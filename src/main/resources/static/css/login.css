@@ -1,0 +1,124 @@
+@charset "utf-8"; 
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@viewport                           {width: device-width; }
+
+
+
+
+/* BASIC */ 
+html                                {margin:0; padding:0; background-color:#ECEEF3; } 
+body                                {height:100%;} 
+body                                {-webkit-text-size-adjust:none} 
+html                                {overflow-y:scroll;} 
+body, p, ul, ol, li, dl, 
+dt, dd, form, table, th, td, 
+fieldset, input, textarea, select, 
+button, h1, h2, h3, h4, h5, h6, pre {margin:0; padding:0; -webkit-text-size-adjust:none; } 
+input:focus                         {outline:none;}
+
+
+
+
+/* 아이폰 가로모드 글자 크기 확대 방지: -webkit-text-size-adjust:none; */ 
+
+body, input, textarea, 
+select                              {font-family: 'NanumSquare', sans-serif; } 
+button                              {cursor: pointer;}
+
+header, footer, nav, aside, 
+section, article,                   
+fieldset, img                       {border:0;} 
+img                                 {-ms-interpolation-mode:bicubic !important; border:0; vertical-align: middle;} 
+table                               {padding:0; border-spacing:0px; border:0; border-collapse:collapse; } 
+ul, ol                              {list-style:none;} 
+a                                   {text-decoration:none;} 
+a:link                              {text-decoration:none;} 
+a:hover                             {text-decoration:none;} 
+.clear                              { clear:both; }
+
+
+
+
+/* Main Container */
+#one									{overflow-y:hidden;}
+#main_ct > section.cover			{ padding:3em 4.5em;}
+#container							{width:100%; height:940px;}
+.login-box							{width:83.5%; height:940px; margin:0 auto; }
+.login-box .title					{width:100%;  padding-top:82px; }
+.login-box .title .header			{font-size:2.2em; line-height:55px;}
+.login-box .title .header .join		{width:100%; text-align:right; font-size:0.68em; font-weight:600; cursor:pointer;}
+
+/* QR CODE 자산관리*/
+.description						{width:49%; height:675px; float:left;}
+.description .de-text				{padding-top:70px;}
+.description .de-text .header		{font-size:2.1em; font-weight:600; color:#3579d5; padding-bottom:32px;}
+.description .de-text .text			{font-size:1.55em; color:#000000; line-height:1.5; font-weight:300;}
+
+/* LOGIN BOX*/
+.content							{width:50.5%; height:675px;  float:left;}
+.content .login-form				{margin-top:70px;  padding-left:40px;}
+.input-row							{padding:20px; position:relative; height:34px; margin:0 0 30px; border-radius:4px; background-color:#fff;}
+.int								{width:98%; font-size:1.2em; line-height:15px; position:relative; z-index:9; height:30px; padding:2px 0 6px; border:none; background-color:#fff; ;}
+.ic												{vertical-align:middle; color:#6a6d77; font-size:1.2em; cursor:pointer;}
+.pq								{float:right; font-size:1.2em; color: #6a6d77; cursor:pointer;}
+#ld_check					{background-color:#ECEEF3;}
+.check_info				{padding-bottom:83px;  font-weight:400;}
+.btn_global					{display:block; width:100%; height:94px; font-size:1.7em; background-color: #558fdd; color:#fff; border-radius:50px; cursor:pointer;}
+.error							{color:#d94815;text-align:center; font-size:1.45em; margin-top:20px; font-weight:300;}
+input::placeholder {color:#acb0ba;}
+
+
+/* 반응형 작업 */
+
+@media screen and (min-width: 700px) and (max-width:800px) {
+		#main_ct > section.cover{padding:0em 1em;}
+		.description	{ display:none;}
+		.content	{width:100%;}
+		.content .login-form{padding:0;}
+	}
+
+	
+	@media screen and (min-width: 360px) and (max-width:700px) {
+		
+		#main_ct > section.cover{padding:0em 1em;}
+		.description	{ display:none;}
+		.content	{width:100%;}
+		.content .login-form{padding:0;}
+		.login-box .title .header{font-size:1.5em; line-height:35px;}
+		.int{font-size:1em;}
+		.login_check_box label{font-size:1em;}
+		.pq{width:100%; margin-top:15px; }
+		.btn_global{font-size:1.5em; height:70px;}
+		.error{font-size:0.95em;}
+		.content .login-form{margin-top:20px;}
+		.input-row{height:20px; margin-bottom:15px;}
+		.int{height:20px;}
+		.check_info{margin-top:25px; padding-bottom:65px;}
+		.login-box .title{padding-top:40px;}
+		
+	}
+	
+	
+	
+		@media screen and (min-width: 200px) and (max-width:360px) {
+		
+		#main_ct > section.cover{padding:0em 1em;}
+		.description	{ display:none;}
+		.content	{width:100%;}
+		.content .login-form{padding:0;}
+		.login-box .title .header{font-size:1.5em; line-height:35px;}
+		.int{font-size:1em;}
+		.login_check_box label{font-size:1em;}
+		.pq{width:100%; margin-top:15px; }
+		.btn_global{font-size:1.3em; height:60px;}
+		.error{font-size:0.8em;}
+		.content .login-form{margin-top:20px;}
+		.input-row{height:20px; margin-bottom:15px;}
+		.int{height:20px;}
+		.check_info{margin-top:25px; padding-bottom:65px;}
+		.login-box .title{padding-top:40px;}
+	}
+	
+	
+	
+	

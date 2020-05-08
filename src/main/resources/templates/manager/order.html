@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/config :: configFragment"></head>
+<link rel="stylesheet th:href="@{/css/service_order.css}"/>
+<body>
+<div class="cd-main-header js-cd-main-header">
+    <div id="main_ct" class="wrap">
+        <div th:replace="fragments/header:: headInfoFragment"></div>
+        <div th:replace="fragments/header:: headNavFragment"></div>
+        <div class="depth2-bg"></div>
+        <div id="title-wrap">
+            <div class="page-title-search-area">
+                <!-- page-title -->
+                <div class="page-title">
+                    <div class="all-company">서비스 주문하기</div>
+                </div>
+                <!-- //page-title -->
+            </div>
+        </div>
+        <!-- //title -->
+        <div id="content-wrap">
+            <div class="process-area">
+            </div>
+            <!-- //process-area -->
+            <div class="order-list-select-area">
+                <div class="new-order-info">
+                    <div class="input-box" >
+                        <div class="input-box-text">
+                            <span>*</span>QR스티커 주문 수량</div>
+                        <fieldset class="qrBox">
+                            <input name="qrCnt" type="text" value="" placeholder=>
+                            <label class="qrCntTot"for="">/ 120개</label>
+                        </fieldset>
+                    </div>
+                    <div class="order-address">
+                        <div class="order-address-text">
+                            <span>*</span>QR스티커 수령 장소
+                        </div>
+                        <div class="order-address-select">
+                            <button id="defaultAddr" class="address-button btn-active">기본 배송지</button><button id="newAddr" class="address-button">신규 배송지</button>
+                        </div>
+                        <!--기존 배송지 active 일 때-->
+                        <input class="order-zipCode" name="addr" type="text" style="width:706px;" value="대전광역시 유성구 테크노 4로 17" disabled/>
+                        <input class="order-addr" name="addr" type="text" value="대덕비즈센터 215호" disabled/>
+                        <!--신규 배송지 active 일 때
+	          			<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
+	          			<button class="postCode-btn" type="button" onclick="execPostCode();" style="color: #666; cursor: pointer; margin-left:20px;">우편번호 검색</button>
+	          			<input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />
+                        -->
+                    </div>
+
+
+                    <div class="order-member">
+                        <div class="order-member-text">
+                            <span>*</span>주문자 이름
+                        </div>
+                        <div class="order-member-select">
+                            <button id="defaultName"  class="phone-button btn-active">기본 주문자</button><button id="newName" class="phone-button">신규 주문자</button>
+                        </div>
+                        <!--기본 주문자 active 일 때-->
+                        <input type="text" name="name" value="현상원" disabled/>
+                        <!--신규 주문자 active 일 때
+                         <input type="text" name="name" />-->
+                    </div>
+
+                    <div class="order-phone">
+                        <div class="order-phone-text">
+                            <span>*</span>주문자 연락처
+                        </div>
+                        <!--기본 연락처 active 일 때-->
+                        <input type="text" name="phone" value="010-1234-5678" disabled/>
+                        <!--신규 연락처 active 일 때
+	          			<input type="text" name="phone" />-->
+                    </div>
+
+                    <div class="order-requests">
+                        <div class="order-requests-text">
+                            <span>요청사항 입력</span>
+                        </div>
+                        <input type="text" name="orderRequests" />
+                    </div>
+                    <hr>
+                    <span class="order-surcharge">
+                        <div class="order-surcharge-text">
+                            <span>추가 결제금액</span>
+                        </div>
+                        <div class="order-surcharge-price">
+                            <span id="orderSurcharge" name="orderSurcharge">0</span><span>원</span>
+                        </div>
+                        <span>
+                            매달 기본 스티커 수량 : 120개<br>
+                            스티커 추가 주문 시 추가 비용이 발생됩니다.
+                        </span>
+                </div>
+
+            </div>
+            <div class="qr-order-btn">
+                <button class="qr-order-taken">
+                    <span>주문하기</span>
+                </button>
+            </div>
+        </div>
+        <!-- //order-list-select-area -->
+    </div>
+    <!-- //content-wrap -->
+</div>
+<!--//main_ct-->
+</div>
+<footer th:replace="fragments/header:: headFooterFragment"></footer>
+</body>
+<!--script area-->
+</html>

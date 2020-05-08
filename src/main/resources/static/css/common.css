@@ -1,0 +1,81 @@
+@charset "utf-8"; 
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@viewport                           {width: device-width; }
+/* 아이폰 가로모드 글자 크기 확대 방지: -webkit-text-size-adjust:none; */ 
+
+/* BASIC */ 
+html                                {margin:0; padding:0;} 
+body                                {height:100%;} 
+body                                {-webkit-text-size-adjust:none} 
+html                                {overflow-y:scroll;} 
+body, p, ul, ol, li, dl, 
+dt, dd, form, table, th, td, 
+fieldset, input, textarea, select, 
+button, h1, h2, h3, h4, h5, h6, pre {margin:0; padding:0; -webkit-text-size-adjust:none; } 
+input:focus                         {outline:none;}
+
+body, input, textarea, 
+select                              {font-family: 'NanumSquare', sans-serif; } 
+button                              {cursor: pointer;}
+
+header, footer, nav, aside, 
+section, article,                   
+fieldset, img                       {border:0;} 
+img                                 {-ms-interpolation-mode:bicubic !important; border:0; vertical-align: middle;} 
+table                               {padding:0; border-spacing:0px; border:0; border-collapse:collapse; } 
+ul, ol                              {list-style:none;} 
+a                                   {text-decoration:none;} 
+a:link                              {text-decoration:none;} 
+a:hover                             {text-decoration:none;} 
+.clear                              { clear:both; }
+
+/* Main Container */
+.wrap                               {width:100%; max-width: 1440px; margin:0 auto;}
+.main-block						    {width:100%; height:60px; background-color:#DEE0E4; float:left;}
+
+/* header */
+.headbg							    {width:100%; background-color:#548fdd;}
+.hd_my                              {background-color: #558fdd; max-width:1440px; height:66px; margin:0 auto;}
+.hd_my .my_info                     {float:right; padding:17px; text-align: right; }
+.hd_my .my_info span                {text-align:left; float:left; padding-top:7px; color:#fff; font-size:1em;}
+.hd_my .my_info button              {float:right; color:#fff; font-size:1em; margin-left:30px; width:80px; height:32px; border:1px solid #86baff; background:none;}
+.logo								{float:left; margin-top:10px; margin-left:39px;}
+
+/* header */
+#header { position:relative; background:#558fdd; height:90px; }
+#hd_h1 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+#logo { display:block; float:left; width:162px; height:54px; margin:18px 0; }
+#logo a { display:block; width:100%; height:100%; background:#000; background-size:100% 100%; text-indent:-9999px; }
+
+#gnb {display:block;position:relative; }
+#gnb h2{position:absolute;font-size:0;line-height:0;overflow:hidden}
+#gnb .gnb-wrap > li { float:left; position:relative; width:180px; text-align:center; }
+#gnb .gnb-wrap > li:last-child { margin:0; }
+#gnb .gnb-wrap > li > a { padding:30px 0; }
+#gnb .gnb-wrap > li .depth2 { display:none; position:absolute; top:100%; width:180px; padding:0 0 55px 0; white-space:nowrap; z-index:10; }
+#gnb .gnb-wrap > li .depth2 li a { padding:17px 0; color:#d5e8ff; text-align:center;}
+#gnb .gnb-wrap > li .depth2 li a span:hover{ background-color:#3174ce; color:#fff; padding:1px;}
+#gnb .gnb-wrap > li a { display:block; position:relative; top:11px; color:#fff; font-size:1.1em;}
+#gnb .gnb-wrap > li a:hover, #gnb .gnb-wrap > li a.active { color:#fff; text-decoration:none;}
+#gnb .gnb-wrap > li .depth2 li a:hover {  text-decoration:none; }
+#gnb .gnb-wrap > li a.active:after { content:''; display:block; position:absolute; bottom:0; width:100%; height:3px; background:#005e95; }
+.depth2-bg { display:none; position:absolute; width:100%; max-width:1440px; height:250px; background:#558fdd; z-index:9; }
+
+/* 반응형 hamburger */
+#hamburger { overflow:hidden; display:none; float:right; position:relative; width:54px; height:54px; margin:18px 0; background:none; border:0; outline:none; }
+#hamburger .bar { display:block; position:absolute; left:50%; width:30px; height:1px; margin-left:-15px; background:#222; }
+#hamburger .bar-top { top:17px; }
+#hamburger .bar-mid { top:50%; margin-top:-0.5px; }
+#hamburger .bar-bot { top:37px; }
+
+/* footer */
+footer 												{width: 100%; height: auto !important; float:left; clear:both;}
+.footer_wrap 										{max-width: 1440px; height: auto !important; margin:0 auto; padding-bottom:30px; background-color: #343434;}
+.footer_title 										{min-height: 30%; margin: 0 auto; padding:60px 60px 0 60px; text-align: left;clear: both;line-height: 44px;}
+.footer_company_name 								{font-size: 28px; color: #ffffff; margin-bottom:28px; font-weight:bold;}
+.footer_wt_col 										{color: #7a7a7a;}
+.footer_info 										{font-size: 24px;text-align: right;color: #909090; margin-top:22px; margin-right:60px; font-weight:300;}
+.footer_addr 										{font-size: 24px;color: #ffffff; line-height:40px; font-weight:300;}
+.footer_tel 										{font-size: 24px;color: #ffffff; margin-top:10px;font-weight:300;}
+.footer_tel a, .footer_tel a:hover, .footer_tel a:active {color: #ffffff;}
+

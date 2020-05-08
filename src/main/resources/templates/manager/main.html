@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/config :: configFragment"></head>
+<!-- main css -->
+<link rel="stylesheet" th:href="@{/css/qr_main.css}" />
+<!--카카오 지도 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
+<!--<script th:src="@{/script/main_script.js}" type="text/javascript"></script>
+<script th:src="@{/script/Map.js}" type="text/javascript"></script>-->
+<script>
+    $(function(){
+        create_map();
+    });
+    function create_map()
+    {
+        var mapContainer = document.getElementById('map'), // 지도의 중심좌표
+            mapOption = {
+                center: new kakao.maps.LatLng(36.2082709,127.9770043), // 지도의 중심좌표
+                level: 12 // 지도의 확대 레벨
+            };
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    }
+</script>
+
+<body>
+<div class="cd-main-header js-cd-main-header">
+    <div id="main_ct" class="wrap">
+        <div th:replace="fragments/header:: headInfoFragment"></div>
+        <div th:replace="fragments/header:: headNavFragment"></div>
+        <div class="depth2-bg"></div>
+
+        <div id="content-wrap">
+            <div id="panel-wrap-all">
+                <div class="panel-heading">
+                    <div class="panel-group">
+                        <div class="circle"></div>
+                        <span class="title">자산 등록 현황</span>
+                        <p style="margin-top:10px;">
+                            <span class="panel-text">하나은행 | 테헤란로 지점</span>
+                    </div>
+                    <!--//panel-group-->
+                </div>
+                <!--//panel-heading-->
+                <div class="dash-board">
+                    <div class="box" name="div-box" id="box1" style="cursor:default">
+                        <div class="box-title">
+                            <span>전체 등록 자산</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
+                        </div>
+                        <div class="box-text">
+                            <span>607</span>
+                        </div>
+                    </div>
+                    <div class="box" name="div-box" id="box2" style="cursor:default">
+                        <div class="box-title">
+                            <span>내부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
+                        </div>
+                        <div class="box-text">
+                            <span>26</span>
+                        </div>
+                    </div>
+                    <div class="box" name="div-box" id="box3" style="cursor:default">
+                        <div class="box-title">
+                            <span>외부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}"/>
+                        </div>
+                        <div class="box-text">
+                            <span>0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//panel-wrap-all-->
+            <div id="panel-wrap-quick">
+                <div class="panel-heading">
+                    <div class="panel-group">
+                        <div class="circle"></div>
+                        <span class="title">주요 기능 즐겨찾기</span>
+                        <p>
+                    </div>
+                    <!--//panel-group-->
+                </div>
+                <!--//panel-heading-->
+                <div class="quick-btn">
+                    <div class="qbtn">
+                        <div class="qimg">
+                            <img th:src="@{/image/main/main-icon-quick-plus.svg}" alt="QR스티커주문" width="48px"/>
+                        </div>
+                        <div class="qtitle">QR 스티커 주문</div>
+                    </div>
+                    <div class="qbtn">
+                        <div class="qimg">
+                            <img th:src="@{/image/main/main-icon-quick-warning.svg}" alt="반납 완료 승인" width="48px"/>
+                        </div>
+                        <div class="qtitle">반납 완료 승인</div>
+                    </div>
+                    <div class="qbtn">
+                        <div class="qimg">
+                            <img th:src="@{/image/main/main-icon-quick-check.svg}" alt="등록실패확인" width="48px" />
+                        </div>
+                        <div class="qtitle">등록 실패 확인</div>
+                    </div>
+                </div>
+                <!-- //quick-btn -->
+            </div>
+            <!--//quick-menu-->
+        </div>
+        <div id="grade-map-area" style="position:relative;">
+            <!-- 지도 영역 -->
+            <div id="map" style="width: 100%; height: 1000px; position: relative;"></div>
+            <div class="category">
+                <ul>
+                    <li id="coffeeMenu" onclick="changeMarker('coffee')">
+                        <span style="margin-right:5px;"><img th:src="@{/image/main/main-icon-map-c.svg}"></span>
+                        내부 자산
+                    </li>
+                    <li id="storeMenu" onclick="changeMarker('store')">
+                        <span style="margin-right:5px;"><img th:src="@{/image/main/main-icon-map-a.svg}"></span>
+                        외부 자산
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="main-block"></div>
+    </div>
+    <!--//main_ct-->
+    <footer th:replace="fragments/header:: headFooterFragment"></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- main css -->
+    <link rel="stylesheet" th:href="@{/css/external_list/out_obj.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <!-- Jquery -->
+    <script language="JavaScript" src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script th:src="@{/script/external_list/out_obj.js}" type="text/javascript"></script>
+    <script th:src="@{/script/header_common.js}" type="text/javascript"></script>
+    <title>QRcode 서비스</title>
+</head>
+<script type="text/javascript">
+    $(function()
+    {
+        var objStatus = $('#objStatus').val();
+        if(objStatus == 'release_start')
+        {
+            $('#data_tab_1').addClass('current');
+            $('#tab-1').addClass('current');
+        }
+        if(objStatus == 'release_finish')
+        {
+            $('#data_tab_2').addClass('current');
+            $('#tab-2').addClass('current');
+        }
+        if(objStatus == 'return_start')
+        {
+            $('#data_tab_3').addClass('current');
+            $('#tab-3').addClass('current');
+        }
+
+        $('a[name=external_asset_search]').css('background-color','#437ece');
+
+        $("span[name=pageNum]").click(function()
+        {
+            $("span[name=pageNum]").attr('class','page');
+            $(this).attr('class','page_start');
+            var pageNum = $(this).attr('id');
+        });
+
+        $("img[name=pageNum]").click(function()
+        {
+            var pageNum = $(this).attr('id');
+        });
+    });
+
+    function load_detail_page(srl)
+    {
+        console.log(srl);
+        location.href = "/obj/detail/search/"+srl;
+    }
+
+</script>
+<body>
+<div class="cd-main-header js-cd-main-header">
+    <div id="main_ct" class="wrap">
+        <div th:replace="fragments/header:: headInfoFragment"></div>
+        <div th:replace="fragments/header:: headNavFragment"></div>
+        <div class="depth2-bg"></div>
+        <!-- title -->
+        <div id="title-wrap">
+            <div class="page-title-search-area">
+                <!-- page-title -->
+                <div class="page-title">
+                    <div class="all-company">외부 관리 자산 조회</div>
+                </div>
+                <!-- //page-title -->
+            </div>
+            <!--//page-title-search-area-->
+        </div>
+        <!-- //title -->
+        <!-- tab content -->
+        <div id="tab_content_wrap">
+            <ul class="tabs">
+                <li class="tab-link" data-tab="tab-1" id="data_tab_1">출고 시작</li>
+                <li class="tab-link" data-tab="tab-2" id="data_tab_2">출고 완료</li>
+                <li class="tab-link" data-tab="tab-3" id="data_tab_3">반납 시작</li>
+            </ul>
+            <!--//tabs-->
+            <div id="tab-1" class="tab-content">
+                <div id="panel-wrap-register" class="text_left">
+                    <div class="regiseter-panel-heading">
+                        <div class="regiseter-panel-group">
+                            <div class="regiseter-panel-title">
+                                <div style="float:left; width:100%;">
+                                    <div class="circle"></div><span class="title">총 <span id="register_complete_tot">167</span>자산</span></p>
+                                </div>
+                            </div>
+                            <!--//regiseter-panel-title-->
+                        </div>
+                        <!--//regiseter-panel-group-->
+                    </div>
+                    <!--//regiseter-panel-heading-->
+                </div>
+                <!--//panel-wrap-register-->
+                <!--검색(베타 주석처리)-->
+                <input type="hidden" id="objStatus" th:value="${objStatus}"/>
+                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
+                <div id="regisster_waitList">
+                    <table th:if="${objStatus eq 'release_start'}" style="border-bottom:2px solid #d7d7d7;">
+                        <colgroup>
+                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="15%" />
+                            <col width="20%" />
+                            <col width="25%" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>출고 시작일</th>
+                            <th>관리자</th>
+                            <th>모델명</th>
+                            <th>자산종류</th>
+                            <th>QR ID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${size} == '0'">
+                            <td colspan=5>데이터가 없습니다.</td>
+                        </tr>
+                        <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
+                            th:data-srl="${list.qrSrl}"
+                            th:onclick="load_detail_page(this.getAttribute('data-srl'))">
+                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <td th:text="${list.userName}">홍길동A</td>
+                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.objKinds}">레이저복합기</td>
+                            <td th:text="${list.qrSrl}">20200504-00000001</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page_count_wrap" th:if="${objStatus eq 'release_start'}">
+                    <!--<span>
+                        <img th:src="@{/image/paging/list-left_next.svg}">
+                    </span>-->
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
+                    </span>
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
+                    <span th:if="${pageHandler.next}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
+                    </span>
+                    <!--<span>
+                        <img th:src="@{/image/paging/list-right_end.svg}">
+                    </span>-->
+                </div>
+                <!--//page_count_wrap-->
+            </div>
+            <!--//tab-1-->
+            <div id="tab-2" class="tab-content">
+                <div id="panel-wrap-register" class="text_left">
+                    <div class="regiseter-panel-heading">
+                        <div class="regiseter-panel-group">
+                            <div class="regiseter-panel-title">
+                                <div style="float:left; width:100%;">
+                                    <div class="circle"></div><span class="title">총 <span id="register_complete_tot">167</span>자산</span></p>
+                                </div>
+                            </div>
+                            <!--//regiseter-panel-title-->
+                        </div>
+                        <!--//regiseter-panel-group-->
+                    </div>
+                    <!--//regiseter-panel-heading-->
+                </div>
+                <!--//panel-wrap-register-->
+                <!--검색(베타 주석처리)-->
+                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
+                <div id="regisster_completeList">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'release_finish'}">
+                        <colgroup>
+                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="15%" />
+                            <col width="20%" />
+                            <col width="25%" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>출고 완료일</th>
+                            <th>관리자</th>
+                            <th>모델명</th>
+                            <th>자산종류</th>
+                            <th>출고 업체명</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${size} == '0'">
+                            <td colspan=5>데이터가 없습니다.</td>
+                        </tr>
+                        <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
+                            th:data-srl="${list.qrSrl}"
+                            th:onclick="load_detail_page(this.getAttribute('data-srl'))">
+                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <td th:text="${list.userName}">홍길동A</td>
+                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.objKinds}">레이저복합기</td>
+                            <td th:text="${list.companyName}">20200504-00000001</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--//regisster_completeList-->
+                <div class="page_count_wrap" th:if="${objStatus eq 'release_finish'}">
+                   <!-- <span>
+                        <img th:src="@{/image/paging/list-left_next.svg}">
+                    </span>-->
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
+                    </span>
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
+                    <span th:if="${pageHandler.next}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
+                    </span>
+                    <!--<span>
+                        <img th:src="@{/image/paging/list-right_end.svg}">
+                    </span>-->
+                </div>
+                <!--//page_count_wrap-->
+            </div>
+            <!--//tab-2-->
+            <div id="tab-3" class="tab-content">
+                <div id="panel-wrap-register" class="text_left">
+                    <div class="regiseter-panel-heading">
+                        <div class="regiseter-panel-group">
+                            <div class="regiseter-panel-title">
+                                <div style="float:left; width:100%;">
+                                    <div class="circle"></div><span class="title">총 <span id="register_complete_tot">167</span>자산</span></p>
+                                </div>
+                            </div>
+                            <!--//regiseter-panel-title-->
+                        </div>
+                        <!--//regiseter-panel-group-->
+                    </div>
+                    <!--//regiseter-panel-heading-->
+                </div>
+                <!--//panel-wrap-register-->
+                <!--검색(베타 주석처리)-->
+                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
+
+                <div id="regisster_waitList">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_start'}">
+                        <colgroup>
+                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="15%" />
+                            <col width="20%" />
+                            <col width="25%" />
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>출고 완료일</th>
+                            <th>관리자</th>
+                            <th>모델명</th>
+                            <th>자산종류</th>
+                            <th>반납 업체명</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${size} == '0'">
+                            <td colspan=5>데이터가 없습니다.</td>
+                        </tr>
+                        <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
+                            th:data-srl="${list.qrSrl}"
+                            th:onclick="load_detail_page(this.getAttribute('data-srl'))">
+                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <td th:text="${list.userName}">홍길동A</td>
+                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.objKinds}">레이저복합기</td>
+                            <td th:text="${list.companyName}">20200504-00000001</td>
+                        </tr>
+                        </tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page_count_wrap" th:if="${objStatus eq 'return_start'}">
+                    <!--<span>
+                        <img th:src="@{/image/paging/list-left_next.svg}">
+                    </span>-->
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
+                    </span>
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
+                    <span th:if="${pageHandler.next}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
+                    </span>
+                    <!--<span>
+                        <img th:src="@{/image/paging/list-right_end.svg}">
+                    </span>-->
+                </div>
+                <!--//page_count_wrap-->
+            </div>
+            <!--//tab-3-->
+            <footer th:replace="fragments/header:: headFooterFragment"></footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68">
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FAFBFC" d="M0 0H1440V3097H0z" transform="translate(-1042 -481)"/>
+        <g>
+            <text fill="#BEBEBE" font-family="NanumSquareEB, NanumSquare" font-size="23" font-weight="600" transform="translate(-1042 -481) translate(790 476)">
+                <tspan x="16" y="20">Serial Number</tspan>
+            </text>
+            <text fill="#000" font-family="NanumSquareB, NanumSquare" font-size="28" font-weight="bold" transform="translate(-1042 -481) translate(790 476)">
+                <tspan x="16" y="56">AB12345678-12345678</tspan>
+            </text>
+        </g>
+        <path fill="#000" fill-opacity=".5" d="M0 0L1440 0 1440 3097 0 3097z" transform="translate(-1042 -481)"/>
+        <g>
+            <path fill="#FAFBFC" d="M0 0L900 0 900 461 0 461z" transform="translate(-1042 -481) translate(270 438)"/>
+            <path fill="#343434" d="M793.272 64.272c.781-.781 2.047-.781 2.829 0l9.899 9.9 9.9-9.9c.78-.781 2.047-.781 2.828 0 .781.781.781 2.047 0 2.829l-9.9 9.899 9.9 9.9c.781.78.781 2.047 0 2.828-.781.781-2.047.781-2.829 0l-9.9-9.9-9.898 9.9c-.782.781-2.048.781-2.829 0-.781-.781-.781-2.047 0-2.829l9.899-9.9-9.899-9.898c-.781-.782-.781-2.048 0-2.829z" transform="translate(-1042 -481) translate(270 438)"/>
+        </g>
+    </g>
+</svg>

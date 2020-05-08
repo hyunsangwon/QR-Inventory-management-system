@@ -1,0 +1,78 @@
+		<!--//my_info-->
+		<div class="hd_my" th:fragment="headInfoFragment">
+			<div class="logo">
+				<a th:href="@{/main}"><img th:src="@{/image/main/main-gnb-logo-weiser.svg}"></a>
+			</div>
+			<div class="my_info">
+				<form th:action="@{/logout}" method="get">
+					<button type="submit">로그아웃</button>
+					<span th:text="|${clientName}님, 안녕하세요.|">대전유성지점님, 안녕하세요.</span>
+				</form>
+			</div>
+		</div>
+		<!--header  -->
+		<div id="header" th:fragment="headNavFragment">
+			<h1 id="hd_h1"></h1>
+			<div class="contents clearfix"></div>
+			<nav id="gnb">
+				<h2>메인메뉴</h2>
+				<!-- 200504 update-->
+				<ul class="gnb-wrap clearfix">
+					<li>
+						<a href="#open" title="관리자 조회" name="admin_search">관리자 조회</a>
+						<ul class="depth2 clearfix">
+							<li><a href="#" title="관리자 자산 조회"><span>관리자 자산 조회</span></a></li>
+						</ul>
+					</li>
+					<li>
+					<a th:href="@{/obj/status/test}" title="내부 자산 조회" name="inner_asset_search">내부자산 조회</a>
+					<ul class="depth2 clearfix">
+						<li><a href="#" title="출고 대기"><span>출고 시작</span></a></li>
+						<li><a href="#" title="반납 완료"><span>반납 시작</span></a></li>
+					</ul>
+					</li>
+					<li>
+						<a th:href="@{/obj/status/release_start/list/1}" title="외부 자산 조회" name="external_asset_search">외부자산 조회</a>
+						<ul class="depth2 clearfix">
+							<li><a th:href="@{/obj/status/release_start/list/1}" title="출고 시작"><span>출고 시작</span></a></li>
+							<li><a th:href="@{/obj/status/release_finish/list/1}" title="출고 완료"><span>출고 완료</span></a></li>
+							<li><a th:href="@{/obj/status/return_start/list/1}" title="반납 시작"><span>반납 시작</span></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#open" title="서비스 신청" name="service">서비스 신청</a>
+						<ul class="depth2 clearfix">
+							<li><a href="#" title="서비스 주문"><span>서비스 주문</span></a></li>
+							<li><a href="#" title="주문.배송 조회"><span>주문.배송 조회</span></a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#open" title="사용자 설정" name="conf">사용자 설정</a>
+						<ul class="depth2 clearfix">
+							<li><a href="#" title="내 정보 수정"><span>내 정보 수정</span></a></li>
+							<!--<li><a href="#" title="관리자 정보 수정"><span>관리자 정보 수정</span></a></li>-->
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<!-- //header -->
+
+		<!-- footer -->
+		<footer th:fragment="headFooterFragment">
+		  <div class="footer_wrap">
+		    <div class="footer_title">
+		      <div class="footer_company_name">C&Tech</div>
+		      <div class="footer_addr normal">
+		          <p>본사 : 대전광역시 유성구 관평동 684번지 대덕비즈센터 B동 2층 215호</p>
+		          <p>지사 : 서울특별시 송파구 위례성대로 6 현대토픽스 빌딩 11층</p>
+		      </div>
+		      <div class="footer_tel light">
+		          <span class="padding_r20"><strong><span class="footer_wt_col">TEL</span></strong> <a href="tel:042-862-0142">042 862 0142</a></span>
+		          <span class="padding_r20"><strong><span class="footer_wt_col">FAX</span></strong> 042 863 0142</span>
+		          <span><strong><span class="footer_wt_col">사업자 등록 번호</span></strong> 314 86 37230</span>
+		      </div>
+		    </div>
+		    <div class="footer_info light">© Untitled. All rights reserved.</div>
+		  </div>
+		</footer>

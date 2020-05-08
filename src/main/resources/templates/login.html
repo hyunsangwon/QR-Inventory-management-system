@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/config :: configFragment"></head>
+<!-- main css -->
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<body scroll="no">
+<script type="text/javascript">
+	$(function() {
+		var cookie_user_id = getLogin();		
+		/*로딩시, 쿠키에 값이 있다면  넣어준다.*/
+		if (cookie_user_id != "") {
+			$("#id").val(cookie_user_id);
+			$("#id_check").attr("checked", true);
+		}
+		$("#id").keyup(function(key) {
+			if (key.keyCode == 13) {
+				if(is_login_check()){
+					$('#loginForm').submit();
+				}				
+			}
+        });
+		$("#password").keyup(function(key) {
+			if (key.keyCode == 13) {
+				if(is_login_check()){
+					$('#loginForm').submit();
+				}
+			}
+		});
+		$('#loginBtn').on('click',function(e){
+			if(is_login_check()){
+				$('#loginForm').submit();
+			}
+		});
+		$("#id_check").on("click", function() {
+			var _this = this;
+			var isRemember;
+			if ($(_this).is(":checked")) {
+				var inputId = $("#id").val();
+				if (inputId == '') {
+					alert('아이디를 입력해주세요');
+					$(_this).attr("checked", false);
+				} else {
+					isRemember = confirm("이 PC에 로그인 정보를 저장하시겠습니까?");
+					if (!isRemember) {
+						$(_this).attr("checked", false);
+					} else {
+						setSave("inputId", $("#id").val(), 1);
+					}
+				}
+			}
+		});
+		$('#forgot_password').on("click", function() {
+			alert('페이지 준비중 입니다.');
+		});
+	});
+	
+	function is_login_check(){
+		var id = $('#id').val();
+		var password = $('#password').val();
+		if(id == ''){
+			alert('번호를 입력해주세요');
+			$('#id').focus();
+			return false;
+		}
+		if(password == ''){
+			alert('비밀번호를 입력해주세요');
+			$('#password').focus();
+			return false;
+		}
+		return true;
+	}
+	
+	function setSave(name, value, expiredays) {
+		var today = new Date();
+		today.setDate(today.getDate() + expiredays);
+		document.cookie = name + "=" + escape(value) + "; path=/; expires="+ today.toGMTString() + ";"
+	}
+	function getLogin() {
+		var cook = document.cookie + ";";
+		var idx = cook.indexOf("inputId", 0);
+		var val = "";
+		if (idx != -1) {
+			cook = cook.substring(idx, cook.length);
+			begin = cook.indexOf("=", 0) + 1;
+			end = cook.indexOf(";", begin);
+			val = unescape(cook.substring(begin, end));
+		}
+		return val;
+	}
+</script>
+		<div id="main_ct" class="wrap">
+			<section id="one" class="one dark cover" style="max-width:1440px; margin:0 auto;">
+				<div id="container">
+					<div class="login-box">
+						<div class="title">
+							<div class="header">
+								<span style="font-weight:100;">WELCOME!</span></p>
+								<span style="font-weight:700;">WEISER 자산관리 서비스</span>
+								<hr style="border:2px solid #d6d8e0; margin:20px 0;">
+								<!-- <div class="join">서비스 가입하기</div> -->
+							</div>
+							<!-- //header 끝입니다.
+							-->
+						</div>
+						<!-- //title -->
+						<div class="description">
+							<div class="de-text">
+							<div class="header">QR CODE 자산관리</div><p>
+							<div class="text">
+							QR Code 스티커를 기업자산(동산)에 부착 후</p>
+							APP으로 자산을 주기적으로 점검하여 안전하게</p>
+							관리하는 서비스입니다.</div>
+							</div>
+						</div>
+						<!-- //description -->
+						<div class="content">
+							<div class="login-form">
+								<form id="loginForm" th:method="post" th:action="@{/login}">
+								<div class="id-area">
+									<div class="input-row" id="id-area">
+										<span class="input-box">
+										<input type="text" id="id" name="phone" class="int" maxlength="40" placeholder="핸드폰 번호를 입력하세요."></input>
+										</span>
+									</div>
+									<!-- //input-row -->
+								</div>
+									<!-- //id-area -->
+									<div class="pw-area">
+										<div class="input-row" id="pw-area">
+										<span class="input-box">
+										<input type="password" id="password" name="password" class="int" maxlength="16" placeholder="비밀번호를 입력하세요." style="font-family:none;"></input>
+										</span>
+										</div>
+										<!-- //input-row -->
+									</div>
+								<div class="check_info">
+									<div class="login-check"  id="check-area" style="width:100%;">
+										<span class="login_check_box">
+										<input type="checkbox"  id="id_check"  name="ldcheck"   style="vertical-align:middle; width:25px; height:25px;" value="off"></input>
+										<label for="id-check"></label>
+										<label for="idsave"  class="ic" >번호 저장</label>
+										</span>
+									</div>
+									<!-- //login-check -->
+								</div>
+								<!-- //check_info -->
+								<!-- Login Btn -->
+								<input id="loginBtn" type="button" title="로그인" alt="로그인" value="로그인" class="btn_global" style="border:none;"></input>
+								<!--  입력한 ID 또는 비밀번호가 정확하지 않을 때 제공되는 text-->
+								<div th:if="${error}" class="error">등록되지 않은 회원입니다.</div>
+								</form>
+							<!-- //login-form -->
+							</div>
+						<!-- //content -->
+					</div>
+					<!-- //login-box -->
+				</div>
+				<!-- //container -->
+			</section>
+			<!-- //section -->
+		</div>
+		<!--//main_ct--> 
+</body>
+</html>

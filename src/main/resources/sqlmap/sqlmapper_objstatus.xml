@@ -1,0 +1,90 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pro.cntech.inventory.mapper.ObjStatusMapper">
+
+    <!--담보물 상태 리스트-->
+    <select id="getObjStatusList" resultType="pro.cntech.inventory.vo.ObjListVO" parameterType="pro.cntech.inventory.vo.ObjListVO">
+        SELECT
+            obj_srl AS objSrl,
+            obj_status AS objStatus,
+            DATE_FORMAT(obj_status_at,'%Y.%m.%d') AS statusAt,
+            obj_m AS modelName,
+            obj_kinds AS objKinds,
+            qr_srl AS qrSrl,
+            u.user_name AS userName,
+            c.company_name AS companyName
+        FROM obj AS o
+        INNER JOIN users AS u
+            ON o.user_srl = u.user_srl
+        INNER JOIN company AS c
+            ON o.company_srl = c.company_srl
+        WHERE u.master_srl = #{userSrl}
+        AND obj_status = #{objStatus}
+        ORDER BY obj_status_at DESC
+        LIMIT #{limitcount},#{contentnum}
+    </select>
+
+    <select id="getObjStatusListTotalCnt" resultType="Integer" parameterType="pro.cntech.inventory.vo.ObjListVO">
+        SELECT
+            count(*)
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        WHERE u.master_srl = #{userSrl}
+        AND obj_status = #{objStatus}
+    </select>
+
+    <!--자산 상세보기-->
+    <select id="getObjDetail" resultType="pro.cntech.inventory.vo.ObjDetailVO">
+        SELECT
+            o.qr_srl AS qrSrl,
+            o.obj_m AS modelName,
+            o.obj_s AS srlName,
+            o.obj_img AS objImage,
+            o.obj_img_srl AS objSrlImage,
+            o.obj_img_mn AS objModelImage,
+            o.latitude,
+            o.longitude,
+            o.addr,
+            c.company_name AS companyName,
+            c.addr AS inputAddr,
+            c.phone AS companyPhone,
+            u.user_name AS userName,
+            u.m_number AS userPhone
+        FROM obj AS o
+        INNER JOIN company AS c
+            ON o.company_srl = c.company_srl
+        INNER JOIN users AS u
+            ON u.user_srl = o.user_srl
+        WHERE o.qr_srl = #{qrSrl}
+    </select>
+    <!--자산 히스토리-->
+    <select id="getObjHistory" resultType="pro.cntech.inventory.vo.ObjDetailVO" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
+        SELECT
+            ol.create_at AS createAt,
+            ol.obj_addr AS addr,
+            ol.longitude,
+            ol.latitude,
+            ol.obj_status AS objStatus,
+            u.user_name AS userName
+        FROM obj_log AS ol
+        INNER JOIN obj AS o
+            ON ol.qr_srl = o.qr_srl
+        INNER JOIN users u
+            ON o.user_srl = u.user_srl
+        WHERE ol.qr_srl = #{qrSrl}
+        ORDER BY ol.create_at DESC
+        LIMIT #{limitcount},#{contentnum}
+    </select>
+    <!--자산 히스토리 토탈 카운트-->
+    <select id="getObjHistoryCnt" resultType="Integer" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
+        SELECT
+            count(*)
+        FROM obj_log AS ol
+        INNER JOIN obj AS o
+            ON ol.obj_srl = o.obj_srl
+        INNER JOIN users AS u
+            ON u.user_srl = o.user_srl
+        WHERE ol.qr_srl = #{qrSrl}
+    </select>
+
+</mapper>

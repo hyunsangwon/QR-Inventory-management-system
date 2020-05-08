@@ -1,0 +1,790 @@
+@charset "utf-8"; 
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+@viewport                           {width: device-width; }
+
+
+
+
+/* BASIC 기본 */
+html                                {margin:0; padding:0;} 
+body                                {height:100%;} 
+body                                {-webkit-text-size-adjust:none} 
+html                                {overflow-y:scroll;} 
+body, p, ul, ol, li, dl, 
+dt, dd, form, table, th, td, 
+fieldset, input, textarea, select, 
+button, h1, h2, h3, h4, h5, h6, pre {margin:0; padding:0; -webkit-text-size-adjust:none; } 
+input:focus                         {outline:none;}
+
+
+
+
+/* 아이폰 가로모드 글자 크기 확대 방지: -webkit-text-size-adjust:none; */ 
+
+body, input, textarea, 
+select                              {font-family: 'NanumSquare', sans-serif; } 
+button                              {cursor: pointer;}
+
+header, footer, nav, aside, 
+section, article,                   
+fieldset, img                       {border:0;} 
+img                                 {-ms-interpolation-mode:bicubic !important; border:0; vertical-align: middle;} 
+table                               {padding:0; border-spacing:0px; border:0; border-collapse:collapse; } 
+ul, ol                              {list-style:none;} 
+a                                   {text-decoration:none;} 
+a:link                              {text-decoration:none;} 
+a:hover                             {text-decoration:none;} 
+.clear                              { clear:both; }
+
+
+
+
+/* Main Container */
+.wrap                               {width:100%; max-width: 1440px; margin:0 auto;}
+.main-block						    {width:1440px; height:396px; background-color:#fafbfc; float:left;}
+
+/* header */
+.headbg							    {width:100%; background-color:#548fdd;}
+.hd_my                              {background-color: #558fdd; max-width:1440px; height:66px; margin:0 auto;}
+.hd_my .my_info                     {float:right; padding:17px; text-align: right; }
+.hd_my .my_info span                {text-align:left; float:left; padding-top:7px; color:#fff; font-size:1em;}
+.hd_my .my_info button              {float:right; color:#fff; font-size:1em; margin-left:30px; width:80px; height:32px; border:1px solid #86baff; background:none;}
+.logo								{float:left; margin-top:10px; margin-left:39px;}
+
+/*hamburger*/
+#header { position:relative; background:#558fdd; height:90px; }
+#hd_h1 {position:absolute;font-size:0;line-height:0;overflow:hidden}
+
+#logo { display:block; float:left; width:162px; height:54px; margin:18px 0; }
+#logo a { display:block; width:100%; height:100%; background:#000; background-size:100% 100%; text-indent:-9999px; }
+
+#gnb {display:block;position:relative; }
+#gnb h2{position:absolute;font-size:0;line-height:0;overflow:hidden}
+#gnb .gnb-wrap > li { float:left; position:relative; width:150px; text-align:center; }
+#gnb .gnb-wrap > li:last-child { margin:0; }
+#gnb .gnb-wrap > li > a { padding:30px 0; }
+#gnb .gnb-wrap > li .depth2 { display:none; position:absolute; top:100%; width:150px; padding:0 0 55px 0; white-space:nowrap; z-index:10; }
+#gnb .gnb-wrap > li .depth2 li a { padding:17px 0; color:#d5e8ff; text-align:center;}
+#gnb .gnb-wrap > li .depth2 li a span:hover{ background-color:#3174ce; color:#fff; padding:5px;}
+#gnb .gnb-wrap > li a { display:block; position:relative;  color:#fff; font-size:1.1em;}
+#gnb .gnb-wrap > li a:hover, #gnb .gnb-wrap > li a.active { color:#fff; text-decoration:none;}
+#gnb .gnb-wrap > li .depth2 li a:hover {  text-decoration:none; }
+#gnb .gnb-wrap > li a.active:after { content:''; display:block; position:absolute; bottom:0; width:100%; height:3px; background:#005e95; }
+.depth2-bg { display:none; position:absolute; width:100%; max-width:1440px; height:172px; background:#558fdd; z-index:9; }
+
+#hamburger { overflow:hidden; display:none; float:right; position:relative; width:54px; height:54px; margin:18px 0; background:none; border:0; outline:none; }
+#hamburger .bar { display:block; position:absolute; left:50%; width:30px; height:1px; margin-left:-15px; background:#222; }
+#hamburger .bar-top { top:17px; }
+#hamburger .bar-mid { top:50%; margin-top:-0.5px; }
+#hamburger .bar-bot { top:37px; }
+
+
+/* content wrap */
+#content-wrap 						{width:1440px;}
+
+/* panel 공통 */
+#panel-wrap-all						{width:70.8%; height:404px; background-color: #fafbfc; float:left;}
+.panel-heading						{padding:68px 0 65px 40px;}
+.panel-group						{line-height:30px;}
+.panel-heading .circle				{width:8px; height:8px; border-radius: 50%; background-color: #e57e5d; float:left; margin-right:10px; margin-top:10px; }
+
+.panel-heading .panel-group .title		{font-size:1.5em; color: #112287; font-weight: 600;}
+.panel-heading .panel-group .panel-text	{font-size:1.25em; margin-left:20px; color: #112287;}
+
+.dash-board							{height:404px; }
+.dash-board .box					{width:339px; height:215px; float:left; cursor: pointer;}
+.dash-board .box .box-title		    {/*height:80px;*/ padding:0 0 0 88px; color: #727272; font-size:1.5em;}
+.dash-board .box .box-text		    {/*height:80px;*/ padding:14px 0 14px 88px; font-size:5em; font-family: "Bebas Neue";}
+#panel-wrap-all .label				{/*height:90px;*/ width:100%;float:right; margin-right:30px; text-align: right; padding:30px 30px 0 0; font-size:1em; color: #727272;}	
+
+/* quick wrap, btn */
+#panel-wrap-quick					{width:29.2%;  height:404px; float:left; background-color: #eceef4;}
+#panel-wrap-quick .qbtn				{height:48px; cursor: pointer; margin-bottom:20px;}
+#panel-wrap-quick .qimg				{width:48px; height:48px; padding-left:58px;float:left;}
+#panel-wrap-quick .qtitle			{width:240px;  padding:10px 0 10px 20px; font-weight: 600; font-size:1.5em; float: left;}
+#panel-wrap-quick .qlink			{width:240px; float:left; padding:11px 17px 33px 0;font-size:1.5em; color:#727272;}
+
+/* 지도, 등급 영역 */
+#grade-map-area					    {width:1440px; height:700px; float:left; }
+.function-area						{width:22.2%; height:700px; cursor:pointer; float:left;  background-color: #eceef4; z-index:1;}
+.function-area .block				{height:70px;}
+.function-box 						{padding:25px 0 25px 68px; cursor: pointer; position:relative;color:#707070;}
+.function-box a						{cursor: pointer;  }
+.function-box.active				{background-color:#fff; color:#000;}
+.function-title						{font-size:1.5em;}
+.function-box-text					{font-family: "Bebas Neue"; font-size:3.1em; }
+
+/* 지도 영역 div 화살표 부분 (더 리서치 해보는 걸로)*/
+
+.function-box:after					{ display:none; }
+.function-box.active:after			{ display:block; position: absolute; bottom: 91.7px; right: -25px; content: " "; height: 0; z-index: 100; border-bottom: 20px solid;border-left: 25px solid rgba(0, 0, 0, 0);border-top: 25px solid rgba(0, 0, 0, 0);color: #ffffff;transform: rotate(-180deg);-webkit-transform: rotate(-180deg);-moz-transform: rotate(-180deg);-o-transform: rotate(-180deg);-ms-transform: rotate(-180deg);}
+
+/* 지도 팝업 */
+.map-wrap 							{position: absolute;left: 170px;bottom: 40px;/* width: 259px; height: 233px; */margin-left: -144px;text-align: left;overflow: hidden; line-height: 1.5; }
+.map-wrap * 						{padding: 0;margin: 0;}
+.map-wrap .info 					{padding:30px; border-radius: 6px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc; overflow: hidden; background-color: rgba(26, 26, 26, 0.85);}
+.map-wrap .info:nth-child(1) 		{border: 0; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.4)}
+.info .title 						{padding: 20px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close 						{position: absolute;top: 10px;right: 10px; color: #888; width: 17px;height: 17px; background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover 					{cursor: pointer;}
+.info .body 						{position: relative;overflow: hidden;}
+.factory-nm-grade					{font-size:1.25em; font-weight:600; color:#fff;}
+.info .desc 						{position: relative; margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis 					{overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.desc .jibun 						{font-size: 11px;color: #888;margin-top: -2px; color:#909090;}
+.jibun.ellipsis						{color:#909090; margin-bottom:15px;}
+.company-dambo						{color:#fff; font-size:1em; line-height:1.6em;}
+#grade-percent-total								{float:left;}
+.amcharts-chart-div a 						{display : none! important;}
+
+/* 200504 추*/
+.category, .category *{margin:0;padding:0;color:#000;}
+.category {position:absolute;overflow:hidden;top:50px;left:50px;width:300px;height:50px;z-index:10;font-size:12px;text-align:center;}
+.category .menu_selected {background:#FF5F4A;color:#fff;border-left:1px solid #915B2F;border-right:1px solid #915B2F;margin:0 -1px;}
+.category li{list-style:none;float:left;width:120px;height:34px;padding-top:5px;cursor:pointer; background-color: rgba(255, 255, 255, 0.9); margin:0 4px; font-size:18px; border-radius:3px; font-weight:600;}
+.category .ico_comm {display:inline-block;;margin:0 auto 2px;width:22px;height:26px; vertical-align: middle;}
+.category .ico_coffee {background-position:-10px 0;}
+.category .ico_store {background-position:-10px -36px;}
+.category .ico_carpark {background-position:-10px -72px;}
+
+/* 등급율 현황 */
+.percent-ratio										{width:1440px; height:500px; }
+.percent-ratio .psection							{width:720px; height:500px; float:left;}
+.percent-ratio .psection .ptitle					{padding:118px 0 27px 67px; font-size:1.5em; line-height:1.4em;}
+.percent-ratio .psection .ptitle .title										{font-weight:600;}							
+.percent-ratio .psection .gradepe-company			{width:653px; height:250px; padding: 10px 0 27px 67px; font-size:2.23em; line-height:1.5em; float:left; color:#2a2a2a;}
+.percent-ratio .psection .gradepe-company .gparcent	{float:left;}
+.percent가tio .psection .gradepe-company .gcompany	{float:left; margin-left:30px; }
+
+.percent-ratio #gchart-ratio						{width:700px; padding-top:50px; float:left;}
+.percent-ratio #gchart-ratio .chatarea-ratio		{width:100%;}
+.percent-ratio #chartdiv-ratio 						{height: 384px; margin:0 auto;}
+
+/* 등급율 변동 수치 */
+.percent-stat .percent-Stat							{width:1440px; height:500px; }
+.percent-stat .psection								{width:720px; height:500px; float:left;}
+.percent-stat .psection .ptitle						{padding:118px 0 27px 67px; font-size:1.5em; line-height:1.4em;}
+.percent-stat .psection .ptitle .title				{font-weight:600;}							
+.percent-stat .psection .gradepe-company			{width:653px; height:250px; padding: 10px 0 27px 67px; font-size:2.23em; line-height:1.5em; float:left; color:#2a2a2a;}
+.percent-stat .psection .gradepe-company .gparcent	{float:left;}
+.percent-stat .psection .gradepe-company .gcompany	{float:left; margin-left:30px; }
+
+.percent-stat #gchart-stat							{width:700px; padding-top:50px; float:left;}
+.percent-stat #gchart-stat .chatarea-stat			{width:100%;}
+.percent-stat #chartdiv-stat 						{height: 384px; margin:0 auto;}
+
+
+/* 담보물 검수 현황 */
+#grade-check-total									{width:1440px; height:1166px; float:left;}
+#gchart-check										{width:95%; text-align:center; padding-top:50px;  margin:0 auto; float:left;}
+#gchart-check .chatarea-check						{width:100%;}
+#gchart-check .chatarea-check #chartdiv-check		{height:600px; margin:0 auto;}
+
+#grade-check-total .qbtn							{ width:100%; float:right; text-align:right; margin-top:90px; cursor:pointer;}
+#grade-check-total .box								{width:20%; float:right; padding:15px 0 15px 10px; }
+#grade-check-total .qtitle							{width:100% !important; font-size:1.65em;  font-weight:600; float:left; text-align:left;}
+#grade-check-total .qlink							{float:left; font-size:1.5em; padding-top:10px; color: #727272; text-align:left;}
+ 
+/* Date_Picker */
+.date-pciker										{position:relative; top:55px; left:815px; z-index:100;/* width:100%;  */text-align:right; float:left;}
+#reportrange 										{width: 380px; height:40px; border:0.5px solid #bbbbbb; vertical-align:middle; text-align:center; font-size:1.2em; color: #5c5c5c;}
+.daterangepicker .ranges ul 						{width: 100% !important;}
+.daterangepicker .ranges li 						{float: left !important;}
+.date-pciker button									{width:44px; height:40.5px; vertical-align:middle; border:0.5px solid #bbbbbb; font-size:1em;}
+.date-pciker #btn_m									{margin-right:-5px;}
+.date-pciker #btn_p									{margin-left:-5px; margin-right:145px;}
+
+
+
+/* footer */
+footer 												{width: 100%; height: auto !important; background-color: #343434;float:left; clear:both;}
+.footer_wrap 										{max-width: 1440px; height: auto !important; background-color: #343434;}
+.footer_title 										{min-height: 30%; margin: 0 auto; padding:60px 60px 0 60px; text-align: left;clear: both;line-height: 44px;}
+.footer_company_name 								{font-size: 28px; color: #ffffff; margin-bottom:28px; font-weight:bold;}
+.footer_wt_col 										{color: #7a7a7a;}
+.footer_info 										{font-size: 28px;text-align: right;color: #909090; margin-top:22px; margin-right:60px; font-weight:300;}
+.footer_addr 										{font-size: 28px;color: #ffffff; font-weight:300;}
+.footer_tel 										{font-size: 28px;color: #ffffff; margin-top:10px;font-weight:300;}
+.footer_tel a, .footer_tel a:hover, .footer_tel a:active {color: #ffffff;}
+
+
+/* 반응형 */
+
+@media screen and (min-width: 1280px) and (max-width: 1430px) {
+	.contents { padding:0 10px; }
+	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	/* 재고자산 담보대출 등록 현황 */
+	.hd_my{width:100% !important;}
+	#panel-wrap-all{width:100% !important;}
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:120px;}
+	
+	/* 주요기능 즐겨찾기 */
+	.dash-board .box{width:33.333% !important;}
+	#panel-wrap-all .label{ padding:30px 41px 0 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:32.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qtitle{width:100% !important; text-align:center; padding:30px 0 0 0 !important;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important;}
+	 
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+	
+	
+	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;}
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio .psection .ptitle{width:100% !important;}
+	.percent-ratio .psection .gradepe-company{width:100% !important; }
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio #chartdiv-ratio{height:600px !important;}
+	
+	/* 등급 변동률*/
+	.percent-stat .psection .ptitle{width:100% !important;}
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important;}
+	.percent-stat #gchart-stat .chatarea-stat{width:90% !important; margin:0 auto;}
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 .date-pciker{width:100% !important; text-align:right; position:inherit; }
+	 .date-pciker #btn_p{margin-right:80px !important;}
+	 .percent-stat .psection .gradepe-company{width:100% !important; }
+	 #gchart-check{width:100% !important;}
+	 #gchart-check .chatarea-check{width:90% !important; margin:0 auto;}
+	 
+	 #grade-check-total .qbtn_fail{width:100% !important;}
+}	
+
+
+@media screen and (min-width: 1180px) and (max-width: 1280px) {
+	.contents { padding:0 10px; }
+	#content-wrap{width:100% !important;}
+	.cont-wrap .contents {  padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	/* 재고자산 담보대출 등록 현황 */
+	.hd_my{width:100% !important;}
+	#panel-wrap-all{width:100% !important;}
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:120px;}
+	/* .dash-board .box .box-title{padding:40px 0 14px 50px;}
+	.dash-board .box .box-text{padding:40px 0 14px 50px;} */
+	
+	/* 주요기능 즐겨찾기 */
+	.dash-board .box{width:33.333% !important;}
+	#panel-wrap-all .label{ padding:30px 41px 0 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:32.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qtitle{width:100% !important; text-align:center; padding:30px 0 0 0 !important;}
+	#panel-wrap-quick .qlink{display:none;}
+
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important;}
+	
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+	
+	
+	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;}
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio .psection .ptitle{width:100% !important;}
+	.percent-ratio .psection .gradepe-company{width:100% !important; }
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio #chartdiv-ratio{height:600px !important;}
+	
+	/* 등급 변동률*/
+	.percent-stat .psection .ptitle{width:100% !important;}
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important;}
+	.percent-stat #gchart-stat .chatarea-stat{width:90% !important; margin:0 auto;}
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 .date-pciker{width:100% !important; text-align:right; position:inherit; }
+	 .date-pciker #btn_p{margin-right:20px !important;}
+	 .percent-stat .psection .gradepe-company{width:100% !important; }
+	 #gchart-check{width:100% !important;}
+	  #gchart-check .chatarea-check{width:90% !important; margin:0 auto;}
+  	
+
+
+}
+
+@media screen and (min-width: 990px) and (max-width: 1180px) {
+	.contents { padding:0 10px; }
+	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	/* 재고자산 담보대출 등록 현황 */
+	.hd_my{width:100% !important;}
+	#panel-wrap-all{width:100% !important;}
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:120px;}
+	.dash-board .box .box-title{padding:40px 0 14px 70px;}
+	.dash-board .box .box-text{padding:40px 0 14px 70px;}
+	
+	/* 주요기능 즐겨찾기 */
+	.dash-board .box{width:33.333% !important;}
+	#panel-wrap-all .label{padding:30px 41px 0 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:33.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qtitle{width:100% !important; text-align:center; padding:30px 0 0 0 !important;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important;}
+	.function-box{padding:25px 0 25px 38px;}
+	.function-title{padding-bottom:10px;}
+	
+	.function-box.active:after{bottom:102px;}
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+	
+	
+	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;}
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio .psection .ptitle{width:100% !important;}
+	.percent-ratio .psection .gradepe-company{width:100% !important; }
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio #chartdiv-ratio{height:600px !important;}
+	
+	/* 등급 변동률*/
+	.percent-stat .psection .ptitle{width:100% !important;}
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important; margin:0 auto !important;}
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 .date-pciker{width:100% !important; text-align:right; position:inherit; }
+	 .date-pciker #btn_p{margin-right:60px !important;}
+	 .percent-stat .psection .gradepe-company{width:100% !important; }
+	 #gchart-check{width:100% !important; margin:0 auto;}
+  
+
+}
+
+@media screen and (min-width:801px) and (max-width: 990px) {
+  	.contents { padding:0 10px; }
+  	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	/* 재고자산 담보대출 등록 현황 */
+	.hd_my{width:100% !important;}
+	#panel-wrap-all{width:100% !important;}
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:120px;}
+	.dash-board .box .box-title{padding:40px 0 14px 60px;}
+	.dash-board .box .box-text{padding:40px 0 14px 60px;}
+	
+	/* 주요기능 즐겨찾기 */
+	.dash-board .box{width:33.333% !important;}
+	#panel-wrap-all .label{ padding:30px 41px 0 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:33.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	
+	#panel-wrap-quick .qtitle{width:100% !important; text-align:center; padding:30px 0 0 0 !important;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important;}
+	.function-area{width:25.5% !important;}
+	#map{width:74.5% !important;}
+	.function-box{padding:25px 0 25px 38px;}
+	.function-title{ padding-bottom:10px;}
+	.function-box.active:after{bottom:102px;}
+	
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+	
+	
+	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;}
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio .psection .ptitle{width:100% !important;}
+	.percent-ratio .psection .gradepe-company{width:100% !important; }
+	.percent-ratio #gchart-ratio{width:100% !important;}
+	.percent-ratio #chartdiv-ratio{height:600px !important;}
+	
+	/* 등급 변동률*/
+	.percent-stat .psection .ptitle{width:100% !important;}
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important;}
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 .date-pciker{width:100% !important; text-align:right; position:inherit; }
+	 .date-pciker #btn_p{margin-right:20px !important;}
+	 .percent-stat .psection .gradepe-company{width:100% !important; }
+	 #gchart-check{width:100% !important;}
+
+  
+}
+
+@media screen and (min-width:600px) and (max-width: 800px) {
+  	.contents { padding:0 10px; }
+  	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	/* 재고자산 담보대출 등록 현황 */
+	.hd_my{width:100% !important;}
+	#panel-wrap-all{width:100% !important; height:auto !important;}
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:60px;}
+	.dash-board{height:auto !important;}
+	.dash-board .box{width:50% !important;}
+	.dash-board .box .box-title{padding:40px 0 14px 60px; font-size:1.35em !important;}
+	.dash-board .box .box-text{padding:40px 0 14px 60px; font-size:4em !important;}
+	.dash-board .box .box-title img{display:none;}
+	
+	/* 주요기능 즐겨찾기 */
+	#panel-wrap-all .label{ padding:30px 30px 30px 0 !important; margin:30px 0 30px 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:33.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qimg img{width:40% !important;}
+	#panel-wrap-quick .qtitle{width:100% !important; font-size:1.2em; text-align:center; padding-top:25px !important;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important; height:auto !important;}
+	.function-area{width:100%; height:auto !important; }
+	.function-box{width:49.333% !important; padding:25px 0 25px 0px; float:left;}
+	.function-title{font-size:1.1em; padding-bottom:20px; text-align:center;}
+	.function-box-text{text-align:center;}
+	.function-box.active:after{display:none;}
+	 #map{width:100% !important;}
+	 
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important; float:left;}
+	
+	
+	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;  height:auto !important; float:left; }
+	.percent-ratio .psection{width:100% !important; float:left; height:auto !important;}
+	.percent-ratio .psection .ptitle{  width:90%; float:left; padding:0 !important; padding-left:40px !important;}
+	.percent-ratio .psection .gradepe-company{ width:90% !important; height:auto !important; font-size:1.5em !important; padding:0 !important; padding-left:40px !important; padding-top:20px !important;}
+	.percent-ratio .psection .gradepe-company .gparcent{font-size:1em;}
+	.percent-ratio #gchart-ratio{width:100% !important;}	
+	
+	/* 등급 변동률 */
+	.percent-stat{width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection{ width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection .ptitle{ width:90% !important; padding:0 !important; padding-left:40px !important;}
+	.percent-stat .psection .gradepe-company{ width:90% !important; height:auto !important; float:left; font-size:1.5em !important; padding:0 !important; padding-left:40px !important; padding-top:20px !important;}
+	.percent-stat .psection .gradepe-company .gcompany{line-height:2.1em !important;margin-left:0 !important; }	
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important;} 
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 #reportrange{width:70% !important; font-size:1.35em !important;}
+	 .date-pciker{width:100% !important; margin-bottom:40px; text-align:center; position:inherit; }
+	 .date-pciker #btn_p{margin-right:0px !important;}
+	 
+	 
+	 #gchart-check .chatarea-check #chartdiv-check{height:400px !important;}
+	 #gchart-check{width:100% !important;}
+	 #gchart-check .chatarea-check #chartdiv-check{height:500px !important;}
+	 #grade-check-total .qbtn_fail{float:left !important;}
+	 
+	 #grade-check-total .box{width:40% !important;}
+	 
+  	.footer_wrap{height:auto !important;}
+  	 #grade-check-total .qbtn_fail{width:100% !important;}
+  	.footer_addr, .footer_tel, .footer_info{font-size:24px! important;}
+}
+
+@media screen and (min-width:414px) and (max-width: 600px) {
+  	.contents { padding:0 10px; }
+  	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	.hd_my{width:100% !important;}
+	
+	/* 재고자산 담보대출 등록 현황 */
+	
+	#panel-wrap-all{width:100% !important; height:auto !important;}
+	
+	.dash-board{height:auto !important;}
+	.panel-heading{width:80% !important; float:left; padding:55px 40px !important; }
+	.dash-board .box{width:50% !important;}
+	.dash-board .box .box-title{ padding:40px 0 14px 0; text-align:center; font-size:1.35em !important;}
+	.dash-board .box .box-text{ padding:40px 0 14px 0; text-align:center; font-size:4em !important;}
+	.dash-board .box .box-title img{display:none;}
+	
+	/* 주요기능 즐겨찾기 */
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:60px;}
+	#panel-wrap-all .label{ padding:30px 30px 30px 0 !important; margin:30px 0 30px 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left;}
+	#panel-wrap-quick .qbtn{width:32.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qimg img{width:45% !important;}
+	#panel-wrap-quick .qtitle{width:85% !important; font-size:1.2em; text-align:center; padding:0 10px !important; line-height:25px;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important; height:auto !important;}
+	.function-area{width:100%; height:auto !important;}
+	.function-box{width:50% !important; padding:25px 0; float:left;}
+	.function-title{font-size:1.1em; padding-bottom:10px; text-align:center;}
+	.function-box-text{text-align:center;}
+	.function-box.active:after{display:none;}
+	 #map{width:100% !important;}
+	 
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+  	
+  	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;  height:auto !important; float:left; }
+	.percent-ratio .psection{width:100% !important; float:left; height:auto !important;}
+	.percent-ratio .psection .ptitle{  width:90%; float:left; padding:0 !important; padding-left:40px !important;}
+	.percent-ratio .psection .gradepe-company{ width:90% !important; height:auto !important; font-size:1.5em !important; padding:0 !important; padding-left:40px !important;  padding-top:20px !important;}
+	.percent-ratio .psection .gradepe-company .gparcent{font-size:1em;}
+	.percent-ratio #gchart-ratio{width:100% !important;}	
+	
+	/* 등급 변동률 */
+	.percent-stat{width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection{ width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection .ptitle{width:90% !important; padding:0 !important; padding-left:40px !important;}
+	.percent-stat .psection .gradepe-company{ width:90% !important; height:auto !important; float:left; font-size:1.5em !important; padding:0 !important; padding-left:40px !important; padding-top:20px !important;}
+	.percent-stat .psection .gradepe-company .gcompany{line-height:2.1em !important;margin-left:0 !important; }	
+	.percent-stat #gchart-stat{width:100% !important; padding:50px 0 !important;} 
+	
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 #reportrange{width:70% !important; font-size:1em !important;}
+	 .date-pciker{width:100% !important; margin-bottom:40px; text-align:center; position:inherit; }
+	 .date-pciker #btn_p{margin-right:0px !important;}
+	 
+	 #gchart-check .chatarea-check #chartdiv-check{height:400px !important;}
+	 #gchart-check{width:90% !important;}
+	 #gchart-check .chatarea-check #chartdiv-check{height:500px !important;}
+	 #grade-check-total .qbtn_fail{float:left !important;}
+	 
+	 #grade-check-total .box{width:60% !important;}
+	  #grade-check-total .box
+  	.footer_wrap{height:auto !important;}
+  	 #grade-check-total .qbtn_fail{width:100% !important;}
+  	.footer_addr, .footer_tel, .footer_info{font-size:24px! important;}
+}
+
+
+
+@media screen and (min-width:320px) and (max-width: 413px) {
+	
+	
+  	.contents { padding:0 10px; }
+  	#content-wrap{width:100% !important;}
+	.cont-wrap .contents { padding:30px 10px; }
+	
+	.cont-img.main-img,
+	.cont-img.traffic-img,
+	.cont-img.forest-img,
+	.cont-img.space-img { background-size:contain; }
+	
+	/* navigation */
+	
+	#gnb { display:none; float:none; position:absolute; top:100%; left:0; width:100%; padding:0; background:#fff;  z-index:9999; }
+	#gnb .gnb-wrap li { float:none; margin:0;  width:100%; text-align:left;}
+	#gnb .gnb-wrap > li > a { padding:18px 0; text-indent:15px; }
+	#gnb .gnb-wrap > li a.active:after { display:none; }
+	#gnb .gnb-wrap > li .depth2 { display:none; position:relative; width:100%;  padding:10px 0; background-color:#6295da;}
+	#gnb .gnb-wrap > li .depth2 li a { padding:20px 0; text-indent:20px; }
+	.depth2-bg { display:none; }
+	#hamburger { display:block; }
+	
+	.panel-heading{padding: 70px 0 55px 15px !important;}
+	
+	
+  	
+	.hd_my{width:100% !important;}
+	
+	/* 재고자산 담보대출 등록 현황 */
+	
+	#panel-wrap-all{width:100% !important; height:auto !important;}
+	
+	.dash-board{height:auto !important;}
+	.panel-heading{width:93% !important; float:left; padding:55px 10px !important;}
+	.dash-board .box{width:50% !important;}
+	.dash-board .box .box-title{ padding:40px 0 14px 0; font-size:1.2em !important; text-align:center;}
+	.dash-board .box .box-text{ padding:40px 0 14px 0; text-align:center; font-size:4em !important;}
+	.dash-board .box .box-title img{display:none;}
+	
+	/* 주요기능 즐겨찾기 */
+	#panel-wrap-quick{width:100% !important; height:auto !important; padding-bottom:100px !important;}
+	#panel-wrap-all .label{ padding:30px 30px 30px 0 !important; margin:30px 0 30px 0 !important;}
+	#panel-wrap-quick .quick-btn{width:100% !important; float:left; height:70px !important; }
+	#panel-wrap-quick .qbtn{width:32.333% !important; float:left; }
+	#panel-wrap-quick .qimg{width:100% !important; height:80px !important; text-align:center; padding:0 !important;}
+	#panel-wrap-quick .qimg img{width:50% !important;}
+	#panel-wrap-quick .qtitle{width:85% !important; font-size:1.2em; text-align:center; padding:0 10px !important; line-height:25px;}
+	#panel-wrap-quick .qlink{display:none;}
+	
+	/* 전체 등록 업체 지도 */
+	#grade-map-area{width:100% !important; height:auto !important;}
+	.function-area{width:100%; height:auto !important;}
+	.function-box{width:50% !important; padding:25px 0; float:left;}
+	.function-title{font-size:1.1em; padding-bottom:10px; text-align:center;}
+	.function-box-text{text-align:center;}
+	.function-box.active:after{display:none;}
+	 #map{width:100% !important;}
+	 
+	/* block */
+	.main-block{width:100% !important;}
+	
+	/* 등록 검수 현황 area */
+	#grade-percent-total{width:100% !important;}
+  	
+  	/* 담보대출 업체 등록 현황 */
+	.percent-ratio{width:100% !important;  height:auto !important; float:left; }
+	.percent-ratio .psection{ width:99% !important; float:left; height:auto !important;}
+	.percent-ratio .psection .ptitle{  width:95%; float:left; padding:0 !important; padding-left:20px !important;}
+	.percent-ratio .psection .gradepe-company{ width:100% !important; height:auto !important; font-size:1.5em !important; padding-top:20px !important; padding-left:0px !important; padding-top:20px}
+	.percent-ratio .psection .gradepe-company .gcompany{margin-left:10px !important;}
+	.percent-ratio .psection .gradepe-company .gparcent{font-size:1em; padding-left:20px;}
+	.percent-ratio #gchart-ratio{width:100% !important; padding:0 !important;}	
+	
+	/* 등급 변동률 */
+	.percent-stat{width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection{ width:100% !important; height:auto !important; float:left; }
+	.percent-stat .psection .ptitle{ width:95% !important; padding:0 !important; padding-left:20px !important;}
+	.percent-stat .psection .gradepe-company{ width:100% !important; height:auto !important; float:left; font-size:1.5em !important; padding-top:20px !important; padding-left:0px !important;}
+	.percent-stat .psection .gradepe-company .gcompany{margin-left:10px !important; }
+	.percent-stat .psection .gradepe-company .gparcent{padding-left:20px !important;}	
+	.percent-stat .psection .gradepe-company .gparcent ul li img{display:none;}
+	.percent-stat #gchart-stat{width:100% !important; padding-bottom:50px 0 !important; padding-top:0 !important;} 
+
+	 /* 담보물 검수 현황 */
+	 #grade-check-total{width:100% !important;}
+	 #reportrange{width:70% !important; font-size:0.8em !important;}
+	 .date-pciker{width:100% !important; margin-bottom:40px; text-align:center; position:inherit; }
+	 .date-pciker #btn_p{margin-right:0px !important;}
+	 
+	 #gchart-check .chatarea-check #chartdiv-check{height:400px !important;}
+	 #gchart-check{width:100% !important;}
+	 #gchart-check .chatarea-check #chartdiv-check{height:500px !important;}
+	
+ 	.qbtn_fail .icon{width:80px !important;}
+	 #grade-check-total .box{width:70.5% !important;}
+  	.footer_wrap{height:auto !important;}
+  	 #grade-check-total .qbtn_fail{width:100% !important;}
+  	.footer_addr, .footer_tel, .footer_info{font-size:24px! important;}  	
+  	
+}
+

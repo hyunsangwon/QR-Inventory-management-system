@@ -1,0 +1,28 @@
+application:
+  version: v3.0.1
+  title: QR-Inventory-API
+
+mybatis:
+  mapper-locations: classpath:/sqlmap/sqlmapper_*.xml
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://database-qr.c1wdflbqbfqj.ap-northeast-2.rds.amazonaws.com/qr_inventory?useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
+    username: admin
+    password: tkddnjs0823
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: file:src/main/resources/templates/
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+logging:
+  config: classpath:logback-spring-dev.xml
+
+kakao:
+  api-key: 87c48b54b7f2c7fdc3f31063f02a7fa2
