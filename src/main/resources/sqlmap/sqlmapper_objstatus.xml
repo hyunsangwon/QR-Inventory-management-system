@@ -86,5 +86,19 @@
             ON u.user_srl = o.user_srl
         WHERE ol.qr_srl = #{qrSrl}
     </select>
+    <!--자산 삭제-->
+    <delete id="deleteObj">
+        DELETE FROM
+        obj
+        WHERE qr_srl = #{qrSrl}
+    </delete>
+    <!--자산 상태 변경-->
+    <update id="updateObjStatus" parameterType="pro.cntech.inventory.vo.ObjListVO">
+        UPDATE obj
+        SET
+            obj_status = #{objStatus},
+            obj_status_at = now()
+        WHERE qr_srl = #{qrSrl}
+    </update>
 
 </mapper>

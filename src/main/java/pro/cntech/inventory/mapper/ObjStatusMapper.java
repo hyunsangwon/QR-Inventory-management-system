@@ -15,4 +15,6 @@ public interface ObjStatusMapper
     ObjDetailVO getObjDetail(@Param("qrSrl") String qrSrl);
     List<ObjDetailVO> getObjHistory(ObjDetailVO objDetailVO);
     int getObjHistoryCnt(ObjDetailVO objDetailVO);
+    int deleteObj (@Param("qrSrl") String qrSrl);
+    int updateObjStatus(ObjListVO objVO);
 }

@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
 import pro.cntech.inventory.util.PageHandler;
+import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
@@ -67,6 +70,33 @@ public class StatusService
         vo.setLimitcount(limitCount); vo.setContentnum(contentNum);
         List<ObjDetailVO> list = objStatusMapper.getObjHistory(vo);
         return list;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public Boolean controlObjStatus(String flag, ObjArrayVO objArrayVO) throws Exception
+    {
+        int rows = 0;
+        if("delete".equals(flag))
+        {
+            for(ObjListVO listVO: objArrayVO.getParam())
+            {
+                String qrSrl = listVO.getQrSrl();
+                rows = objStatusMapper.deleteObj(qrSrl);
+            }
+        }
+        if("update".equals(flag))
+        {
+            for(ObjListVO listVO: objArrayVO.getParam())
+            {
+                listVO.setObjStatus("release_wait"); //출고 대기
+                rows = objStatusMapper.updateObjStatus(listVO);
+            }
+        }
+        if(rows == 0)
+        {
+            return false;
+        }
+        return true;
     }
 
     public PageHandler getpageHandler(ObjDetailVO vo)

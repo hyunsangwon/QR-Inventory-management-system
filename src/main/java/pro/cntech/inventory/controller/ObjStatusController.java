@@ -75,12 +75,21 @@ public class ObjStatusController
     }
     /*출고대기 자산 삭제하기*/
     @PostMapping("/ajax/obj/release_wait/delete")
-    public Boolean callAjaxobjDelete(@RequestBody ObjArrayVO objArrayVO)
+    public @ResponseBody  Boolean callAjaxObjDelete(@RequestBody ObjArrayVO objArrayVO) throws Exception
     {
         logger.debug("[ Call /ajax/obj/release_wait/delete - POST ]");
         logger.debug("Param : "+objArrayVO.toString());
 
-        return true;
+        return statusService.controlObjStatus("delete",objArrayVO);
+    }
+
+    @PostMapping("/ajax/obj/return_finish/confirm")
+    public @ResponseBody Boolean callAjaxObjConfirm(@RequestBody ObjArrayVO objArrayVO) throws Exception
+    {
+        logger.debug("[ Call /ajax/obj/return_finish/confirm - POST ]");
+        logger.debug("Param : "+objArrayVO.toString());
+
+        return statusService.controlObjStatus("update",objArrayVO);
     }
 
 }
