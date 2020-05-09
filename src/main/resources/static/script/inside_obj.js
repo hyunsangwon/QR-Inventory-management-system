@@ -137,26 +137,20 @@ $(window).on('resize',function(){
 
 }).resize();
 
-
-
 $(document).ready(function(){
 
 	$('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
-
-})
-
-
-
-
-
+      if(tab_id == 'tab-1') //출고 대기
+      {
+        location.href = "/obj/status/release_wait/list/1";
+      }
+      if(tab_id == 'tab-2') //반납 완료
+      {
+        location.href = "/obj/status/return_finish/list/1";
+      }
+	});
+});
 /*check 전체선택 및 전체해제*/
 function checkAll(){
       if( $("#checkAll").is(':checked') ){

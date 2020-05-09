@@ -5,7 +5,19 @@
 <link rel="stylesheet" th:href="@{/css/inside_obj.css}">
 <script th:src="@{/script/inside_obj.js}" type="text/javascript"></script>
 <script type="text/javascript">
-    $(function(){
+    $(function()
+    {
+        var objStatus = $('#objStatus').val();
+        if('release_wait' == objStatus)
+        {
+            $('#data_tab_1').addClass('current');
+            $('#tab-1').addClass('current');
+        }
+        if('return_finish' == objStatus)
+        {
+            $('#data_tab_2').addClass('current');
+            $('#tab-2').addClass('current');
+        }
         $('th[name=checkRow]').hide();
         $('td[name=checkRow]').hide();
 
@@ -13,7 +25,6 @@
         {
             $('th[name=checkRow]').show();
             $('td[name=checkRow]').show();
-            //delete_active_btn
             var checkedLen = $('input[name=objRow]:checked').length;
             if(checkedLen > 0)
             {
@@ -86,7 +97,26 @@
                 alert('해당 자산을 승인 하시겠습니까?');
             }
         });
+
+        $("span[name=pageNum]").click(function()
+        {
+            $("span[name=pageNum]").attr('class','page');
+            $(this).attr('class','page_start');
+            var pageNum = $(this).attr('id');
+        });
+
+        $("img[name=pageNum]").click(function()
+        {
+            var pageNum = $(this).attr('id');
+        });
     });
+
+    function load_detail_page(srl)
+    {
+        console.log(srl);
+        location.href = "/obj/detail/search/"+srl;
+    }
+
 </script>
 <body>
 <div class="cd-main-header js-cd-main-header">
@@ -108,11 +138,12 @@
         <!-- tab content -->
         <div id="tab_content_wrap">
             <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">출고 대기</li>
-                <li class="tab-link" data-tab="tab-2">반납 완료</li>
+                <li class="tab-link" data-tab="tab-1" id="data_tab_1">출고 대기</li>
+                <li class="tab-link" data-tab="tab-2" id="data_tab_2">반납 완료</li>
             </ul>
+            <input type="hidden" id="objStatus" th:value="${objStatus}"/>
             <!--//tabs-->
-            <div id="tab-1" class="tab-content current">
+            <div id="tab-1" class="tab-content">
                 <div id="panel-wrap-register" class="text_left">
                     <div class="regiseter-panel-heading">
                         <div class="regiseter-panel-group">
@@ -150,7 +181,7 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_waitList">
-                    <table style="border-bottom:2px solid #d7d7d7;">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'release_wait'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -170,61 +201,35 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td name="checkRow"><input type="checkbox" class="check" name="objRow"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>SL-X3220NR</td>
-                            <td>레이저복합기</td>
-                            <td>20200504-00000001</td>
+                        <tr th:if="${size} == '0'">
+                            <td colspan=6>데이터가 없습니다.</td>
                         </tr>
-                        <tr>
+                        <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
+                            th:data-srl="${list.qrSrl}"
+                            th:onclick="load_detail_page(this.getAttribute('data-srl'))">
                             <td name="checkRow"><input type="checkbox" class="check" name="objRow"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>SL-X3220NR</td>
-                            <td>토너 카트리지</td>
-                            <td>20200504-00000001</td>
+                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <td th:text="${list.userName}">홍길동A</td>
+                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.objKinds}">레이저복합기</td>
+                            <td th:text="${list.companyName}">20200504-00000001</td>
                         </tr>
-                        <tr>
-                            <td name="checkRow"><input type="checkbox" class="check" name="objRow"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>SL-X3220NR</td>
-                            <td>레이저복합기</td>
-                            <td>20200504-00000001</td>
-                        </tr>
-                        <tr>
-                            <td name="checkRow"><input type="checkbox" class="check" name="objRow"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>SL-X3220NR</td>
-                            <td>토너 카트리지</td>
-                            <td>20200504-00000001</td>
-                        </tr>
+
                         </tbody>
                     </table>
                 </div>
-                <div class="page_count_wrap">
+                <div class="page_count_wrap" th:if="${objStatus eq 'release_wait'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->
-                    <span>
-                       <img th:src="@{/image/paging/list-previous.svg}" />
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
                     </span>
-                    <span class="page_num">
-                        <span id="page_start">1</span>
-                        <span id="page">2</span>
-                        <span id="page">3</span>
-                        <span id="page">4</span>
-                        <span id="page">5</span>
-                        <span id="page">6</span>
-                        <span id="page">7</span>
-                        <span id="page">8</span>
-                        <span id="page">9</span>
-                        <span id="page_total">10</span></span>
-                    <span>
-                        <img th:src="@{/image/paging/list-next.svg}" />
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
+                    <span th:if="${pageHandler.next}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
                     </span>
                     <!--<span>
                         <img src="list-right_end.svg" >
@@ -259,13 +264,11 @@
                     <input type="checkbox" id="checkAll" onclick="checkAll();"class="all-check" style="margin-right:20px; ">
                     <span style="position: relative; bottom:-3px;">전체 선택하기</span>
                 </div>
-
                 <!--검색(베타 주석처리)
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
-
                 <div id="regisster_completeList">
-                    <table style="border-bottom:2px solid #d7d7d7;">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_finish'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -285,46 +288,35 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><input type="checkbox" name="objReturnRow" class="check"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>SL-X3220NR</td>
-                            <td>레이저 복합기</td>
-                            <td>20200504-00000001</td>
+                        <tr th:if="${size} == '0'">
+                            <td colspan=6>데이터가 없습니다.</td>
                         </tr>
-                        <tr>
+                        <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
+                            th:data-srl="${list.qrSrl}"
+                            th:onclick="load_detail_page(this.getAttribute('data-srl'))">
                             <td><input type="checkbox" name="objReturnRow" class="check"></td>
-                            <td>2020.5.7</td>
-                            <td>홍길동A</td>
-                            <td>모델명</td>
-                            <td>레이저 복합기</td>
-                            <td>20200504-00000001</td>
+                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <td th:text="${list.userName}">홍길동A</td>
+                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.objKinds}">레이저복합기</td>
+                            <td th:text="${list.companyName}">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <!--//regisster_completeList-->
-                <div class="page_count_wrap">
+                <div class="page_count_wrap" th:if="${objStatus eq 'return_finish'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->
-                    <span>
-                       <img th:src="@{/image/paging/list-previous.svg}" />
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
                     </span>
-                    <span class="page_num">
-                        <span id="page_start">1</span>
-                        <span id="page">2</span>
-                        <span id="page">3</span>
-                        <span id="page">4</span>
-                        <span id="page">5</span>
-                        <span id="page">6</span>
-                        <span id="page">7</span>
-                        <span id="page">8</span>
-                        <span id="page">9</span>
-                        <span id="page_total">10</span></span>
-                    <span>
-                         <img th:src="@{/image/paging/list-next.svg}" />
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
+                    <span th:if="${pageHandler.next}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
                     </span>
                     <!--<span>
                         <img src="list-right_end.svg" >

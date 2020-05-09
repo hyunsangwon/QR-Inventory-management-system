@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pro.cntech.inventory.service.StatusService;
+import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
+import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
 
@@ -35,13 +37,11 @@ public class ObjStatusController
         obj.setObjStatus(status);
         statusService.getObjStatusList(model,obj);
 
+        if(ObjStatusCode.RELEASE_WAIT.equals(status) || ObjStatusCode.RETURN_FINISH.equals(status))
+        {
+            return MANAGER_VIEW_PREFIX+"internal_obj_list";
+        }
         return MANAGER_VIEW_PREFIX+"external_obj_list";
-    }
-
-    @GetMapping("/obj/status/test")
-    public String loadObjStatusList()
-    {
-        return MANAGER_VIEW_PREFIX+"internal_obj_list";
     }
 
     /*자산 상세보기*/
@@ -73,4 +73,14 @@ public class ObjStatusController
 
         return statusService.getpageHandler(objDetailVO);
     }
+    /*출고대기 자산 삭제하기*/
+    @PostMapping("/ajax/obj/release_wait/delete")
+    public Boolean callAjaxobjDelete(@RequestBody ObjArrayVO objArrayVO)
+    {
+        logger.debug("[ Call /ajax/obj/release_wait/delete - POST ]");
+        logger.debug("Param : "+objArrayVO.toString());
+
+        return true;
+    }
+
 }
