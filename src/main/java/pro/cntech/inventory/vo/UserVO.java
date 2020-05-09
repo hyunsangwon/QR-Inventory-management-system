@@ -13,4 +13,5 @@ public class UserVO
     private String latitude;
     private String longitude;
     private String password;
+    private int totalObjCnt;
 }

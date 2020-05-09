@@ -1,0 +1,48 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pro.cntech.inventory.mapper.AdminMapper">
+
+    <!--나의 자산수량과 기본정보-->
+    <select id="getMyAssetInfo" resultType="pro.cntech.inventory.vo.UserVO">
+        SELECT
+            u.user_srl AS userSrl,
+            u.user_name AS userName,
+            u.auth,
+            u.m_number AS phone,
+            COUNT(o.obj_srl) AS totalObjCnt
+        FROM users AS u
+        INNER JOIN obj AS o
+        ON u.user_srl = o.user_srl
+        WHERE u.user_srl = #{userSrl}
+    </select>
+    <!--자산담당자의 관리자 리스트 조회-->
+    <select id="getMyAdminList" resultType="pro.cntech.inventory.vo.UserVO">
+        SELECT
+            u.user_srl AS userSrl,
+            u.user_name AS userName,
+            COUNT(o.obj_srl) AS totalObjCnt
+        FROM users AS u
+        INNER JOIN obj AS o
+        ON u.user_srl = o.user_srl
+        WHERE u.master_srl = #{userSrl}
+    </select>
+    <!--자산담당자,자산관리자 의 자산 리스트-->
+    <select id="getObjList" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
+        SELECT
+            qr_srl AS qrSrl,
+            obj_img AS objImage,
+            obj_status AS objStatus,
+            DATE_FORMAT(obj_status_at,'%Y.%m.%d, %H시%i분') AS objStatusAt
+        FROM obj
+        WHERE user_srl = #{userSrl}
+        ORDER BY create_at DESC
+        LIMIT #{limitcount},#{contentnum}
+    </select>
+
+    <select id="getObjListTotalCnt" resultType="Integer">
+        SELECT
+            count(*)
+        FROM obj
+        WHERE user_srl = #{userSrl}
+    </select>
+
+</mapper>

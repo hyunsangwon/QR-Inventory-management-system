@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
+import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
@@ -88,7 +89,7 @@ public class StatusService
         {
             for(ObjListVO listVO: objArrayVO.getParam())
             {
-                listVO.setObjStatus("release_wait"); //출고 대기
+                listVO.setObjStatus(ObjStatusCode.RELEASE_WAIT); //출고 대기
                 rows = objStatusMapper.updateObjStatus(listVO);
             }
         }
