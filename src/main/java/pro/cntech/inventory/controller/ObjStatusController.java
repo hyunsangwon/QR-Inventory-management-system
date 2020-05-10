@@ -12,6 +12,7 @@ import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
+import pro.cntech.inventory.vo.UserVO;
 
 import java.util.List;
 

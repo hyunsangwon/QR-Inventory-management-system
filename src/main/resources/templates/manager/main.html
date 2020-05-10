@@ -28,7 +28,6 @@
         <div th:replace="fragments/header:: headInfoFragment"></div>
         <div th:replace="fragments/header:: headNavFragment"></div>
         <div class="depth2-bg"></div>
-
         <div id="content-wrap">
             <div id="panel-wrap-all">
                 <div class="panel-heading">
@@ -36,7 +35,7 @@
                         <div class="circle"></div>
                         <span class="title">자산 등록 현황</span>
                         <p style="margin-top:10px;">
-                            <span class="panel-text">하나은행 | 테헤란로 지점</span>
+                            <span class="panel-text" th:text="${addr}">하나은행 | 테헤란로 지점</span>
                     </div>
                     <!--//panel-group-->
                 </div>
@@ -47,7 +46,7 @@
                             <span>전체 등록 자산</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
                         <div class="box-text">
-                            <span>607</span>
+                            <span th:text="${statistics.totalCnt}">607</span>
                         </div>
                     </div>
                     <div class="box" name="div-box" id="box2" style="cursor:default">
@@ -55,7 +54,7 @@
                             <span>내부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
                         <div class="box-text">
-                            <span>26</span>
+                            <span th:text="${statistics.innerCount}">26</span>
                         </div>
                     </div>
                     <div class="box" name="div-box" id="box3" style="cursor:default">
@@ -63,7 +62,7 @@
                             <span>외부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}"/>
                         </div>
                         <div class="box-text">
-                            <span>0</span>
+                            <span th:text="${statistics.outerCount}">0</span>
                         </div>
                     </div>
                 </div>

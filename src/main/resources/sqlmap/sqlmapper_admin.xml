@@ -21,9 +21,10 @@
             u.user_name AS userName,
             COUNT(o.obj_srl) AS totalObjCnt
         FROM users AS u
-        INNER JOIN obj AS o
+        LEFT JOIN obj AS o
         ON u.user_srl = o.user_srl
         WHERE u.master_srl = #{userSrl}
+        GROUP BY u.user_srl
     </select>
     <!--자산담당자,자산관리자 의 자산 리스트-->
     <select id="getObjList" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
@@ -31,7 +32,7 @@
             qr_srl AS qrSrl,
             obj_img AS objImage,
             obj_status AS objStatus,
-            DATE_FORMAT(obj_status_at,'%Y.%m.%d, %H시%i분') AS objStatusAt
+            DATE_FORMAT(obj_status_at,'%Y.%m.%d, %H시%i분') AS statusAt
         FROM obj
         WHERE user_srl = #{userSrl}
         ORDER BY create_at DESC
@@ -44,5 +45,36 @@
         FROM obj
         WHERE user_srl = #{userSrl}
     </select>
+
+    <insert id="setUserInfo" parameterType="pro.cntech.inventory.vo.UserVO">
+        INSERT INTO users
+        (
+            user_name,
+            addr,
+            master_srl,
+            auth,
+            m_number,
+            create_at,
+            grade
+        )
+        VALUES
+        (
+            #{userName},
+            '대전 동구 충정로 136',
+            #{masterSrl},
+            'admin',
+            #{phone},
+            now(),
+            'A'
+        )
+    </insert>
+
+    <update id="updateUserInfo" parameterType="pro.cntech.inventory.vo.UserVO">
+        UPDATE users
+        SET
+            user_name = #{userName},
+            m_number = #{phone}
+        WHERE user_srl = #{userSrl}
+    </update>
 
 </mapper>

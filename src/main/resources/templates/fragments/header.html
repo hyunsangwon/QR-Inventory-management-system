@@ -28,7 +28,7 @@
 					<a th:href="@{/obj/status/release_wait/list/1}" title="내부 자산 조회" name="inner_asset_search">내부자산 조회</a>
 					<ul class="depth2 clearfix">
 						<li><a th:href="@{/obj/status/release_wait/list/1}" title="출고 대기"><span>출고 시작</span></a></li>
-						<li><a th:href="@{/obj/status/return_wait/list/1}" title="반납 완료"><span>반납 시작</span></a></li>
+						<li><a th:href="@{/obj/status/return_finish/list/1}" title="반납 완료"><span>반납 완료</span></a></li>
 					</ul>
 					</li>
 					<li>
@@ -43,7 +43,7 @@
 						<a href="#open" title="서비스 신청" name="service">서비스 신청</a>
 						<ul class="depth2 clearfix">
 							<li><a href="#" title="서비스 주문"><span>서비스 주문</span></a></li>
-							<li><a href="#" title="주문.배송 조회"><span>주문.배송 조회</span></a></li>
+							<!--<li><a href="#" title="주문.배송 조회"><span>주문.배송 조회</span></a></li>-->
 						</ul>
 					</li>
 					<li>
@@ -57,7 +57,6 @@
 			</nav>
 		</div>
 		<!-- //header -->
-
 		<!-- footer -->
 		<footer th:fragment="headFooterFragment">
 		  <div class="footer_wrap">

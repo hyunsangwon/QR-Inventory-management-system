@@ -14,4 +14,6 @@ public interface AdminMapper
     List<UserVO> getMyAdminList(@Param("userSrl") String userSrl);
     List<ObjListVO> getObjList(ObjListVO objListVO);
     int getObjListTotalCnt(@Param("userSrl") String userSrl);
+    int setUserInfo(UserVO userVO);
+    int updateUserInfo(UserVO userVO);
 }

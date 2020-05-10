@@ -52,6 +52,8 @@ public class MainContoller
     @GetMapping("/main")
     public String loadMainPage(ModelMap model)
     {
+        logger.debug("[ Call /main - GET ]");
+        model.addAttribute("statistics",mainService.getMainStatistics());
         return MANAGER_VIEW_PREFIX+"main";
     }
 

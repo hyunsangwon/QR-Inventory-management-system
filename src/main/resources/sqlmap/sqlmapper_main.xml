@@ -13,4 +13,33 @@
         WHERE m_number = #{phone}
     </select>
 
+
+    <select id="getMainStatistics" resultType="pro.cntech.inventory.vo.StatisticsVO">
+        SELECT
+            COUNT(o.obj_srl) AS totalCnt,
+            (
+            SELECT
+                COUNT(o.obj_srl)
+            FROM obj AS o
+            INNER JOIN users AS u
+            ON o.user_srl = u.user_srl
+            WHERE u.master_srl = #{userSrl}
+            AND o.obj_status IN ('return_start','release_finish','outer_wait')
+            )
+        AS outerCount,
+        (
+            SELECT
+                COUNT(o.obj_srl)
+            FROM obj AS o
+            INNER JOIN users AS u
+            ON o.user_srl = u.user_srl
+            WHERE u.master_srl = #{userSrl}
+            AND o.obj_status IN ('return_finish','release_wait','release_start','inner_wait')
+        )
+        AS innerCount
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        WHERE u.master_srl = #{userSrl}
+    </select>
 </mapper>

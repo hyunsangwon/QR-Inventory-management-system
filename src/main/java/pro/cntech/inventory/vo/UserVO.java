@@ -14,4 +14,6 @@ public class UserVO
     private String longitude;
     private String password;
     private int totalObjCnt;
+    private String grade;
+    private String masterSrl;
 }

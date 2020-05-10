@@ -1,10 +1,11 @@
 package pro.cntech.inventory.service;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.AdminMapper;
 import pro.cntech.inventory.util.PageHandler;
@@ -48,7 +49,34 @@ public class AdminService {
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
     {
+        int MAX = 15;
+        int limitCount=((objListVO.getPageNum() - 1 ) * MAX);
+        int contentNum = MAX;
+        objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum);
         return adminMapper.getObjList(objListVO);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public Boolean isControlUser(UserVO userVO,String flag)
+    {
+        int rows = 0;
+        if("insert".equals(flag))
+        {
+            rows = adminMapper.setUserInfo(userVO);
+            if(rows > 0)
+            {
+              return  true;
+            }
+        }
+        if("update".equals(flag))
+        {
+            rows = adminMapper.updateUserInfo(userVO);
+            if(rows > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public UserPrincipalVO getSecurityInfo()

@@ -23,13 +23,12 @@
             $('#data_tab_2').addClass('current');
             $('#tab-2').addClass('current');
         }
-        $('th[name=checkRow]').hide();
-        $('td[name=checkRow]').hide();
+        $('input[name=objRow]').hide();
 
         $('#select_obj').click(function()
         {
-            $('th[name=checkRow]').show();
-            $('td[name=checkRow]').show();
+
+            $('input[name=objRow]').show();
             var checkedLen = $('input[name=objRow]:checked').length;
             if(checkedLen > 0)
             {
@@ -187,6 +186,7 @@
                 if(data)
                 {
                     alert('해당 자산이 삭제 되었습니다.');
+                    location.reload();
                 }
             },
             error : function(xhr, status, error)
@@ -215,6 +215,7 @@
                 if(data)
                 {
                     alert('해당 자산 반납승인되었습니다.');
+                    location.reload();
                 }
             },
             error : function(xhr, status, error)
@@ -274,7 +275,7 @@
                                     <p>
                                     <span style="font-size: 24px;  color: #112287; ">자산 삭제 후 부착된 QR 스티커는 제거해주세요.</span>
                                 </div>
-                                <!--//remark_check-->
+                                //remark_check-->
                             </div>
                             <!--//regiseter-panel-title-->
                         </div>

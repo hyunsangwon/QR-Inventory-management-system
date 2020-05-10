@@ -50,4 +50,20 @@ public class AdminController
         return adminService.getAdminAssetList(listVO);
     }
 
+    @PostMapping("/ajax/user/insert/info")
+    public @ResponseBody Boolean callAjaxUserInsert(@RequestBody UserVO userVO)
+    {
+        logger.debug("[ Call /ajax/user/insert/info - POST ]");
+        logger.debug("Param : "+userVO.toString());
+        return adminService.isControlUser(userVO,"insert");
+    }
+
+    @PostMapping("/ajax/user/update/info")
+    public @ResponseBody Boolean callAjaxUserUpdate(@RequestBody UserVO userVO)
+    {
+        logger.debug("[ Call /ajax/user/update/info - POST ]");
+        logger.debug("Param : "+userVO.toString());
+        return adminService.isControlUser(userVO,"update");
+    }
+
 }

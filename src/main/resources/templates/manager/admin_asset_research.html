@@ -23,32 +23,257 @@
         {
             var pageNum = $(this).attr('id');
         });
-
+        /* 사용자 추가 */
+        $("#add_user").click(function(){
+            var userName = $('#insert_user_name').val();
+            var phone = $('#insert_user_phone').val();
+            var masterSrl = $('#masterSrl').val();
+            var jsonData = { "userName" : userName , 'phone' : phone, 'masterSrl' : masterSrl};
+            ajax_admin_add(jsonData);
+        });
+        /* 사용자 정보 수정*/
+        $('#complete_btn').click(function () {
+            var userName = $('#update_user_name').val();
+            var phone = $('#update_user_phone').val();
+            var userSrl = $('#userSrl').val();
+            var jsonData = { "userName" : userName , 'phone' : phone, 'userSrl' : userSrl};
+            ajax_admin_update(jsonData);
+        });
     });
     function click_user(userSrl)
     {
         $("div[name=section-box]").removeClass('active');
         $('#'+userSrl).addClass('active');
+        var jsonData = { "userSrl" : userSrl};
+        ajax_admin_info(jsonData);
+        jsonData.pageNum = '1';
+        ajax_admin_asset_list(jsonData);
     }
 
-    function load_detail_page(qrSrl)
+    function load_detail_page(obj)
     {
-        console.log(qrSrl);
+        location.href = "/obj/detail/search/"+obj.id;
     }
-
-    /*자산 관리자 정보와 페이징 객체 가져오기*/
-    function ajax_admin_info()
+    /*자산 관리자 정보 가져오기*/
+    function ajax_admin_info(data)
     {
         $.ajax
         ({
-
+            type: 'POST',
+            contentType: "application/json",
+            url:'/ajax/admin/info',
+            data : JSON.stringify(data),
+            dataType : "json",
+            beforeSend : function(xhr)
+            {
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(data)
+            {
+                $('#userName').empty();
+                $('#userInfo').empty();
+                $('#userSrl').val(data.userSrl);
+                var html = '';
+                if(data.auth == 'admin')
+                {
+                    html += '<b>[자산 관리자] ' + data.userName + '</b>';
+                }
+               else
+                {
+                    html += '<b>[자산 담당자] ' + data.userName + '</b>';
+                }
+                $('#userName').html(html);
+                var userInfo = '<li>: <span style="font-weight: 600;">' +data.phone+ '</span><li>';
+                userInfo += '<li>: <span >'+ data.totalObjCnt+ '개</span></li>';
+                $('#userInfo').html(userInfo);
+            },
+            error : function(xhr, status, error)
+            {
+                console.log('error ====> ' + error);
+            }
         });
     }
     /*자산 관리자 자산 리스트 호출*/
-    function ajax_admin_asset_list()
+    function ajax_admin_asset_list(data)
     {
-
+        $.ajax
+        ({
+            type: 'POST',
+            contentType: "application/json",
+            url:'/ajax/admin/asset/list',
+            data : JSON.stringify(data),
+            dataType : "json",
+            beforeSend : function(xhr)
+            {
+                xhr.setRequestHeader(header, token);
+            },
+            success : function(data)
+            {
+                $('#asset_container').empty();
+                var html = '';
+                if(data.length == 0)
+                {
+                    html += '<div class="default-remark">';
+                        html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
+                    html += '</div>';
+                    html += '<div class="default-wrap">';
+                        html += '<div class="default-box">';
+                            html += '<div class="box"></div>';
+                            html += "<span>등록 예정 자산에<p>QR 코드 스티커 부착</span>";
+                        html += '</div>';
+                        html += '<div class="default-box">';
+                            html += '<div class="box"></div>';
+                            html += "<span>'WEISER QR 자산관리'<p>APP 다운로드</span>";
+                        html += '</div>';
+                        html += '<div class="default-box">';
+                            html += '<div class="box"></div>';
+                            html += "<span>APP 실행 후<p>'내부 자산 등록' 선택</span>";
+                         html += '</div>';
+                    html += '</div>';
+                    $('#asset_container').html(html);
+                }
+                else
+                {
+                    for(var i=0; i < data.length; i++)
+                    {
+                        if(data[i].objStatus == 'release_wait')
+                        {
+                            html += '<div class="item-wait" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                                html += '<div class="item">';
+                                html += '<img src='+data[i].objImage+'>';
+                                html += '</div>';
+                            html += '<div class="item-text">';
+                                html += '<div class="state">';
+                                    html += '<b>출고 대기</b>';
+                                html += '</div>';
+                                html += '<div class="date">'+data[i].statusAt+'</div>';
+                                html += '</div>';
+                            html += '</div>';
+                        }
+                        if(data[i].objStatus == 'return_wait ')
+                        {
+                            html += '<div class="item-return-approve" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item">';
+                            html += '<img src='+data[i].objImage+'>';
+                            html += '</div>';
+                            html += '<div class="item-text">';
+                            html += '<div class="state">';
+                            html += '<b>반납 승인 필요</b>';
+                            html += '</div>';
+                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        if(data[i].objStatus == 'release_finish')
+                        {
+                            html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item">';
+                            html += '<img src='+data[i].objImage+'>';
+                            html += '</div>';
+                            html += '<div class="item-text">';
+                            html += '<div class="state">';
+                            html += '<b>출고 완료</b>';
+                            html += '</div>';
+                            html += '<div class="date">'+data[i].statusAt+'</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        if(data[i].objStatus == 'return_start')
+                        {
+                            html += '<div class="item-return-start" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item">';
+                            html += '<img src='+data[i].objImage+'>';
+                            html += '</div>';
+                            html += '<div class="item-text">';
+                            html += '<div class="state">';
+                            html += '<b>반납 시작</b>';
+                            html += '</div>';
+                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        if(data[i].objStatus == 'return_finish')
+                        {
+                            html += '<div class="item-return-finish" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item">';
+                            html += '<img src='+data[i].objImage+'>';
+                            html += '</div>';
+                            html += '<div class="item-text">';
+                            html += '<div class="state">';
+                            html += '<b>반납 완료</b>';
+                            html += '</div>';
+                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                    }
+                    $('#asset_container').html(html);
+                }
+            },
+            error : function(xhr, status, error)
+            {
+                console.log('error ====> ' + error);
+            }
+        });
     }
+    function ajax_admin_add(data)
+    {
+        $.ajax
+        ({
+            type: 'POST',
+            contentType: "application/json",
+            url:'/ajax/user/insert/info',
+            data : JSON.stringify(data),
+            beforeSend : function(xhr)
+            {
+                xhr.setRequestHeader(header, token);
+            },
+            dataType : "text",
+            cache : false,
+            success : function(data)
+            {
+                if(data)
+                {
+                    alert('입력 완료');
+                    location.reload();
+                }
+            },
+            error : function(xhr, status, error)
+            {
+                console.log('error ====> ' + error);
+            }
+        });
+    }
+
+    function ajax_admin_update(data)
+    {
+        $.ajax
+        ({
+            type: 'POST',
+            contentType: "application/json",
+            url:'/ajax/user/update/info',
+            data : JSON.stringify(data),
+            beforeSend : function(xhr)
+            {
+                xhr.setRequestHeader(header, token);
+            },
+            dataType : "text",
+            cache : false,
+            success : function(data)
+            {
+                if(data)
+                {
+                    alert('수정 완료');
+                    location.reload();
+                }
+            },
+            error : function(xhr, status, error)
+            {
+                console.log('error ====> ' + error);
+            }
+        });
+    }
+
 </script>
 <body>
 	<div class="cd-main-header js-cd-main-header">
@@ -71,7 +296,7 @@
                         <div class="circle"></div>이름
                     </div>
                     <div class="text" >
-                        <input type="text" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
+                        <input type="text" id="insert_user_name" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
                     </div>
                 </div>
                 <div class="form-box">
@@ -79,7 +304,7 @@
                         <div class="circle"></div>연락처
                     </div>
                     <div class="text" >
-                        <input type="text" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
+                        <input type="text" id="insert_user_phone" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
                     </div>
                 </div>
                 <div class="remark" style="width:100%; padding:20px 0 60px 150px; height:165px; float:left; color:#444444;">
@@ -88,7 +313,7 @@
                 </div>
             </div>
             <div class="obj-plus-btn">
-                <button class="plus_btn"><span>추가하기</span></button>
+                <button class="plus_btn" id="add_user"><span>추가하기</span></button>
             </div>
         </div>
     </div>
@@ -108,7 +333,7 @@
                         <div class="circle"></div>이름
                     </div>
                     <div class="text" >
-                        <input type="text" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
+                        <input type="text" id="update_user_name" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
                     </div>
                 </div>
                 <div class="form-box">
@@ -116,7 +341,7 @@
                         <div class="circle"></div>연락처
                     </div>
                     <div class="text" >
-                        <input type="text" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
+                        <input type="text" id="update_user_phone" style="width:630px; height:80px; padding-left:40px; font-weight: 500;">
                     </div>
                 </div>
                 <div class="remark" style="width:100%; padding:20px 0 60px 150px; height:165px; float:left; color:#444444;">
@@ -125,7 +350,7 @@
                 </div>
             </div>
             <div class="obj-complete-btn">
-                <button class="complete_btn"><span>수정 완료</span></button>
+                <button class="complete_btn" id="complete_btn"><span>수정 완료</span></button>
             </div>
         </div>
     </div>
@@ -156,7 +381,7 @@
  			  <!-- // filter-area-->
 			  </div>
 			  <div class="container-text" style="height:1400px; overflow-y:auto; overflow-x:hidden;  ">
-			  	<div class="section-box active" name="section-box" th:onclick="click_user(${myInfo.userSrl})" th:id="${myInfo.userSrl}">
+			  	<div class="section-box active" name="section-box" th:data-listNo="${myInfo.userSrl}" th:onclick="click_user(this.getAttribute('data-listNo'))" th:id="${myInfo.userSrl}">
 			  		<a>
                         <!--자산 담당자일 경우는 com-icon-crown, 자산 관리자일 경우는 com-icon-->
                         <div class="com-icon-crown"><img th:src="@{/image/list-icon-crown.svg}"></div>
@@ -190,13 +415,15 @@
                 <span style="margin-right: 20px; font-size: 24px; vertical-align: middle; color: #666666;">수정하기</span><img th:src="@{/image/list-icon-edit.svg}">
             </div>
 		   <!--//edit-icon-->
-            <!--자산 등록이 안되어 있는 경우Default-->
-            <div class="company-info" id="userInfo">
+            <!--자산 등록이 안되어 있는 경우 Default-->
+            <div class="company-info">
+                <input type="hidden" id="masterSrl" th:value="${myInfo.userSrl}"/>
+                <input type="hidden" id="userSrl" th:value="${myInfo.userSrl}"/>
                 <ul class="info-list">
                     <li><b>담당자 연락처</b></li>
                     <li>전체 관리 자산</li>
                 </ul>
-                <ul class="info-text">
+                <ul class="info-text" id="userInfo">
                     <li>: <span style="font-weight: 600;" th:text="${myInfo.phone}">010-1234-5678</span><li>
                     <li>: <span th:text="|${myInfo.totalObjCnt} 개|">104개</span></li>
                 </ul>
@@ -232,7 +459,7 @@
 						<div class="filter-area-panel" style="position:relative; top:-29px; padding:0; text-align:right;">
 		 				<!--자산 담당자를 클릭했을 경우 나오는 select-->  
                         <select>
-                            <option selected >전체 관리 자산</option>
+                            <option selected>전체 관리 자산</option>
                             <option>출고 대기</option>
                             <option>반납 승인 필요</option>
                         </select>
@@ -251,16 +478,16 @@
 				</div>
 				<!--//panel-heading-->
 		  </div>
-		  <div class="w3-container w3-padding-large" >
+		  <div class="w3-container w3-padding-large" id="asset_container">
             <!-- default일 때 나오는 box  -->  
             <!--등록된 자산이 없을 때-->
-            <div class="default-remark">
+            <div class="default-remark" th:if="${assetListSize} == '0'">
                 등록된 자산이 없습니다.<p>
                 아래 순서에 따라 자산을 등록하세요.
             </div>
             <!-- default 상태  -->
             <div class="default-wrap" th:if="${assetListSize} == '0'">
-                <div class="default-box" >
+                    <div class="default-box" >
                     <div class="box"></div>
                     <span>등록 예정 자산에<p>QR 코드 스티커 부착</span>
                 </div>
@@ -356,7 +583,6 @@
               </th:block>
 		    </div>
             <!--//w3-container w3-padding-large-->
-            
             <div class="page_count_wrap">
            <!--     <span>
             <img src="list-left_next.svg" >
