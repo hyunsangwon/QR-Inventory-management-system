@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pro.cntech.inventory.service.AdminService;
+import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserVO;
 
@@ -36,7 +37,7 @@ public class AdminController
     @PostMapping("/ajax/admin/info")
     public @ResponseBody UserVO ajaxCallAdminInfo(@RequestBody UserVO userVO)
     {
-        logger.debug("[ Call /ajax/admin/info - GET ]");
+        logger.debug("[ Call /ajax/admin/info - POST ]");
         logger.debug("Param : "+userVO.toString());
 
         return adminService.getAdminInfo(userVO);
@@ -45,9 +46,17 @@ public class AdminController
     @PostMapping("/ajax/admin/asset/list")
     public @ResponseBody List<ObjListVO> ajaxCallAdminAssetInfo(@RequestBody ObjListVO listVO)
     {
-        logger.debug("[ Call /ajax/admin/asset/list - GET ]");
+        logger.debug("[ Call /ajax/admin/asset/list - POST ]");
         logger.debug("Param : "+listVO.toString());
         return adminService.getAdminAssetList(listVO);
+    }
+
+    @PostMapping("/ajax/paging")
+    public @ResponseBody PageHandler callAjaxPageHandler(@RequestBody ObjListVO listVO)
+    {
+        logger.debug("[ Call /ajax/admin/paging - POST ]");
+        logger.debug("Param : "+listVO.toString());
+        return adminService.createPageHandler(listVO);
     }
 
     @PostMapping("/ajax/user/insert/info")

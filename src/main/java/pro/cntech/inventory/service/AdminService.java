@@ -79,13 +79,21 @@ public class AdminService {
         return false;
     }
 
+    public PageHandler createPageHandler(ObjListVO listVO)
+    {
+        int contentNum = 15;
+        int totalCnt = adminMapper.getObjListTotalCnt(listVO.getUserSrl());
+        PageHandler pageHandler = pageHandler(totalCnt,listVO.getPageNum(),contentNum);
+        if(pageHandler == null) return null;
+        return pageHandler;
+    }
+
     public UserPrincipalVO getSecurityInfo()
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         return userPrincipalVO;
     }
-
     private PageHandler pageHandler(int totalCount, int pageNum, int contentNum)
     {
 

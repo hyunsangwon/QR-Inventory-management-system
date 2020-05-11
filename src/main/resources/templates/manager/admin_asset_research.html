@@ -12,6 +12,7 @@
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
         $('a[name=admin_search]').css('background-color','#437ece');
+
         $("span[name=pageNum]").click(function()
         {
             $("span[name=pageNum]").attr('class','page');
@@ -40,241 +41,8 @@
             ajax_admin_update(jsonData);
         });
     });
-    function click_user(userSrl)
-    {
-        $("div[name=section-box]").removeClass('active');
-        $('#'+userSrl).addClass('active');
-        var jsonData = { "userSrl" : userSrl};
-        ajax_admin_info(jsonData);
-        jsonData.pageNum = '1';
-        ajax_admin_asset_list(jsonData);
-    }
-
-    function load_detail_page(obj)
-    {
-        location.href = "/obj/detail/search/"+obj.id;
-    }
-    /*자산 관리자 정보 가져오기*/
-    function ajax_admin_info(data)
-    {
-        $.ajax
-        ({
-            type: 'POST',
-            contentType: "application/json",
-            url:'/ajax/admin/info',
-            data : JSON.stringify(data),
-            dataType : "json",
-            beforeSend : function(xhr)
-            {
-                xhr.setRequestHeader(header, token);
-            },
-            success : function(data)
-            {
-                $('#userName').empty();
-                $('#userInfo').empty();
-                $('#userSrl').val(data.userSrl);
-                var html = '';
-                if(data.auth == 'admin')
-                {
-                    html += '<b>[자산 관리자] ' + data.userName + '</b>';
-                }
-               else
-                {
-                    html += '<b>[자산 담당자] ' + data.userName + '</b>';
-                }
-                $('#userName').html(html);
-                var userInfo = '<li>: <span style="font-weight: 600;">' +data.phone+ '</span><li>';
-                userInfo += '<li>: <span >'+ data.totalObjCnt+ '개</span></li>';
-                $('#userInfo').html(userInfo);
-            },
-            error : function(xhr, status, error)
-            {
-                console.log('error ====> ' + error);
-            }
-        });
-    }
-    /*자산 관리자 자산 리스트 호출*/
-    function ajax_admin_asset_list(data)
-    {
-        $.ajax
-        ({
-            type: 'POST',
-            contentType: "application/json",
-            url:'/ajax/admin/asset/list',
-            data : JSON.stringify(data),
-            dataType : "json",
-            beforeSend : function(xhr)
-            {
-                xhr.setRequestHeader(header, token);
-            },
-            success : function(data)
-            {
-                $('#asset_container').empty();
-                var html = '';
-                if(data.length == 0)
-                {
-                    html += '<div class="default-remark">';
-                        html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
-                    html += '</div>';
-                    html += '<div class="default-wrap">';
-                        html += '<div class="default-box">';
-                            html += '<div class="box"></div>';
-                            html += "<span>등록 예정 자산에<p>QR 코드 스티커 부착</span>";
-                        html += '</div>';
-                        html += '<div class="default-box">';
-                            html += '<div class="box"></div>';
-                            html += "<span>'WEISER QR 자산관리'<p>APP 다운로드</span>";
-                        html += '</div>';
-                        html += '<div class="default-box">';
-                            html += '<div class="box"></div>';
-                            html += "<span>APP 실행 후<p>'내부 자산 등록' 선택</span>";
-                         html += '</div>';
-                    html += '</div>';
-                    $('#asset_container').html(html);
-                }
-                else
-                {
-                    for(var i=0; i < data.length; i++)
-                    {
-                        if(data[i].objStatus == 'release_wait')
-                        {
-                            html += '<div class="item-wait" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                                html += '<div class="item">';
-                                html += '<img src='+data[i].objImage+'>';
-                                html += '</div>';
-                            html += '<div class="item-text">';
-                                html += '<div class="state">';
-                                    html += '<b>출고 대기</b>';
-                                html += '</div>';
-                                html += '<div class="date">'+data[i].statusAt+'</div>';
-                                html += '</div>';
-                            html += '</div>';
-                        }
-                        if(data[i].objStatus == 'return_wait ')
-                        {
-                            html += '<div class="item-return-approve" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>반납 승인 필요</b>';
-                            html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        if(data[i].objStatus == 'release_finish')
-                        {
-                            html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>출고 완료</b>';
-                            html += '</div>';
-                            html += '<div class="date">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        if(data[i].objStatus == 'return_start')
-                        {
-                            html += '<div class="item-return-start" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>반납 시작</b>';
-                            html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        if(data[i].objStatus == 'return_finish')
-                        {
-                            html += '<div class="item-return-finish" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>반납 완료</b>';
-                            html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                    }
-                    $('#asset_container').html(html);
-                }
-            },
-            error : function(xhr, status, error)
-            {
-                console.log('error ====> ' + error);
-            }
-        });
-    }
-    function ajax_admin_add(data)
-    {
-        $.ajax
-        ({
-            type: 'POST',
-            contentType: "application/json",
-            url:'/ajax/user/insert/info',
-            data : JSON.stringify(data),
-            beforeSend : function(xhr)
-            {
-                xhr.setRequestHeader(header, token);
-            },
-            dataType : "text",
-            cache : false,
-            success : function(data)
-            {
-                if(data)
-                {
-                    alert('입력 완료');
-                    location.reload();
-                }
-            },
-            error : function(xhr, status, error)
-            {
-                console.log('error ====> ' + error);
-            }
-        });
-    }
-
-    function ajax_admin_update(data)
-    {
-        $.ajax
-        ({
-            type: 'POST',
-            contentType: "application/json",
-            url:'/ajax/user/update/info',
-            data : JSON.stringify(data),
-            beforeSend : function(xhr)
-            {
-                xhr.setRequestHeader(header, token);
-            },
-            dataType : "text",
-            cache : false,
-            success : function(data)
-            {
-                if(data)
-                {
-                    alert('수정 완료');
-                    location.reload();
-                }
-            },
-            error : function(xhr, status, error)
-            {
-                console.log('error ====> ' + error);
-            }
-        });
-    }
-
 </script>
+<script th:src="@{/script/admin_asset_research/admin_asset_research.js}" type="text/javascript"></script>
 <body>
 	<div class="cd-main-header js-cd-main-header">
 	<div id="main_ct" class="wrap">
@@ -583,16 +351,16 @@
               </th:block>
 		    </div>
             <!--//w3-container w3-padding-large-->
-            <div class="page_count_wrap">
+            <div class="page_count_wrap" id="paging_page">
            <!--     <span>
             <img src="list-left_next.svg" >
                 </span>-->
                 <span th:if="${pageHandler.prev}">
                         <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
-                    </span>
+                </span>
                     <span class="page_num" th:if="${assetListSize} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
                         <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
-                    </span>
+                </span>
                 <span th:if="${pageHandler.next}">
                         <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
                 </span>
