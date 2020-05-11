@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/config :: configFragment"></head>
+<link rel="stylesheet" th:href="@{/css/my_info_check.css}">
+<body>
+<div class="cd-main-header js-cd-main-header">
+    <div id="main_ct" class="wrap">
+        <div th:replace="fragments/header:: headInfoFragment"></div>
+        <div th:replace="fragments/header:: headNavFragment"></div>
+        <div class="depth2-bg"></div>
+        <div id="title-wrap">
+            <div class="page-title-search-area">
+                <!-- page-title -->
+                <div class="page-title">
+                    <div class="all-company">내 정보 수정</div>
+                </div>
+                <!-- //page-title -->
+            </div>
+        </div>
+        <!-- //title -->
+        <div id="content-wrap">
+            <div class="process-area">
+			</div>
+			<!-- //process-area -->
+            <div class="order-list-select-area">
+                <div class="new-order-info">
+                    <div class="order-phone">
+                        <div class="order-phone-text">
+                            <div class="circle"></div>휴대전화 번호
+                        </div>
+                        <input type="text" name="name" value="01012345678" disabled/>
+                    </div>
+
+          			<div class="order-password">
+	          			<div class="order-password-text">
+                            <div class="circle"></div>비밀번호
+                        </div>
+                        <input name="password" value="" type="password"/>
+          			</div>
+
+          		</div>
+                <div class="qr-order-btn">
+                    <button class="qr-order-taken">
+                        <span>내 정보 보기</span>
+                    </button>
+                </div>
+            </div>
+            <!-- //order-list-select-area -->
+        </div>
+        <!-- //content-wrap -->
+    </div>
+    <!--//main_ct-->
+    <footer th:replace="fragments/header:: headFooterFragment"></footer>
+</div>
+</body>
+</html>
