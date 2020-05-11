@@ -71,8 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .accessDeniedPage("/access-denied") //권한없는 URL 접속시
                 .and()
                 .sessionManagement()
-                .maximumSessions(1) //같은 아이디로 1명만 로그인
-                .expiredUrl("/login")//세션 아웃되면 이동할 url
-                .maxSessionsPreventsLogin(true); //False :신규 로그인은 허용 기존 사용자는 세션 아웃  True: 이미 로그인한 세션이있으면 로그인 불가
+                .maximumSessions(5)
+                .expiredUrl("/login");//세션 아웃되면 이동할 url
+                /*
+                .maxSessionsPreventsLogin(true); //False :신규 로그인은 허용 기존 사용자는 세션 아웃  True: 이미 로그인한 세션이있으면 로그인 불가*/
     }
 }

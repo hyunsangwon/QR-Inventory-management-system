@@ -1,10 +1,9 @@
 application:
   version: v3.0.1
   title: QR-Inventory-API
-
 spring:
   profiles:
-    active: dev
+    active: env
 mybatis:
   mapper-locations: classpath:/sqlmap/sqlmapper_*.xml
 logging:

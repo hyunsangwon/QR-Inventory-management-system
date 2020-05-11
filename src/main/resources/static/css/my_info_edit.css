@@ -1,0 +1,814 @@
+
+input:disabled{
+    color:black !important;
+    background-color: #eceef4;
+}
+
+
+/* content header*/
+#content-wrap {
+    width: 100%;
+    max-width: 1440px;
+    height: 2000px;
+    overflow: hidden;
+    background-color: #ECEEF4;
+    }
+
+.page-title-search-area {
+    width: 100%;
+    max-width: 1440px;
+    height: 120px;
+    background-color: #437ece;
+    }
+
+.page-title-search-area .page-title {
+    width: 50%;
+    float: left;
+    padding: 44px 0;
+    color: #fff;
+    }
+
+.page-title-search-area .page-title .all-company {
+    margin-left: 40px;
+    font-size: 1.75em;
+    font-weight: 600;
+    }
+
+.page-title-search-area .page-search {
+    width: 50%;
+    float: left;
+    padding: 42px 0;
+    color: #fff;
+    text-align: right;
+    }
+
+.page-title-search-area .page-search .search {
+    margin-right: 54px;
+    font-size: 1.6em;
+    }
+
+.page-title-search-area .page-search .page-in-search {
+    background-color: #437ece;
+    border: none;
+    color: #fff;
+    text-align: right;
+    width: 70%;
+    font-weight: 400;
+    }
+
+
+input:focus {
+    border: 1px solid #c3c3c3;
+    }
+
+.process-area {
+    padding: 60px 0px 0px 0px;
+    }
+
+.process-area .img-area {
+    text-align: center;
+    padding: 60px 0 0 0;
+    }
+
+.process-area .process-text-area {
+    text-align: center;
+    padding: 20px 0 40px 0;
+    font-size: 1.75em;
+    }
+
+.process-area .process-text-area .process-title {
+    font-weight: 600;
+    padding-bottom: 10px;
+    }
+
+.form-title{color:#437ece; font-weight:600; font-size:1.75em;  width:97%; border-bottom:4px solid #eceef4; padding-bottom:10px; margin-bottom:25px; float:left;}
+
+/* new company info area */
+.profile-info-area {
+    width: 90%;
+    height:auto;
+    min-height: 1205px;
+    border-radius: 20px;
+    background-color: #fff;
+    margin: 0 auto;
+    }
+
+.profile-info {
+    height: auto;
+    max-height: 1350px;
+    overflow: hidden;
+    padding: 60px 125px 60px 125px;
+    }
+
+.profile-info .profile-title {
+    float: left;
+    color: #437ece;
+    font-weight: 600;
+    font-size: 1.75em;
+    width: 100%;
+    border-bottom: 2px solid #eceef4;
+    padding-bottom: 10px;
+    margin-bottom: 60px;
+    }
+
+.profile-info .title {
+    width: 28%;
+    font-size: 1.9em;
+    font-weight: 500;
+    float: left;
+    color: #666666;
+    padding-bottom: 30px;
+    }
+
+.profile .text {
+    width: 72%;
+    font-size: 1.9em;
+    font-weight: 500;
+    float: left;
+    color: #000;
+    padding-bottom: 30px;
+    }
+
+/* small title*/
+.order-info-check {
+    height: 300px;
+    padding: 80px 0 70px 170px;
+    }
+
+.order-info-check .manager-title {
+    color: #437ece;
+    font-weight: 600;
+    font-size: 1.75em;
+    width: 90%;
+    border-bottom: 2px solid #eceef4;
+    padding-bottom: 10px;
+    margin-bottom: 50px;
+    }
+
+.order-info-check .title {
+    width: 28%;
+    font-size: 1.9em;
+    font-weight: 500;
+    float: left;
+    color: #666666;
+    padding-bottom: 30px;
+    }
+
+.order-info-check .text {
+    width: 72%;
+    font-size: 1.9em;
+    font-weight: 500;
+    float: left;
+    color: #000;
+    padding-bottom: 30px;
+    }
+
+/* defalut input*/
+.input-box {
+    width: 100%;
+    float: left;
+    margin-bottom: 60px;
+    }
+
+.input-box input {
+    border:none;
+    width:180px;
+    height:63px;
+    font-size: 1.6em;
+    padding-left:20px;
+    }
+
+.input-box .input-box-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 26px 26px 26px 0;
+    float: left;
+    }
+
+.input-box-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.qrBox{
+    border:solid 2px #bcc2d0;
+    width:328px;
+    height:63px;
+}
+
+/* 회원정보 이름*/
+.customer-name {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.customer-name .customer-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+
+.customer-name .customer-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.customer-name input[type="text"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    margin-right: 9px;
+    border: 2px solid #bcc2d0;
+    }
+
+.customer-name .customer-name-select {
+    width: 100%;
+    }
+
+/* 회원 휴대전화 번호 이름*/
+.customer-phone {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.customer-phone .customer-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+
+.customer-phone .customer-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.customer-phone input[type="text"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    margin-right: 9px;
+    border: 2px solid #bcc2d0;
+    }
+
+.customer-phone .customer-phone-select {
+    width: 100%;
+    }
+
+/* 비밀번호*/
+.customer-password {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.customer-password .customer-password-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+.customer-password .customer-password-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.customer-password input[type="password"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    border:none;
+    margin-right: 9px;
+    font-family: '돋움';
+    }
+
+/* 신규 비밀번호 */
+.customer-new-password {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.customer-new-password .customer-password-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+.customer-new-password .customer-password-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.customer-new-password input[type="password"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    border: 2px solid #bcc2d0;
+    margin-right: 9px;
+    font-family: '돋움';
+    }
+
+/* 신규 비밀번호 확인*/
+.customer-new-check-password {
+    width: 100%;
+    float: left;
+    margin-bottom: 19px;
+    }
+
+.customer-new-check-password .customer-password-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+.customer-new-check-password .customer-password-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.customer-new-check-password input[type="password"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    border: 2px solid #bcc2d0;
+    margin-right: 9px;
+    font-family: '돋움';
+    }
+
+/* 회사 이름 */
+.company-name {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.company-name .company-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+
+.company-name .company-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.company-name input[type="text"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    margin-right: 9px;
+    border: 2px solid #bcc2d0;
+    }
+
+.company-name .company-name-select {
+    width: 100%;
+    }
+
+/* 회사 연락처 */
+.company-phone {
+    width: 100%;
+    float: left;
+    margin-bottom: 40px;
+    }
+
+.company-phone .company-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 23px 26px 26px 0;
+    float: left;
+    }
+
+
+.company-phone .company-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.company-phone input[type="text"] {
+    width: 100%;
+    max-width: 700px;
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    margin-right: 9px;
+    border: 2px solid #bcc2d0;
+    }
+
+.company-phone .company-name-select {
+    width: 100%;
+    }
+
+/* 회사 주소 */
+.company-address {
+    width: 100%;
+    float: left;
+    margin-bottom: 60px;
+    }
+
+.company-address .company-text {
+    width: 25%;
+    font-size: 1.6em;
+    padding: 76px 26px 120px 0;
+    float: left;
+    }
+
+
+.company-address .company-text span {
+    color: #e86731;
+    margin-right: 20px;
+    vertical-align: middle;
+    }
+
+.company-address input[type="text"] {
+    height: 76px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    margin-right: 9px;
+    border: 2px solid #bcc2d0;
+    }
+
+.company-address .order-address-select {
+    width: 100%;
+    }
+
+.company-address .address-button {
+    width: 200px;
+    height: 40px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    font-size: 26px;
+    color: #000;
+    cursor: pointer;
+    font-weight: 600;
+    }
+
+.company-address .btn-active {
+    width: 164px;
+    height: 40px;
+    background-color: #23367a;
+    }
+
+.company-address .order-zipCode {
+    width: 530px;
+    height: 80px;
+    padding-left: 20px;
+    font-size: 1.7em;
+    border: 2px solid #bcc2d0;
+    color:#9a9a9a;
+    }
+
+.company-address button {
+    font-size: 1.6em;
+    border: none;
+    }
+
+.company-address .order-addr {
+    width: 706px;
+    height: 80px;
+    margin-top: 10px;
+    padding-left:20px;
+    font-size: 1.7em;
+    border: 2px solid #bcc2d0;
+    float:left;
+    color:#9a9a9a;
+    }
+
+    .circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #e57e5d;
+    float: left;
+    margin-right: 15px;
+    margin-top: 10px;
+    }
+
+.password-complete-btn, .password-cancel-btn{border:none; font-size:24px; margin:0 5px;}
+/* 주문 완료 버튼 */
+.edit-complete-btn {
+    width: 100%;
+    text-align: center;
+    padding: 60px 0;
+    float: left;
+    cursor: pointer;
+    }
+
+.edit-complete {
+    width: 720px;
+    height: 100px;
+    border: none;
+    border-radius: 72px;
+    background-color: #558fdd;
+    cursor: pointer;
+    }
+
+.edit-complete span {
+    color: #fff;
+    font-size: 2.8em;
+    font-weight: 600;
+    }
+
+.error-text{color: #b40a0a; text-align: left; float:left; margin-top:10px; font-size: 22px; display: none;}
+@media screen and (min-width: 1250px) and (max-width: 1430px) {
+    .contents {
+        padding: 0 10px;
+        }
+
+    .cont-wrap .contents {
+        padding: 30px 10px;
+        }
+
+    .cont-img.main-img,
+    .cont-img.traffic-img,
+    .cont-img.forest-img,
+    .cont-img.space-img {
+        background-size: contain;
+        }
+
+    .filter-area-panel {
+        width: 100%;
+        float: left;
+        position: inherit !important;
+        margin-top: 30px;
+        }
+
+    .filter-area-panel select {
+        width: 85%;
+        float: left;
+        padding-left: 20px;
+        }
+
+    .search-input {
+        margin: 20px 70px 0 0;
+        }
+
+    .depth2-bg {
+        display: none;
+        }
+
+    .w3-padding-large {
+        padding: 0px 60px 0 60px !important
+        }
+
+    .item-waiting .item-text, .item-fail .item-text, .item-complete .item-text, .item-plus .item-text {
+        font-size: 1.1em;
+        }
+
+    }
+
+@media screen and (min-width: 1180px) and (max-width: 1250px) {
+    .contents {
+        padding: 0 10px;
+        }
+
+    .cont-wrap .contents {
+        padding: 30px 10px;
+        }
+
+    .cont-img.main-img,
+    .cont-img.traffic-img,
+    .cont-img.forest-img,
+    .cont-img.space-img {
+        background-size: contain;
+        }
+
+    .filter-area-panel {
+        width: 100%;
+        float: left;
+        position: inherit !important;
+        margin-top: 30px;
+        }
+
+    .filter-area-panel select {
+        width: 85%;
+        float: left;
+        padding-left: 20px;
+        }
+
+    .search-input {
+        margin: 20px 70px 0 0;
+        }
+
+    .w3-padding-large {
+        padding: 0px 60px 0 60px !important
+        }
+
+    .item-waiting, .item-fail, .item-complete, .item-plus {
+        width: 100% !important;
+        margin: 10px !important;
+        }
+
+    .item-waiting .item-text, .item-fail .item-text, .item-complete .item-text, .item-plus .item-text {
+        font-size: 1.1em;
+        }
+
+    }
+
+@media screen and (min-width: 990px) and (max-width: 1180px) {
+    .contents {
+        padding: 0 10px;
+        }
+
+    .cont-wrap .contents {
+        padding: 30px 10px;
+        }
+
+    .cont-img.main-img,
+    .cont-img.traffic-img,
+    .cont-img.forest-img,
+    .cont-img.space-img {
+        background-size: contain;
+        }
+
+    .filter-area-panel {
+        width: 100%;
+        float: left;
+        position: inherit !important;
+        margin-top: 30px;
+        }
+
+    .filter-area-panel select {
+        width: 85%;
+        float: left;
+        padding-left: 20px;
+        }
+
+    .search-input {
+        margin: 20px 70px 0 0;
+        }
+
+    .w3-padding-large {
+        padding: 0px 60px 0 60px !important
+        }
+
+    .item-waiting, .item-fail, .item-complete, .item-plus {
+        width: 100% !important;
+        margin: 10px !important;
+        }
+
+    .item-waiting .item-text, .item-fail .item-text, .item-complete .item-text, .item-plus .item-text {
+        font-size: 1.1em;
+        }
+
+    .w3-padding-large {
+        padding: 0px 60px 0 60px !important
+        }
+
+    .order-info {
+        font-size: 0.9em;
+        }
+
+    .grade-box {
+        width: 50% !important;
+        }
+    }
+
+@media screen and (min-width: 767px) and (max-width: 990px) {
+    .contents {
+        padding: 0 10px;
+        }
+
+    .cont-wrap .contents {
+        padding: 30px 10px;
+        }
+
+    .cont-img.main-img,
+    .cont-img.traffic-img,
+    .cont-img.forest-img,
+    .cont-img.space-img {
+        background-size: contain;
+        }
+
+
+    .depth2-bg {
+        display: none;
+        }
+
+    .w3-padding-large {
+        padding: 40px 60px 0 60px !important;
+        }
+
+    .item-waiting, .item-fail, .item-complete, .item-plus {
+        width: 31.5% !important;
+        }
+
+    footer {
+        height: auto !important;
+        padding-bottom: 40px;
+        }
+    }
+
+
+@media screen and (max-width: 767px) {
+    .contents {
+        padding: 0 10px;
+        }
+
+    .cont-wrap .contents {
+        padding: 30px 10px;
+        }
+
+    .cont-img.main-img,
+    .cont-img.traffic-img,
+    .cont-img.forest-img,
+    .cont-img.space-img {
+        background-size: contain;
+        }
+
+    #gnb {
+        display: none;
+        float: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background: #fff;
+        z-index: 9999;
+        }
+
+    #gnb .gnb-wrap li {
+        float: none;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+        }
+
+    #gnb .gnb-wrap > li > a {
+        padding: 18px 0;
+        text-indent: 15px;
+        }
+
+    #gnb .gnb-wrap > li a.active:after {
+        display: none;
+        }
+
+    #gnb .gnb-wrap > li .depth2 {
+        display: none;
+        position: relative;
+        width: 100%;
+        padding: 10px 0;
+        background-color: #6295da;
+        }
+
+    #gnb .gnb-wrap > li .depth2 li a {
+        padding: 20px 0;
+        text-indent: 20px;
+        }
+
+    .depth2-bg {
+        display: none;
+        }
+
+    #hamburger {
+        display: block;
+        }
+
+    .w3-padding-large {
+        padding: 40px 60px 0 60px !important;
+        }
+
+    .item-waiting, .item-fail, .item-complete, .item-plus {
+        width: 31.5% !important;
+        }
+
+    footer {
+        height: auto !important;
+        padding-bottom: 40px;
+        }
+    }
+
+
+
