@@ -93,4 +93,13 @@ public class ObjStatusController
         return statusService.controlObjStatus("update",objArrayVO);
     }
 
+
+    @PostMapping("/ajax/obj/delete")
+    public @ResponseBody Boolean callAjaxselectedObjDelete(@RequestBody ObjDetailVO objDetailVO)
+    {
+        logger.debug("[ Call /ajax/obj/delete - POST ]");
+        logger.debug("Param : "+objDetailVO.toString());
+        return statusService.deleteObj(objDetailVO);
+    }
+
 }

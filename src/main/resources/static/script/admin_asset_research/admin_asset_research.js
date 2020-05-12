@@ -1,14 +1,13 @@
 var _userSrl = null;
 var _userAuth = null;
 
-function click_user(userSrl) //왼쪽 NAV 클릭시 이벤트 함수
+function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
 {
+    _userSrl = userSrl;
+    _userAuth = auth;
     $("div[name=section-box]").removeClass('active');
     $('#'+userSrl).addClass('active');
 
-    var arr = userSrl.split(',');
-    _userSrl = arr[0];
-    _userAuth = arr[1];
     var jsonData = { "userSrl" : userSrl, "auth" : _userAuth};
     ajax_admin_info(jsonData);
     jsonData.pageNum = '1';

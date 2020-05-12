@@ -25,6 +25,7 @@
         LEFT JOIN obj AS o
         ON u.user_srl = o.user_srl
         WHERE u.master_srl = #{userSrl}
+        AND auth != 'holder'
         GROUP BY u.user_srl
     </select>
     <!--자산담당자,자산관리자 의 자산 리스트-->

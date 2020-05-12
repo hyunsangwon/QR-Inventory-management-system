@@ -8,10 +8,15 @@
             user_srl AS userSrl,
             user_name AS userName,
             addr,
-            auth
+            auth,
+            company_name AS companyName,
+            s_number AS companyPhone
         FROM users
         WHERE m_number = #{phone}
     </select>
+
+    <!--<update id="">
+    </update>-->
 
     <select id="getMainStatistics" resultType="pro.cntech.inventory.vo.StatisticsVO">
         SELECT

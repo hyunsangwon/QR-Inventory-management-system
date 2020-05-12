@@ -36,7 +36,6 @@ public class AdminService {
         List<ObjListVO> assetList = managerMapper.getObjList(param);
         int totalCnt = managerMapper.getObjListTotalCnt(param);
         PageHandler pageHandler = pageHandler(totalCnt,1,20);
-        System.out.println("assetListSize ====> "+assetList.size());
 
         map.addAttribute("myInfo",myInfo);
         map.addAttribute("assetManagerList",assetAdminList);

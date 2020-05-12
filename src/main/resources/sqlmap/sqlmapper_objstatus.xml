@@ -24,7 +24,13 @@
         <if test='objStatus eq "release_finish"'>
             AND obj_status IN ('release_finish','outer_wait')
         </if>
-        <if test='objStatus neq "return_finish"'>
+        <if test='objStatus eq "return_start"'>
+            AND obj_status = #{objStatus}
+        </if>
+        <if test='objStatus eq "return_wait"'>
+            AND obj_status = #{objStatus}
+        </if>
+        <if test='objStatus eq "release_start"'>
             AND obj_status = #{objStatus}
         </if>
         ORDER BY obj_status_at DESC
@@ -44,7 +50,13 @@
         <if test='objStatus eq "release_finish"'>
             AND obj_status IN ('release_finish','outer_wait')
         </if>
-        <if test='objStatus neq "return_finish"'>
+        <if test='objStatus eq "return_start"'>
+            AND obj_status = #{objStatus}
+        </if>
+        <if test='objStatus eq "return_wait"'>
+            AND obj_status = #{objStatus}
+        </if>
+        <if test='objStatus eq "release_start"'>
             AND obj_status = #{objStatus}
         </if>
     </select>
@@ -65,7 +77,8 @@
             c.addr AS inputAddr,
             c.phone AS companyPhone,
             u.user_name AS userName,
-            u.m_number AS userPhone
+            u.m_number AS userPhone,
+            u.auth
         FROM obj AS o
         INNER JOIN company AS c
             ON o.company_srl = c.company_srl

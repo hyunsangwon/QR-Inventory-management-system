@@ -57,9 +57,13 @@ public class StatusService
         {
             detailvo.setModelName("데이터 없음");
         }
-        if(userInfo.getAuth().equals("manager"))
+        if(detailvo.getAuth().equals("manager"))
         {
-            detailvo.setAuth("자산관리자");
+            detailvo.setAuth("자산 관리자");
+        }
+        if(detailvo.getAuth().equals("holder"))
+        {
+            detailvo.setAuth("자산 소유자");
         }
         return detailvo;
     }
@@ -99,6 +103,17 @@ public class StatusService
             return false;
         }
         return true;
+    }
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public Boolean deleteObj(ObjDetailVO objDetailVO)
+    {
+        int rows = 0;
+
+        String qrSrl = objDetailVO.getQrSrl();
+        rows = objStatusMapper.deleteObj(qrSrl);
+        if(rows > 0) return true;
+
+        return  false;
     }
 
     public PageHandler getpageHandler(ObjDetailVO vo)

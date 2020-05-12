@@ -172,6 +172,44 @@
 
             marker.setMap(map);
         }
+
+        function delete_asset()
+        {
+            var qrSrl = $('#qrSrl').text();
+            var jsonData = { "qrSrl" : qrSrl};
+            if(qrSrl != null || qrSrl != '')
+            {
+                confirm(qrSrl+'자산을 삭제하시겠습니까?')
+                {
+                    $.ajax
+                    ({
+                        type: 'POST',
+                        contentType: "application/json",
+                        url:'/ajax/obj/delete',
+                        data : JSON.stringify(jsonData),
+                        beforeSend : function(xhr)
+                        {
+                            xhr.setRequestHeader(header, token);
+                        },
+                        dataType : "text",
+                        cache : false,
+                        success : function(data)
+                        {
+                            if(data)
+                            {
+                                alert('해당 자산을 삭제 했습니다.');
+                                window.history.back();
+                            }
+                        },
+                        error : function(xhr, status, error)
+                        {
+                            console.log('error ====> ' + error);
+                        }
+                    });
+                }
+            }
+        }
+
     </script>
 <body>
 <div class="cd-main-header js-cd-main-header">
@@ -199,7 +237,7 @@
                     자산 삭제 후 부착된 QR 스티커를 제거해주세요.<p>
                 </div>
                 <div class="company-delete-btn">
-                    <button class="comapny_info_btn"><span>자산 삭제하기</span></button>
+                    <button class="comapny_info_btn" onclick="delete_asset();"><span>자산 삭제하기</span></button>
                 </div>
             </div>
             <!-- //modal -->
@@ -243,7 +281,7 @@
 
                     <div class="obj-info">
                         <div class="list" style="font-weight:600;">책임자 : <span th:text="|${vo.userName} ${vo.auth}|">현상원</span></div>
-                        <div class="list">연락처 : <span>01012345678</span></div>
+                        <div class="list">연락처 : <span th:text="${vo.userPhone}">01012345678</span></div>
                     </div>
                     <!--//obj-info-->
                     <div class="obj-image">

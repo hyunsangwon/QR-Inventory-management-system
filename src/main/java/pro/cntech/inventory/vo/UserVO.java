@@ -16,4 +16,6 @@ public class UserVO
     private int totalObjCnt;
     private String grade;
     private String masterSrl;
+    private String companyName;
+    private String companyPhone;
 }

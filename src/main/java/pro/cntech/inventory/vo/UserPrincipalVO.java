@@ -46,6 +46,15 @@ public class UserPrincipalVO implements UserDetails
 
     public String getUserSrl() { return userVO.getUserSrl(); }
 
+    public String getCompanyName()
+    {
+        return userVO.getCompanyName();
+    }
+
+    public String getCompanyPhone()
+    {
+        return userVO.getCompanyPhone();
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
