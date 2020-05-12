@@ -58,7 +58,34 @@
                             html += '<td>' + data[i].createAt + '</td>';
                             html += '<td>' + data[i].userName + '</td>';
                             html += '<td>' + data[i].addr + '</td>';
-                            html += '<td><b>' + data[i].objStatus + '</b></td>';
+                            if(data[i].objStatus == 'inner_wait') //내부자산 등록
+                            {
+                                html += '<td><b>내부자산 등록</b></td>';
+                            }
+                            if(data[i].objStatus == 'outer_wait') //외부자산 등록
+                            {
+                                html += '<td><b>외부자산 등록</b></td>';
+                            }
+                            if(data[i].objStatus == 'release_start') //출고 시작
+                            {
+                                html += '<td><b>출고 시작</b></td>';
+                            }
+                            if(data[i].objStatus == 'release_finish') //출고 완료
+                            {
+                                html += '<td><b>출고 완료</b></td>';
+                            }
+                            if(data[i].objStatus == 'return_wait') //반납 대기
+                            {
+                                html += '<td><b>반납 대기</b></td>';
+                            }
+                            if(data[i].objStatus == 'return_finish') //반납 완료
+                            {
+                                html += '<td><b>반납 완료</b></td>';
+                            }
+                            if(data[i].objStatus == 'return_start') //반납 시작
+                            {
+                                html += '<td><b>반납 시작</b></td>';
+                            }
                             html += '</tr>';
                         }
                     }
