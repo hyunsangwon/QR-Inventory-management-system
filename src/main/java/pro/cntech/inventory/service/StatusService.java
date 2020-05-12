@@ -90,7 +90,7 @@ public class StatusService
         {
             for(ObjListVO listVO: objArrayVO.getParam())
             {
-                listVO.setObjStatus(ObjStatusCode.RELEASE_WAIT); //출고 대기
+                listVO.setObjStatus(ObjStatusCode.RELEASE_FINISH); //출고 대기
                 rows = objStatusMapper.updateObjStatus(listVO);
             }
         }

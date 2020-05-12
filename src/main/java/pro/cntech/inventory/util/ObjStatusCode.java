@@ -9,7 +9,6 @@ public class ObjStatusCode {
     public static final String OUTER_REG_FAIL = "outer_fail"; //외부자산 승인 실패
 
     public static final String RELEASE_START = "release_start"; //출고 시작
-    public static final String RELEASE_WAIT = "release_wait" ; //출고 대기
     public static final String RELEASE_FINISH  = "release_finish"; //출고 완료
 
     public static final String RETURN_START = "return_start" ; //반납 시작
