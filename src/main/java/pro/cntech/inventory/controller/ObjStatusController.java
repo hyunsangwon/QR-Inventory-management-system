@@ -38,7 +38,7 @@ public class ObjStatusController
         obj.setObjStatus(status);
         statusService.getObjStatusList(model,obj);
 
-        if(ObjStatusCode.RELEASE_WAIT.equals(status) || ObjStatusCode.RETURN_FINISH.equals(status))
+        if(ObjStatusCode.RETURN_WAIT.equals(status) || ObjStatusCode.RETURN_FINISH.equals(status))
         {
             return MANAGER_VIEW_PREFIX+"internal_obj_list";
         }

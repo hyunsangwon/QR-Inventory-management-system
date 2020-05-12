@@ -18,9 +18,9 @@ import java.util.List;
 
 /*자산 관리자 컨트롤 */
 @Controller
-public class AdminController
+public class ManagerController
 {
-    private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
     private static final String MASTER_VIEW_PREFIX = "cntech/";
     private static final String MANAGER_VIEW_PREFIX = "manager/";
     @Autowired

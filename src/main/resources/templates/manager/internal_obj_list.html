@@ -13,12 +13,12 @@
         $('a[name=inner_asset_search]').css('background-color','#437ece');
 
         var objStatus = $('#objStatus').val();
-        if('release_wait' == objStatus)
+        if('return_finish' == objStatus)
         {
             $('#data_tab_1').addClass('current');
             $('#tab-1').addClass('current');
         }
-        if('return_finish' == objStatus)
+        if('return_wait' == objStatus)
         {
             $('#data_tab_2').addClass('current');
             $('#tab-2').addClass('current');
@@ -288,7 +288,7 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_waitList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'release_wait'}">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_finish'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -324,7 +324,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="page_count_wrap" th:if="${objStatus eq 'release_wait'}">
+                <div class="page_count_wrap" th:if="${objStatus eq 'return_finish'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->
@@ -374,7 +374,7 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_completeList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_finish'}">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_wait'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -409,7 +409,7 @@
                     </table>
                 </div>
                 <!--//regisster_completeList-->
-                <div class="page_count_wrap" th:if="${objStatus eq 'return_finish'}">
+                <div class="page_count_wrap" th:if="${objStatus eq 'return_wait'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->

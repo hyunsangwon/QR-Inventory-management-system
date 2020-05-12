@@ -31,7 +31,8 @@ public class Interceptor implements HandlerInterceptor
         String userAuth = userPrincipalVO.getAuth();
         String name = userPrincipalVO.getName();
         String addr = userPrincipalVO.getAddr();
-
+        String userSrl = userPrincipalVO.getUserSrl();
+        modelAndView.addObject("userSrl",userSrl);
         modelAndView.addObject("addr",addr);
         modelAndView.addObject("auth",userAuth);
         modelAndView.addObject("clientName",name);

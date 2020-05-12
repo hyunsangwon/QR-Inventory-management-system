@@ -16,4 +16,5 @@ public class ObjListVO extends PagingVO
     private String userSrl; //회원 고유 번호
     private String companyName; //업체 이름
     private String objImage;
+    private String auth;
 }

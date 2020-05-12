@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="pro.cntech.inventory.mapper.AdminMapper">
+<mapper namespace="pro.cntech.inventory.mapper.ManagerMapper">
 
     <!--나의 자산수량과 기본정보-->
     <select id="getMyAssetInfo" resultType="pro.cntech.inventory.vo.UserVO">
@@ -19,6 +19,7 @@
         SELECT
             u.user_srl AS userSrl,
             u.user_name AS userName,
+            u.auth,
             COUNT(o.obj_srl) AS totalObjCnt
         FROM users AS u
         LEFT JOIN obj AS o
@@ -29,21 +30,36 @@
     <!--자산담당자,자산관리자 의 자산 리스트-->
     <select id="getObjList" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
         SELECT
-            qr_srl AS qrSrl,
-            obj_img AS objImage,
-            obj_status AS objStatus,
-            DATE_FORMAT(obj_status_at,'%Y.%m.%d, %H시%i분') AS statusAt
-        FROM obj
-        WHERE user_srl = #{userSrl}
-        ORDER BY create_at DESC
+            u.auth,
+            o.qr_srl AS qrSrl,
+            o.obj_img AS objImage,
+            o.obj_status AS objStatus,
+            DATE_FORMAT(o.obj_status_at,'%Y.%m.%d, %H시%i분') AS statusAt
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        WHERE o.user_srl = #{userSrl}
+        <if test='auth eq "holder"'>
+            AND o.obj_status IN ('inner_wait','return_finish', 'return_wait')
+        </if>
+        <if test='auth eq "manager"'>
+            AND o.obj_status IN ('outer_wait', 'release_finish', 'return_start', 'return_wait','release_start')
+        </if>
+        ORDER BY o.create_at DESC
         LIMIT #{limitcount},#{contentnum}
     </select>
 
-    <select id="getObjListTotalCnt" resultType="Integer">
+    <select id="getObjListTotalCnt" resultType="Integer" parameterType="pro.cntech.inventory.vo.ObjListVO">
         SELECT
             count(*)
         FROM obj
         WHERE user_srl = #{userSrl}
+        <if test='auth eq "holder"'>
+            AND obj_status IN ('inner_wait','return_finish', 'return_wait')
+        </if>
+        <if test='auth eq "manager"'>
+            AND obj_status IN ('outer_wait', 'release_finish', 'return_start','return_wait','release_start')
+        </if>
     </select>
 
     <insert id="setUserInfo" parameterType="pro.cntech.inventory.vo.UserVO">

@@ -13,7 +13,6 @@
         WHERE m_number = #{phone}
     </select>
 
-
     <select id="getMainStatistics" resultType="pro.cntech.inventory.vo.StatisticsVO">
         SELECT
             COUNT(o.obj_srl) AS totalCnt,
@@ -24,7 +23,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('return_start','release_finish','outer_wait')
+            AND o.obj_status IN ('outer_wait','release_finish','return_start')
             )
         AS outerCount,
         (
@@ -34,7 +33,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('return_finish','release_wait','release_start','inner_wait')
+            AND o.obj_status IN ('inner_wait','return_wait','return_finish','release_start')
         )
         AS innerCount
         FROM obj AS o
@@ -42,4 +41,21 @@
         ON o.user_srl = u.user_srl
         WHERE u.master_srl = #{userSrl}
     </select>
+
+    <select id="getCompanyGPS" parameterType="pro.cntech.inventory.vo.UserVO" resultType="pro.cntech.inventory.vo.CompanyVO">
+        SELECT
+            c.company_srl AS companySrl,
+            c.latitude,
+            c.longitude
+            c.company_name AS companyName
+        FROM obj AS o
+        INNER JOIN company AS c
+        ON o.company_srl = c.company_srl
+        INNER JOIN users AS u
+        ON c.user_srl = u.user_srl
+        WHERE u.master_srl = #{userSrl}
+        GROUP BY o.company_srl
+    </select>
+
+
 </mapper>

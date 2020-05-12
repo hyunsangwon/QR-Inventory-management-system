@@ -5,23 +5,17 @@
 <link rel="stylesheet" th:href="@{/css/qr_main.css}" />
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
-<!--<script th:src="@{/script/main_script.js}" type="text/javascript"></script>
-<script th:src="@{/script/Map.js}" type="text/javascript"></script>-->
+<!--<script th:src="@{/script/main_kakao_map.js}" type="text/javascript"></script>-->
 <script>
     $(function(){
-        create_map();
-    });
-    function create_map()
-    {
         var mapContainer = document.getElementById('map'), // 지도의 중심좌표
             mapOption = {
                 center: new kakao.maps.LatLng(36.2082709,127.9770043), // 지도의 중심좌표
                 level: 12 // 지도의 확대 레벨
             };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-    }
+    });
 </script>
-
 <body>
 <div class="cd-main-header js-cd-main-header">
     <div id="main_ct" class="wrap">
@@ -34,6 +28,7 @@
                     <div class="panel-group">
                         <div class="circle"></div>
                         <span class="title">자산 등록 현황</span>
+                        <input type="hidden" id="userSrl" th:value="${userSrl}"/>
                         <p style="margin-top:10px;">
                             <span class="panel-text" th:text="${addr}">하나은행 | 테헤란로 지점</span>
                     </div>

@@ -6,7 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pro.cntech.inventory.service.MainService;
+import pro.cntech.inventory.vo.CompanyVO;
+import pro.cntech.inventory.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,4 +62,18 @@ public class MainContoller
         return MANAGER_VIEW_PREFIX+"main";
     }
 
+    @PostMapping("/ajax/call/kakaomap/marker")
+    public @ResponseBody CompanyVO ajaxCallMapMarker(@RequestBody UserVO userVO)
+    {
+        logger.debug("[ Call /ajax/call/kakaomap/marker- GET ]");
+        logger.debug("Param : "+userVO.toString());
+        return mainService.getCompanyGPS(userVO);
+    }
+
+    @GetMapping("/map")
+    public String loadMapPage()
+    {
+        logger.debug("[ Call /map - GET ]");
+        return "map";
+    }
 }

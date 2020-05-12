@@ -33,6 +33,7 @@ public class StatusService
         int totalCnt = 0;
         UserPrincipalVO userInfo = getSecurityInfo();
         vo.setUserSrl(userInfo.getUserSrl()); vo.setLimitcount(limitCount); vo.setContentnum(contentNum);
+        vo.setAuth(userInfo.getAuth());
         totalCnt = objStatusMapper.getObjStatusListTotalCnt(vo);
         PageHandler pageHandler = pageHandler(totalCnt,vo.getPageNum(),contentNum);
         List<ObjListVO> list = objStatusMapper.getObjStatusList(vo);

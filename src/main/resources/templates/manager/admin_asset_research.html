@@ -157,8 +157,8 @@
 			  			<div class="com-total" th:text="${myInfo.totalObjCnt}">167</div>
 			  		</a>
 			  	</div>
-			  	<div class="section-box" name="section-box" th:unless="${assetAdminListSize} == '0'" th:each="list : ${assetAdminList}"
-                     th:data-listNo="${list.userSrl}" th:id="${list.userSrl}" th:onclick="click_user(this.getAttribute('data-listNo'))">
+			  	<div class="section-box" name="section-box" th:unless="${assetManagerListSize} == '0'" th:each="list : ${assetManagerList}"
+                     th:data-listNo="${list.userSrl}" th:id="|${list.userSrl},${list.auth}|" th:onclick="click_user(this.getAttribute('data-listNo'))">
 			  		<a>
                         <div class="com-icon"><img style="opacity: 0;" th:src="@{/image/list-icon-crown.svg}"></div>
 			  			<div class="com-name" th:text="${list.userName}">홍길동B</div>
@@ -176,7 +176,7 @@
 		    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()" style="background:url('/image/total_company/hamburger_menu.png') no-repeat ; width:50px; height:50px; background-size:50px; margin:20px;"><i class="fa fa-bars"></i></span>
             <div class="w3-container" style="padding:60px 50px;">
 		    <div class="company-name" id="userName">
-		    	<b th:text="|[자산 담당자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
+		    	<b th:text="|[자산 소유자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
 		    </div>
             <!-- //company-name -->
             <div class="edit-icon edit-btn" style="cursor: pointer;">
@@ -272,82 +272,35 @@
             <!--자산 담당자일때 나오는 box 시작-->
                 <!-- 출고 대기 -->
               <th:block th:unless="${assetListSize} == '0'">
-              <th:block th:if="${auth} == 'manager'" th:each="list : ${assetList}"
-                        th:data-listNo="${list.qrSrl}"  th:onclick="load_detail_page(this.getAttribute('data-listNo'))">
-                <div class="item-wait" th:if="${list.objStatus eq 'release_wait'}">
-                    <div class="item">
-                        <img th:src="@{${list.objImage}}">
-                    </div>
-                    <div class="item-text">
-                        <div class="state">
-                            <b>출고 대기</b>
+                  <th:block th:each="list : ${assetList}"
+                            th:data-listNo="${list.qrSrl}"  th:onclick="load_detail_page(this.getAttribute('data-listNo'))">
+                    <div class="item-wait" th:if="${list.objStatus eq 'return_finish'|| list.objStatus eq 'inner_wait'}">
+                        <div class="item">
+                            <img th:src="@{${list.objImage}}">
                         </div>
-                        <div class="date" th:text="${list.objStatusAt}">
-                            2020.5.24, 10시 22분
-                        </div>
-                    </div>
-                </div>
-                <div class="item-return-approve" th:if="${list.objStatus eq 'return_wait'}">
-                    <div class="item">
-                        <img th:src="@{${list.objImage}}">
-                    </div>
-                    <div class="item-text">
-                        <div class="state">
-                            <b>반납 승인 필요</b>
-                        </div>
-                        <div class="item-id" th:text="${list.objStatusAt}">
-                            2020.5.24 14시 54분
+                        <div class="item-text">
+                            <div class="state">
+                                <b>출고 대기</b>
+                            </div>
+                            <div class="date" th:text="${list.statusAt}">
+                                2020.5.24, 10시 22분
+                            </div>
                         </div>
                     </div>
-                </div>
-              </th:block>
-                <!-- 자산 담당자 일때 나오는 box 끝-->
-                <!--자산 관리자 일때 나오는 box 시작-->
-                <!-- 출고 완료 -->
-                <th:block th:if="${auth} == 'admin'">
-                <div class="item-release-ok">
-                    <div class="item">
-                        <img src="zimg_1432269391_66.jpg">
-                    </div>
-                    <div class="item-text">
-                        <div class="state">
-                            <b>출고 완료</b>
+                    <div class="item-return-approve" th:if="${list.objStatus eq 'return_wait'}">
+                        <div class="item">
+                            <img th:src="@{${list.objImage}}">
                         </div>
-                        <div class="date">
-                            2020.5.24, 10시 22분
+                        <div class="item-text">
+                            <div class="state">
+                                <b>반납 승인 필요</b>
+                            </div>
+                            <div class="item-id" th:text="${list.statusAt}">
+                                2020.5.24 14시 54분
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- 반납 시작 상태 -->
-                <div class="item-return-start">
-                    <div class="item">
-                        <img src="zimg_1432269391_66.jpg">
-                    </div>
-                    <div class="item-text">
-                        <div class="state">
-                            <b>반납 시작</b>
-                        </div>
-                        <div class="item-id">
-                            2020.5.24 14시 54분
-                        </div>
-                    </div>
-                </div>
-                <!-- 반납 완료 상태 -->
-                <div class="item-return-finish">
-                    <div class="item">
-                        <img src="zimg_1432269391_66.jpg">
-                    </div>
-                    <div class="item-text">
-                        <div class="state">
-                            <b>반납 완료</b>
-                        </div>
-                        <div class="item-id">
-                            2020.5.24 14시 54분
-                        </div>
-                    </div>
-                </div>
-                </th:block>
-               <!-- 자산 관리자 일 때 나오는 box 끝-->
+                  </th:block>
               </th:block>
 		    </div>
             <!--//w3-container w3-padding-large-->

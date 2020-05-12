@@ -8,12 +8,12 @@ import pro.cntech.inventory.vo.UserVO;
 import java.util.List;
 
 @Repository
-public interface AdminMapper
+public interface ManagerMapper
 {
     UserVO getMyAssetInfo(@Param("userSrl") String userSrl);
     List<UserVO> getMyAdminList(@Param("userSrl") String userSrl);
     List<ObjListVO> getObjList(ObjListVO objListVO);
-    int getObjListTotalCnt(@Param("userSrl") String userSrl);
+    int getObjListTotalCnt(ObjListVO objListVO);
     int setUserInfo(UserVO userVO);
     int updateUserInfo(UserVO userVO);
 }

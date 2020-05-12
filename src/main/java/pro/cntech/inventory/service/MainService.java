@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pro.cntech.inventory.mapper.MainMapper;
+import pro.cntech.inventory.vo.CompanyVO;
 import pro.cntech.inventory.vo.StatisticsVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
@@ -23,6 +24,11 @@ public class MainService implements UserDetailsService
     {
         UserVO userVO = mainMapper.getUserInfo(phone);
         return new UserPrincipalVO(userVO);
+    }
+
+    public CompanyVO getCompanyGPS(UserVO userVO)
+    {
+        return mainMapper.getCompanyGPS(userVO);
     }
 
     public StatisticsVO getMainStatistics()

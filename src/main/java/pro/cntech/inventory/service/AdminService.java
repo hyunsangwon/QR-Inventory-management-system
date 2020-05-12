@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import pro.cntech.inventory.mapper.AdminMapper;
+import pro.cntech.inventory.mapper.ManagerMapper;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
@@ -19,24 +19,28 @@ import java.util.List;
 public class AdminService {
 
     @Autowired
-    private AdminMapper adminMapper;
+    private ManagerMapper managerMapper;
 
     /*자산 담당자 기본 정보 세팅*/
     public void setMyInfo(ModelMap map)
     {
         UserPrincipalVO user = getSecurityInfo();
         String userSrl = user.getUserSrl();
-        UserVO myInfo = adminMapper.getMyAssetInfo(userSrl);
-        List<UserVO> assetAdminList = adminMapper.getMyAdminList(userSrl);
+        String auth = user.getAuth();
+
+        UserVO myInfo = managerMapper.getMyAssetInfo(userSrl);
+        List<UserVO> assetAdminList = managerMapper.getMyAdminList(userSrl);
         ObjListVO param = new ObjListVO();
-        param.setUserSrl(userSrl); param.setLimitcount(1); param.setContentnum(20);
-        List<ObjListVO> assetList = adminMapper.getObjList(param);
-        int totalCnt = adminMapper.getObjListTotalCnt(userSrl);
+        param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
+        param.setAuth(auth);
+        List<ObjListVO> assetList = managerMapper.getObjList(param);
+        int totalCnt = managerMapper.getObjListTotalCnt(param);
         PageHandler pageHandler = pageHandler(totalCnt,1,20);
+        System.out.println("assetListSize ====> "+assetList.size());
 
         map.addAttribute("myInfo",myInfo);
-        map.addAttribute("assetAdminList",assetAdminList);
-        map.addAttribute("assetAdminListSize",assetAdminList.size());
+        map.addAttribute("assetManagerList",assetAdminList);
+        map.addAttribute("assetManagerListSize",assetAdminList.size());
         map.addAttribute("assetList",assetList);
         map.addAttribute("assetListSize",assetList.size());
         map.addAttribute("pageHandler",pageHandler);
@@ -44,7 +48,7 @@ public class AdminService {
 
     public UserVO getAdminInfo(UserVO userVO)
     {
-        return adminMapper.getMyAssetInfo(userVO.getUserSrl());
+        return managerMapper.getMyAssetInfo(userVO.getUserSrl());
     }
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
@@ -53,7 +57,7 @@ public class AdminService {
         int limitCount=((objListVO.getPageNum() - 1 ) * MAX);
         int contentNum = MAX;
         objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum);
-        return adminMapper.getObjList(objListVO);
+        return managerMapper.getObjList(objListVO);
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
@@ -62,7 +66,7 @@ public class AdminService {
         int rows = 0;
         if("insert".equals(flag))
         {
-            rows = adminMapper.setUserInfo(userVO);
+            rows = managerMapper.setUserInfo(userVO);
             if(rows > 0)
             {
               return  true;
@@ -70,7 +74,7 @@ public class AdminService {
         }
         if("update".equals(flag))
         {
-            rows = adminMapper.updateUserInfo(userVO);
+            rows = managerMapper.updateUserInfo(userVO);
             if(rows > 0)
             {
                 return true;
@@ -82,7 +86,7 @@ public class AdminService {
     public PageHandler createPageHandler(ObjListVO listVO)
     {
         int contentNum = 15;
-        int totalCnt = adminMapper.getObjListTotalCnt(listVO.getUserSrl());
+        int totalCnt = managerMapper.getObjListTotalCnt(listVO);
         PageHandler pageHandler = pageHandler(totalCnt,listVO.getPageNum(),contentNum);
         if(pageHandler == null) return null;
         return pageHandler;

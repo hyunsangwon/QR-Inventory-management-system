@@ -143,11 +143,11 @@ $(document).ready(function(){
 		var tab_id = $(this).attr('data-tab');
       if(tab_id == 'tab-1') //출고 대기
       {
-        location.href = "/obj/status/release_wait/list/1";
+        location.href = "/obj/status/return_finish/list/1";
       }
       if(tab_id == 'tab-2') //반납 완료
       {
-        location.href = "/obj/status/return_finish/list/1";
+        location.href = "/obj/status/return_wait/list/1";
       }
 	});
 });

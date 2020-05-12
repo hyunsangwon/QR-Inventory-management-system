@@ -17,8 +17,16 @@
             ON o.user_srl = u.user_srl
         INNER JOIN company AS c
             ON o.company_srl = c.company_srl
-        WHERE u.master_srl = #{userSrl}
-        AND obj_status = #{objStatus}
+            WHERE u.master_srl = #{userSrl}
+        <if test='objStatus eq "return_finish"'>
+            AND obj_status IN ('return_finish','inner_wait')
+        </if>
+        <if test='objStatus eq "release_finish"'>
+            AND obj_status IN ('release_finish','outer_wait')
+        </if>
+        <if test='objStatus neq "return_finish"'>
+            AND obj_status = #{objStatus}
+        </if>
         ORDER BY obj_status_at DESC
         LIMIT #{limitcount},#{contentnum}
     </select>
@@ -30,7 +38,15 @@
         INNER JOIN users AS u
         ON o.user_srl = u.user_srl
         WHERE u.master_srl = #{userSrl}
-        AND obj_status = #{objStatus}
+        <if test='objStatus eq "return_finish"'>
+            AND obj_status IN ('return_finish','inner_wait')
+        </if>
+        <if test='objStatus eq "release_finish"'>
+            AND obj_status IN ('release_finish','outer_wait')
+        </if>
+        <if test='objStatus neq "return_finish"'>
+            AND obj_status = #{objStatus}
+        </if>
     </select>
 
     <!--자산 상세보기-->
