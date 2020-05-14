@@ -2,6 +2,7 @@ package pro.cntech.inventory.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import pro.cntech.inventory.vo.LogVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
 
@@ -17,4 +18,5 @@ public interface ObjStatusMapper
     int getObjHistoryCnt(ObjDetailVO objDetailVO);
     int deleteObj (@Param("qrSrl") String qrSrl);
     int updateObjStatus(ObjListVO objVO);
+    void setObjLog(LogVO logVO);
 }

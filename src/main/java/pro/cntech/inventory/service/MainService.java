@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import pro.cntech.inventory.mapper.MainMapper;
-import pro.cntech.inventory.vo.CompanyVO;
+import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.StatisticsVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
+
+import java.util.List;
 
 @Service
 public class MainService implements UserDetailsService
@@ -26,7 +28,7 @@ public class MainService implements UserDetailsService
         return new UserPrincipalVO(userVO);
     }
 
-    public CompanyVO getCompanyGPS(UserVO userVO)
+    public List<MarkerVO> getCompanyGPS(UserVO userVO)
     {
         return mainMapper.getCompanyGPS(userVO);
     }

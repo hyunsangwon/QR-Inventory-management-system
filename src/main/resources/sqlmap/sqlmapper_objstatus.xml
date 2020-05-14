@@ -86,6 +86,25 @@
             ON u.user_srl = o.user_srl
         WHERE o.qr_srl = #{qrSrl}
     </select>
+    <!-- 로그 저장-->
+    <update id="setObjLog" parameterType="pro.cntech.inventory.vo.LogVO">
+        INSERT INTO obj_log
+        (
+            qr_srl,
+            obj_status,
+            obj_addr,
+            create_at,
+            holder_name
+        )
+        VALUES
+        (
+            #{qrSrl},
+            #{objStatus},
+            #{objAddr},
+            now(),
+            #{holderName}
+        )
+    </update>
     <!--자산 히스토리-->
     <select id="getObjHistory" resultType="pro.cntech.inventory.vo.ObjDetailVO" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
         SELECT
@@ -94,6 +113,7 @@
             ol.longitude,
             ol.latitude,
             ol.obj_status AS objStatus,
+            ol.holder_name AS holderName,
             u.user_name AS userName
         FROM obj_log AS ol
         INNER JOIN obj AS o

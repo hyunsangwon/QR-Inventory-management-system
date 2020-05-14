@@ -15,9 +15,6 @@
         WHERE m_number = #{phone}
     </select>
 
-    <!--<update id="">
-    </update>-->
-
     <select id="getMainStatistics" resultType="pro.cntech.inventory.vo.StatisticsVO">
         SELECT
             COUNT(o.obj_srl) AS totalCnt,
@@ -47,19 +44,23 @@
         WHERE u.master_srl = #{userSrl}
     </select>
 
-    <select id="getCompanyGPS" parameterType="pro.cntech.inventory.vo.UserVO" resultType="pro.cntech.inventory.vo.CompanyVO">
+    <select id="getCompanyGPS" parameterType="pro.cntech.inventory.vo.UserVO" resultType="pro.cntech.inventory.vo.MarkerVO">
         SELECT
+            o.obj_srl AS objSrl,
             c.company_srl AS companySrl,
-            c.latitude,
-            c.longitude
-            c.company_name AS companyName
+            c.company_name AS companyName,
+            c.addr AS companyAddr,
+            c.phone AS companyPhone,
+            o.latitude,
+            o.longitude,
+            o.obj_status AS objStatus
         FROM obj AS o
         INNER JOIN company AS c
         ON o.company_srl = c.company_srl
         INNER JOIN users AS u
         ON c.user_srl = u.user_srl
         WHERE u.master_srl = #{userSrl}
-        GROUP BY o.company_srl
+      <!-- GROUP BY o.company_srl-->
     </select>
 
 

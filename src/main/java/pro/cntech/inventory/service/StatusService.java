@@ -11,10 +11,7 @@ import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
 import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
-import pro.cntech.inventory.vo.ObjArrayVO;
-import pro.cntech.inventory.vo.ObjDetailVO;
-import pro.cntech.inventory.vo.ObjListVO;
-import pro.cntech.inventory.vo.UserPrincipalVO;
+import pro.cntech.inventory.vo.*;
 
 import java.util.List;
 
@@ -94,7 +91,8 @@ public class StatusService
         {
             for(ObjListVO listVO: objArrayVO.getParam())
             {
-                listVO.setObjStatus(ObjStatusCode.RELEASE_FINISH); //출고 대기
+                listVO.setObjStatus(ObjStatusCode.RETURN_FINISH); //출고 대기
+                insertObjLog(listVO); //로그 저장
                 rows = objStatusMapper.updateObjStatus(listVO);
             }
         }
@@ -104,6 +102,22 @@ public class StatusService
         }
         return true;
     }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public void insertObjLog(ObjListVO listVO)
+    {
+        LogVO logVO = new LogVO();
+        UserPrincipalVO userPrincipalVO = getSecurityInfo();
+        String holderName = userPrincipalVO.getName();
+        String objAddr = userPrincipalVO.getAddr();
+
+        logVO.setObjStatus(listVO.getObjStatus());
+        logVO.setQrSrl(listVO.getQrSrl());
+        logVO.setObjAddr(objAddr);
+        logVO.setHolderName(holderName);
+        objStatusMapper.setObjLog(logVO);
+    }
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public Boolean deleteObj(ObjDetailVO objDetailVO)
     {
@@ -123,7 +137,6 @@ public class StatusService
         PageHandler pageHandler = pageHandler(totalCnt,vo.getPageNum(),contentNum);
         return pageHandler;
     }
-
 
     private PageHandler pageHandler(int totalCount, int pageNum, int contentNum)
     {
@@ -147,7 +160,4 @@ public class StatusService
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         return userPrincipalVO;
     }
-
-
-
 }

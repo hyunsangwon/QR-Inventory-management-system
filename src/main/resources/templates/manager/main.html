@@ -3,10 +3,13 @@
 <head th:replace="fragments/config :: configFragment"></head>
 <!-- main css -->
 <link rel="stylesheet" th:href="@{/css/qr_main.css}" />
+<link rel="stylesheet" th:href="@{/css/popup.css}" />
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
-<!--<script th:src="@{/script/main_kakao_map.js}" type="text/javascript"></script>-->
+<script th:src="@{/script/main_kakao_map.js}" type="text/javascript"></script>
 <script>
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
     $(function(){
         var mapContainer = document.getElementById('map'), // 지도의 중심좌표
             mapOption = {
@@ -14,6 +17,7 @@
                 level: 12 // 지도의 확대 레벨
             };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+        create_marker_map(map);
     });
 </script>
 <body>

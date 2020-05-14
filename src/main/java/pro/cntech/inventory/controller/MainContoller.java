@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pro.cntech.inventory.service.MainService;
-import pro.cntech.inventory.vo.CompanyVO;
+import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class MainContoller
@@ -63,7 +64,7 @@ public class MainContoller
     }
 
     @PostMapping("/ajax/call/kakaomap/marker")
-    public @ResponseBody CompanyVO ajaxCallMapMarker(@RequestBody UserVO userVO)
+    public @ResponseBody List<MarkerVO> ajaxCallMapMarker(@RequestBody UserVO userVO)
     {
         logger.debug("[ Call /ajax/call/kakaomap/marker- GET ]");
         logger.debug("Param : "+userVO.toString());

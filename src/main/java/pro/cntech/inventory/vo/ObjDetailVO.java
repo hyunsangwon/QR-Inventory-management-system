@@ -24,4 +24,5 @@ public class ObjDetailVO extends PagingVO
     private String userPhone;
     private String createAt;
     private String auth;
+    private String holderName;
 }

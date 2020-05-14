@@ -56,7 +56,14 @@
                         {
                             html += '<tr>';
                             html += '<td>' + data[i].createAt + '</td>';
-                            html += '<td>' + data[i].userName + '</td>';
+                            if(data[i].objStatus == 'return_finish') //반납 완료
+                            {
+                                html += '<td>' + data[i].holderName + '</td>';
+                            }
+                            else
+                            {
+                                html += '<td>' + data[i].userName + '</td>';
+                            }
                             html += '<td>' + data[i].addr + '</td>';
                             if(data[i].objStatus == 'inner_wait') //내부자산 등록
                             {
