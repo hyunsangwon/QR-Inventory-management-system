@@ -1,5 +1,6 @@
 package pro.cntech.inventory.mapper;
 
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import pro.cntech.inventory.vo.MarkerVO;
@@ -14,4 +15,5 @@ public interface MainMapper
     UserVO getUserInfo(@Param("phone") String phone);
     StatisticsVO getMainStatistics(@Param("userSrl") String userSrl);
     List<MarkerVO> getCompanyGPS(UserVO userVO);
+    int updateMyInfo(UserVO userVO);
 }

@@ -63,5 +63,18 @@
       <!-- GROUP BY o.company_srl-->
     </select>
 
+    <update id="updateMyInfo" parameterType="pro.cntech.inventory.vo.UserVO">
+        UPDATE users
+        SET
+            user_name = #{userName}
+            <if test='password neq ""'>
+            ,password = #{password}
+            </if>
+            ,addr = #{addr}
+            ,m_number = #{phone}
+            ,s_number = #{companyPhone}
+            ,company_name = #{companyName}
+        WHERE user_srl = #{userSrl}
+    </update>
 
 </mapper>

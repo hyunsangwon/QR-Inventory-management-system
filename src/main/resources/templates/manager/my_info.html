@@ -6,6 +6,15 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
+    $(function(){
+        $('#password').keydown(function(key){
+            if(key.keyCode == 13)
+            {
+                move_page();
+            }
+        });
+    });
+
     function move_page()
     {
         var password = $('#password').val();
@@ -33,9 +42,15 @@
                 cache : false,
                 success : function(data)
                 {
-                    if(data)
+                    if(data == 'true')
                     {
-                        location.href = "/manager/myinfo/detail";
+                        location.href = "/holder/myinfo/detail";
+                    }
+                    else
+                    {
+                        alert('비밀번호가 틀렸습니다.');
+                        $('#password').val();
+                        $('#password').focus();
                     }
                 },
                 error : function(xhr, status, error)

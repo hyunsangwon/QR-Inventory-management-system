@@ -80,3 +80,8 @@ function create_pop_up(marker,map,data)
 function closeOverlay() {
     _overlay.setMap(null);
 }
+
+function changeMarker(status)
+{
+    alert('작업중...!');
+}

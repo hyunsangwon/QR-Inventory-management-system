@@ -1,5 +1,6 @@
 package pro.cntech.inventory.controller;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,8 @@ public class MyInfoController
     private static final String MANAGER_VIEW_PREFIX = "manager/";
     @Autowired
     private MainService mainService;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("/manager/myinfo")
+    @GetMapping("/holder/myinfo")
     public String loadMyInfoPage(ModelMap model)
     {
         logger.debug("[ Call /manager/myinfo - GET ]");
@@ -39,21 +38,34 @@ public class MyInfoController
         return MANAGER_VIEW_PREFIX+"my_info";
     }
 
+    @PostMapping("/ajax/holder/myinfo")
+    public @ResponseBody Boolean updateMyInfo(@RequestBody UserVO userVO)
+    {
+        logger.debug("[ Call /ajax/holder/myinfo - POST ]");
+        logger.debug("Param : "+userVO.toString());
+        if(userVO == null) return false;
+
+        return mainService.isUserinfoUpdate(userVO);
+    }
+
     @PostMapping("/ajax/manager/password/compare")
     public @ResponseBody Boolean callAjaxPasswordCompare(@RequestBody UserVO userVO)
     {
         logger.debug("[ Call /manager/password/compare - GET ]");
+        logger.debug("Param : "+userVO.toString());
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
-        return bCryptPasswordEncoder.matches(userPrincipalVO.getPassword(),userVO.getPassword());
+        return BCrypt.checkpw(userVO.getPassword(),userPrincipalVO.getPassword());
     }
 
-    @GetMapping("/manager/myinfo/detail")
+    @GetMapping("/holder/myinfo/detail")
     public String loadMyInfoDetailPage(ModelMap model)
     {
         logger.debug("[ Call /manager/myinfo/detail - GET ]");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
+        model.addAttribute("userSrl",userPrincipalVO.getUserSrl());
         model.addAttribute("name",userPrincipalVO.getName());
         model.addAttribute("phone",userPrincipalVO.getUsername());
         model.addAttribute("companyName",userPrincipalVO.getCompanyName());
@@ -61,6 +73,5 @@ public class MyInfoController
         model.addAttribute("companyAddr",userPrincipalVO.getAddr());
         return MANAGER_VIEW_PREFIX+"my_info_edit";
     }
-
 
 }

@@ -68,9 +68,9 @@
                         <div class="customer-text">
                             <div class="circle"></div>이름
                         </div>
-                        <input type="text" name="name" th:value="${name}" />
+                        <input type="hidden" id="userSrl" name="userSrl" th:value="${userSrl}" />
+                        <input type="text" id="name" name="name" th:value="${name}" />
                     </div>
-
           			<div class="customer-phone">
 	          			<div class="customer-text" >
                             <div class="circle"></div>휴대전화 번호
@@ -80,7 +80,8 @@
                     <div class="form-title" style="margin-top:40px;">
                         비밀번호
                         <div class="edit-icon edit-btn" style="cursor: pointer; float:right;">
-                            <span style="margin-right: 20px; font-size: 24px; vertical-align: middle; color: #666666;">수정하기</span><img th:src="@{/image/list-icon-edit.svg}">
+                            <span style="margin-right: 20px; font-size: 24px; vertical-align: middle; color: #666666;">수정하기</span>
+                            <img th:src="@{/image/list-icon-edit.svg}" onclick="update_password('update');">
                         </div>
                        <!--//edit-icon-->
                     </div>
@@ -95,18 +96,18 @@
                             <div class="customer-password-text">
                                 <div class="circle"></div>신규 비밀번호
                             </div>
-                            <input type="password" id="password_1" class="pw">
+                            <input type="password" id="password_1" class="pw" value="">
                         </div>
                         <div class="customer-new-check-password">
                             <div class="customer-password-text">
                                 <div class="circle"></div>신규 비밀번호 확인
                             </div>
-                              <input type="password" id="password_2" class="pw">
+                              <input type="password" id="password_2" class="pw" value="">
                         </div>
                         <div class="edit-icon-area" style="float:left; width:68%; height:50px; text-align: right; padding-left:300px; ">
                             <div id="alert-danger" class="error-text">Error Text 비밀번호가 일치하지 않습니다.</div>
                             <button class="password-complete-btn">수정완료<img th:src="@{/image/list-icon-edit-complate.svg}"></button>
-                            <button class="password-cancel-btn">수정취소<img th:src="@{/image/list-icon-edit-cancel.svg}"></button>
+                            <button class="password-cancel-btn" onclick="update_password('cancel')">수정취소<img th:src="@{/image/list-icon-edit-cancel.svg}"></button>
                         </div>
                     </div>
                     <div class="form-title" style="margin-top:40px;">
@@ -116,19 +117,19 @@
                         <div class="company-text">
                             <div class="circle"></div>회사 이름
                         </div>
-                        <input type="text" name="name" th:value="${companyName}" />
+                        <input type="text" id="companyName" name="name" th:value="${companyName}" />
                     </div>
                     <div class="company-phone">
                         <div class="company-text">
                             <div class="circle"></div>회사 연락처
                         </div>
-                        <input type="text" name="name" maxlength="11" th:value="${companyPhone}" onKeyDown="return onlyNumber(event)" />
+                        <input type="text" id="companyPhone" name="name" maxlength="11" th:value="${companyPhone}" onKeyDown="return onlyNumber(event)" />
                     </div>
                     <div class="company-address">
                         <div class="company-text">
                             <div class="circle"></div>회사 주소
                         </div>
-                        <input type="text" name="addr" th:value="${companyAddr}" style="width:500px; margin-bottom:10px;"/>
+                        <input type="text" id="companyAddr" name="addr" th:value="${companyAddr}" style="width:500px; margin-bottom:10px;"/>
                         <button class="address-button" onclick="execPostCode();">우편번호 찾기</button>
                         <input type="text" name="zipCode" value="" style="width:700px;"/>
                     </div>
@@ -148,7 +149,8 @@
 </div>
 </body>
 <script>
-        
+        var _count = 0;
+
         /* 전화번호 숫자 입력*/
         function onlyNumber(event){
             event = event || window.event;
@@ -157,10 +159,8 @@
                 return;
             else{
                 alert("숫자만 입력가능합니다.");
-
             }
         }
-
         /* 비밀번호 일치하지 않을 때*/
         $('.pw').focusout(function () {
                 var pwd1 = $("#password_1").val();
@@ -178,10 +178,101 @@
                 }
             });
 
+        function update_password(status)
+        {
+            if(status == 'update')
+            {
+                ++_count;
+            }
+            if(status == 'cancle')
+            {
+                _count=0;
+            }
+        }
         /* 수정사항 완료 */
-        function finishBtn(){
-            alert('수정이 완료되었습니다.');
-            return false;
+        function finishBtn()
+        {
+            var name = $('#name');
+            var phone = $('#customer_phone');
+            var password_2 = $('#password_2');
+            var companyName = $('#companyName');
+            var companyPhone = $('#companyPhone');
+            var companyAddr = $('#companyAddr');
+            var userSrl = $('#userSrl');
+            if(_count > 0)
+            {
+                if(password_2.val() == '')
+                {
+                    alert('비밀번호를 입력해주세요.');
+                    password_2.focus();
+                    return false;
+                }
+            }
+            if(name.val() == '')
+            {
+                alert('이름을 입력 해주세요.');
+                name.focus();
+                return false;
+            }
+            if(phone.val() == '')
+            {
+                alert('번호를 입력 해주세요.');
+                phone.focus();
+                return false;
+            }
+            if(companyName.val() == '')
+            {
+                alert('회사이름을 입력해주세요');
+                companyName.focus();
+                return false;
+            }
+            if(companyAddr.val() == '')
+            {
+                alert('회사주소를 입력해주세요');
+                companyAddr.focus();
+                return false;
+            }
+            if(companyPhone.val() == '')
+            {
+                alert('회사번호를 입력해주세요');
+                companyPhone.focus();
+                return false;
+            }
+         
+
+            var jsonData = {'userSrl' : userSrl.val() , 'userName' : name.val() , 'phone' : phone.val(), 'password': password_2.val(),
+                'companyName' : companyName.val(), 'companyPhone': companyPhone.val(), 'addr' : companyAddr.val()};
+            ajax_user_info_update(jsonData);
+        }
+
+        function ajax_user_info_update(data)
+        {
+            console.log(JSON.stringify(data));
+            $.ajax
+            ({
+                type: 'POST',
+                contentType: "application/json",
+                url:'/ajax/holder/myinfo',
+                data : JSON.stringify(data),
+                beforeSend : function(xhr)
+                {
+                    xhr.setRequestHeader(header, token);
+                },
+                dataType : "text",
+                cache : false,
+                success : function(data)
+                {
+                    if(data == 'true')
+                    {
+                        alert('회원정보 수정 완료');
+                        location.reload();
+                    }
+                },
+                error : function(xhr, status, error)
+                {
+                    console.log('error ====> ' + error);
+                }
+            });
         }
         
         /* 수정하기,수정취소 버튼 눌렀을 때*/
