@@ -2,7 +2,79 @@
 <html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/config :: configFragment"></head>
-<link rel="stylesheet th:href="@{/css/service_order.css}"/>
+<link rel="stylesheet" th:href="@{/css/service_order.css}">
+<script>
+    $(function()
+    {
+        $('#qrCnt').keyup(function(e)
+        {
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+    });
+
+    function qr_order()
+    {
+        var maxCnt = 120;
+        var qrCnt = $('#qrCnt').val();
+        if (maxCnt < qrCnt) {
+            alert('주문수량을 초과했습니다.');
+            $('#qrCnt').val();
+            $('#qrCnt').focus();
+        }
+        if(qrCnt == 0)
+        {
+            alert('수량을 입력해주세요.');
+            $('#qrCnt').focus();
+            return false;
+        }
+        if($('#companyAddr').val() == '' || $('#companyDetailAddr').val() == '') {
+            alert('주소를 입력해주세요.');
+            $('#companyAddr').focus();
+            return false;
+        }
+        if($('#userName').val() == '')
+        {
+            alert('주문자 이름을 입력해주세요');
+            $('#userName').focus();
+            return false;
+        }
+        if($('#userPhone').val() == '')
+        {
+            alert('주문자 연락처를 입력해주세요');
+            $('#userPhone').focus();
+            return false;
+        }
+
+        $("input[name=addr]").val($('#companyAddr').val());
+        $("input[name=detailAddr]").val($('#companyDetailAddr').val());
+        $("input[name=orderCnt]").val($('#qrCnt').val());
+        $("input[name=userName]").val($('#userName').val());
+        $("input[name=userPhone]").val($('#userPhone').val());
+        $("input[name=orderRequests]").val("test");
+
+        $('#orderForm').submit();
+    }
+
+    function set_text(status)
+    {
+        if(status == 'addr')
+        {
+            $('#companyAddr').attr('disabled', false);
+            $('#companyDetailAddr').attr('disabled', false);
+            $('#companyAddr').val();
+            $('#companyDetailAddr').val();
+            $('#postCode').css('display','block')
+        }
+        if(status == 'order')
+        {
+            $('#userName').attr('disabled', false);
+            $('#userPhone').attr('disabled', false);
+            $('#userName').val();
+            $('#userPhone').val();
+        }
+    }
+
+</script>
 <body>
 <div class="cd-main-header js-cd-main-header">
     <div id="main_ct" class="wrap">
@@ -25,11 +97,19 @@
             <!-- //process-area -->
             <div class="order-list-select-area">
                 <div class="new-order-info">
+                    <form th:action="@{/order/qr}" th:method="post" id="orderForm">
+                        <input type="hidden" name="addr" />
+                        <input type="hidden" name="detailAddr" />
+                        <input type="hidden" name="orderCnt" />
+                        <input type="hidden" name="userName" />
+                        <input type="hidden" name="userPhone" />
+                        <input type="hidden" name="orderRequests" />
+                    </form>
                     <div class="input-box" >
                         <div class="input-box-text">
                             <span>*</span>QR스티커 주문 수량</div>
                         <fieldset class="qrBox">
-                            <input name="qrCnt" type="text" value="" placeholder=>
+                            <input id="qrCnt" type="text" value="" placeholder="0">
                             <label class="qrCntTot">/ 120개</label>
                         </fieldset>
                     </div>
@@ -38,28 +118,26 @@
                             <span>*</span>QR스티커 수령 장소
                         </div>
                         <div class="order-address-select">
-                            <button id="defaultAddr" class="address-button btn-active">기본 배송지</button><button id="newAddr" class="address-button">신규 배송지</button>
+                            <button id="defaultAddr" type="button" class="address-button btn-active">기본 배송지</button><button id="newAddr" type="button" class="address-button" onclick="set_text('addr')">신규 배송지</button>
                         </div>
                         <!--기존 배송지 active 일 때-->
-                        <input class="order-zipCode" name="addr" type="text" style="width:706px;" value="대전광역시 유성구 테크노 4로 17" disabled/>
-                        <input class="order-addr" name="addr" type="text" value="대덕비즈센터 215호" disabled/>
-                        <!--신규 배송지 active 일 때
-	          			<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
-	          			<button class="postCode-btn" type="button" onclick="execPostCode();" style="color: #666; cursor: pointer; margin-left:20px;">우편번호 검색</button>
-	          			<input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />
-                        -->
+                        <input class="order-zipCode"  id="companyAddr" type="text" style="width:706px;" th:value="${addr}" disabled/>
+                        <input class="order-addr" id="companyDetailAddr" type="text" value="" disabled/>
+                        <!--
+                        신규 배송지 active 일 때  -->
+	          			<!--<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
+	          			<input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />-->
+                      <!--  <button class="postCode-btn" id="postCode" type="button" onclick="execPostCode();" style="color: #666; cursor: pointer; margin-left:20px; display: none;">우편번호 검색</button>-->
                     </div>
-
-
                     <div class="order-member">
                         <div class="order-member-text">
                             <span>*</span>주문자 이름
                         </div>
                         <div class="order-member-select">
-                            <button id="defaultName"  class="phone-button btn-active">기본 주문자</button><button id="newName" class="phone-button">신규 주문자</button>
+                            <button id="defaultName" type="button" class="phone-button btn-active">기본 주문자</button><button id="newName" type="button" class="phone-button" onclick="set_text('order')">신규 주문자</button>
                         </div>
                         <!--기본 주문자 active 일 때-->
-                        <input type="text" name="name" value="현상원" disabled/>
+                        <input type="text" id="userName" th:value="${name}" disabled/>
                         <!--신규 주문자 active 일 때
                          <input type="text" name="name" />-->
                     </div>
@@ -69,7 +147,7 @@
                             <span>*</span>주문자 연락처
                         </div>
                         <!--기본 연락처 active 일 때-->
-                        <input type="text" name="phone" value="010-1234-5678" disabled/>
+                        <input type="text" id="userPhone" th:value="${phone}" disabled/>
                         <!--신규 연락처 active 일 때
 	          			<input type="text" name="phone" />-->
                     </div>
@@ -78,7 +156,7 @@
                         <div class="order-requests-text">
                             <span>요청사항 입력</span>
                         </div>
-                        <input type="text" name="orderRequests" />
+                        <input type="text"/>
                     </div>
                     <hr>
                     <span class="order-surcharge">
@@ -93,10 +171,9 @@
                             스티커 추가 주문 시 추가 비용이 발생됩니다.
                         </span>
                 </div>
-
             </div>
             <div class="qr-order-btn">
-                <button class="qr-order-taken">
+                <button class="qr-order-taken" type="button" onclick="qr_order();">
                     <span>주문하기</span>
                 </button>
             </div>
