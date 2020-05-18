@@ -21,6 +21,7 @@ public class UserVO
     private String userName;
     private String auth;
     private String addr;
+    private String detailAddr;
     private String phone;
     private String latitude;
     private String longitude;

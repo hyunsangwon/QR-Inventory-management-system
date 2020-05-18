@@ -38,9 +38,9 @@ public class UserPrincipalVO implements UserDetails
 
     public String getAuth() { return userVO.getAuth(); }
 
-    public String getAddr() {
-        return userVO.getAddr();
-    }
+    public String getAddr() { return userVO.getAddr();}
+
+    public String getDetailAddr() { return userVO.getDetailAddr();}
 
     public String getName() {return userVO.getUserName(); }
 

@@ -6,10 +6,25 @@
 <script>
     $(function()
     {
-        $('#qrCnt').keyup(function(e)
+        $('#qrCnt').keyup(function(e)// 주문 수량 입력
         {
             $(this).val($(this).val().replace(/[^0-9]/g,""));
         });
+        $('#userPhone').keyup(function(e) // 핸드폰 번호 입력
+        {
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+
+        $('#defaultAddr').click(function(){
+            $('#newAddr').removeClass('btn-active');
+            $('#defaultAddr').addClass('btn-active');
+        });
+
+        $('#defaultName').click(function () {
+            $('#newName').removeClass('btn-active');
+            $('#defaultName').addClass('btn-active');
+        });
+
     });
 
     function qr_order()
@@ -51,7 +66,6 @@
         $("input[name=userName]").val($('#userPhone').val());
         $("input[name=userPhone]").val($('#userName').val());
         $("input[name=orderRequests]").val("test");
-
         $('#orderForm').submit();
     }
 
@@ -59,14 +73,20 @@
     {
         if(status == 'addr')
         {
+            $('#defaultAddr').removeClass('btn-active');
+            $('#newAddr').addClass('btn-active');
+
             $('#companyAddr').attr('disabled', false);
             $('#companyDetailAddr').attr('disabled', false);
             $('#companyAddr').val();
             $('#companyDetailAddr').val();
-            $('#postCode').css('display','block')
+            $('#postCode').css('display','block');
         }
         if(status == 'order')
         {
+            $('#defaultName').removeClass('btn-active');
+            $('#newName').addClass('btn-active');
+
             $('#userName').attr('disabled', false);
             $('#userPhone').attr('disabled', false);
             $('#userName').val();
@@ -119,11 +139,12 @@
                             <span>*</span>QR스티커 수령 장소
                         </div>
                         <div class="order-address-select">
-                            <button id="defaultAddr" type="button" class="address-button btn-active">기본 배송지</button><button id="newAddr" type="button" class="address-button" onclick="set_text('addr')">신규 배송지</button>
+                            <button id="defaultAddr" type="button" class="address-button btn-active">기본 배송지</button>
+                            <button id="newAddr" type="button" class="address-button" onclick="set_text('addr')">신규 배송지</button>
                         </div>
                         <!--기존 배송지 active 일 때-->
                         <input class="order-zipCode"  id="companyAddr" type="text" style="width:706px;" th:value="${addr}" disabled/>
-                        <input class="order-addr" id="companyDetailAddr" type="text" value="" disabled/>
+                        <input class="order-addr" id="companyDetailAddr" type="text" th:value="${detailAddr}" disabled/>
                         <!--
                         신규 배송지 active 일 때  -->
 	          			<!--<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
@@ -135,10 +156,11 @@
                             <span>*</span>주문자 이름
                         </div>
                         <div class="order-member-select">
-                            <button id="defaultName" type="button" class="phone-button btn-active">기본 주문자</button><button id="newName" type="button" class="phone-button" onclick="set_text('order')">신규 주문자</button>
+                            <button id="defaultName" type="button" class="phone-button btn-active">기본 주문자</button>
+                            <button id="newName" type="button" class="phone-button" onclick="set_text('order')">신규 주문자</button>
                         </div>
                         <!--기본 주문자 active 일 때-->
-                        <input type="text" id="userName" th:value="${name}" disabled/>
+                        <input type="text" id="userName" th:value="${phone}" disabled/>
                         <!--신규 주문자 active 일 때
                          <input type="text" name="name" />-->
                     </div>
@@ -148,7 +170,7 @@
                             <span>*</span>주문자 연락처
                         </div>
                         <!--기본 연락처 active 일 때-->
-                        <input type="text" id="userPhone" th:value="${phone}" disabled/>
+                        <input type="text" id="userPhone" th:value="${name}" disabled/>
                         <!--신규 연락처 active 일 때
 	          			<input type="text" name="phone" />-->
                     </div>

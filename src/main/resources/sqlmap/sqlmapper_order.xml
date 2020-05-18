@@ -8,8 +8,8 @@
             order_cnt,
             order_status,
             order_addr,
-        <if test='orderRequests neq "null"'>
-            etc
+        <if test='orderRequests != null'>
+            ,etc
         </if>
         )
         VALUES
@@ -17,8 +17,10 @@
             #{userSrl},
             #{orderCnt},
             'y',
-            #{addr},
-            #{orderRequests}
+            #{addr}
+        <if test='orderRequests != null'>
+            ,#{orderRequests}
+        </if>
         )
     </insert>
 </mapper>

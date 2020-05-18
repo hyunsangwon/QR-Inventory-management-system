@@ -8,6 +8,7 @@
             user_srl AS userSrl,
             user_name AS userName,
             addr,
+            detail_addr AS detailAddr,
             auth,
             company_name AS companyName,
             s_number AS companyPhone
