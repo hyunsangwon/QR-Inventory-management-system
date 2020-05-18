@@ -1,18 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width"/>
-    <!-- main css -->
-    <link rel="stylesheet" th:href="@{/css/external_list/out_obj.css}">
-    <link rel="stylesheet" th:href="@{/css/common.css}">
-    <!-- Jquery -->
-    <script language="JavaScript" src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-    <script th:src="@{/script/external_list/out_obj.js}" type="text/javascript"></script>
-    <script th:src="@{/script/header_common.js}" type="text/javascript"></script>
-    <title>QRcode 서비스</title>
-</head>
+<head th:replace="fragments/config :: configFragment"></head>
+<link rel="stylesheet" th:href="@{/css/external_list/out_obj.css}">
+<script th:src="@{/script/external_list/out_obj.js}" type="text/javascript"></script>
 <script type="text/javascript">
     $(function()
     {
@@ -50,7 +41,6 @@
 
     function load_detail_page(srl)
     {
-        console.log(srl);
         location.href = "/obj/detail/search/"+srl;
     }
 

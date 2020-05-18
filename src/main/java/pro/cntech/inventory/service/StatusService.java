@@ -1,6 +1,5 @@
 package pro.cntech.inventory.service;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +20,8 @@ public class StatusService
 
     @Autowired
     private ObjStatusMapper objStatusMapper;
+    @Autowired
+    private AwsService awsService;
 
     public void getObjStatusList(ModelMap map, ObjListVO vo)
     {
@@ -41,22 +42,34 @@ public class StatusService
         map.addAttribute("pageHandler",pageHandler);
     }
 
-    public ObjDetailVO getObjDetail(String qrSrl)
+    public ObjDetailVO getObjDetail(String qrSrl) throws Exception
     {
-
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
         detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone(),"user"));
         detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone(),"company"));
 
-        UserPrincipalVO userInfo = getSecurityInfo();
+        String[] imageSrlName = detailvo.getObjSrlImage().split("/");
+        String[] imageModelName = detailvo.getObjModelImage().split("/");
+
         if(detailvo.getSrlName() == null)
         {
             detailvo.setSrlName("데이터 없음");
+        }
+        else
+        {
+            String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
+            detailvo.setSrlName(ocrSrlName);
         }
         if(detailvo.getModelName() == null)
         {
             detailvo.setModelName("데이터 없음");
         }
+        else
+        {
+            String ocrModelName = awsService.getConvertedText(imageModelName[imageSrlName.length-1]);
+            detailvo.setSrlName(ocrModelName);
+        }
+
         if(detailvo.getAuth().equals("manager"))
         {
             detailvo.setAuth("자산 관리자");

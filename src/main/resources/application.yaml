@@ -10,6 +10,8 @@ logging:
   config: classpath:logback-spring-dev.xml
 kakao:
   api-key: 87c48b54b7f2c7fdc3f31063f02a7fa2
+aws:
+  api-gateway-url: https://66m2vdg9fi.execute-api.ap-northeast-2.amazonaws.com/OCR-API/ocr
 ---
 spring:
   profiles: dev

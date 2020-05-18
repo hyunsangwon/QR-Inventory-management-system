@@ -47,7 +47,7 @@ public class ObjStatusController
     /*자산 상세보기*/
     @GetMapping("/obj/detail/search/{qrSrl}")
     public String loadObjDetailPage(ModelMap model
-            ,@PathVariable("qrSrl") String qrSrl)
+            ,@PathVariable("qrSrl") String qrSrl)throws Exception
     {
         logger.debug("[ Call /obj/search/"+qrSrl+ "- GET ]");
         logger.debug("Param : "+qrSrl);
