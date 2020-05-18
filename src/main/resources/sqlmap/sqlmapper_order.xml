@@ -7,7 +7,7 @@
             user_srl,
             order_cnt,
             order_status,
-            order_addr,
+            order_addr
         <if test='orderRequests != null'>
             ,etc
         </if>

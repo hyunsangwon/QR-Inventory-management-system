@@ -62,7 +62,7 @@ function ajax_admin_info(data)
             }
             else
             {
-                html += '<b>[자산 담당자] ' + data.userName + '</b>';
+                html += '<b>[자산 관리자] ' + data.userName + '</b>';
             }
             $('#userName').html(html);
             var userInfo = '<li>: <span style="font-weight: 600;">' +data.phone+ '</span><li>';

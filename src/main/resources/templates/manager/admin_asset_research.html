@@ -11,6 +11,12 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
+
+        $('#insert_user_phone').keyup(function(e)// 핸드폰 번호 입력
+        {
+            $(this).val($(this).val().replace(/[^0-9]/g,""));
+        });
+
         $('a[name=admin_search]').css('background-color','#437ece');
 
         $("span[name=pageNum]").click(function()
@@ -25,9 +31,20 @@
             var pageNum = $(this).attr('id');
         });
         /* 사용자 추가 */
-        $("#add_user").click(function(){
+        $("#add_user").click(function()
+        {
             var userName = $('#insert_user_name').val();
             var phone = $('#insert_user_phone').val();
+            if (userName == '')
+            {
+                alert('이름을 입력해주세요');
+                return false;
+            }
+            if(phone == '')
+            {
+                alert('번호를 입력해주세요');
+                return false;
+            }
             var masterSrl = $('#masterSrl').val();
             var jsonData = { "userName" : userName , 'phone' : phone, 'masterSrl' : masterSrl};
             ajax_admin_add(jsonData);
@@ -36,6 +53,16 @@
         $('#complete_btn').click(function () {
             var userName = $('#update_user_name').val();
             var phone = $('#update_user_phone').val();
+            if (userName == '')
+            {
+                alert('이름을 입력해주세요');
+                return false;
+            }
+            if(phone == '')
+            {
+                alert('번호를 입력해주세요');
+                return false;
+            }
             var userSrl = $('#userSrl').val();
             var jsonData = { "userName" : userName , 'phone' : phone, 'userSrl' : userSrl};
             ajax_admin_update(jsonData);
@@ -154,7 +181,7 @@
                         <!--자산 담당자일 경우는 com-icon-crown, 자산 관리자일 경우는 com-icon-->
                         <div class="com-icon-crown"><img th:src="@{/image/list-icon-crown.svg}"></div>
 			  			<div class="com-name" th:text="${myInfo.userName}">홍길동A</div>
-			  			<div class="com-total" th:text="${myInfo.totalObjCnt}">167</div>
+			  			<!--<div class="com-total" th:text="${myInfo.totalObjCnt}">167</div>-->
 			  		</a>
 			  	</div>
 			  	<div class="section-box" name="section-box" th:unless="${assetManagerListSize} == '0'" th:each="list : ${assetManagerList}"
@@ -163,7 +190,7 @@
 			  		<a>
                         <div class="com-icon"><img style="opacity: 0;" th:src="@{/image/list-icon-crown.svg}"></div>
 			  			<div class="com-name" th:text="${list.userName}">홍길동B</div>
-			  			<div class="com-total" th:text="${list.totalObjCnt}">104</div>
+			  		<!--	<div class="com-total" th:text="${list.totalObjCnt}">104</div>-->
 			  		</a>
 			  	</div>
 			  </div>

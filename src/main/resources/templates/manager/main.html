@@ -4,6 +4,7 @@
 <!-- main css -->
 <link rel="stylesheet" th:href="@{/css/qr_main.css}" />
 <link rel="stylesheet" th:href="@{/css/popup.css}" />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
 <script th:src="@{/script/main_kakao_map.js}" type="text/javascript"></script>
@@ -44,7 +45,7 @@
                         <div class="box-title">
                             <span>전체 등록 자산</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
-                        <div class="box-text">
+                        <div class="box-text" style="font-family: 'Open Sans', sans-serif;">
                             <span th:text="${statistics.totalCnt}">607</span>
                         </div>
                     </div>
@@ -52,7 +53,7 @@
                         <div class="box-title">
                             <span>내부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
-                        <div class="box-text">
+                        <div class="box-text" style="font-family: 'Open Sans', sans-serif;">
                             <span th:text="${statistics.innerCount}">26</span>
                         </div>
                     </div>
@@ -60,7 +61,7 @@
                         <div class="box-title">
                             <span>외부자산 조회</span><img th:src="@{/image/main/main-icon-arrow.svg}"/>
                         </div>
-                        <div class="box-text">
+                        <div class="box-text" style="font-family: 'Open Sans', sans-serif;">
                             <span th:text="${statistics.outerCount}">0</span>
                         </div>
                     </div>
@@ -68,7 +69,7 @@
             </div>
             <!--//panel-wrap-all-->
             <div id="panel-wrap-quick">
-                <div class="panel-heading">
+                <div class="panel-heading" style="padding-bottom:97px !important;">
                     <div class="panel-group">
                         <div class="circle"></div>
                         <span class="title">주요 기능 즐겨찾기</span>
@@ -77,24 +78,18 @@
                     <!--//panel-group-->
                 </div>
                 <!--//panel-heading-->
-                <div class="quick-btn">
-                    <div class="qbtn">
-                        <div class="qimg">
+                <div class="quick-btn" >
+                    <div class="qbtn" style="margin-bottom:45px;">
+                        <div class="qtitle" style="border-bottom:1px solid #fff;">QR 스티커 주문</div>
+                        <div class="qimg" style="border-bottom:1px solid #fff;">
                             <img th:src="@{/image/main/main-icon-quick-plus.svg}" alt="QR스티커주문" width="48px"/>
                         </div>
-                        <div class="qtitle">QR 스티커 주문</div>
                     </div>
                     <div class="qbtn">
-                        <div class="qimg">
+                        <div class="qtitle" style="border-bottom:1px solid #fff;">반납 완료 승인</div>
+                        <div class="qimg" style="border-bottom:1px solid #fff;">
                             <img th:src="@{/image/main/main-icon-quick-warning.svg}" alt="반납 완료 승인" width="48px"/>
                         </div>
-                        <div class="qtitle">반납 완료 승인</div>
-                    </div>
-                    <div class="qbtn">
-                        <div class="qimg">
-                            <img th:src="@{/image/main/main-icon-quick-check.svg}" alt="등록실패확인" width="48px" />
-                        </div>
-                        <div class="qtitle">등록 실패 확인</div>
                     </div>
                 </div>
                 <!-- //quick-btn -->
