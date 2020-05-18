@@ -28,8 +28,9 @@ public class AdminService {
         String userSrl = user.getUserSrl();
         String auth = user.getAuth();
 
-        UserVO myInfo = managerMapper.getUserInfo(new UserVO(userSrl,auth));
-        myInfo.setPhone(setPhoneNumber(myInfo.getPhone()));
+        UserVO myInfo = managerMapper.getUserInfo(userSrl,auth);
+        if(myInfo.getPhone() != null) myInfo.setPhone(setPhoneNumber(myInfo.getPhone()));
+
         List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
@@ -48,7 +49,7 @@ public class AdminService {
 
     public UserVO getAdminInfo(UserVO userVO)
     {
-        UserVO vo = managerMapper.getUserInfo(userVO);
+        UserVO vo = managerMapper.getUserInfo(userVO.getUserSrl(),userVO.getAuth());
         vo.setPhone(setPhoneNumber(vo.getPhone()));
         return vo;
     }

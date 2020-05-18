@@ -51,24 +51,10 @@ public class StatusService
         String[] imageSrlName = detailvo.getObjSrlImage().split("/");
         String[] imageModelName = detailvo.getObjModelImage().split("/");
 
-        if(detailvo.getSrlName() == null)
-        {
-            detailvo.setSrlName("데이터 없음");
-        }
-        else
-        {
-            String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
-            detailvo.setSrlName(ocrSrlName);
-        }
-        if(detailvo.getModelName() == null)
-        {
-            detailvo.setModelName("데이터 없음");
-        }
-        else
-        {
-            String ocrModelName = awsService.getConvertedText(imageModelName[imageSrlName.length-1]);
-            detailvo.setSrlName(ocrModelName);
-        }
+        String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
+        detailvo.setSrlName(ocrSrlName);
+        String ocrModelName = awsService.getConvertedText(imageModelName[imageModelName.length-1]);
+        detailvo.setModelName(ocrModelName);
 
         if(detailvo.getAuth().equals("manager"))
         {

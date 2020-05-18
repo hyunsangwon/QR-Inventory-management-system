@@ -1,8 +1,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pro.cntech.inventory.mapper.ManagerMapper">
     <!--나의 자산수량과 기본정보-->
-    <select id="getUserInfo" resultType="pro.cntech.inventory.vo.UserVO" parameterType="pro.cntech.inventory.vo.UserVO">
-        SELECT
+    <select id="getUserInfo" resultType="pro.cntech.inventory.vo.UserVO">
+         SELECT
         <if test='auth eq "holder"'>
             holder.auth
             ,holder.m_number AS phone
@@ -22,7 +22,7 @@
         INNER JOIN users AS holder
         ON manager.master_srl = holder.user_srl
         <if test='auth eq "holder"'>
-            WHERE manager.master_srl = #{userSrl}
+            WHERE manager.master_srl = ${userSrl}
         </if>
         <if test='auth eq "manager"'>
             WHERE manager.user_srl = #{userSrl}
@@ -47,7 +47,7 @@
             FROM users AS u
             INNER JOIN obj AS o
             ON u.user_srl = o.user_srl
-            WHERE u.master_srl = 1
+            WHERE u.master_srl = #{userSrl}
             AND auth != 'holder'
             AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
             )AS assetCnt

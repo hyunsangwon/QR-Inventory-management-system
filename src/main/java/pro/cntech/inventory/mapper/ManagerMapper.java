@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface ManagerMapper
 {
-    UserVO getUserInfo(UserVO userVO);
+    UserVO getUserInfo(@Param("userSrl") String userSrl,@Param("auth") String auth);
     List<UserVO> getMyMangerList (@Param("userSrl") String userSrl);
     List<ObjListVO> getObjList(ObjListVO objListVO);
     int getObjListTotalCnt(ObjListVO objListVO);
