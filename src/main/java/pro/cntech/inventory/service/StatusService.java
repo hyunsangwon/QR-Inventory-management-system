@@ -45,6 +45,9 @@ public class StatusService
     {
 
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
+        detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone(),"user"));
+        detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone(),"company"));
+
         UserPrincipalVO userInfo = getSecurityInfo();
         if(detailvo.getSrlName() == null)
         {
@@ -167,4 +170,25 @@ public class StatusService
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         return userPrincipalVO;
     }
+
+    public String setPhoneNumber(String phone,String status)
+    {
+        String firstNumber = null;
+        String secondNumber = null;
+        String lastNumber = null;
+        if("user".equals(status))
+        {
+            firstNumber = phone.substring(0,3);
+            secondNumber = phone.substring(3,7);
+            lastNumber= phone.substring(7,11);
+        }
+        else
+        {
+            firstNumber = phone.substring(0,3);
+            secondNumber = phone.substring(3,6);
+            lastNumber= phone.substring(6,10);
+        }
+        return firstNumber+"-"+secondNumber+"-"+lastNumber;
+    }
+
 }

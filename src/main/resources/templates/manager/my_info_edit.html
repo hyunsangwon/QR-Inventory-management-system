@@ -199,6 +199,7 @@
             var companyPhone = $('#companyPhone');
             var companyAddr = $('#companyAddr');
             var userSrl = $('#userSrl');
+
             if(_count > 0)
             {
                 if(password_2.val() == '')
@@ -238,10 +239,14 @@
                 companyPhone.focus();
                 return false;
             }
-         
 
             var jsonData = {'userSrl' : userSrl.val() , 'userName' : name.val() , 'phone' : phone.val(), 'password': password_2.val(),
                 'companyName' : companyName.val(), 'companyPhone': companyPhone.val(), 'addr' : companyAddr.val()};
+            if(password_2.val() == '')
+            {
+                jsonData.password = null;
+            }
+
             ajax_user_info_update(jsonData);
         }
 

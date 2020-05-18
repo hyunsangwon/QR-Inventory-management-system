@@ -35,7 +35,13 @@ public class MainService implements UserDetailsService
 
     public List<MarkerVO> getCompanyGPS(UserVO userVO)
     {
-        return mainMapper.getCompanyGPS(userVO);
+        List<MarkerVO> list = mainMapper.getCompanyGPS(userVO);
+        for(MarkerVO vo : list)
+        {
+           vo.setCompanyPhone(setCompanyPhoneNumber(vo.getCompanyPhone()));
+        }
+
+        return list;
     }
 
     public StatisticsVO getMainStatistics()
@@ -51,11 +57,22 @@ public class MainService implements UserDetailsService
         return userPrincipalVO;
     }
 
+    public String setCompanyPhoneNumber(String phone)
+    {
+        String firstNumber = phone.substring(0,3);
+        String secondNumber = phone.substring(3,6);
+        String lastNumber= phone.substring(6,10);
+        return firstNumber+"-"+secondNumber+"-"+lastNumber;
+    }
+
     public boolean isUserinfoUpdate(UserVO userVO)
     {
         String password = userVO.getPassword();
-        password = bCryptPasswordEncoder.encode(password);
-        userVO.setPassword(password);
+        if(password != null)
+        {
+            password = bCryptPasswordEncoder.encode(password);
+            userVO.setPassword(password);
+        }
         int rows = mainMapper.updateMyInfo(userVO);
         if(rows > 0)
         {

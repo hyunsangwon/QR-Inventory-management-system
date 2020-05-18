@@ -61,14 +61,13 @@
         INNER JOIN users AS u
         ON c.user_srl = u.user_srl
         WHERE u.master_srl = #{userSrl}
-      <!-- GROUP BY o.company_srl-->
     </select>
 
     <update id="updateMyInfo" parameterType="pro.cntech.inventory.vo.UserVO">
         UPDATE users
         SET
             user_name = #{userName}
-            <if test='password neq ""'>
+            <if test='password != null'>
             ,password = #{password}
             </if>
             ,addr = #{addr}

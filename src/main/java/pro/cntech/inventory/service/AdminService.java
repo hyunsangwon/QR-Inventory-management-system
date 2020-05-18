@@ -29,6 +29,7 @@ public class AdminService {
         String auth = user.getAuth();
 
         UserVO myInfo = managerMapper.getUserInfo(new UserVO(userSrl,auth));
+        myInfo.setPhone(setPhoneNumber(myInfo.getPhone()));
         List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
@@ -47,7 +48,17 @@ public class AdminService {
 
     public UserVO getAdminInfo(UserVO userVO)
     {
-        return managerMapper.getUserInfo(userVO);
+        UserVO vo = managerMapper.getUserInfo(userVO);
+        vo.setPhone(setPhoneNumber(vo.getPhone()));
+        return vo;
+    }
+
+    public String setPhoneNumber(String phone)
+    {
+        String firstNumber = phone.substring(0,3);
+        String secondNumber = phone.substring(3,7);
+        String lastNumber= phone.substring(7,11);
+        return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
