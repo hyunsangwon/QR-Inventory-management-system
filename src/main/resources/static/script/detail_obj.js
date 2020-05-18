@@ -163,7 +163,7 @@ function ajax_update_obj(data)
       type: 'POST',
       contentType: "application/json",
       url:'/ajax/obj/update',
-      data : JSON.stringify(jsonData),
+      data : JSON.stringify(data),
       beforeSend : function(xhr)
       {
         xhr.setRequestHeader(header, token);

@@ -181,7 +181,7 @@
                         <!--자산 담당자일 경우는 com-icon-crown, 자산 관리자일 경우는 com-icon-->
                         <div class="com-icon-crown"><img th:src="@{/image/list-icon-crown.svg}"></div>
 			  			<div class="com-name" th:text="${myInfo.userName}">홍길동A</div>
-			  			<!--<div class="com-total" th:text="${myInfo.totalObjCnt}">167</div>-->
+			  			<div class="com-total" th:text="${myInfo.totalObjCnt}">167</div>
 			  		</a>
 			  	</div>
 			  	<div class="section-box" name="section-box" th:unless="${assetManagerListSize} == '0'" th:each="list : ${assetManagerList}"
@@ -190,7 +190,7 @@
 			  		<a>
                         <div class="com-icon"><img style="opacity: 0;" th:src="@{/image/list-icon-crown.svg}"></div>
 			  			<div class="com-name" th:text="${list.userName}">홍길동B</div>
-			  		<!--	<div class="com-total" th:text="${list.totalObjCnt}">104</div>-->
+			  			<div class="com-total" th:text="${list.totalObjCnt}">104</div>
 			  		</a>
 			  	</div>
 			  </div>
@@ -300,9 +300,9 @@
             <!--자산 담당자일때 나오는 box 시작-->
                 <!-- 출고 대기 -->
               <th:block th:unless="${assetListSize} == '0'">
-                  <th:block th:each="list : ${assetList}"
-                            th:data-listNo="${list.qrSrl}"  th:onclick="load_detail_page(this.getAttribute('data-listNo'))">
-                    <div class="item-wait" th:if="${list.objStatus eq 'return_finish'|| list.objStatus eq 'inner_wait'}">
+                  <th:block th:each="list : ${assetList}">
+                    <div class="item-wait" th:if="${list.objStatus eq 'return_finish'|| list.objStatus eq 'inner_wait'}"
+                         th:id="${list.qrSrl}" th:onclick="load_detail_page(this)">
                         <div class="item">
                             <img th:src="@{${list.objImage}}">
                         </div>
@@ -315,7 +315,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item-return-approve" th:if="${list.objStatus eq 'return_wait'}">
+                    <div class="item-return-approve" th:if="${list.objStatus eq 'return_wait'}"
+                         th:id='${list.qrSrl}' th:onclick="load_detail_page(this)">
                         <div class="item">
                             <img th:src="@{${list.objImage}}">
                         </div>

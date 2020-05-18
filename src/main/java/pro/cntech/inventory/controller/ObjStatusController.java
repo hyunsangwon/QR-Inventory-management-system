@@ -80,7 +80,7 @@ public class ObjStatusController
         logger.debug("[ Call /ajax/obj/release_wait/delete - POST ]");
         logger.debug("Param : "+objArrayVO.toString());
 
-        return statusService.controlObjStatus("delete",objArrayVO);
+        return statusService.isControlObjStatus("delete",objArrayVO);
     }
 
     @PostMapping("/ajax/obj/return_finish/confirm")
@@ -88,7 +88,7 @@ public class ObjStatusController
     {
         logger.debug("[ Call /ajax/obj/return_finish/confirm - POST ]");
         logger.debug("Param : "+objArrayVO.toString());
-        return statusService.controlObjStatus("update",objArrayVO);
+        return statusService.isControlObjStatus("update",objArrayVO);
     }
 
     @PostMapping("/ajax/obj/delete")

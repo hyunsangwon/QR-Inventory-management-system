@@ -19,6 +19,13 @@
             };
         var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
         create_marker_map(map);
+
+        $('#approvalPage').click(function () {
+            location.href = "/obj/status/return_wait/list/1";
+        });
+        $('#orderPage').click(function () {
+            location.href = "/order/qr";
+        });
     });
 </script>
 <body>
@@ -78,17 +85,17 @@
                     <!--//panel-group-->
                 </div>
                 <!--//panel-heading-->
-                <div class="quick-btn" >
-                    <div class="qbtn" style="margin-bottom:45px;">
+                <div class="quick-btn">
+                    <div class="qbtn" id="orderPage" style="margin-bottom:45px;">
                         <div class="qtitle" style="border-bottom:1px solid #fff;">QR 스티커 주문</div>
                         <div class="qimg" style="border-bottom:1px solid #fff;">
-                            <img th:src="@{/image/main/main-icon-quick-plus.svg}" alt="QR스티커주문" width="48px"/>
+                            <img th:src="@{/image/main/home-quick-icon-order.svg}" alt="QR스티커주문" width="48px"/>
                         </div>
                     </div>
-                    <div class="qbtn">
+                    <div class="qbtn" id="approvalPage">
                         <div class="qtitle" style="border-bottom:1px solid #fff;">반납 완료 승인</div>
                         <div class="qimg" style="border-bottom:1px solid #fff;">
-                            <img th:src="@{/image/main/main-icon-quick-warning.svg}" alt="반납 완료 승인" width="48px"/>
+                           <img th:src="@{/image/main/home-quick-icon-check.svg}" alt="반납 완료 승인" width="48px"/>
                         </div>
                     </div>
                 </div>

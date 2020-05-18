@@ -76,7 +76,7 @@ public class StatusService
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public Boolean controlObjStatus(String flag, ObjArrayVO objArrayVO) throws Exception
+    public Boolean isControlObjStatus(String flag, ObjArrayVO objArrayVO) throws Exception
     {
         int rows = 0;
         if("delete".equals(flag))

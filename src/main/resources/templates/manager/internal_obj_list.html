@@ -11,6 +11,7 @@
     $(function()
     {
         $('a[name=inner_asset_search]').css('background-color','#437ece');
+        $('.remark_check').hide();
 
         var objStatus = $('#objStatus').val();
         if('return_finish' == objStatus)
@@ -40,7 +41,8 @@
                 $('#select_obj').addClass('select_btn');
             }
             $('#select_obj').text('자산 삭제하기');
-
+            $('.remark_default').hide();
+            $('.remark_check').show();
             var className = $('#select_obj').attr('class');
 
             if(className == 'delete_active_btn')
@@ -257,7 +259,7 @@
                         <div class="regiseter-panel-group">
                             <div class="regiseter-panel-title">
                                 <div style="float:left; width:100%;">
-                                   <!-- <div class="circle"></div><span class="title">총 <span id="register_complete_tot">167</span>자산</span></p>-->
+                                    <div class="circle"></div><span class="title">총 <span id="register_complete_tot" th:text="${size}">167</span>자산</span></p>
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
                                     <!--자산 선택 전 활성화 되는 버튼-->
@@ -269,14 +271,11 @@
                                 <div class="remark_default" style="float:left; margin-top:10px; margin-left: 25px;">
                                     <span style="font-size: 24px;  color: #112287; ">출고 자산의 상태의 자산은 선택 후 삭제 가능합니다.</span>
                                 </div>
-                                <!--//remark_default-->
-                                <!--체크박스 체크했을 때
                                 <div class="remark_check" style="float:left; margin-top:10px; margin-left: 25px; line-height: 35px;">
                                     <span style="font-size: 24px;  color: #112287; margin-bottom:5px;">자산이 삭제되면 관리 이력과 QR스티커 정보가 지워집니다.</span>
                                     <p>
                                     <span style="font-size: 24px;  color: #112287; ">자산 삭제 후 부착된 QR 스티커는 제거해주세요.</span>
                                 </div>
-                                //remark_check-->
                             </div>
                             <!--//regiseter-panel-title-->
                         </div>
@@ -351,7 +350,7 @@
                         <div class="regiseter-panel-group">
                             <div class="regiseter-panel-title">
                                 <div style="float:left; width:100%;">
-                                   <!-- <div class="circle"></div><span class="title">총 <span id="register_complete_tot">167</span>자산</span></p>-->
+                                    <div class="circle"></div><span class="title">총 <span id="register_complete_tot" th:text="${size}">167</span>자산</span></p>
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
                                     <button class="approve_btn" id="return_confirm">반납 승인하기</button>
