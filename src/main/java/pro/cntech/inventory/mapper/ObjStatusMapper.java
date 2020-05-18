@@ -19,4 +19,5 @@ public interface ObjStatusMapper
     int deleteObj (@Param("qrSrl") String qrSrl);
     int updateObjStatus(ObjListVO objVO);
     void setObjLog(LogVO logVO);
+    int updateObjInfo(ObjDetailVO objDetailVO);
 }

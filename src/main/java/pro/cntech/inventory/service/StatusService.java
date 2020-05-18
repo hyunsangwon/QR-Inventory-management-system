@@ -119,14 +119,21 @@ public class StatusService
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public Boolean deleteObj(ObjDetailVO objDetailVO)
+    public Boolean isDeleteObj(ObjDetailVO objDetailVO)
     {
         int rows = 0;
-
         String qrSrl = objDetailVO.getQrSrl();
         rows = objStatusMapper.deleteObj(qrSrl);
         if(rows > 0) return true;
+        return  false;
+    }
 
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public Boolean isUpdateObjInfo(ObjDetailVO objDetailVO)
+    {
+        int rows = 0;
+        rows = objStatusMapper.updateObjInfo(objDetailVO);
+        if(rows > 0) return true;
         return  false;
     }
 

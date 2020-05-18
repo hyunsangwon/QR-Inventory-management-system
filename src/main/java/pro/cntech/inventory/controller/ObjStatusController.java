@@ -12,7 +12,6 @@ import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
-import pro.cntech.inventory.vo.UserVO;
 
 import java.util.List;
 
@@ -93,11 +92,18 @@ public class ObjStatusController
     }
 
     @PostMapping("/ajax/obj/delete")
-    public @ResponseBody Boolean callAjaxselectedObjDelete(@RequestBody ObjDetailVO objDetailVO)
+    public @ResponseBody Boolean callAjaxObjDelete(@RequestBody ObjDetailVO objDetailVO)
     {
         logger.debug("[ Call /ajax/obj/delete - POST ]");
         logger.debug("Param : "+objDetailVO.toString());
-        return statusService.deleteObj(objDetailVO);
+        return statusService.isDeleteObj(objDetailVO);
     }
 
+    @PostMapping("/ajax/obj/update")
+    public @ResponseBody Boolean callAjaxObjUpdate(@RequestBody ObjDetailVO objDetailVO)
+    {
+        logger.debug("[ Call /ajax/obj/update - POST ]");
+        logger.debug("Param : "+objDetailVO.toString());
+        return statusService.isUpdateObjInfo(objDetailVO);
+    }
 }

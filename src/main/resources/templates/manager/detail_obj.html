@@ -6,228 +6,23 @@
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
 <script th:src="@{/script/detail_obj.js}" type="text/javascript"></script>
-    <script>
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        /* modal script*/
-        $(document).ready(function()
-        {
-            $(".delete-btn").click(function() {
-                $("#company-info").css({
-                    "display": "block"
-                });
-            });
-            $(".close").click(function() {
-                $("#company-info").css({
-                    "display": "none"
-                });
-            });
-            manage_history_paging(1);
-            create_map();
-        });
-
-        function manage_history_paging(pageNum)
-        {
-            var qrSrl = $('#qrSrl').text();
-            var jsonData = { "qrSrl" : qrSrl ,"pageNum" : pageNum};
-            ajax_call_obj_history_list(jsonData);
-            ajax_call_obj_history_page(jsonData);
-        }
-        function ajax_call_obj_history_list(jsonData)
-        {
-            $.ajax
-            ({
-                type: 'POST',
-                contentType: "application/json",
-                url:'/ajax/obj/history/list',
-                data : JSON.stringify(jsonData),
-                beforeSend : function(xhr)
-                {
-                    xhr.setRequestHeader(header, token);
-                },
-                dataType : "json",
-                cache : false,
-                success : function(data)
-                {
-                    var html = '';
-                    if(data.length > 0)
-                    {
-                        for(var i = 0; i < data.length; i++)
-                        {
-                            html += '<tr>';
-                            html += '<td>' + data[i].createAt + '</td>';
-                            if(data[i].objStatus == 'return_finish') //반납 완료
-                            {
-                                html += '<td>' + data[i].holderName + '</td>';
-                            }
-                            else
-                            {
-                                html += '<td>' + data[i].userName + '</td>';
-                            }
-                            html += '<td>' + data[i].addr + '</td>';
-                            if(data[i].objStatus == 'inner_wait') //내부자산 등록
-                            {
-                                html += '<td><b>내부자산 등록</b></td>';
-                            }
-                            if(data[i].objStatus == 'outer_wait') //외부자산 등록
-                            {
-                                html += '<td><b>외부자산 등록</b></td>';
-                            }
-                            if(data[i].objStatus == 'release_start') //출고 시작
-                            {
-                                html += '<td><b>출고 시작</b></td>';
-                            }
-                            if(data[i].objStatus == 'release_finish') //출고 완료
-                            {
-                                html += '<td><b>출고 완료</b></td>';
-                            }
-                            if(data[i].objStatus == 'return_wait') //반납 대기
-                            {
-                                html += '<td><b>반납 대기</b></td>';
-                            }
-                            if(data[i].objStatus == 'return_finish') //반납 완료
-                            {
-                                html += '<td><b>반납 완료</b></td>';
-                            }
-                            if(data[i].objStatus == 'return_start') //반납 시작
-                            {
-                                html += '<td><b>반납 시작</b></td>';
-                            }
-                            html += '</tr>';
-                        }
-                    }
-                    else
-                    {
-                         html += '<tr><td colspan=4>데이터가 없습니다.</tr></td>'
-                    }
-                    $('#objHistoryList').html(html);
-                },
-                error : function(xhr, status, error)
-                {
-                    console.log('error ====> ' + error);
-                }
-            });
-        }
-        function ajax_call_obj_history_page(jsonData)
-        {
-            $.ajax
-            ({
-                type: 'POST',
-                contentType: "application/json",
-                url:'/ajax/obj/history/page',
-                data : JSON.stringify(jsonData),
-                beforeSend : function(xhr)
-                {
-                    xhr.setRequestHeader(header, token);
-                },
-                dataType : "json",
-                cache : false,
-                success : function(data)
-                {
-                    var html = '';
-                    if(data.prev)
-                    {
-                     html += '<span> <img src="/image/paging/list-previous.svg" onclick="pageClick(this);" id='+(data.startPage - 1 )+' name="pageNum"></span>';
-                    }
-                    if (data.totalcount != 0)
-                    {
-                        for (var i = data.startPage; i <= data.endPage; i++)
-                        {
-                            html += '<span class="page_num">';
-                            html += '<span class="page" id="'
-                                + i
-                                + '"onclick="pageClick(this);" name="pageNum" style="cursor:pointer;">'
-                                + i + '</span>';
-                            html += '</span>';
-                        }
-                    }
-                    if(data.next)
-                    {
-                        html += '<span> <img src="/image/paging/list-next.svg" onclick="pageClick(this);" id='+(data.startPage + 1 )+' name="pageNum"></span>';
-                    }
-                    $('#pageHandler').html(html);
-                },
-                error : function(xhr, status, error)
-                {
-                    console.log('error ====> ' + error);
-                }
-            });
-        }
-        function pageClick(obj)
-        {
-            var qrSrl = $('#qrSrl').text();
-            var pageNum = obj.id;
-            var jsonData = { "qrSrl" : qrSrl ,"pageNum" : pageNum};
-            ajax_call_obj_history_list(jsonData);
-            ajax_call_obj_history_page(jsonData);
-        }
-
-        function create_map()
-        {
-            var latitude = $('#latitude').val();
-            var longitude = $('#longitude').val();
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-                mapOption = {
-                    center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
-                };
-            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-            var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
-            var marker = new kakao.maps.Marker({
-                position: markerPosition
-            });
-
-            marker.setMap(map);
-        }
-
-        function delete_asset()
-        {
-            var qrSrl = $('#qrSrl').text();
-            var jsonData = { "qrSrl" : qrSrl};
-            if(qrSrl != null || qrSrl != '')
-            {
-                confirm(qrSrl+'자산을 삭제하시겠습니까?')
-                {
-                    $.ajax
-                    ({
-                        type: 'POST',
-                        contentType: "application/json",
-                        url:'/ajax/obj/delete',
-                        data : JSON.stringify(jsonData),
-                        beforeSend : function(xhr)
-                        {
-                            xhr.setRequestHeader(header, token);
-                        },
-                        dataType : "text",
-                        cache : false,
-                        success : function(data)
-                        {
-                            if(data)
-                            {
-                                alert('해당 자산을 삭제 했습니다.');
-                                window.history.back();
-                            }
-                        },
-                        error : function(xhr, status, error)
-                        {
-                            console.log('error ====> ' + error);
-                        }
-                    });
-                }
-            }
-        }
-
-    </script>
+<script>
+    $(function()
+    {
+        $(".delete-btn").click(function() {$("#company-info").css({"display": "block"});});
+        $(".close").click(function() {$("#company-info").css({"display": "none"});});
+        manage_history_paging(1);
+        create_map();
+    });
+</script>
 <body>
 <div class="cd-main-header js-cd-main-header">
-
     <div id="main_ct" class="wrap">
     <div th:replace="fragments/header:: headInfoFragment"></div>
     <div th:replace="fragments/header:: headNavFragment"></div>
     <div class="depth2-bg"></div>
         <!-- The Modal -->
         <div id="company-info" class="company-modal" style="border:1px solid #000;">
-
             <!-- Modal content -->
             <div id="modal-content" class="modal-company">
                 <div class="order-info-title">
@@ -237,7 +32,6 @@
                     </div>
                 </div>
                 <!-- //order-info-title -->
-
                 <div class="form" style=" height:150px; font-size:28px; font-weight: 300; line-height: 45px;">
                     해당 자산을 삭제하시겠습니까?<p>
                     자산이 삭제되면 관리이력과 QR 스티커 정보가 지워집니다.<p>
@@ -250,7 +44,6 @@
             <!-- //modal -->
         </div>
         <!-- //company-info -->
-
         <!-- title -->
         <div id="title-wrap">
             <div class="page-title-search-area">
@@ -265,11 +58,10 @@
             </div>
         </div>
         <!-- //title -->
-
         <!-- tab content -->
         <div id="tab_content_wrap">
             <div id="tab-1" class="tab-content current">
-                <div class="obj-box" style="height:700px;">
+                <div class="obj-box" style="height:795px;">
                     <div id="panel-wrap-register" class="text_left">
                         <div class="regiseter-panel-heading">
                             <div class="regiseter-panel-group">
@@ -285,18 +77,29 @@
                         <!--//regiseter-panel-heading-->
                     </div>
                     <!--//panel-wrap-register-->
-
                     <div class="obj-info">
                         <div class="list" style="font-weight:600;">책임자 : <span th:text="|${vo.userName} ${vo.auth}|">현상원</span></div>
                         <div class="list">연락처 : <span th:text="${vo.userPhone}">01012345678</span></div>
                     </div>
                     <!--//obj-info-->
+                    <!-- 20.05.15 추가-->
+                    <div class="edit-wrap" style="width:82%; height:44px; float:left; text-align: right;margin-bottom:20px; ">
+                        <div onclick="qr_edit(this)" class="qr_edit">
+                            <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
+                            <img th:src="@{/image/list-icon-edit.svg}">
+                        </div>
+                        <div onclick="qr_save(this)" class="qr_save">
+                            <span style="color:#666; font-size:24px; vertical-align: middle;">저장하기</span>
+                            <img th:src="@{/image/list-icon-edit-complate.svg}">
+                        </div>
+                    </div>
+                    <!-- //20.05.15 추가-->
                     <div class="obj-image">
                         <div class="list-img">
                             <div class="list-title">
                                 QR ID
                             </div>
-                            <div class="title-text" th:text="${vo.qrSrl}" id="qrSrl">
+                            <div class="title-text" th:text="${vo.qrSrl}" id="qrSrl" style="margin:12px 0 50px 0;">
                                 20202000504-00000001
                             </div>
                             <div class="obj-id-img">
@@ -305,14 +108,13 @@
                         </div>
                     </div>
                     <!--//obj-image-->
-
                     <div class="obj-image">
                         <div class="list-img">
                             <div class="list-title">
                                 Model
                             </div>
-                            <div class="title-text" th:text="${vo.modelName}">
-                                20202000504-00000001
+                            <div class="title-text">
+                                <textarea id="modelName" name="qr1" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.modelName}"></textarea>
                             </div>
                             <div class="obj-model-img">
                                 <div class="model-img">
@@ -322,14 +124,13 @@
                         </div>
                     </div>
                     <!--//obj-image-->
-
                     <div class="obj-image">
                         <div class="list-img">
                             <div class="list-title">
                                 Serial Number
                             </div>
-                            <div class="title-text" th:text="${vo.srlName}">
-                                20202000504-00000001
+                            <div class="title-text">
+                                <textarea id="srlName" name="qr2" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.modelName}"></textarea>
                             </div>
                             <div class="obj-serial-img">
                                 <div class="serial-img">
@@ -357,7 +158,6 @@
                         <!--//regiseter-panel-heading-->
                     </div>
                     <!--//panel-wrap-register-->
-
                     <div class="obj-info" style="line-height:43px;">
                         <div class="list" style="font-weight:600; margin:20px 0; " th:text="${vo.companyName}">(주)외부 기기사용 업체명</div>
                         <div class="list">연락처 : <span th:text="${vo.companyPhone}">01012345678</span></div>
@@ -368,11 +168,8 @@
                     <input type="hidden" id="latitude" th:value="${vo.latitude}"/>
                     <input type="hidden" id="longitude"th:value="${vo.longitude}"/>
                     <div id="map" style="width: 1100px; height:520px; float:left;"></div>
-
-
                 </div>
                 <!--//obj-box-->
-
                 <div class="obj-box" style="width:100%;">
                     <div id="panel-wrap-register" class="text_left" style="height:30px; padding-bottom:30px;">
                         <div class="regiseter-panel-heading">
@@ -389,7 +186,6 @@
                         <!--//regiseter-panel-heading-->
                     </div>
                     <!--//panel-wrap-register-->
-
                     <div id="regisster_waitList">
                         <table style="margin-top:30px; border-bottom:2px solid #d7d7d7;">
                             <colgroup>

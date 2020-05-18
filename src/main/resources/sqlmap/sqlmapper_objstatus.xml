@@ -150,4 +150,12 @@
         WHERE qr_srl = #{qrSrl}
     </update>
 
+    <update id="updateObjInfo" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
+        UPDATE obj
+        SET
+            obj_m = ${modelName},
+            obj_s = ${srlName}
+        WHERE qr_srl = #{qrSrl}
+    </update>
+
 </mapper>

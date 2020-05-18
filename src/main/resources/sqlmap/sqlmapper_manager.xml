@@ -29,19 +29,31 @@
         </if>
         AND o.obj_status IN ('inner_wait','return_finish')
     </select>
-    <!-- 자산 소유자의 담당자 리스트 조회-->
+    <!-- 자산 담당자 리스트 조회-->
     <select id="getMyMangerList" resultType="pro.cntech.inventory.vo.UserVO">
         SELECT
             u.user_srl AS userSrl,
             u.user_name AS userName,
-            u.auth
-          <!--  COUNT(o.obj_srl) AS totalObjCnt-->
+            u.auth,
+            IFNULL(assetCnt.totalObjCnt,0) AS totalObjCnt
         FROM users AS u
         LEFT JOIN obj AS o
         ON u.user_srl = o.user_srl
+        LEFT JOIN
+        (
+            SELECT
+                u.user_srl AS userSrl,
+                COUNT(o.obj_srl) AS totalObjCnt
+            FROM users AS u
+            INNER JOIN obj AS o
+            ON u.user_srl = o.user_srl
+            WHERE u.master_srl = 1
+            AND auth != 'holder'
+            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+            )AS assetCnt
+        ON assetCnt.userSrl = u.user_srl
         WHERE u.master_srl = #{userSrl}
         AND auth != 'holder'
-       <!-- AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')-->
         GROUP BY u.user_srl
     </select>
     <!-- 자산 소유자, 자산 담당자의 자산 리스트-->
