@@ -2,7 +2,7 @@
 <html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/config :: configFragment"></head>
-<link rel="stylesheet th:href="@{/css/confirmation_order.css}"/>
+<link rel="stylesheet" th:href="@{/css/confirmation_order.css}">
 <body>
 <div class="cd-main-header js-cd-main-header">
     <div id="main_ct" class="wrap">
@@ -26,7 +26,7 @@
             <div class="order-list-select-area">
                 <div class="new-order-info">
                     <div class="confirmation-remark">
-                        <div class="check-img" style="width:100%; margin:20px 0 25px 0;"><img src="order-icon-check.svg"></div>
+                        <div class="check-img" style="width:100%; margin:20px 0 25px 0;"><img th:src="@{/image/order-icon-check.svg}"></div>
                         <b>주문이 완료되었습니다.</b><p>
                         주문번호 : <span>12345678-12345678</span>
                     </div>
@@ -36,15 +36,15 @@
                     </div>
                     <div class="info-check">
                         <div class="title" >QR 스티커 수량</div>
-                        <div class="text">:<span>24개</span></div>
+                        <div class="text">:<span th:text="|${vo.orderCnt} 개|">24개</span></div>
                         <div class="title">QR 스티커 배송지</div>
-                        <div class="text">:<span>[12312] 대전 광역시 유성구 문화원로 123<p></span><span>소프트웨어 벤처타워 빌딩 10층 1004호</span></div>
+                        <div class="text">:<span th:text="${vo.addr}">[12312] 대전 광역시 유성구 문화원로 123<p></span><span th:text="${detailAddr}">소프트웨어 벤처타워 빌딩 10층 1004호</span></div>
                         <div class="title">주문자이름</div>
-                        <div class="text">:<span>현상원</span></div>
+                        <div class="text">:<span th:text="${vo.userName}">현상원</span></div>
                         <div class="title" style="margin-top:-10px;">주문자 연락처</div>
-                        <div class="text" style="margin-top:-10px;">:<span>01012345678</span></div>
+                        <div class="text" style="margin-top:-10px;">:<span th:text="${vo.userPhone}">01012345678</span></div>
                         <div class="title" style="margin-top:10px;">요청사항</div>
-                        <div class="text" style="margin-top:10px;">:<span>부재 시 연락주세요.</span></div>
+                        <div class="text" style="margin-top:10px;">:<span th:text="${vo.orderRequests}">부재 시 연락주세요.</span></div>
                         <div class="title">추가 결제금액</div>
                         <div class="text">:<span>0원</span></div>
                     </div>

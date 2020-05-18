@@ -1,6 +1,10 @@
 var _userSrl = null;
 var _userAuth = null;
 
+/*
+* userSrl : 유저 고유번호
+* auth : 유저 권한
+* */
 function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
 {
     _userSrl = userSrl;
@@ -18,7 +22,6 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
 function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
 {
     var pageNum = obj.id;
-
     if(_userSrl != null)
     {
         var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth};
@@ -47,6 +50,8 @@ function ajax_admin_info(data)
         },
         success : function(data)
         {
+            console.log('data ===> '+data);
+
             $('#userName').empty();
             $('#userInfo').empty();
             $('#userSrl').val(data.userSrl);
@@ -90,6 +95,7 @@ function ajax_admin_asset_list(data)
             var html = '';
             if(data.length == 0)
             {
+                $('#assetSelectBox').empty();
                 html += '<div class="default-remark">';
                 html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
                 html += '</div>';
@@ -113,7 +119,7 @@ function ajax_admin_asset_list(data)
             {
                 for(var i=0; i < data.length; i++)
                 {
-                    if(data[i].auth == 'holder') //자산 소유자 (반납 완료, 내부 등록, 반납대기)
+                    if(data[i].auth == 'holder') //자산 소유자 (반납 완료, 내부 등록)
                     {
                         if(data[i].objStatus == 'return_finish' || data[i].objStatus == 'inner_wait') //출고 대기
                         {
@@ -129,22 +135,8 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '</div>';
                         }
-                        if(data[i].objStatus == 'return_wait')
-                        {
-                            html += '<div class="item-return-approve" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>반납 승인 필요</b>';
-                            html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
                     }
-                    if(data[i].auth == 'manager') //자산 관리자 (출고 완료, 외부 등록, 반납시작 , 반납 대기)
+                    if(data[i].auth == 'manager') //자산 관리자 (출고 완료, 출고 시작, 반납 시작, 반납 완료, 반납 대기, 외부자산 등록)
                     {
                         if(data[i].objStatus == 'release_finish' || data[i].objStatus == 'outer_wait') //출고 완료
                         {

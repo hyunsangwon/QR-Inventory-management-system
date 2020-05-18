@@ -2,11 +2,8 @@ package pro.cntech.inventory.util;
 
 public class ObjStatusCode {
 
-    public static final String INNER_REG_WAIT = "inner_wait"; //내부자산 등록
-    public static final String INNER_REG_FAIL = "inner_fail"; //내부자산 승인 실패
-
-    public static final String OUTER_REG_WAIT = "outer_wait"; //외부자산 등록
-    public static final String OUTER_REG_FAIL = "outer_fail"; //외부자산 승인 실패
+    public static final String INNER_WAIT = "inner_wait"; //내부자산 등록
+    public static final String OUTER_WAIT = "outer_wait"; //외부자산 등록
 
     public static final String RELEASE_START = "release_start"; //출고 시작
     public static final String RELEASE_FINISH  = "release_finish"; //출고 완료

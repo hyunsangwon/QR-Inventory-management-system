@@ -38,7 +38,7 @@ public class ManagerController
     public @ResponseBody UserVO ajaxCallAdminInfo(@RequestBody UserVO userVO)
     {
         logger.debug("[ Call /ajax/admin/info - POST ]");
-        logger.debug("Param : "+userVO.toString());
+        logger.debug(" /ajax/admin/info Param : "+userVO.toString());
 
         return adminService.getAdminInfo(userVO);
     }

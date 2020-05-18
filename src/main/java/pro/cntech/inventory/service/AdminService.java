@@ -28,8 +28,8 @@ public class AdminService {
         String userSrl = user.getUserSrl();
         String auth = user.getAuth();
 
-        UserVO myInfo = managerMapper.getMyAssetInfo(userSrl);
-        List<UserVO> assetAdminList = managerMapper.getMyAdminList(userSrl);
+        UserVO myInfo = managerMapper.getUserInfo(new UserVO(userSrl,auth));
+        List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
         param.setAuth(auth);
@@ -47,7 +47,7 @@ public class AdminService {
 
     public UserVO getAdminInfo(UserVO userVO)
     {
-        return managerMapper.getMyAssetInfo(userVO.getUserSrl());
+        return managerMapper.getUserInfo(userVO);
     }
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
@@ -55,7 +55,16 @@ public class AdminService {
         int MAX = 15;
         int limitCount=((objListVO.getPageNum() - 1 ) * MAX);
         int contentNum = MAX;
+
         objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum);
+
+        if("holder".equals(objListVO.getAuth()))
+        {
+            UserPrincipalVO userPrincipalVO = getSecurityInfo();
+            String masterSrl = userPrincipalVO.getUserSrl();
+            objListVO.setUserSrl(masterSrl);
+        }
+
         return managerMapper.getObjList(objListVO);
     }
 

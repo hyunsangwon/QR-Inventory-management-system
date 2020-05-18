@@ -6,7 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,17 +36,14 @@ public class OrderController
     }
 
     @PostMapping("/order/qr")
-    public String qrOrder(@ModelAttribute("orderVO") OrderVO orderVO,
-                          BindingResult bindingResult,
-                          ModelMap model)
+    public String qrOrder(@ModelAttribute("orderVO") OrderVO orderVO, ModelMap model)
     {
         logger.debug("[ Call /order/qr - POST ]");
         logger.debug("Param : "+orderVO.toString());
-        if (bindingResult.hasErrors())
-        {
 
-        }
-        return MANAGER_VIEW_PREFIX+"order";
+        model.addAttribute("vo",orderVO);
+        return MANAGER_VIEW_PREFIX+"order_confirm";
     }
+
 
 }

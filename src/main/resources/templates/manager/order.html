@@ -48,8 +48,8 @@
         $("input[name=addr]").val($('#companyAddr').val());
         $("input[name=detailAddr]").val($('#companyDetailAddr').val());
         $("input[name=orderCnt]").val($('#qrCnt').val());
-        $("input[name=userName]").val($('#userName').val());
-        $("input[name=userPhone]").val($('#userPhone').val());
+        $("input[name=userName]").val($('#userPhone').val());
+        $("input[name=userPhone]").val($('#userName').val());
         $("input[name=orderRequests]").val("test");
 
         $('#orderForm').submit();
@@ -98,6 +98,7 @@
             <div class="order-list-select-area">
                 <div class="new-order-info">
                     <form th:action="@{/order/qr}" th:method="post" id="orderForm">
+                        <input type="hidden" name="userSrl"  th:value="${userSrl}"/>
                         <input type="hidden" name="addr" />
                         <input type="hidden" name="detailAddr" />
                         <input type="hidden" name="orderCnt" />

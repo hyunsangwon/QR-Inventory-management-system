@@ -5,6 +5,18 @@ import lombok.Data;
 @Data
 public class UserVO
 {
+
+    public UserVO ()
+    {
+
+    }
+
+    public UserVO(String userSrl,String auth)
+    {
+     this.userSrl = userSrl;
+     this.auth = auth;
+    }
+
     private String userSrl;
     private String userName;
     private String auth;
