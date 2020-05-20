@@ -23,11 +23,13 @@
         ON manager.master_srl = holder.user_srl
         <if test='auth eq "holder"'>
             WHERE manager.master_srl = ${userSrl}
+            AND o.obj_status IN ('inner_wait','return_finish','return_wait')
         </if>
         <if test='auth eq "manager"'>
             WHERE manager.user_srl = #{userSrl}
+            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
         </if>
-        AND o.obj_status IN ('inner_wait','return_finish')
+
     </select>
     <!-- 자산 담당자 리스트 조회-->
     <select id="getMyMangerList" resultType="pro.cntech.inventory.vo.UserVO">
@@ -49,12 +51,21 @@
             ON u.user_srl = o.user_srl
             WHERE u.master_srl = #{userSrl}
             AND auth != 'holder'
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
             )AS assetCnt
         ON assetCnt.userSrl = u.user_srl
         WHERE u.master_srl = #{userSrl}
         AND auth != 'holder'
         GROUP BY u.user_srl
+        <if test='sortName eq "date"'>
+            ORDER BY u.create_at DESC
+        </if>
+        <if test='sortName eq "name"'>
+            ORDER BY u.user_name ASC
+        </if>
+        <if test='sortName eq "count"'>
+            ORDER BY assetCnt.totalObjCnt DESC
+        </if>
     </select>
     <!-- 자산 소유자, 자산 담당자의 자산 리스트-->
     <select id="getObjList" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
@@ -76,11 +87,27 @@
             INNER JOIN users AS holder
             ON manager.master_srl = holder.user_srl
             WHERE manager.master_srl = #{userSrl}
-            AND o.obj_status IN ('inner_wait','return_finish')
+            <if test='sortName eq "return_finish"'>
+                AND o.obj_status IN ('inner_wait','return_finish')
+            </if>
+            <if test='sortName eq "return_wait"'>
+                AND o.obj_status = 'return_wait'
+            </if>
+            <if test='sortName eq "all"'>
+                AND o.obj_status IN ('inner_wait','return_finish','return_wait')
+            </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+            <if test='sortName eq "release_finish"'>
+                AND o.obj_status = 'release_finish'
+            </if>
+            <if test='sortName eq "return_start"'>
+                AND o.obj_status = 'return_start'
+            </if>
+            <if test='sortName eq "all"'>
+                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+            </if>
         </if>
         ORDER BY o.create_at DESC
         LIMIT #{limitcount},#{contentnum}
@@ -94,11 +121,27 @@
         ON o.user_srl = u.user_srl
         <if test='auth eq "holder"'>
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('inner_wait','return_finish')
+            <if test='sortName eq "return_finish"'>
+                AND o.obj_status IN ('inner_wait','return_finish')
+            </if>
+            <if test='sortName eq "return_wait"'>
+                AND o.obj_status = 'return_wait'
+            </if>
+            <if test='sortName eq "all"'>
+                AND o.obj_status IN ('inner_wait','return_finish','return_wait')
+            </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+            <if test='sortName eq "release_finish"'>
+                AND o.obj_status = 'release_finish'
+            </if>
+            <if test='sortName eq "return_start"'>
+                AND o.obj_status = 'return_start'
+            </if>
+            <if test='sortName eq "all"'>
+                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+            </if>
         </if>
     </select>
 

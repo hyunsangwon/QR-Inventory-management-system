@@ -11,7 +11,7 @@ import java.util.List;
 public interface ManagerMapper
 {
     UserVO getUserInfo(@Param("userSrl") String userSrl,@Param("auth") String auth);
-    List<UserVO> getMyMangerList (@Param("userSrl") String userSrl);
+    List<UserVO> getMyMangerList (@Param("userSrl") String userSrl,@Param("sortName") String sortName);
     List<ObjListVO> getObjList(ObjListVO objListVO);
     int getObjListTotalCnt(ObjListVO objListVO);
     int setUserInfo(UserVO userVO);

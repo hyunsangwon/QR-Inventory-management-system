@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
-                .addPathPatterns("/main","/order/**","/obj/**","/holder/**", "/admin/**")
+                .addPathPatterns("/main","/order/**","/obj/**","/holder/**", "/admin/**","/asset/**")
                 .excludePathPatterns("/login", "/login-fail", "/access-denied", "/ajax/**");
     }
 }

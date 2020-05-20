@@ -381,7 +381,7 @@ select::-ms-expand {
     background-color: #eceef4;
     color: #666666;
     font-size: 1.6em;
-    background: url('common-icon-sourting-down.svg') 90% 50%;
+    background: url('/image/common-icon-sourting-down.svg') 90% 50%;
     background-repeat: no-repeat;
 }
 
@@ -401,13 +401,11 @@ select::-ms-expand {
     background-color: #eceef4;
     color: #666;
     font-size: 1.6em;
-    background: url('common-icon-sourting-down.svg') 100% 50%;
+    background: url('/image/common-icon-sourting-down.svg') 100% 50%;
     background-repeat: no-repeat;
 }
 
-
 /* company_info*/
-
 .company-name {
     width: 80%;
     float: left;

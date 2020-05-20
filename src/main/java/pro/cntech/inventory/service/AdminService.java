@@ -22,7 +22,7 @@ public class AdminService {
     private ManagerMapper managerMapper;
 
     /*자산 담당자 기본 정보 세팅*/
-    public void setMyInfo(ModelMap map)
+    public void setMyInfo(ModelMap map,String sortName)
     {
         UserPrincipalVO user = getSecurityInfo();
         String userSrl = user.getUserSrl();
@@ -31,7 +31,7 @@ public class AdminService {
         UserVO myInfo = managerMapper.getUserInfo(userSrl,auth);
         if(myInfo.getPhone() != null) myInfo.setPhone(setPhoneNumber(myInfo.getPhone()));
 
-        List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl);
+        List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl,sortName);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
         param.setAuth(auth);

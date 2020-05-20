@@ -9,12 +9,23 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
 {
     _userSrl = userSrl;
     _userAuth = auth;
+
+    if(_userAuth == 'holder')
+    {
+        $('#managerOption').hide();
+        $('#holderOption').show();
+    }
+    if(_userAuth == 'manager')
+    {
+        $('#holderOption').hide();
+        $('#managerOption').show();
+    }
     $("div[name=section-box]").removeClass('active');
     $('#'+userSrl).addClass('active');
-
     var jsonData = { "userSrl" : userSrl, "auth" : _userAuth};
     ajax_admin_info(jsonData);
     jsonData.pageNum = '1';
+    jsonData.sortName = 'all';
     ajax_admin_asset_list(jsonData);
     ajax_page_add(jsonData);
 }
@@ -22,9 +33,18 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
 function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
 {
     var pageNum = obj.id;
+    var sortName = "all";
+    if(_userAuth = 'holder')
+    {
+        sortName = $('#holderOption option:selected').val();
+    }
+    if(_userAuth = 'manager')
+    {
+        sortName = $('#managerOption option:selected').val();
+    }
     if(_userSrl != null)
     {
-        var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth};
+        var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth , "sortName" : sortName};
         ajax_admin_asset_list(jsonData);
         ajax_page_add(jsonData);
     }
@@ -50,8 +70,6 @@ function ajax_admin_info(data)
         },
         success : function(data)
         {
-            console.log('data ===> '+data);
-
             $('#userName').empty();
             $('#userInfo').empty();
             $('#userSrl').val(data.userSrl);
@@ -91,11 +109,13 @@ function ajax_admin_asset_list(data)
         },
         success : function(data)
         {
-            $('#asset_container').empty();
+            //$('#asset_container').empty();
             var html = '';
             if(data.length == 0)
             {
-                $('#assetSelectBox').empty();
+                $('#holderOption').hide(); //select box
+                $('#managerOption').hide();
+
                 html += '<div class="default-remark">';
                 html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
                 html += '</div>';

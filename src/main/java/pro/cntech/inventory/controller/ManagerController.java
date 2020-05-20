@@ -5,10 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pro.cntech.inventory.service.AdminService;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
@@ -26,11 +23,11 @@ public class ManagerController
     @Autowired
     private AdminService adminService;
 
-    @GetMapping("/admin/asset/research")
-    public String loadAdminListPage(ModelMap model)
+    @GetMapping("/asset/research/sort/{sortName}")
+    public String loadAdminListPage(ModelMap model,@PathVariable("sortName") String sortName)
     {
         logger.debug("[ Call /admin/asset/research - GET ]");
-        adminService.setMyInfo(model);
+        adminService.setMyInfo(model,sortName);
         return MANAGER_VIEW_PREFIX+"admin_asset_research";
     }
 

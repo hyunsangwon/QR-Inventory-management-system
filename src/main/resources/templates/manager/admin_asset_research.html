@@ -11,6 +11,24 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
+        $('#managerOption').hide();
+        $('#holderOption').show()
+
+        $('#userOption').change(function(){
+            location.href = "/asset/research/sort/"+$(this).val();
+        });
+        $('#holderOption').change(function(){
+            var holderSrl = $('#userSrl').val();
+            var jsonData = {"userSrl":holderSrl, "auth":'holder', "pageNum":1, "sortName":$(this).val()};
+            ajax_admin_asset_list(jsonData);
+            ajax_page_add(jsonData);
+        });
+        $('#managerOption').change(function(){
+            var managerSrl = _userSrl;
+            var jsonData = {"userSrl":managerSrl, "auth":'manager', "pageNum":1, "sortName":$(this).val()};
+            ajax_admin_asset_list(jsonData);
+            ajax_page_add(jsonData);
+        });
 
         $('#insert_user_phone').keyup(function(e)// 핸드폰 번호 입력
         {
@@ -167,10 +185,10 @@
 		<div class="w3-sidebar w3-collapse w3-white w3-animate-left"  style=" width:460px; overflow:hidden;"  id="mySidebar"><br>
 			  <div class="w3-container-select">
 			    <div class="filter-area">
- 				  <select>
- 				  		<option selected >관리자 이름순</option>
- 				  		<!--<option>이벤트 발생순</option>
- 				  		<option>업체 이름순 </option>-->
+ 				  <select id="userOption">
+                        <option value="date">가입 순서</option>
+ 				  		<option value="name">관리자 이름순</option>
+ 				  		<option value="count">수량 순서</option>
  				  </select>
  			  </div>
  			  <!-- // filter-area-->
@@ -201,7 +219,7 @@
 		<div class="w3-main" style="margin-left:460px; height:1750px;">
 		  <!-- Header -->
 		  <header id="company-all-info">
-		    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()" style="background:url('/image/total_company/hamburger_menu.png') no-repeat ; width:50px; height:50px; background-size:50px; margin:20px;"><i class="fa fa-bars"></i></span>
+		    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()" style="background:url('/image/hamburger_menu.png') no-repeat ; width:50px; height:50px; background-size:50px; margin:20px;"><i class="fa fa-bars"></i></span>
             <div class="w3-container" style="padding:60px 50px;">
 		    <div class="company-name" id="userName">
 		    	<b th:text="|[자산 소유자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
@@ -253,20 +271,18 @@
 							<span class="title">자산 관리 현황</span>
 						</div>
 						<div id="assetSelectBox" class="filter-area-panel" style="position:relative; top:-29px; padding:0; text-align:right;">
-		 				<!--자산 담당자를 클릭했을 경우 나오는 select-->  
-                        <select>
-                            <option selected>전체 관리 자산</option>
-                            <option>출고 대기</option>
-                            <option>반납 승인 필요</option>
+		 				<!--자산 담당자를 클릭했을 경우 나오는 select-->
+                        <select id="holderOption">
+                            <option value="all"> 전체 관리 자산 </option>
+                            <option value="return_finish"> 출고 대기 </option>
+                            <option value="return_wait"> 반납 승인 필요 </option>
                         </select>
-                        <!--자산 관리자를 클릭했을 경우 나오는 select 
-                        <select>
-                            <option selected >전체 관리 자산</option>
-                            <option>출고 완료</option>
-		 				    <option>반납 시작</option>
-		 	                <option>반납 완료</option>
+                        <!--자산 관리자를 클릭했을 경우 나오는 select  -->
+                        <select id="managerOption">
+                            <option value="all"> 전체 관리 자산 </option>
+                            <option value="release_finish"> 출고 완료 </option>
+		 				    <option value="return_start"> 반납 시작 </option>
                         </select>
-                        --> 
                         </div>
 			             <!-- // filter-area-->
 					</div>
