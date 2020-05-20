@@ -1,6 +1,7 @@
 package pro.cntech.inventory.service;
 
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,7 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import pro.cntech.inventory.mapper.MainMapper;
+import pro.cntech.inventory.util.MapUtil;
 import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.StatisticsVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
@@ -80,4 +84,32 @@ public class MainService implements UserDetailsService
         }
         return false;
     }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public boolean isUserJoin(UserVO userVO) throws Exception
+    {
+        MapUtil util = new MapUtil();
+        String gps[] = util.convertAddrToGPS(userVO.getAddr()).split("/");
+        userVO.setLongitude(gps[0]);
+        userVO.setLatitude(gps[1]);
+        userVO.setPassword(makeHashedPassword(userVO.getPassword()));
+        int rows = mainMapper.setUserJoin(userVO);
+        if(rows > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    //단방향 암호
+    public String makeHashedPassword(String password)
+    {
+        String hashedStr = null;
+        if(password != null)
+        {
+            hashedStr = BCrypt.hashpw(password,BCrypt.gensalt());
+        }
+        return hashedStr;
+    }
+
 }

@@ -48,6 +48,10 @@ dependencies {
 	}
 	//암호
 	implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.3m'
+	//AWS s3
+	//java-sdk-bom : sdk 버전 호환
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
 }
 
 test {

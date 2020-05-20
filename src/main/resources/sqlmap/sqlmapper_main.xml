@@ -77,4 +77,37 @@
         WHERE user_srl = #{userSrl}
     </update>
 
+    <!--회원 가입 -->
+    <insert id="setUserJoin" parameterType="pro.cntech.inventory.vo.UserVO">
+        INSERT INTO users
+        (
+        user_name,
+        auth,
+        password,
+        company_name,
+        addr,
+        detail_addr,
+        m_number,
+        s_number,
+        latitude,
+        longitude,
+        grade
+        )
+        VALUES
+        (
+        #{userName},
+        'holder',
+        #{password},
+        #{companyName},
+        #{addr},
+        #{detailAddr},
+        #{phone},
+        #{companyPhone},
+        #{latitude},
+        #{longitude},
+        'A'
+        )
+    </insert>
+
+
 </mapper>

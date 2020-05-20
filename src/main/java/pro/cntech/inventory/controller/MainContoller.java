@@ -71,10 +71,21 @@ public class MainContoller
         return mainService.getCompanyGPS(userVO);
     }
 
-    @GetMapping("/map")
+    @GetMapping("/join")
     public String loadMapPage()
     {
-        logger.debug("[ Call /map - GET ]");
-        return "map";
+        logger.debug("[ Call /join - GET ]");
+        return "join";
     }
+
+    @PostMapping("/join")
+    public @ResponseBody Boolean userJoin(@RequestBody UserVO userVO) throws Exception
+    {
+        logger.debug("[ Call /join - POST ]");
+        logger.debug("Param : "+userVO.toString());
+
+        return mainService.isUserJoin(userVO);
+    }
+
+
 }

@@ -1,12 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/config :: configFragment"></head>
-<!-- main css -->
 <link rel="stylesheet" th:href="@{/css/login.css}">
+<!-- main css -->
+<!---->
 <body scroll="no">
 <script type="text/javascript">
 	$(function() {
-		var cookie_user_id = getLogin();		
+		var cookie_user_id = getLogin();
 		/*로딩시, 쿠키에 값이 있다면  넣어준다.*/
 		if (cookie_user_id != "") {
 			$("#id").val(cookie_user_id);
@@ -16,7 +17,7 @@
 			if (key.keyCode == 13) {
 				if(is_login_check()){
 					$('#loginForm').submit();
-				}				
+				}
 			}
         });
 		$("#password").keyup(function(key) {
@@ -53,7 +54,7 @@
 			alert('페이지 준비중 입니다.');
 		});
 	});
-	
+
 	function is_login_check(){
 		var id = $('#id').val();
 		var password = $('#password').val();
@@ -69,7 +70,7 @@
 		}
 		return true;
 	}
-	
+
 	function setSave(name, value, expiredays) {
 		var today = new Date();
 		today.setDate(today.getDate() + expiredays);
@@ -97,7 +98,7 @@
 								<span style="font-weight:100;">WELCOME!</span></p>
 								<span style="font-weight:700;">WEISER 자산관리 서비스</span>
 								<hr style="border:2px solid #d6d8e0; margin:20px 0;">
-								<!-- <div class="join">서비스 가입하기</div> -->
+								<div class="join"><a th:href="@{/join}">서비스 가입하기</a></div>
 							</div>
 							<!-- //header 끝입니다.
 							-->

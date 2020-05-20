@@ -11,7 +11,14 @@ logging:
 kakao:
   api-key: 87c48b54b7f2c7fdc3f31063f02a7fa2
 aws:
+  s3:
+    access-id: AKIAWRLYC323CCXX777E
+    access-pw: D1En4rvy+dfsl0gEPHF5hc3nDqngWmplMeqUqdrH
+    bucket: qr-s3
   api-gateway-url: https://66m2vdg9fi.execute-api.ap-northeast-2.amazonaws.com/OCR-API/ocr
+
+server:
+  port: 8080
 ---
 spring:
   profiles: dev

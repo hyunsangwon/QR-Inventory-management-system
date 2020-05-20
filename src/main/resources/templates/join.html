@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/config :: configFragment"></head>
+<link rel="stylesheet" th:href="@{/css/join.css}">
+<body>
+<div class="cd-main-header js-cd-main-header">
+    <div id="main_ct" class="wrap">
+        <div id="form" >
+            <h1>WEISER 회원가입하기</h1>
+            <div class="form-container">
+                <div class="form-box">
+                    <div class="box-title" >
+                        <span>관리책임자 정보</span>
+                    </div>
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>사용자명
+                        </div>
+                        <input type="text" style="width:755px;">
+                    </div>
+                    <!--//box-->
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>연락처
+                        </div>
+                        <input class="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
+                    </div>
+                    <!--//box-->
+                    <div class="box">
+                        <div class="new-password-area" style="float:left; ">
+                            <div class="customer-new-password">
+                                <div class="customer-password-text">
+                                    <div class="circle"></div>비밀번호
+                                </div>
+                                <input type="password" id="password_1" class="pw">
+                            </div>
+                            <div class="customer-new-check-password" style="margin-bottom:10px !important;">
+                                <div class="customer-password-text">
+                                    <div class="circle"></div>비밀번호 확인
+                                </div>
+                                <input type="password" id="password_2" class="pw">
+                            </div>
+                            <div class="edit-icon-area" style="float:left; width:98%; color:red; height:50px; text-align: left; padding-left:330px; ">
+                                <div id="alert-danger" class="error-text" style="display: none;">Error Text 비밀번호가 일치하지 않습니다.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>E-mail
+                        </div>
+                        <input class="email" type="text"><span style="font-size:28px;">@</span>
+                        <input class="str_email02" type="text" disabled>
+                        <select class="selectEmail">
+                            <option value="1" selected>직접입력</option>
+                            <option value="naver.com" >naver.com</option>
+                            <option value="hanmail.net">hanmail.net</option>
+                            <option value="hotmail.com">hotmail.com</option>
+                            <option value="nate.com">nate.com</option>
+                            <option value="gmail.com">gmail.com</option>
+                        </select>
+                    </div>
+                    <!--//box-->
+                    <div class="box-title" style="margin-top:80px;">
+                        <span>소속 회사 정보</span>
+                    </div>
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>업체 명
+                        </div>
+                        <input type="text">
+                    </div>
+                    <!--//box-->
+                    <div class="box">
+                        <div class="input-title" style="margin-bottom:40px;">
+                            <div class="circle"></div>업체 주소
+                        </div>
+                        <input type="text" style="width:570px; margin-bottom:20px;">
+                        <button style="cursor: pointer; background-color:#fff; border:none;">우편번호 찾기</button>
+                        <input type="text" style="width:755px;">
+                    </div>
+                    <!--//box-->
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>업체 연락처
+                        </div>
+                        <input class="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
+                    </div>
+                    <!--//box-->
+                    <div class="box">
+                        <div class="input-title">
+                            <div class="circle"></div>업체 사업자 번호
+                        </div>
+                        <input class="BusinessNumber" name="number" value="" maxlength="10" type="text" onKeyDown="return onlyNumber(event)"/>
+                    </div>
+                    <!--//box-->
+                    <div class="box" style="margin-bottom:30px !important;">
+                        <div class="input-title" style="height:550px;">
+                            <div class="circle"></div>사업자 사본
+                        </div>
+                        <input type="file" name="files" id="uploadFile" data-input="false" multiple/>
+                    </div>
+                    <!--//box-->
+                    <div class="imgBox" >
+                        <img src="#" >
+                    </div>
+                    <div style="float:left; width:100%; padding:130px 0 60px 20px; font-size:24px;">
+                        <span style="text-align: left; font-weight: 600;">결제 방식에 동의해주세요.(워딩은 사업부 결정 후 수정)</span>
+                        <span style="float:right;"><input type="radio" for="agree" style="margin-right:10px; cursor: pointer;"><label for="agree">동의</label></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="join-finish-btn">
+            <button class="join_btn" onClick="finishBtn();"><span>회원가입 완료</span></button>
+        </div>
+    </div>
+    <!--//main_ct-->
+</div>
+</body>
+<script>
+    /* e-mail select box*/
+    $('.selectEmail').change(function(){
+        $(".selectEmail option:selected").each(function () {
+            if($(this).val()== '1'){ //직접입력일 경우
+                $(".str_email02").val(''); //값 초기화
+                $(".str_email02").attr("disabled",false); //활성화
+            }else{ //직접입력이 아닐경우
+                $(".str_email02").val($(this).text()); //선택값 입력
+                $(".str_email02").attr("disabled",true); //비활성화
+            }
+        });
+    });
+    /* 전화번호 숫자 입력*/
+    function onlyNumber(event){
+        event = event || window.event;
+        var keyID = (event.which) ? event.which : event.keyCode;
+        if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+            return;
+        else{
+            alert("숫자만 입력가능합니다.");
+        }
+    }
+    /* 비밀번호 일치하지 않을 때*/
+    $('.pw').focusout(function () {
+        var pwd1 = $("#password_1").val();
+        var pwd2 = $("#password_2").val();
+
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-danger").css('display', 'none');
+            } else {
+                $("#alert-danger").css('display', 'inline-block');
+                return false;
+            }
+        }
+    });
+
+    /* 회원가입 완료 */
+    function finishBtn(){
+        alert('회원가입이 완료되었습니다.');
+        return false;
+    }
+
+</script>
+</html>
