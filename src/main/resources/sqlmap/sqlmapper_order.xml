@@ -16,11 +16,34 @@
         (
             #{userSrl},
             #{orderCnt},
-            'y',
+            'n',
             #{addr}
         <if test='orderRequests != null'>
             ,#{orderRequests}
         </if>
         )
     </insert>
+
+    <!-- 주문 리스트 -->
+    <select id="getOrderList" parameterType="pro.cntech.inventory.vo.OrderVO" resultType="pro.cntech.inventory.vo.OrderVO">
+        SELECT
+            order_srl AS orderSrl,
+            DATE_FORMAT(create_at,'%Y.%m.%d') AS orderDate,
+            order_cnt AS orderCnt,
+            order_status AS orderStatus,
+            order_addr AS addr
+        FROM obj_order
+        WHERE user_srl = #{userSrl}
+        ORDER BY create_at DESC
+        LIMIT #{limitcount},#{contentnum}
+    </select>
+
+    <select id="getOrderListCnt" resultType="Integer" parameterType="pro.cntech.inventory.vo.OrderVO">
+        SELECT
+            COUNT(*)
+        FROM obj_order
+        WHERE user_srl = #{userSrl}
+    </select>
+
+
 </mapper>

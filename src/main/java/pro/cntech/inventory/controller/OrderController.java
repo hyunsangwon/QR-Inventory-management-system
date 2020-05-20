@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pro.cntech.inventory.service.OrderService;
 import pro.cntech.inventory.vo.OrderVO;
@@ -52,5 +53,13 @@ public class OrderController
         return MANAGER_VIEW_PREFIX+"order_confirm";
     }
 
+    @GetMapping("/order/list/{pageNum}")
+    public String loadOrderListPage(ModelMap model, @PathVariable("pageNum") int pageNum)
+    {
+        logger.debug("[ Call /order/list - GET ]");
+
+        orderService.getOrderList(model,pageNum);
+        return MANAGER_VIEW_PREFIX+"order_list";
+    }
 
 }
