@@ -19,4 +19,5 @@ public class UserVO
     private String masterSrl;
     private String companyName;
     private String companyPhone;
+    private String email;
 }

@@ -89,6 +89,7 @@
         detail_addr,
         m_number,
         s_number,
+        email,
         latitude,
         longitude,
         grade
@@ -103,6 +104,7 @@
         #{detailAddr},
         #{phone},
         #{companyPhone},
+        #{email},
         #{latitude},
         #{longitude},
         'A'

@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
 <head th:replace="fragments/config :: configFragment"></head>
 <link rel="stylesheet" th:href="@{/css/join.css}">
 <body>
@@ -16,14 +18,14 @@
                         <div class="input-title">
                             <div class="circle"></div>사용자명
                         </div>
-                        <input type="text" style="width:755px;">
+                        <input autocomplete="off" type="text" id="userName" style="width:755px;">
                     </div>
                     <!--//box-->
                     <div class="box">
                         <div class="input-title">
                             <div class="circle"></div>연락처
                         </div>
-                        <input class="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
+                        <input class="phone" id="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)" autocomplete="off"/>
                     </div>
                     <!--//box-->
                     <div class="box">
@@ -32,13 +34,13 @@
                                 <div class="customer-password-text">
                                     <div class="circle"></div>비밀번호
                                 </div>
-                                <input type="password" id="password_1" class="pw">
+                                <input autocomplete="off" type="password" id="password_1" class="pw">
                             </div>
                             <div class="customer-new-check-password" style="margin-bottom:10px !important;">
                                 <div class="customer-password-text">
                                     <div class="circle"></div>비밀번호 확인
                                 </div>
-                                <input type="password" id="password_2" class="pw">
+                                <input autocomplete="off" type="password" id="password_2" class="pw">
                             </div>
                             <div class="edit-icon-area" style="float:left; width:98%; color:red; height:50px; text-align: left; padding-left:330px; ">
                                 <div id="alert-danger" class="error-text" style="display: none;">Error Text 비밀번호가 일치하지 않습니다.</div>
@@ -49,9 +51,9 @@
                         <div class="input-title">
                             <div class="circle"></div>E-mail
                         </div>
-                        <input class="email" type="text"><span style="font-size:28px;">@</span>
-                        <input class="str_email02" type="text" disabled>
-                        <select class="selectEmail">
+                        <input class="email" id="firstEmail" type="text" autocomplete="off"><span style="font-size:28px;">@</span>
+                        <input class="str_email02" id="secondEmail" type="text" disabled>
+                        <select class="selectEmail" id="emailOption">
                             <option value="1" selected>직접입력</option>
                             <option value="naver.com" >naver.com</option>
                             <option value="hanmail.net">hanmail.net</option>
@@ -68,30 +70,30 @@
                         <div class="input-title">
                             <div class="circle"></div>업체 명
                         </div>
-                        <input type="text">
+                        <input type="text" id="companyName" autocomplete="off" />
                     </div>
                     <!--//box-->
                     <div class="box">
                         <div class="input-title" style="margin-bottom:40px;">
                             <div class="circle"></div>업체 주소
                         </div>
-                        <input type="text" style="width:570px; margin-bottom:20px;">
-                        <button style="cursor: pointer; background-color:#fff; border:none;">우편번호 찾기</button>
-                        <input type="text" style="width:755px;">
+                        <input type="text" style="width:570px; margin-bottom:20px;" id="addr" autocomplete="off" />
+                        <button style="cursor: pointer; background-color:#fff; border:none;" onclick="execPostCode();">우편번호 찾기</button>
+                        <input type="text" style="width:755px;" id="detailAddr" autocomplete="off" />
                     </div>
                     <!--//box-->
                     <div class="box">
                         <div class="input-title">
                             <div class="circle"></div>업체 연락처
                         </div>
-                        <input class="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
+                        <input class="phone" id="companyPhone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)" autocomplete="off"/>
                     </div>
                     <!--//box-->
                     <div class="box">
                         <div class="input-title">
                             <div class="circle"></div>업체 사업자 번호
                         </div>
-                        <input class="BusinessNumber" name="number" value="" maxlength="10" type="text" onKeyDown="return onlyNumber(event)"/>
+                        <input class="BusinessNumber" id="companyNumber" name="number" value="" maxlength="10" type="text" autocomplete="off"/>
                     </div>
                     <!--//box-->
                     <div class="box" style="margin-bottom:30px !important;">
@@ -102,11 +104,11 @@
                     </div>
                     <!--//box-->
                     <div class="imgBox" >
-                        <img src="#" >
+
                     </div>
                     <div style="float:left; width:100%; padding:130px 0 60px 20px; font-size:24px;">
                         <span style="text-align: left; font-weight: 600;">결제 방식에 동의해주세요.(워딩은 사업부 결정 후 수정)</span>
-                        <span style="float:right;"><input type="radio" for="agree" style="margin-right:10px; cursor: pointer;"><label for="agree">동의</label></span>
+                        <span style="float:right;"><input id="payAgree" type="radio" for="agree" style="margin-right:10px; cursor: pointer;"><label for="agree">동의</label></span>
                     </div>
                 </div>
             </div>
@@ -119,7 +121,49 @@
     <!--//main_ct-->
 </div>
 </body>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    var _size = null;
+    var _filesTempArr = [];
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+
+    $(function(){
+        $('#uploadFile').change(function(e){
+            _filesTempArr = []; //단일 파일 보낼때 ( 다중 파일 업로드일때는 삭제 바람 )
+            var files = e.target.files;
+            var arr =Array.prototype.slice.call(files);
+            _size = files.length;
+            for(var i=0;i<files.length;i++){
+                if (!/\.(jpe?g|png|gif)$/i.test(files[i].name)){  //업로드 가능 파일인지 체크
+                    return alert(files[i].name +" is not an image");
+                }else{
+                    _filesTempArr.push(files[i]);
+                }
+            }
+            img_preview(arr); // 이미지 미리보기
+        });
+    });
+
+    function img_preview(arr){
+            arr.forEach(function(f){
+            //파일명이 길면 파일명...으로 처리
+            var fileName = f.name;
+            if(fileName.length > 10){
+                fileName = fileName.substring(0,7)+"...";
+            }
+            //이미지 파일 미리보기
+            if(f.type.match('image.*')){
+                var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+                reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+                    var str = '<img src="'+e.target.result+'" title="'+f.name+'" width=200 height=230 />';
+                    //$(str).appendTo('#preview'); 다중 업로드 할때
+                    $('.imgBox').html(str);
+                }
+                reader.readAsDataURL(f);
+            }
+        });//arr.forEach
+    }
     /* e-mail select box*/
     $('.selectEmail').change(function(){
         $(".selectEmail option:selected").each(function () {
@@ -159,11 +203,212 @@
         }
     });
 
-    /* 회원가입 완료 */
-    function finishBtn(){
-        alert('회원가입이 완료되었습니다.');
+    function isEmail(email) {
+        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return regExp.test(email); // 형식에 맞는 경우 true 리턴
+
+    }
+
+    function isCompanyNumber(bizID) //사업자 번호 체크
+    {
+        var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
+        var tmpBizID, i, chkSum=0, c2, remander;
+        bizID = bizID.replace(/-/gi,'');
+
+        for (i=0; i<=7; i++) chkSum += checkID[i] * bizID.charAt(i);
+        c2 = "0" + (checkID[8] * bizID.charAt(8));
+        c2 = c2.substring(c2.length - 2, c2.length);
+        chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1));
+        remander = (10 - (chkSum % 10)) % 10 ;
+
+        if (Math.floor(bizID.charAt(9)) == remander) return true ; // OK!
         return false;
     }
 
+    /* 회원가입 완료 */
+    function finishBtn()
+    {
+        var userName = $('#userName');
+        var phone = $('#phone');
+        var password = $('#password_2');
+        var bizNum = $('#companyNumber');
+        var email =  $('#firstEmail').val()+'@'+$('#secondEmail').val();
+        var companyName = $('#companyName');
+        var companyPhone = $('#companyPhone');
+        var addr = $('#addr');
+        var detailAddr = $('#detailAddr');
+        if(userName.val() == '')
+        {
+            alert('이름을 입력해주세요');
+            userName.focus();
+            return false;
+        }
+        if(phone.val() == '')
+        {
+            alert('번호를 입력해주세요');
+            phone.focus();
+            return false;
+        }
+        if(password.val() == '' || $('#password_1').val() == '')
+        {
+            alert('비밀번호를 입력해주세요');
+            password.focus();
+            return false;
+        }
+        if($('#firstEmail').val() == '')
+        {
+            alert('이메일을 입력해주세요');
+            $('#firstEmail').focus();
+            return false;
+        }
+        if($('#secondEmail').val() == '')
+        {
+            alert('이메일을 입력해주세요');
+            $('#secondEmail').focus();
+            return false;
+        }
+        if(companyName.val() == '')
+        {
+            alert('업체명을 입력해주세요');
+            companyName.focus();
+            return false;
+        }
+        if(companyPhone.val() == '')
+        {
+            alert('업체 연락처를 입력해주세요');
+            companyPhone.focus();
+            return false;
+        }
+        if(addr.val() == '')
+        {
+            alert('주소를 입력해주세요');
+            addr.focus();
+            return false;
+        }
+        if(detailAddr.val() == '')
+        {
+            alert('주소를 입력해주세요');
+            detailAddr.focus();
+            return false;
+        }
+        var isNum = isCompanyNumber(bizNum.val());
+        var isMail = isEmail(email);
+        if(!isNum)
+        {
+            alert('올바르지 않은 사업자 번호 입니다.');
+            return false;
+        }
+        if(!isMail)
+        {
+            alert('올바르지 않은 메일 입니다.');
+            return false;
+        }
+        var isRadio = $('#payAgree').is(':checked');
+        if(!isRadio)
+        {
+            alert('결제 방식에 동의해주세요');
+            $('#payAgree').focus();
+            return false;
+        }
+        var jsonData = {'userName' : userName.val(), "phone" : phone.val(), "password" : password.val(), "email" : email, "companyName" : companyName.val(), "companyPhone" : companyPhone.val(), "addr" : addr.val(), "detailAddr" : detailAddr.val()};
+        ajax_user_join(jsonData);
+    }
+
+    function ajax_user_join(jsonData)
+    {
+        $.ajax
+        ({
+            type: 'POST',
+            contentType: "application/json",
+            url:'/join',
+            data : JSON.stringify(jsonData),
+            dataType : "text",
+            cache : false,
+            success : function(data)
+            {
+                console.log(data);
+                if(data == 'true')
+                {
+                    ajax_image_upload();
+                }
+                else
+                {
+                    alert('회원 가입 실패! 관리자에게 문의하세요.');
+                }
+            },
+            error : function(xhr, status, error)
+            {
+                console.log('error ====> ' + error);
+            }
+        });
+    }
+
+    function ajax_image_upload()
+    {
+        if(_size == 0 || _size == null){
+            alert('사업자 사본을 업로드 해주세요');
+            return;
+        }
+        var data = new FormData();
+        data.append("files", _filesTempArr[0]);
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/img/upload",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache: false,
+            timeout: 600000,
+            success: function (data) {
+                console.log(data);
+                if(data)
+                {
+                    alert('회원 가입 완료!');
+                    location.href = "/login";
+                }
+                else
+                {
+                    alert('업로드 실패');
+                }
+
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+
+    }
+    function execPostCode()
+    {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+                $("#addr").val(data.zonecode);
+                $("#detailAddr").val(fullRoadAddr);
+            }
+        }).open();
+    }
 </script>
 </html>

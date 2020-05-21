@@ -48,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
                 .authorizeRequests()
-                .antMatchers("/","/login","/login-fail","/join").permitAll()//모두 허용
+                .antMatchers("/","/login","/login-fail","/join","/img/upload").permitAll()//모두 허용
                 .anyRequest().authenticated()
                 .and()
-                .csrf().ignoringAntMatchers("/*")//해당 URL CSRF 무시
+                .csrf().ignoringAntMatchers("/*","/img/upload")//해당 URL CSRF 무시
                 .and()
                 .formLogin()
                 .loginPage("/login")

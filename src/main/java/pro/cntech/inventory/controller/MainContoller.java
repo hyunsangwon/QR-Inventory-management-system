@@ -5,10 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pro.cntech.inventory.service.MainService;
 import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.UserVO;
@@ -83,9 +81,23 @@ public class MainContoller
     {
         logger.debug("[ Call /join - POST ]");
         logger.debug("Param : "+userVO.toString());
-
         return mainService.isUserJoin(userVO);
     }
 
+    @PostMapping("/img/upload")
+    public @ResponseBody Boolean imageUpload(@RequestParam("files") MultipartFile[] file) throws Exception
+    {
+        logger.debug("[ Call /img/upload - POST ]");
+        if(file.length == 0)
+        {
+            return false;
+        }
+        for(int i=0; i< file.length; i++) {
+            logger.debug("====> Parameters      file name  : " + file[i].getName());
+            logger.debug("====> Parameters      file size  : " + file[i].getSize());
+        }
+        mainService.uploadImageToAwsS3(file);
+        return true;
+    }
 
 }
