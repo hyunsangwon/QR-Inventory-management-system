@@ -12,11 +12,11 @@
             <div class="form-container">
                 <div class="form-box">
                     <div class="box-title" >
-                        <span>관리책임자 정보</span>
+                        <span>자산 관리책임자 정보</span>
                     </div>
                     <div class="box">
                         <div class="input-title">
-                            <div class="circle"></div>사용자명
+                            <div class="circle"></div>가입자 명
                         </div>
                         <input autocomplete="off" type="text" id="userName" style="width:755px;">
                     </div>
@@ -106,10 +106,10 @@
                     <div class="imgBox" >
 
                     </div>
-                    <div style="float:left; width:100%; padding:130px 0 60px 20px; font-size:24px;">
+                    <!--<div style="float:left; width:100%; padding:130px 0 60px 20px; font-size:24px;">
                         <span style="text-align: left; font-weight: 600;">결제 방식에 동의해주세요.(워딩은 사업부 결정 후 수정)</span>
                         <span style="float:right;"><input id="payAgree" type="radio" for="agree" style="margin-right:10px; cursor: pointer;"><label for="agree">동의</label></span>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -303,13 +303,13 @@
             alert('올바르지 않은 메일 입니다.');
             return false;
         }
-        var isRadio = $('#payAgree').is(':checked');
+       /* var isRadio = $('#payAgree').is(':checked');
         if(!isRadio)
         {
             alert('결제 방식에 동의해주세요');
             $('#payAgree').focus();
             return false;
-        }
+        }*/
         var jsonData = {'userName' : userName.val(), "phone" : phone.val(), "password" : password.val(), "email" : email, "companyName" : companyName.val(), "companyPhone" : companyPhone.val(), "addr" : addr.val(), "detailAddr" : detailAddr.val()};
         ajax_user_join(jsonData);
     }
@@ -333,7 +333,7 @@
                 }
                 else
                 {
-                    alert('회원 가입 실패! 관리자에게 문의하세요.');
+                    alert('이미 가입된 회원이거나 가입이 실패했습니다.');
                 }
             },
             error : function(xhr, status, error)
@@ -371,7 +371,6 @@
                 {
                     alert('업로드 실패');
                 }
-
             },
             error: function (e) {
                 console.log("ERROR : ", e);

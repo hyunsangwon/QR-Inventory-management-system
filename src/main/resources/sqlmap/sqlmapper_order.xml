@@ -45,5 +45,12 @@
         WHERE user_srl = #{userSrl}
     </select>
 
+    <select id="myOrderCnt" resultType="Integer">
+        SELECT
+            IFNULL(SUM(order_cnt),0)
+        FROM obj_order
+        WHERE user_srl = #{userSrl}
+    </select>
+
 
 </mapper>

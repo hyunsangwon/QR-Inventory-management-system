@@ -111,5 +111,11 @@
         )
     </insert>
 
+    <select id="checkUser" parameterType="pro.cntech.inventory.vo.UserVO" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM users
+        WHERE m_number = #{phone}
+    </select>
 
 </mapper>

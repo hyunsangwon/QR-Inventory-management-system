@@ -28,12 +28,13 @@
 
     function qr_order()
     {
-        var maxCnt = 120;
+        var maxCnt = $('#myCnt').val();
         var qrCnt = $('#qrCnt').val();
         if (maxCnt < qrCnt) {
             alert('주문수량을 초과했습니다.');
             $('#qrCnt').val();
             $('#qrCnt').focus();
+            return false;
         }
         if(qrCnt == 0)
         {
@@ -130,7 +131,8 @@
                             <span>*</span>QR스티커 주문 수량</div>
                         <fieldset class="qrBox">
                             <input id="qrCnt" type="text" value="" placeholder="0">
-                            <label class="qrCntTot">/ 120개</label>
+                            <input id="myCnt" type="hidden" th:value="${cnt}">
+                            <label class="qrCntTot" th:text="|/ ${cnt}개|">/ 120개</label>
                         </fieldset>
                     </div>
                     <div class="order-address">

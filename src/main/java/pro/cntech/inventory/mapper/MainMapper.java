@@ -17,4 +17,5 @@ public interface MainMapper
     List<MarkerVO> getCompanyGPS(UserVO userVO);
     int updateMyInfo(UserVO userVO);
     int setUserJoin(UserVO userVO);
+    int checkUser(UserVO userVO);
 }

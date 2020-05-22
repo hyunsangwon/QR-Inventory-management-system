@@ -32,6 +32,7 @@ public class OrderController
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
 
+        model.addAttribute("cnt",orderService.myOrderCnt(userPrincipalVO.getUserSrl()));
         model.addAttribute("phone",userPrincipalVO.getName());
         model.addAttribute("name",userPrincipalVO.getUsername());
         model.addAttribute("addr",userPrincipalVO.getAddr());

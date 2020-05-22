@@ -29,6 +29,12 @@ public class OrderService
         orderMapper.setOrder(orderVO);
     }
 
+    public int myOrderCnt(String userSrl)
+    {
+        int MAX = 120;
+        return (MAX - orderMapper.myOrderCnt(userSrl));
+    }
+
     public void getOrderList(ModelMap map,int pageNum)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

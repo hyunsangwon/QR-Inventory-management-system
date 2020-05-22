@@ -95,14 +95,21 @@ public class MainService implements UserDetailsService
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public boolean isUserJoin(UserVO userVO) throws Exception
     {
+        int rows = 0;
+        rows = mainMapper.checkUser(userVO);
+        if(rows > 0)
+        {
+            return false;
+        }
         MapUtil util = new MapUtil();
         String gps[] = util.convertAddrToGPS(userVO.getDetailAddr()).split("/");
         userVO.setLongitude(gps[0]);
         userVO.setLatitude(gps[1]);
         userVO.setPassword(makeHashedPassword(userVO.getPassword()));
-        int rows = mainMapper.setUserJoin(userVO);
+        rows = mainMapper.setUserJoin(userVO);
         if(rows > 0)
         {
+
             return true;
         }
         return false;
