@@ -23,11 +23,11 @@
         ON manager.master_srl = holder.user_srl
         <if test='auth eq "holder"'>
             WHERE manager.master_srl = ${userSrl}
-            AND o.obj_status IN ('inner_wait','return_finish','return_wait')
+            AND o.obj_status IN ('inner_wait','return_finish')
         </if>
         <if test='auth eq "manager"'>
             WHERE manager.user_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
         </if>
 
     </select>
@@ -51,7 +51,7 @@
             ON u.user_srl = o.user_srl
             WHERE u.master_srl = #{userSrl}
             AND auth != 'holder'
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
             )AS assetCnt
         ON assetCnt.userSrl = u.user_srl
         WHERE u.master_srl = #{userSrl}
@@ -90,11 +90,8 @@
             <if test='sortName eq "return_finish"'>
                 AND o.obj_status IN ('inner_wait','return_finish')
             </if>
-            <if test='sortName eq "return_wait"'>
-                AND o.obj_status = 'return_wait'
-            </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('inner_wait','return_finish','return_wait')
+                AND o.obj_status IN ('inner_wait','return_finish')
             </if>
         </if>
         <if test='auth eq "manager"'>
@@ -102,11 +99,14 @@
             <if test='sortName eq "release_finish"'>
                 AND o.obj_status = 'release_finish'
             </if>
+            <if test='sortName eq "return_wait"'>
+                AND o.obj_status = 'return_wait'
+            </if>
             <if test='sortName eq "return_start"'>
                 AND o.obj_status = 'return_start'
             </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
             </if>
         </if>
         ORDER BY o.create_at DESC
@@ -124,11 +124,8 @@
             <if test='sortName eq "return_finish"'>
                 AND o.obj_status IN ('inner_wait','return_finish')
             </if>
-            <if test='sortName eq "return_wait"'>
-                AND o.obj_status = 'return_wait'
-            </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('inner_wait','return_finish','return_wait')
+                AND o.obj_status IN ('inner_wait','return_finish')
             </if>
         </if>
         <if test='auth eq "manager"'>
@@ -139,8 +136,11 @@
             <if test='sortName eq "return_start"'>
                 AND o.obj_status = 'return_start'
             </if>
+            <if test='sortName eq "return_wait"'>
+                AND o.obj_status = 'return_wait'
+            </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start')
+                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
             </if>
         </if>
     </select>

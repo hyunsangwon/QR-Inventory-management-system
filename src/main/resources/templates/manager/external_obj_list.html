@@ -28,14 +28,36 @@
 
         $("span[name=pageNum]").click(function()
         {
-            $("span[name=pageNum]").attr('class','page');
-            $(this).attr('class','page_start');
             var pageNum = $(this).attr('id');
+            if('release_start' == objStatus)
+            {
+                location.href="/obj/status/release_start/list/"+pageNum;
+            }
+            if('release_finish' == objStatus)
+            {
+                location.href="/obj/status/release_finish/list/"+pageNum;
+            }
+            if(objStatus == 'return_start')
+            {
+                location.href="/obj/status/return_start/list/"+pageNum;
+            }
         });
 
         $("img[name=pageNum]").click(function()
         {
             var pageNum = $(this).attr('id');
+            if('release_start' == objStatus)
+            {
+                location.href="/obj/status/release_start/list/"+pageNum;
+            }
+            if('release_finish' == objStatus)
+            {
+                location.href="/obj/status/release_finish/list/"+pageNum;
+            }
+            if(objStatus == 'return_start')
+            {
+                location.href="/obj/status/return_start/list/"+pageNum;
+            }
         });
     });
 

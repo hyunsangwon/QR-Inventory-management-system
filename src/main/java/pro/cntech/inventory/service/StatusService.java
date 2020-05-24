@@ -25,7 +25,7 @@ public class StatusService
 
     public void getObjStatusList(ModelMap map, ObjListVO vo)
     {
-        int MAX = 15;
+        int MAX = 10;
         int limitCount=((vo.getPageNum() - 1 ) * MAX);
         int contentNum = MAX;
         int totalCnt = 0;
@@ -69,7 +69,7 @@ public class StatusService
 
     public List<ObjDetailVO> getObjHistoryList(ObjDetailVO vo)
     {
-        int MAX = 15;
+        int MAX = 10;
         int limitCount=((vo.getPageNum() - 1 ) * MAX);
         int contentNum = MAX;
         vo.setLimitcount(limitCount); vo.setContentnum(contentNum);

@@ -34,20 +34,8 @@
         {
             $(this).val($(this).val().replace(/[^0-9]/g,""));
         });
-
         $('a[name=admin_search]').css('background-color','#437ece');
 
-        $("span[name=pageNum]").click(function()
-        {
-            $("span[name=pageNum]").attr('class','page');
-            $(this).attr('class','page_start');
-            var pageNum = $(this).attr('id');
-        });
-
-        $("img[name=pageNum]").click(function()
-        {
-            var pageNum = $(this).attr('id');
-        });
         /* 사용자 추가 */
         $("#add_user").click(function()
         {
@@ -275,7 +263,7 @@
                         <select id="holderOption">
                             <option value="all"> 전체 관리 자산 </option>
                             <option value="return_finish"> 출고 대기 </option>
-                            <option value="return_wait"> 반납 승인 필요 </option>
+                           <!-- <option value="return_wait"> 반납 승인 필요 </option>-->
                         </select>
                         <!--자산 관리자를 클릭했을 경우 나오는 select  -->
                         <select id="managerOption">
@@ -354,13 +342,13 @@
             <img src="list-left_next.svg" >
                 </span>-->
                 <span th:if="${pageHandler.prev}">
-                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" onclick="pageClick(this);"/>
                 </span>
                     <span class="page_num" th:if="${assetListSize} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
-                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" onclick="pageClick(this);">1</span>
                 </span>
                 <span th:if="${pageHandler.next}">
-                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" onclick="pageClick(this);"/>
                 </span>
           <!--  <span>
                 <img src="list-right_end.svg" >

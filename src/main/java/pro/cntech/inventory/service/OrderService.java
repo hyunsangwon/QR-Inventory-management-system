@@ -41,7 +41,7 @@ public class OrderService
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         String userSrl = userPrincipalVO.getUserSrl();
 
-        int MAX = 15;
+        int MAX = 10;
         int limitCount=((pageNum - 1 ) * MAX);
         int contentNum = MAX;
         int totalCnt = 0;

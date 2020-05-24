@@ -26,6 +26,7 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
     ajax_admin_info(jsonData);
     jsonData.pageNum = '1';
     jsonData.sortName = 'all';
+    console.log(JSON.stringify(jsonData));
     ajax_admin_asset_list(jsonData);
     ajax_page_add(jsonData);
 }
@@ -34,20 +35,26 @@ function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
 {
     var pageNum = obj.id;
     var sortName = "all";
-    if(_userAuth = 'holder')
+    if(_userAuth == 'holder')
     {
         sortName = $('#holderOption option:selected').val();
     }
-    if(_userAuth = 'manager')
+    if(_userAuth == 'manager')
     {
         sortName = $('#managerOption option:selected').val();
     }
-    if(_userSrl != null)
+    if(_userSrl == null)
     {
-        var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth , "sortName" : sortName};
-        ajax_admin_asset_list(jsonData);
-        ajax_page_add(jsonData);
+        _userSrl = $('#userSrl').val();
     }
+    if(_userAuth == null)
+    {
+        _userAuth = 'holder';
+    }
+    var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth , "sortName" : sortName};
+    console.log(JSON.stringify(jsonData));
+    ajax_admin_asset_list(jsonData);
+    ajax_page_add(jsonData);
 }
 
 function load_detail_page(obj) //사진 클릭시 이벤트 함수
@@ -302,7 +309,7 @@ function ajax_page_add(data)
             if(data.prev)
             {
                 html += '<span>';
-                    html += '<img src="/image/paging/list-previous.svg" onclick="pageClick(this);" id='+(data.startPage - 1 )+' name="pageNum"/>';
+                    html += '<img src="/image/paging/list-previous.svg" onclick="pageClick(this);" id='+(data.startPage - 1 )+'/>';
                 html += '</span>';
             }
             if(data.totalcount != 0)
@@ -310,14 +317,14 @@ function ajax_page_add(data)
                 for (var i = data.startPage; i <= data.endPage; i++)
                 {
                     html += '<span class="page_num">';
-                        html += '<span class="page_center" id="'+ i + '"onclick="pageClick(this);" name="pageNum" style="cursor:pointer;">' + i + '</span>';
+                        html += '<span class="page_center" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer;">' + i + '</span>';
                     html += '</span>';
                 }
             }
             if(data.next)
             {
                 html += '<span>';
-                    html += '<img src="/image/paging/list-next.svg" onclick="pageClick(this);" id='+(data.endPage + 1)+' name="pageNum"/>';
+                    html += '<img src="/image/paging/list-next.svg" onclick="pageClick(this);" id='+(data.endPage + 1)+'/>';
                 html += '</span>';
             }
             $('#paging_page').html(html);

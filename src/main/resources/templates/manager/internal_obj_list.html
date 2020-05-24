@@ -147,14 +147,30 @@
 
         $("span[name=pageNum]").click(function()
         {
-            $("span[name=pageNum]").attr('class','page');
-            $(this).attr('class','page_start');
             var pageNum = $(this).attr('id');
+            var objStatus = $('#objStatus').val();
+            if('return_finish' == objStatus)
+            {
+                location.href="/obj/status/return_finish/list/"+pageNum;
+            }
+            if('return_wait' == objStatus)
+            {
+                location.href="/obj/status/return_wait/list/"+pageNum;
+            }
         });
 
         $("img[name=pageNum]").click(function()
         {
             var pageNum = $(this).attr('id');
+            var objStatus = $('#objStatus').val();
+            if('return_finish' == objStatus)
+            {
+                location.href="/obj/status/return_finish/list/"+pageNum;
+            }
+            if('return_wait' == objStatus)
+            {
+                location.href="/obj/status/return_wait/list/"+pageNum;
+            }
         });
     });
 

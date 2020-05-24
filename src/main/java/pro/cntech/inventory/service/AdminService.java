@@ -34,7 +34,7 @@ public class AdminService {
         List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl,sortName);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
-        param.setAuth(auth);
+        param.setAuth(auth); param.setSortName("all");
         List<ObjListVO> assetList = managerMapper.getObjList(param);
         int totalCnt = managerMapper.getObjListTotalCnt(param);
         PageHandler pageHandler = pageHandler(totalCnt,1,20);
@@ -64,7 +64,7 @@ public class AdminService {
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
     {
-        int MAX = 15;
+        int MAX = 20;
         int limitCount=((objListVO.getPageNum() - 1 ) * MAX);
         int contentNum = MAX;
 
@@ -76,8 +76,8 @@ public class AdminService {
             String masterSrl = userPrincipalVO.getUserSrl();
             objListVO.setUserSrl(masterSrl);
         }
-
-        return managerMapper.getObjList(objListVO);
+        List<ObjListVO> list = managerMapper.getObjList(objListVO);
+        return list;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
@@ -105,7 +105,7 @@ public class AdminService {
 
     public PageHandler createPageHandler(ObjListVO listVO)
     {
-        int contentNum = 15;
+        int contentNum = 20;
         int totalCnt = managerMapper.getObjListTotalCnt(listVO);
         PageHandler pageHandler = pageHandler(totalCnt,listVO.getPageNum(),contentNum);
         if(pageHandler == null) return null;

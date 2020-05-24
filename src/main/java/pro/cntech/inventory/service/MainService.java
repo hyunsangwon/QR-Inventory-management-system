@@ -109,11 +109,14 @@ public class MainService implements UserDetailsService
         rows = mainMapper.setUserJoin(userVO);
         if(rows > 0)
         {
-
+            //mastersrl update
+            //업체 사업자 번호 insert
             return true;
         }
         return false;
     }
+
+
 
     //단방향 암호
     public String makeHashedPassword(String password)
