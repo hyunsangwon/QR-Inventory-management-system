@@ -11,6 +11,8 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
+        $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
+
         $('#managerOption').hide();
         $('#holderOption').show()
 
@@ -345,7 +347,7 @@
                         <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" onclick="pageClick(this);"/>
                 </span>
                     <span class="page_num" th:if="${assetListSize} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
-                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" onclick="pageClick(this);">1</span>
+                        <span class="page" style="cursor:pointer;" th:text="${index.current}" th:name="${index.current}" th:id="${index.current}" onclick="pageClick(this);">1</span>
                 </span>
                 <span th:if="${pageHandler.next}">
                         <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" onclick="pageClick(this);"/>

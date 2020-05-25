@@ -317,7 +317,14 @@ function ajax_page_add(data)
                 for (var i = data.startPage; i <= data.endPage; i++)
                 {
                     html += '<span class="page_num">';
+                    if(data.pagenum == i)
+                    {
+                        html += '<span class="page_center" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer; font-weight:800;">' + i + '</span>';
+                    }
+                    else
+                    {
                         html += '<span class="page_center" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer;">' + i + '</span>';
+                    }
                     html += '</span>';
                 }
             }
