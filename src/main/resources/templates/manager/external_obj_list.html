@@ -7,6 +7,9 @@
 <script type="text/javascript">
     $(function()
     {
+        var pageNum = $('#pageNum').val();
+        $('#'+pageNum).css('font-weight',800);
+
         var objStatus = $('#objStatus').val();
         if(objStatus == 'release_start')
         {
@@ -92,6 +95,7 @@
                 <li class="tab-link" data-tab="tab-2" id="data_tab_2">출고 완료</li>
                 <li class="tab-link" data-tab="tab-3" id="data_tab_3">반납 시작</li>
             </ul>
+            <input type="hidden" id="pageNum" th:value="${pageNum}"/>
             <!--//tabs-->
             <div id="tab-1" class="tab-content">
                 <div id="panel-wrap-register" class="text_left">

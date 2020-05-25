@@ -10,6 +10,9 @@
 
     $(function()
     {
+        var pageNum = $('#pageNum').val();
+        $('#'+pageNum).css('font-weight',800);
+
         $('a[name=inner_asset_search]').css('background-color','#437ece');
         $('.remark_check').hide();
 
@@ -268,6 +271,7 @@
                 <li class="tab-link" data-tab="tab-2" id="data_tab_2">반납 완료</li>
             </ul>
             <input type="hidden" id="objStatus" th:value="${objStatus}"/>
+            <input type="hidden" id="pageNum" th:value="${pageNum}"/>
             <!--//tabs-->
             <div id="tab-1" class="tab-content">
                 <div id="panel-wrap-register" class="text_left">
@@ -348,7 +352,7 @@
                         <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
                     </span>
                     <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
-                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                        <span class="page" style="cursor:pointer;" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
                     </span>
                     <span th:if="${pageHandler.next}">
                         <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
@@ -433,7 +437,7 @@
                         <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
                     </span>
                     <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
-                        <span class="page" style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                        <span class="page" style="cursor:pointer;" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
                     </span>
                     <span th:if="${pageHandler.next}">
                         <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>

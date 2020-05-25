@@ -36,6 +36,7 @@ public class StatusService
         PageHandler pageHandler = pageHandler(totalCnt,vo.getPageNum(),contentNum);
         List<ObjListVO> list = objStatusMapper.getObjStatusList(vo);
 
+        map.addAttribute("pageNum",vo.getPageNum());
         map.addAttribute("objStatus",vo.getObjStatus());
         map.addAttribute("list",list);
         map.addAttribute("size",list.size());

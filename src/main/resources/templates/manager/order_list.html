@@ -5,6 +5,9 @@
 <script th:src="@{/script/delivery.js}" type="text/javascript"></script>
 <script>
     $(function() {
+        var pageNum = $('#pageNum').val();
+        $('#'+pageNum).css('font-weight',800);
+
         $('a[name=objsub]').css('background-color','#437ece');
         /* 페이징 클릭시 이동  */
         $("span[name=pageNum]").click(function(){
@@ -33,6 +36,7 @@
                 <!-- //page-title -->
             </div>
         </div>
+        <input type="hidden" id="pageNum" th:value="${pageNum}"/>
         <!-- //title -->
         <!-- tab content -->
         <div id="tab_content_wrap">

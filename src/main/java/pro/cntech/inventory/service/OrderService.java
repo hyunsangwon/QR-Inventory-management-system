@@ -52,6 +52,7 @@ public class OrderService
         totalCnt = orderMapper.getOrderListCnt(orderVO);
         PageHandler pageHandler = pageHandler(totalCnt,pageNum,contentNum);
 
+        map.addAttribute("pageNum",pageNum);
         map.addAttribute("list",list);
         map.addAttribute("size",list.size());
         map.addAttribute("pageHandler",pageHandler);
