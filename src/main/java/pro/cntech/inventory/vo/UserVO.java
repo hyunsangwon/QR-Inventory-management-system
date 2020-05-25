@@ -20,4 +20,5 @@ public class UserVO
     private String companyName;
     private String companyPhone;
     private String email;
+    private String businessNumber; //사업자 등록 번호
 }

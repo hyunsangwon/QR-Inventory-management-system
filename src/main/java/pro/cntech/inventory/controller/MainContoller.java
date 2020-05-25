@@ -77,18 +77,24 @@ public class MainContoller
     }
 
     @PostMapping("/join")
-    public @ResponseBody Boolean userJoin(@RequestBody UserVO userVO) throws Exception
+    public @ResponseBody UserVO userJoin(@RequestBody UserVO userVO) throws Exception
     {
         logger.debug("[ Call /join - POST ]");
         logger.debug("Param : "+userVO.toString());
-        return mainService.isUserJoin(userVO);
+        return mainService.userJoin(userVO);
     }
 
     @PostMapping("/img/upload")
-    public @ResponseBody Boolean imageUpload(@RequestParam("files") MultipartFile[] file) throws Exception
+    public @ResponseBody Boolean imageUpload(@RequestParam("files") MultipartFile[] file,
+                                             @RequestParam("userSrl") String userSrl,
+                                             @RequestParam("businessNumber") String businessNumber) throws Exception
     {
         logger.debug("[ Call /img/upload - POST ]");
         if(file.length == 0)
+        {
+            return false;
+        }
+        if(userSrl == null || businessNumber == null)
         {
             return false;
         }
@@ -96,7 +102,7 @@ public class MainContoller
             logger.debug("====> Parameters      file name  : " + file[i].getName());
             logger.debug("====> Parameters      file size  : " + file[i].getSize());
         }
-        mainService.uploadImageToAwsS3(file);
+        mainService.uploadImageToAwsS3(file,userSrl,businessNumber);
         return true;
     }
 

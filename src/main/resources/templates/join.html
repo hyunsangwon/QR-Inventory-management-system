@@ -310,7 +310,7 @@
             $('#payAgree').focus();
             return false;
         }*/
-        var jsonData = {'userName' : userName.val(), "phone" : phone.val(), "password" : password.val(), "email" : email, "companyName" : companyName.val(), "companyPhone" : companyPhone.val(), "addr" : addr.val(), "detailAddr" : detailAddr.val()};
+        var jsonData = {'userName' : userName.val(), "phone" : phone.val(), "password" : password.val(), "email" : email, "companyName" : companyName.val(), "companyPhone" : companyPhone.val(), "addr" : addr.val(), "detailAddr" : detailAddr.val(), "businessNumber" : bizNum.val()};
         ajax_user_join(jsonData);
     }
 
@@ -326,10 +326,10 @@
             cache : false,
             success : function(data)
             {
-                console.log(data);
-                if(data == 'true')
+                if(data != '')
                 {
-                    ajax_image_upload();
+                    var result = JSON.parse(data);
+                    ajax_image_upload(result.userSrl,jsonData.businessNumber);
                 }
                 else
                 {
@@ -343,7 +343,7 @@
         });
     }
 
-    function ajax_image_upload()
+    function ajax_image_upload(userSrl,businessNumber)
     {
         if(_size == 0 || _size == null){
             alert('사업자 사본을 업로드 해주세요');
@@ -351,6 +351,9 @@
         }
         var data = new FormData();
         data.append("files", _filesTempArr[0]);
+        data.append("userSrl", userSrl);
+        data.append("businessNumber", businessNumber);
+
         $.ajax({
             type: "POST",
             enctype: 'multipart/form-data',
@@ -361,7 +364,7 @@
             cache: false,
             timeout: 600000,
             success: function (data) {
-                console.log(data);
+
                 if(data)
                 {
                     alert('회원 가입 완료!');

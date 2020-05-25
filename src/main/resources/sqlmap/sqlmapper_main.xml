@@ -110,12 +110,34 @@
         'A'
         )
     </insert>
-
-    <select id="checkUser" parameterType="pro.cntech.inventory.vo.UserVO" resultType="Integer">
+    <!-- 이미 가입된 자산소유자인지 확인 -->
+    <select id="checkUser" parameterType="pro.cntech.inventory.vo.UserVO" resultType="pro.cntech.inventory.vo.UserVO">
         SELECT
-            COUNT(*)
+            user_srl AS userSrl
         FROM users
         WHERE m_number = #{phone}
     </select>
+    <!-- 자산소유자 Master key 수정-->
+    <update id="updateMasterSrl" parameterType="pro.cntech.inventory.vo.UserVO">
+        UPDATE users
+        SET
+            master_srl = #{userSrl}
+        WHERE user_srl = #{userSrl}
+    </update>
+    <!--자산 소유자 등본 저장-->
+    <insert id="setCertificate" parameterType="pro.cntech.inventory.vo.CertificateVO">
+        INSERT INTO company_certificate
+        (
+            business_number,
+            user_srl,
+            certificate_image
+        )
+        VALUES
+        (
+            #{businessNumber},
+            #{userSrl},
+            #{certificateImage}
+        )
+    </insert>
 
 </mapper>
