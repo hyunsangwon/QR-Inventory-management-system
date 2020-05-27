@@ -154,7 +154,8 @@
         UPDATE obj
         SET
             obj_m = #{modelName},
-            obj_s = #{srlName}
+            obj_s = #{srlName},
+            obj_kinds = #{objKinds}
         WHERE qr_srl = #{qrSrl}
     </update>
 

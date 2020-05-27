@@ -145,16 +145,35 @@ function qr_save(item,event){
   var input_di2 =  $(item).parent().next().next().next().children().children().find('textarea')[0];
   input_di2.disabled = true;
 
-  var modelName = $('#modelName').val();
-  var srlName = $('#srlName').val();
+  var modelName = remove_special_str($('#modelName').val());
+  var srlName = remove_special_str($('#srlName').val());
+
   var qrSrl = $('#qrSrl').text();
   var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};
   if(confirm('수정하시겠습니까?'))
   {
+    var option = $('.selectObj option:selected').val();
+    if(option == 'null')
+    {
+      alert('장비종류를 선택해주세요.');
+      return false;
+    }
+    jsonData.objKinds = option;
     ajax_update_obj(jsonData);
   }
 
 }//end
+
+function remove_special_str(str){
+  var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+
+  if(regExp.test(str)){
+    str = str.replace(regExp, ""); // 찾은 특수 문자를 제거
+  }
+  return str;
+}
+
+
 /* 20.05.18 추가*/
 function ajax_update_obj(data)
 {
@@ -214,15 +233,18 @@ function ajax_call_obj_history_list(jsonData)
         {
           html += '<tr>';
           html += '<td>' + data[i].createAt + '</td>';
+
           if(data[i].objStatus == 'return_finish') //반납 완료
           {
-            html += '<td>' + data[i].holderName + '</td>';
+            html += '<td>[관리책임자] ' + data[i].holderName + '</td>';
           }
           else
           {
-            html += '<td>' + data[i].userName + '</td>';
+            html += '<td>[현장기사] ' + data[i].userName + '</td>';
           }
+
           html += '<td>' + data[i].addr + '</td>';
+
           if(data[i].objStatus == 'inner_wait') //내부자산 등록
           {
             html += '<td><b>내부자산 등록</b></td>';

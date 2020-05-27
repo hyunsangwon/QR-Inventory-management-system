@@ -26,7 +26,6 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
     ajax_admin_info(jsonData);
     jsonData.pageNum = '1';
     jsonData.sortName = 'all';
-    console.log(JSON.stringify(jsonData));
     ajax_admin_asset_list(jsonData);
     ajax_page_add(jsonData);
 }
@@ -52,7 +51,6 @@ function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
         _userAuth = 'holder';
     }
     var jsonData = { "userSrl" : _userSrl , "pageNum" : pageNum, "auth" : _userAuth , "sortName" : sortName};
-    console.log(JSON.stringify(jsonData));
     ajax_admin_asset_list(jsonData);
     ajax_page_add(jsonData);
 }

@@ -13,6 +13,11 @@
         $(".close").click(function() {$("#company-info").css({"display": "none"});});
         manage_history_paging(1);
         create_map();
+
+        $('.qr_edit').click(function(){
+            $('.selectObj').attr('disabled',false);
+        });
+
     });
 </script>
 <body>
@@ -84,6 +89,11 @@
                     <!--//obj-info-->
                     <!-- 20.05.15 추가-->
                     <div class="edit-wrap" style="width:82%; height:44px; float:left; text-align: right;margin-bottom:20px; ">
+                        <select class="selectObj" disabled>
+                            <option value="null">미정</option>
+                            <option value="machine">레이저 복합기</option>
+                            <option value="cartridge">토너 카트리지</option>
+                        </select>
                         <div onclick="qr_edit(this)" class="qr_edit">
                             <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
                             <img th:src="@{/image/list-icon-edit.svg}">
@@ -197,7 +207,7 @@
                             <thead>
                             <tr>
                                 <th>관리일</th>
-                                <th>관리 책임자/현장 기사</th>
+                                <th>관리자</th>
                                 <th>자산 위치</th>
                                 <th>자산 상태</th>
                             </tr>

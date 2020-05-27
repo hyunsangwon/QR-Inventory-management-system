@@ -53,10 +53,16 @@ public class StatusService
         String[] imageSrlName = detailvo.getObjSrlImage().split("/");
         String[] imageModelName = detailvo.getObjModelImage().split("/");
 
-        String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
-        detailvo.setSrlName(ocrSrlName);
-        String ocrModelName = awsService.getConvertedText(imageModelName[imageModelName.length-1]);
-        detailvo.setModelName(ocrModelName);
+        if(detailvo.getSrlName() == null)
+        {
+            String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
+            detailvo.setSrlName(ocrSrlName);
+        }
+        if(detailvo.getModelName() == null)
+        {
+            String ocrModelName = awsService.getConvertedText(imageModelName[imageModelName.length-1]);
+            detailvo.setModelName(ocrModelName);
+        }
 
         if(detailvo.getAuth().equals("manager"))
         {
@@ -138,6 +144,19 @@ public class StatusService
     public Boolean isUpdateObjInfo(ObjDetailVO objDetailVO)
     {
         int rows = 0;
+        String kinds= null;
+        if(objDetailVO != null)
+        {
+            kinds = objDetailVO.getObjKinds();
+            if("machine".equals(kinds))
+            {
+                objDetailVO.setObjKinds("레이저 복합기");
+            }
+            if("cartridge".equals(kinds))
+            {
+                objDetailVO.setObjKinds("토너 카트리지");
+            }
+        }
         rows = objStatusMapper.updateObjInfo(objDetailVO);
         if(rows > 0) return true;
         return  false;

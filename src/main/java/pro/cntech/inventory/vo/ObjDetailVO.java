@@ -25,4 +25,5 @@ public class ObjDetailVO extends PagingVO
     private String createAt;
     private String auth;
     private String holderName;
+    private String objKinds; //장비 종류
 }
