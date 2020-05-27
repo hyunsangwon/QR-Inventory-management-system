@@ -131,7 +131,7 @@
                         </div>
                         <input type="text" id="companyAddr" name="addr" th:value="${companyAddr}" style="width:500px; margin-bottom:10px;"/>
                         <button class="address-button" onclick="execPostCode();">우편번호 찾기</button>
-                        <input type="text" name="zipCode" value="" style="width:700px;"/>
+                        <input type="text" name="zipCode" th:value="${companyDetailAddr}" style="width:700px;"/>
                     </div>
           		</div>
                 <div class="edit-complete-btn">

@@ -56,9 +56,23 @@ public class AdminService {
 
     public String setPhoneNumber(String phone)
     {
-        String firstNumber = phone.substring(0,3);
-        String secondNumber = phone.substring(3,7);
-        String lastNumber= phone.substring(7,11);
+        String firstNumber = null;
+        String secondNumber = null;
+        String lastNumber= null;
+
+        if(phone.length() == 11)
+        {
+            firstNumber = phone.substring(0,3);
+            secondNumber = phone.substring(3,7);
+            lastNumber= phone.substring(7,11);
+        }
+        else
+        {
+            firstNumber = phone.substring(0,3);
+            secondNumber = phone.substring(3,6);
+            lastNumber= phone.substring(6,10);
+        }
+
         return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 

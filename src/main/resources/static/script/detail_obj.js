@@ -292,10 +292,15 @@ function ajax_call_obj_history_page(jsonData)
         for (var i = data.startPage; i <= data.endPage; i++)
         {
           html += '<span class="page_num">';
-          html += '<span class="page" id="'
-              + i
-              + '"onclick="pageClick(this);" name="pageNum" style="cursor:pointer;">'
-              + i + '</span>';
+          if(data.pagenum == i)
+          {
+            html += '<span class="page" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer; font-weight:800;">' + i + '</span>';
+          }
+          else
+          {
+            html += '<span class="page" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer;">' + i + '</span>';
+          }
+
           html += '</span>';
         }
       }
@@ -316,6 +321,8 @@ function pageClick(obj)
   var qrSrl = $('#qrSrl').text();
   var pageNum = obj.id;
   var jsonData = { "qrSrl" : qrSrl ,"pageNum" : pageNum};
+
+
   ajax_call_obj_history_list(jsonData);
   ajax_call_obj_history_page(jsonData);
 }//end

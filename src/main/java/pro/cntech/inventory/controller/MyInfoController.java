@@ -71,6 +71,7 @@ public class MyInfoController
         model.addAttribute("companyName",userPrincipalVO.getCompanyName());
         model.addAttribute("companyPhone",userPrincipalVO.getCompanyPhone());
         model.addAttribute("companyAddr",userPrincipalVO.getAddr());
+        model.addAttribute("companyDetailAddr",userPrincipalVO.getDetailAddr());
         return MANAGER_VIEW_PREFIX+"my_info_edit";
     }
 

@@ -35,7 +35,7 @@ public class OrderController
         model.addAttribute("cnt",orderService.myOrderCnt(userPrincipalVO.getUserSrl()));
         model.addAttribute("phone",userPrincipalVO.getName());
         model.addAttribute("name",userPrincipalVO.getUsername());
-        model.addAttribute("addr",userPrincipalVO.getAddr());
+        model.addAttribute("companyAddr",userPrincipalVO.getAddr());
         model.addAttribute("detailAddr",userPrincipalVO.getDetailAddr());
         model.addAttribute("orderVO",orderVO);
 

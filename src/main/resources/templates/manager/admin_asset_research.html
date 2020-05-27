@@ -12,7 +12,6 @@
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
         $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
-
         $('#managerOption').hide();
         $('#holderOption').show()
 
@@ -89,7 +88,7 @@
         <div id="modal-content" class="modal-company">
             <div class="order-info-title">
                 <div class="title">
-                    <span>관리자 추가하기</span> 
+                    <span>현장 기사 추가하기</span>
                     <span class="close"><img th:src="@{/image/popup-icon-close.svg}"></span>
                 </div>
             </div>
@@ -126,7 +125,7 @@
         <div id="modal-content" class="modal-company">
             <div class="order-info-title">
                 <div class="title">
-                    <span>관리자 정보 수정하기</span> 
+                    <span>현장 기사 정보 수정하기</span>
                     <span class="close"><img th:src="@{/image/popup-icon-close.svg}"></span>
                 </div>
             </div>
@@ -176,9 +175,9 @@
 			  <div class="w3-container-select">
 			    <div class="filter-area">
  				  <select id="userOption">
-                        <option value="date">가입 순서</option>
- 				  		<option value="name">관리자 이름순</option>
- 				  		<option value="count">수량 순서</option>
+                        <option value="date">최신등록순</option>
+                        <option value="count">수량 높은순</option>
+                        <option value="name">이름순</option>
  				  </select>
  			  </div>
  			  <!-- // filter-area-->
@@ -212,7 +211,7 @@
 		    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()" style="background:url('/image/hamburger_menu.png') no-repeat ; width:50px; height:50px; background-size:50px; margin:20px;"><i class="fa fa-bars"></i></span>
             <div class="w3-container" style="padding:60px 50px;">
 		    <div class="company-name" id="userName">
-		    	<b th:text="|[자산 소유자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
+		    	<b th:text="|[관리 책임자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
 		    </div>
             <!-- //company-name -->
             <div class="edit-icon edit-btn" style="cursor: pointer;">
@@ -262,7 +261,7 @@
 						</div>
 						<div id="assetSelectBox" class="filter-area-panel" style="position:relative; top:-29px; padding:0; text-align:right;">
 		 				<!--자산 담당자를 클릭했을 경우 나오는 select-->
-                        <select id="holderOption">
+                        <select id="holderOption" th:if="${assetListSize} != '0'">
                             <option value="all"> 전체 관리 자산 </option>
                             <option value="return_finish"> 출고 대기 </option>
                            <!-- <option value="return_wait"> 반납 승인 필요 </option>-->
@@ -272,6 +271,7 @@
                             <option value="all"> 전체 관리 자산 </option>
                             <option value="release_finish"> 출고 완료 </option>
 		 				    <option value="return_start"> 반납 시작 </option>
+                            <option value="return_wait"> 반납 승인 필요 </option>
                         </select>
                         </div>
 			             <!-- // filter-area-->

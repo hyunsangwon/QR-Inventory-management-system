@@ -24,6 +24,8 @@ spring:
   profiles: dev
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 1
     url: jdbc:mariadb://database-qr.c1wdflbqbfqj.ap-northeast-2.rds.amazonaws.com/qr_inventory?useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
     username: admin
     password: tkddnjs0823
@@ -41,6 +43,8 @@ spring:
   profiles: env
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 3
     url: jdbc:mariadb://database-qr.c1wdflbqbfqj.ap-northeast-2.rds.amazonaws.com/qr_inventory?useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
     username: admin
     password: tkddnjs0823

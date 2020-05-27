@@ -87,8 +87,9 @@
                             <td th:text="${list.orderSrl}">12345678-12345678</td>
                             <td th:text="${list.orderCnt}">50</td>
                             <td th:text="${list.addr}">(주)제조공장 가나다업체</td>
-                            <td th:if="${list.orderStatus} == 'y'"><b>배송 준비중</b></td>
-                            <td th:if="${list.orderStatus} == 'n'"><b>배송 완료</b></td>
+                            <td th:if="${list.orderStatus} == 'p'"><b>배송 준비중</b></td>
+                            <td th:if="${list.orderStatus} == 'y'"><b>배송 완료</b></td>
+                            <td th:if="${list.orderStatus} == 'n'"><b>주문 완료</b></td>
                         </tr>
                         </tbody>
                     </table>

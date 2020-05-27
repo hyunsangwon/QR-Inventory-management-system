@@ -46,8 +46,9 @@ public class StatusService
     public ObjDetailVO getObjDetail(String qrSrl) throws Exception
     {
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
-        detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone(),"user"));
-        detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone(),"company"));
+
+        detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone()));
+        detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone()));
 
         String[] imageSrlName = detailvo.getObjSrlImage().split("/");
         String[] imageModelName = detailvo.getObjModelImage().split("/");
@@ -127,6 +128,8 @@ public class StatusService
         int rows = 0;
         String qrSrl = objDetailVO.getQrSrl();
         rows = objStatusMapper.deleteObj(qrSrl);
+        //삭제 로그 추가 개발 예정
+
         if(rows > 0) return true;
         return  false;
     }
@@ -142,7 +145,7 @@ public class StatusService
 
     public PageHandler getpageHandler(ObjDetailVO vo)
     {
-        int contentNum = 5;
+        int contentNum = 10;
         int totalCnt = objStatusMapper.getObjHistoryCnt(vo);
         PageHandler pageHandler = pageHandler(totalCnt,vo.getPageNum(),contentNum);
         return pageHandler;
@@ -171,12 +174,13 @@ public class StatusService
         return userPrincipalVO;
     }
 
-    public String setPhoneNumber(String phone,String status)
+    public String setPhoneNumber(String phone)
     {
         String firstNumber = null;
         String secondNumber = null;
         String lastNumber = null;
-        if("user".equals(status))
+
+        if(phone.length() == 11)
         {
             firstNumber = phone.substring(0,3);
             secondNumber = phone.substring(3,7);
@@ -188,6 +192,7 @@ public class StatusService
             secondNumber = phone.substring(3,6);
             lastNumber= phone.substring(6,10);
         }
+
         return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 
