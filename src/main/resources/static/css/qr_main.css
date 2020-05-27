@@ -11,7 +11,7 @@ body                                {height:100%;}
 body                                {-webkit-text-size-adjust:none} 
 html                                {overflow-y:scroll;} 
 body, p, ul, ol, li, dl, 
-dt, dd, form, table, th, td, 
+dt, dd, form, table, th, td,
 fieldset, input, textarea, select, 
 button, h1, h2, h3, h4, h5, h6, pre {margin:0; padding:0; -webkit-text-size-adjust:none; } 
 input:focus                         {outline:none;}
@@ -48,7 +48,7 @@ a:hover                             {text-decoration:none;}
 .hd_my                              {background-color: #558fdd; max-width:1440px; height:66px; margin:0 auto;}
 .hd_my .my_info                     {float:right; padding:17px; text-align: right; }
 .hd_my .my_info span                {text-align:left; float:left; padding-top:7px; color:#fff; font-size:1em;}
-.hd_my .my_info button              {float:right; color:#fff; font-size:1em; margin-left:30px; width:80px; height:32px; border:1px solid #86baff; background:none;}
+.hd_my .my_info button              {float:right; color:#fff; font-size:1em; margin-left:20px; margin-right:30px; width:80px; height:32px; border:1px solid #86baff; background:none;}
 .logo								{float:left; margin-top:10px; margin-left:39px;}
 
 /*hamburger*/
@@ -100,7 +100,7 @@ a:hover                             {text-decoration:none;}
 /* quick wrap, btn */
 #panel-wrap-quick					{width:29.2%;  height:404px; float:left; background-color: #eceef4;}
 #panel-wrap-quick .qbtn				{height:48px; cursor: pointer; margin-bottom:20px;}
-#panel-wrap-quick .qimg				{width:48px; height:48px; padding-left:58px;float:left;}
+#panel-wrap-quick .qimg				{width:48px; height:37px; padding-top:10px; padding-left:58px; float:left;}
 #panel-wrap-quick .qtitle			{width:170px;  padding:10px 0 10px 0; margin-left:58px; font-weight: 600; font-size:1.5em; float: left;}
 #panel-wrap-quick .qlink			{width:240px; float:left; padding:11px 17px 33px 0;font-size:1.5em; color:#727272;}
 

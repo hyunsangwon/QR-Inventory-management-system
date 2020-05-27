@@ -348,12 +348,14 @@ input:focus {
     font-size: 20px;
     color: #ffffff;
     cursor: pointer;
+    border:none;
     }
 
 .order-member .btn-active {
     width: 164px;
     height: 40px;
     background-color: #23367a;
+    border:none;
     }
 
 /* 주문자 전화번호*/

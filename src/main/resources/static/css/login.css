@@ -32,7 +32,8 @@ img                                 {-ms-interpolation-mode:bicubic !important; 
 table                               {padding:0; border-spacing:0px; border:0; border-collapse:collapse; } 
 ul, ol                              {list-style:none;} 
 a                                   {text-decoration:none;} 
-a:link                              {text-decoration:none;} 
+a:link                              {text-decoration:none; color:#000;}
+a:visited							{text-decoration:none; color:#000;}
 a:hover                             {text-decoration:none;} 
 .clear                              { clear:both; }
 

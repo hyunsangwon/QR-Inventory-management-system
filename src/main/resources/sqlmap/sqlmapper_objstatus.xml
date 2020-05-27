@@ -70,6 +70,7 @@
             o.obj_img AS objImage,
             o.obj_img_srl AS objSrlImage,
             o.obj_img_mn AS objModelImage,
+            o.obj_kinds AS objKinds,
             o.latitude,
             o.longitude,
             o.addr,

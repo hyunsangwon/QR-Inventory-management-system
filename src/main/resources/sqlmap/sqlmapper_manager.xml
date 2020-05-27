@@ -97,7 +97,7 @@
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
             <if test='sortName eq "release_finish"'>
-                AND o.obj_status = 'release_finish'
+                AND o.obj_status IN ('release_finish','outer_wait')
             </if>
             <if test='sortName eq "return_wait"'>
                 AND o.obj_status = 'return_wait'

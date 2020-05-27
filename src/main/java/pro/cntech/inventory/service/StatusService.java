@@ -52,7 +52,10 @@ public class StatusService
 
         String[] imageSrlName = detailvo.getObjSrlImage().split("/");
         String[] imageModelName = detailvo.getObjModelImage().split("/");
-
+        if(detailvo.getObjKinds() == null)
+        {
+            detailvo.setObjKinds("null");
+        }
         if(detailvo.getSrlName() == null)
         {
             String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
