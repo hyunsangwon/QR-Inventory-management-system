@@ -93,6 +93,11 @@ public class MainService implements UserDetailsService
     public UserVO userJoin(UserVO userVO) throws Exception
     {
         int rows = 0;
+        rows = mainMapper.getbusinessNumber(userVO.getBusinessNumber());
+        if(rows > 0) //사업자 번호 확인
+        {
+            return null;
+        }
         UserVO vo = mainMapper.checkUser(userVO);
         if(vo != null)
         {

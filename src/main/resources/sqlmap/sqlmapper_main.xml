@@ -140,4 +140,11 @@
         )
     </insert>
 
+    <select id="getbusinessNumber" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM company_certificate
+        WHERE business_number = #{businessNumber}
+    </select>
+
 </mapper>

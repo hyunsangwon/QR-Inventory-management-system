@@ -21,4 +21,5 @@ public interface MainMapper
     UserVO checkUser(UserVO userVO);
     int updateMasterSrl(UserVO userVO);
     int setCertificate(CertificateVO certificateVO);
+    int getbusinessNumber(@Param("businessNumber") String businessNumber);
 }

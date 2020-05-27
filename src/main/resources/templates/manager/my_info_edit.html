@@ -189,6 +189,7 @@
                 _count=0;
             }
         }
+
         /* 수정사항 완료 */
         function finishBtn()
         {
@@ -270,7 +271,7 @@
                     if(data == 'true')
                     {
                         alert('회원정보 수정 완료');
-                        location.reload();
+                        window.location.reload();
                     }
                 },
                 error : function(xhr, status, error)
@@ -279,9 +280,17 @@
                 }
             });
         }
-        
         /* 수정하기,수정취소 버튼 눌렀을 때*/
         $(document).ready(function(){
+            $('#customer_phone').keyup(function(e) // 핸드폰 번호 입력
+            {
+                $(this).val($(this).val().replace(/[^0-9]/g,""));
+            });
+            $('#companyPhone').keyup(function(e) // 회사번호
+            {
+                $(this).val($(this).val().replace(/[^0-9]/g,""));
+            });
+
             $('.edit-icon').click(function(){
                 $('.new-password-area').show();
             });

@@ -25,7 +25,7 @@
                         <div class="input-title">
                             <div class="circle"></div>연락처
                         </div>
-                        <input class="phone" id="phone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)" autocomplete="off"/>
+                        <input class="phone" id="phone" name="number" value="" maxlength="11" type="text" onkeyup="return onlyNumber(event)" autocomplete="off"/>
                     </div>
                     <!--//box-->
                     <div class="box">
@@ -52,7 +52,7 @@
                             <div class="circle"></div>E-mail
                         </div>
                         <input class="email" id="firstEmail" type="text" autocomplete="off"><span style="font-size:28px;">@</span>
-                        <input class="str_email02" id="secondEmail" type="text" disabled>
+                        <input class="str_email02" id="secondEmail" type="text">
                         <select class="selectEmail" id="emailOption">
                             <option value="1" selected>직접입력</option>
                             <option value="naver.com" >naver.com</option>
@@ -86,7 +86,7 @@
                         <div class="input-title">
                             <div class="circle"></div>업체 연락처
                         </div>
-                        <input class="phone" id="companyPhone" name="number" value="" maxlength="11" type="text" onKeyDown="return onlyNumber(event)" autocomplete="off"/>
+                        <input class="phone" id="companyPhone" name="number" value="" maxlength="11" type="text" onkeyup="return onlyNumber(event)" autocomplete="off"/>
                     </div>
                     <!--//box-->
                     <div class="box">
