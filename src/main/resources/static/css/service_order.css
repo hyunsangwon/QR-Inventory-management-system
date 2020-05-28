@@ -282,7 +282,7 @@ input:focus {
     padding-left: 20px;
     font-size: 1.7em;
     border: 2px solid #bcc2d0;
-    color:#9a9a9a;
+    color:#000;
     }
 
 .order-address button {
@@ -301,7 +301,7 @@ input:focus {
     font-size: 1.7em;
     border: 2px solid #bcc2d0;
     float:left;
-    color:#9a9a9a;
+    color:#000;
     }
 
 /* 주문자 이름*/

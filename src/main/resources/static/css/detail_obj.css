@@ -165,7 +165,7 @@ textarea:disabled {
 
 /* 업체 삭제 완료 버튼 */
 .company-delete-btn													{ width:100%; text-align:center; padding:40px 0 60px 0;  float:left;}
-.comapny_info_btn													{width:720px; height:100px; border-radius:72px; background-color:#558fdd;}
+.comapny_info_btn													{width:720px; height:100px; border-radius:72px; background-color:#558fdd; border:none;}
 .comapny_info_btn span										{color:#fff; font-size:2.8em; font-weight:600;}
 
 .close {

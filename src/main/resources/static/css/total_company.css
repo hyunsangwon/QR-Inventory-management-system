@@ -704,7 +704,7 @@ input[type="text"]:disabled {background: #eceef4;}
 
 /* 추가하기 버튼 */
 .obj-plus-btn												{ width:100%; text-align:center;  float:left;}
-.plus_btn													{width:540px; height:80px; border-radius:72px; background-color:#558fdd;}
+.plus_btn													{width:540px; height:80px; border-radius:72px; background-color:#558fdd; border:none;}
 .plus_btn span										{color:#fff; font-size:2em; font-weight:600;}
 
 .close {

@@ -17,11 +17,24 @@
         $('#defaultAddr').click(function(){
             $('#newAddr').removeClass('btn-active');
             $('#defaultAddr').addClass('btn-active');
+            $('#companyAddr').val($('#h_companyAddr').val());
+            $('#companyDetailAddr').val($('#h_companyDetailAddr').val());
         });
 
         $('#defaultName').click(function () {
             $('#newName').removeClass('btn-active');
             $('#defaultName').addClass('btn-active');
+            $('#userName').val($('#h_userName').val());
+            $('#userPhone').val($('#h_userPhone').val());
+        });
+
+        $('#newAddr').click(function(){
+            $('#companyAddr').val('');
+            $('#companyDetailAddr').val('');
+        });
+        $('#newName').click(function(){
+            $('#userName').val('');
+            $('#userPhone').val('');
         });
 
     });
@@ -153,6 +166,8 @@
                         <!--기존 배송지 active 일 때-->
                         <input class="order-zipCode"  id="companyAddr" type="text" style="width:706px;" th:value="${companyAddr}" disabled/>
                         <input class="order-addr" id="companyDetailAddr" type="text" th:value="${detailAddr}" disabled/>
+                        <input id="h_companyAddr" type="hidden" th:value="${companyAddr}" />
+                        <input id="h_companyDetailAddr" type="hidden" th:value="${detailAddr}"/>
                         <!--
                         신규 배송지 active 일 때  -->
 	          			<!--<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
@@ -169,6 +184,7 @@
                         </div>
                         <!--기본 주문자 active 일 때-->
                         <input type="text" id="userName" th:value="${phone}" disabled/>
+                        <input type="hidden" id="h_userName" th:value="${phone}"/>
                         <!--신규 주문자 active 일 때
                          <input type="text" name="name" />-->
                     </div>
@@ -179,6 +195,7 @@
                         </div>
                         <!--기본 연락처 active 일 때-->
                         <input type="text" id="userPhone" th:value="${name}" disabled/>
+                        <input type="hidden" id="h_userPhone" th:value="${name}"/>
                         <!--신규 연락처 active 일 때
 	          			<input type="text" name="phone" />-->
                     </div>
@@ -189,7 +206,7 @@
                         </div>
                         <input type="text"/>
                     </div>
-                    <hr>
+
                    <!-- <span class="order-surcharge">
                         <div class="order-surcharge-text">
                             <span>추가 결제금액</span>

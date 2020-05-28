@@ -515,7 +515,7 @@ input:focus {
     margin-top: 10px;
     }
 
-.password-complete-btn, .password-cancel-btn{border:none; font-size:24px; margin:0 5px;}
+.password-complete-btn, .password-cancel-btn{border:none; font-size:24px; margin:0 5px; background-color:#fff;}
 /* 주문 완료 버튼 */
 .edit-complete-btn {
     width: 100%;
