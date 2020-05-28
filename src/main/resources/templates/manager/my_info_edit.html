@@ -150,7 +150,6 @@
 </body>
 <script>
         var _count = 0;
-
         /* 전화번호 숫자 입력*/
         function onlyNumber(event){
             event = event || window.event;
@@ -195,6 +194,7 @@
         {
             var name = $('#name');
             var phone = $('#customer_phone');
+            var password_1 = $('#password_1');
             var password_2 = $('#password_2');
             var companyName = $('#companyName');
             var companyPhone = $('#companyPhone');
@@ -209,6 +209,18 @@
                     password_2.focus();
                     return false;
                 }
+                if(password_1.val() != password_2.val())
+                {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    password_2.focus();
+                    return false;
+                }
+            }
+            if(password_1.val() != password_2.val())
+            {
+                alert('비밀번호가 일치하지 않습니다.');
+                password_2.focus();
+                return false;
             }
             if(name.val() == '')
             {
@@ -247,13 +259,11 @@
             {
                 jsonData.password = null;
             }
-
             ajax_user_info_update(jsonData);
         }
 
         function ajax_user_info_update(data)
         {
-            console.log(JSON.stringify(data));
             $.ajax
             ({
                 type: 'POST',
@@ -299,6 +309,21 @@
             });
             /* 수정완료 버튼 눌렀을 때*/
             $('.password-complete-btn').click(function(){
+                var password_1 = $('#password_1');
+                var password_2 = $('#password_2');
+
+                if(password_2.val() == '' || password_1.val() == '')
+                {
+                    alert('비밀번호를 입력해주세요.');
+                    password_2.focus();
+                    return false;
+                }
+                if(password_1.val() != password_2.val())
+                {
+                    alert('비밀번호가 일치하지 않습니다.');
+                    password_2.focus();
+                    return false;
+                }
                 alert("수정이 완료되었습니다.");
                 $('.new-password-area').hide();
             });
