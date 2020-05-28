@@ -136,7 +136,7 @@ public class MainService implements UserDetailsService
         String imageName = new SimpleDateFormat( "yyMMdd").format(new Date());
         String randomNumber = Integer.toString(ran.nextInt(500)+10);
         String awsS3Url = "https://qr-s3.s3.ap-northeast-2.amazonaws.com";
-        String s3bucketPath = "/private/users/"+randomNumber+imageName;
+        String s3bucketPath = "/private/users/"+randomNumber+"/"+imageName;
         int fileSize = file.length;
         CertificateVO certificateVO = null;
         for(int i=0; i<fileSize; i++)
