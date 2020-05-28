@@ -56,10 +56,17 @@
             var jsonData = { "userName" : userName , 'phone' : phone, 'masterSrl' : masterSrl};
             ajax_admin_add(jsonData);
         });
+        //수정 버튼 클릭
+        $('#editBtn').click(function(){
+            var name = $('#name').val();
+            var phone = $('#userPhone').val();
+            $('#update_user_name').val(name);
+            $('#update_user_phone').val(phone);
+        });
         /* 사용자 정보 수정*/
         $('#complete_btn').click(function () {
             var userName = $('#update_user_name').val();
-            var phone = $('#update_user_phone').val();
+            var phone = remove_special_str($('#update_user_phone').val());
             if (userName == '')
             {
                 alert('이름을 입력해주세요');
@@ -74,6 +81,15 @@
             var jsonData = { "userName" : userName , 'phone' : phone, 'userSrl' : userSrl};
             ajax_admin_update(jsonData);
         });
+
+        function remove_special_str(str){
+            var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+            if(regExp.test(str)){
+                str = str.replace(regExp, ""); // 찾은 특수 문자를 제거
+            }
+            return str;
+        }
+
     });
 </script>
 <script th:src="@{/script/admin_asset_research/admin_asset_research.js}" type="text/javascript"></script>
@@ -214,7 +230,7 @@
 		    	<b th:text="|[관리 책임자] ${myInfo.userName}|">[자산담당자] 홍길동 A</b>
 		    </div>
             <!-- //company-name -->
-            <div class="edit-icon edit-btn" style="cursor: pointer;">
+            <div id="editBtn" class="edit-icon edit-btn" style="cursor: pointer;">
                 <span style="margin-right: 20px; font-size: 24px; vertical-align: middle; color: #666666;">수정하기</span><img th:src="@{/image/list-icon-edit.svg}">
             </div>
 		   <!--//edit-icon-->
@@ -222,6 +238,9 @@
             <div class="company-info">
                 <input type="hidden" id="masterSrl" th:value="${myInfo.userSrl}"/>
                 <input type="hidden" id="userSrl" th:value="${myInfo.userSrl}"/>
+                <input type="hidden" id="name" th:value="${myInfo.userName}"/>
+                <input type="hidden" id="userPhone" th:value="${myInfo.phone}"/>
+                <input type="hidden" id="totalObjCnt" th:value="${myInfo.totalObjCnt}"/>
                 <ul class="info-list">
                     <li><b>관리자 연락처</b></li>
                     <li>전체 관리 자산</li>

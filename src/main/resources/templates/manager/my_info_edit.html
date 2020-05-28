@@ -68,14 +68,14 @@
                         <div class="customer-text">
                             <div class="circle"></div>이름
                         </div>
-                        <input type="hidden" id="userSrl" name="userSrl" th:value="${userSrl}" />
-                        <input type="text" id="name" name="name" th:value="${name}" />
+                        <input type="hidden" id="userSrl" name="userSrl" th:value="${vo.userSrl}" />
+                        <input type="text" id="name" name="name" th:value="${vo.userName}" />
                     </div>
           			<div class="customer-phone">
 	          			<div class="customer-text" >
                             <div class="circle"></div>휴대전화 번호
                         </div>
-                        <input id="customer_phone" name="number" th:value="${phone}" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
+                        <input id="customer_phone" name="number" th:value="${vo.phone}" maxlength="11" type="text" onKeyDown="return onlyNumber(event)"/>
           			</div>
                     <div class="form-title" style="margin-top:40px;">
                         비밀번호
@@ -117,21 +117,21 @@
                         <div class="company-text">
                             <div class="circle"></div>회사 이름
                         </div>
-                        <input type="text" id="companyName" name="name" th:value="${companyName}" />
+                        <input type="text" id="companyName" name="name" th:value="${vo.companyName}" />
                     </div>
                     <div class="company-phone">
                         <div class="company-text">
                             <div class="circle"></div>회사 연락처
                         </div>
-                        <input type="text" id="companyPhone" name="name" maxlength="11" th:value="${companyPhone}" onKeyDown="return onlyNumber(event)" />
+                        <input type="text" id="companyPhone" name="name" maxlength="11" th:value="${vo.companyPhone}" onKeyDown="return onlyNumber(event)" />
                     </div>
                     <div class="company-address">
                         <div class="company-text">
                             <div class="circle"></div>회사 주소
                         </div>
-                        <input type="text" name="zipCode" th:value="${companyDetailAddr}" style="width:500px; margin-bottom:10px;"/>
+                        <input type="text" id="companyDetailAddr" name="zipCode" th:value="${vo.detailAddr}" style="width:500px; margin-bottom:10px;"/>
                         <button class="address-button" onclick="execPostCode();">우편번호 찾기</button>
-                        <input type="text" id="companyAddr" name="addr" th:value="${companyAddr}" style="width:700px;"/>
+                        <input type="text" id="companyAddr" name="addr" th:value="${vo.addr}" style="width:700px;"/>
                     </div>
           		</div>
                 <div class="edit-complete-btn">
@@ -242,7 +242,7 @@
             }
 
             var jsonData = {'userSrl' : userSrl.val() , 'userName' : name.val() , 'phone' : phone.val(), 'password': password_2.val(),
-                'companyName' : companyName.val(), 'companyPhone': companyPhone.val(), 'addr' : companyAddr.val()};
+                'companyName' : companyName.val(), 'companyPhone': companyPhone.val(), 'addr' : companyAddr.val() , 'detailAddr' : $('#companyDetailAddr').val()};
             if(password_2.val() == '')
             {
                 jsonData.password = null;

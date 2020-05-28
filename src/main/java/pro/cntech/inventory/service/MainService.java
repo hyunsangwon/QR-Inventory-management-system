@@ -119,6 +119,11 @@ public class MainService implements UserDetailsService
         return null;
     }
 
+    public UserVO getMyInfo(String userSrl)
+    {
+        return mainMapper.getMyInfo(userSrl);
+    }
+
     //단방향 암호
     public String makeHashedPassword(String password)
     {

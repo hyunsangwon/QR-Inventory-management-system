@@ -115,7 +115,7 @@
                 <!--//panel-wrap-register-->
                 <!--검색(베타 주석처리)-->
                 <input type="hidden" id="objStatus" th:value="${objStatus}"/>
-                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
+                <!--<div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>-->
                 <div id="regisster_waitList">
                     <table th:if="${objStatus eq 'release_start'}" style="border-bottom:2px solid #d7d7d7;">
                         <colgroup>
@@ -187,7 +187,7 @@
                 </div>
                 <!--//panel-wrap-register-->
                 <!--검색(베타 주석처리)-->
-                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
+               <!-- <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>-->
                 <div id="regisster_completeList">
                     <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'release_finish'}">
                         <colgroup>
@@ -260,8 +260,7 @@
                 </div>
                 <!--//panel-wrap-register-->
                 <!--검색(베타 주석처리)-->
-                <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>
-
+              <!--  <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>-->
                 <div id="regisster_waitList">
                     <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_start'}">
                         <colgroup>

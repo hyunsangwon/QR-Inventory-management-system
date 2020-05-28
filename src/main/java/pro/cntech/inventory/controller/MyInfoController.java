@@ -65,13 +65,7 @@ public class MyInfoController
         logger.debug("[ Call /manager/myinfo/detail - GET ]");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
-        model.addAttribute("userSrl",userPrincipalVO.getUserSrl());
-        model.addAttribute("name",userPrincipalVO.getName());
-        model.addAttribute("phone",userPrincipalVO.getUsername());
-        model.addAttribute("companyName",userPrincipalVO.getCompanyName());
-        model.addAttribute("companyPhone",userPrincipalVO.getCompanyPhone());
-        model.addAttribute("companyAddr",userPrincipalVO.getAddr());
-        model.addAttribute("companyDetailAddr",userPrincipalVO.getDetailAddr());
+        model.addAttribute("vo",mainService.getMyInfo(userPrincipalVO.getUserSrl()));
         return MANAGER_VIEW_PREFIX+"my_info_edit";
     }
 

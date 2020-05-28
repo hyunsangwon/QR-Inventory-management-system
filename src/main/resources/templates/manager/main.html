@@ -27,6 +27,22 @@
             location.href = "/order/qr";
         });
     });
+
+    function move_page(status)
+    {
+        if('all' == status)
+        {
+            location.href="/asset/research/sort/date";
+        }
+        if('inner' == status)
+        {
+            location.href='/obj/status/return_finish/list/1';
+        }
+        if('outer' == status)
+        {
+            location.href='/obj/status/release_start/list/1';
+        }
+    }
 </script>
 <body>
 <div class="cd-main-header js-cd-main-header">
@@ -48,7 +64,7 @@
                 </div>
                 <!--//panel-heading-->
                 <div class="dash-board">
-                    <div class="box" name="div-box" id="box1" style="cursor:default">
+                    <div class="box" name="div-box" id="box1" style="cursor:pointer" onclick="move_page('all')">
                         <div class="box-title">
                             <span style="margin-right:15px;">전체 등록 자산</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
@@ -56,7 +72,7 @@
                             <span th:text="${statistics.totalCnt}">607</span>
                         </div>
                     </div>
-                    <div class="box" name="div-box" id="box2" style="cursor:default">
+                    <div class="box" name="div-box" id="box2" style="cursor:pointer" onclick="move_page('inner')">
                         <div class="box-title">
                             <span style="margin-right:15px;">재고 자산조회</span><img th:src="@{/image/main/main-icon-arrow.svg}" />
                         </div>
@@ -64,7 +80,7 @@
                             <span th:text="${statistics.innerCount}">26</span>
                         </div>
                     </div>
-                    <div class="box" name="div-box" id="box3" style="cursor:default">
+                    <div class="box" name="div-box" id="box3" style="cursor:pointer" onclick="move_page('outer')">
                         <div class="box-title">
                             <span style="margin-right:15px;">운영 자산조회</span><img th:src="@{/image/main/main-icon-arrow.svg}"/>
                         </div>

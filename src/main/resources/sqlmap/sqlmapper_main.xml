@@ -16,6 +16,19 @@
         WHERE m_number = #{phone}
     </select>
 
+    <select id="getMyInfo" resultType="pro.cntech.inventory.vo.UserVO">
+        SELECT
+            user_srl AS userSrl,
+            user_name AS userName,
+            m_number AS phone,
+            company_name AS companyName,
+            s_number AS companyPhone,
+            addr,
+            detail_addr AS detailAddr
+        FROM users
+        WHERE user_srl = #{userSrl}
+    </select>
+
     <select id="getMainStatistics" resultType="pro.cntech.inventory.vo.StatisticsVO">
         SELECT
             COUNT(o.obj_srl) AS totalCnt,
@@ -71,6 +84,7 @@
             ,password = #{password}
             </if>
             ,addr = #{addr}
+            ,detail_addr = #{detailAddr}
             ,m_number = #{phone}
             ,s_number = #{companyPhone}
             ,company_name = #{companyName}

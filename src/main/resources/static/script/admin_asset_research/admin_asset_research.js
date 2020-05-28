@@ -77,7 +77,7 @@ function ajax_admin_info(data)
         {
             $('#userName').empty();
             $('#userInfo').empty();
-            $('#userSrl').val(data.userSrl);
+            $('#userSrl').val(data.userSrl); $('#name').val(data.userName); $('#userPhone').val(data.phone); $('#totalObjCnt').val(data.totalObjCnt);
             var html = '';
             if(data.auth == 'holder')
             {
@@ -118,26 +118,33 @@ function ajax_admin_asset_list(data)
             var html = '';
             if(data.length == 0)
             {
-                $('#holderOption').hide(); //select box
-                $('#managerOption').hide();
-
-                html += '<div class="default-remark">';
-                html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
-                html += '</div>';
-                html += '<div class="default-wrap">';
-                html += '<div class="default-box">';
-                html += '<div class="box"></div>';
-                html += "<span>등록 예정 자산에<p>QR 코드 스티커 부착</span>";
-                html += '</div>';
-                html += '<div class="default-box">';
-                html += '<div class="box"></div>';
-                html += "<span>'WEISER QR 자산관리'<p>APP 다운로드</span>";
-                html += '</div>';
-                html += '<div class="default-box">';
-                html += '<div class="box"></div>';
-                html += "<span>APP 실행 후<p>'내부 자산 등록' 선택</span>";
-                html += '</div>';
-                html += '</div>';
+                var totalCnt = $('#totalObjCnt').val();
+                if(parseInt(totalCnt) > 0)
+                {
+                    //데이터가 없습니다.
+                }
+                else
+                {
+                    $('#holderOption').hide(); //select box
+                    $('#managerOption').hide();
+                    html += '<div class="default-remark">';
+                    html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
+                    html += '</div>';
+                    html += '<div class="default-wrap">';
+                    html += '<div class="default-box">';
+                    html += '<div class="box"></div>';
+                    html += "<span>등록 예정 자산에<p>QR 코드 스티커 부착</span>";
+                    html += '</div>';
+                    html += '<div class="default-box">';
+                    html += '<div class="box"></div>';
+                    html += "<span>'WEISER QR 자산관리'<p>APP 다운로드</span>";
+                    html += '</div>';
+                    html += '<div class="default-box">';
+                    html += '<div class="box"></div>';
+                    html += "<span>APP 실행 후<p>'내부 자산 등록' 선택</span>";
+                    html += '</div>';
+                    html += '</div>';
+                }
                 $('#asset_container').html(html);
             }
             else

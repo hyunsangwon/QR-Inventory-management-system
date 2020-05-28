@@ -15,6 +15,7 @@ public interface MainMapper
 {
     UserVO getUserInfo(@Param("phone") String phone);
     StatisticsVO getMainStatistics(@Param("userSrl") String userSrl);
+    UserVO getMyInfo(@Param("userSrl") String userSrl);
     List<MarkerVO> getCompanyGPS(UserVO userVO);
     int updateMyInfo(UserVO userVO);
     int setUserJoin(UserVO userVO);
