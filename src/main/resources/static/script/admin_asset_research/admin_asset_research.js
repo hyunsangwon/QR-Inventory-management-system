@@ -77,7 +77,10 @@ function ajax_admin_info(data)
         {
             $('#userName').empty();
             $('#userInfo').empty();
-            $('#userSrl').val(data.userSrl); $('#name').val(data.userName); $('#userPhone').val(data.phone); $('#totalObjCnt').val(data.totalObjCnt);
+            $('#userSrl').val(data.userSrl);
+            $('#name').val(data.userName);
+            $('#userPhone').val(data.phone);
+            $('#totalObjCnt').val(data.totalObjCnt);
             var html = '';
             if(data.auth == 'holder')
             {
@@ -118,13 +121,6 @@ function ajax_admin_asset_list(data)
             var html = '';
             if(data.length == 0)
             {
-                var totalCnt = $('#totalObjCnt').val();
-                if(parseInt(totalCnt) > 0)
-                {
-                    //데이터가 없습니다.
-                }
-                else
-                {
                     $('#holderOption').hide(); //select box
                     $('#managerOption').hide();
                     html += '<div class="default-remark">';
@@ -144,7 +140,6 @@ function ajax_admin_asset_list(data)
                     html += "<span>APP 실행 후<p>'내부 자산 등록' 선택</span>";
                     html += '</div>';
                     html += '</div>';
-                }
                 $('#asset_container').html(html);
             }
             else
