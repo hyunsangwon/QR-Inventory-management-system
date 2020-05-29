@@ -208,6 +208,12 @@ public class StatusService
             secondNumber = phone.substring(3,7);
             lastNumber= phone.substring(7,11);
         }
+        if(phone.length() == 9)
+        {
+            firstNumber = phone.substring(0,2);
+            secondNumber = phone.substring(2,5);
+            lastNumber= phone.substring(5,9);
+        }
         else
         {
             firstNumber = phone.substring(0,3);

@@ -66,7 +66,7 @@
                 </div>
                 <!-- //page-title -->
                 <div style="width: 48%; text-align: right; float:left; vertical-align: middle; padding:23px 0; cursor: pointer;">
-                    <img th:src="@{/image/common-icon-delete-white.svg}" class="delete-btn">
+                    <span style="font-weight:bold; color:#fff; font-size:24px; margin-right:10px; vertical-align: middle;">자산 삭제하기</span><img th:src="@{/image/common-icon-delete-white.svg}" class="delete-btn">
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
                     <!--//panel-wrap-register-->
                     <input id="objKinds" th:value="${vo.objKinds}" type="hidden"/>
                     <div class="obj-info">
-                        <div class="list" style="font-weight:600;">책임자 : <span th:text="|${vo.userName} ${vo.auth}|">현상원</span></div>
+                        <div class="list" style="font-weight:600;">책임자 : <span th:text="${vo.userName}">현상원</span></div>
                         <div class="list">연락처 : <span th:text="${vo.userPhone}">01012345678</span></div>
                     </div>
                     <!--//obj-info-->

@@ -85,7 +85,7 @@ input:focus {
 
 /* new company info area */
 .profile-info-area {
-    width: 90%;
+    width: 1300px;
     height:auto;
     min-height: 1205px;
     border-radius: 20px;
@@ -199,7 +199,7 @@ input:focus {
 
 /* 회원정보 이름*/
 .customer-name {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -234,7 +234,7 @@ input:focus {
 
 /* 회원 휴대전화 번호 이름*/
 .customer-phone {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -269,7 +269,7 @@ input:focus {
 
 /* 비밀번호*/
 .customer-password {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -300,7 +300,7 @@ input:focus {
 
 /* 신규 비밀번호 */
 .customer-new-password {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -331,7 +331,7 @@ input:focus {
 
 /* 신규 비밀번호 확인*/
 .customer-new-check-password {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 19px;
     }
@@ -362,7 +362,7 @@ input:focus {
 
 /* 회사 이름 */
 .company-name {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -397,7 +397,7 @@ input:focus {
 
 /* 회사 연락처 */
 .company-phone {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -432,7 +432,7 @@ input:focus {
 
 /* 회사 주소 */
 .company-address {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 60px;
     }

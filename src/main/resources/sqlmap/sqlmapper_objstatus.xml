@@ -115,7 +115,8 @@
             ol.latitude,
             ol.obj_status AS objStatus,
             ol.holder_name AS holderName,
-            u.user_name AS userName
+            u.user_name AS userName,
+            u.auth
         FROM obj_log AS ol
         INNER JOIN obj AS o
             ON ol.qr_srl = o.qr_srl

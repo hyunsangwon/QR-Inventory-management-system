@@ -54,7 +54,7 @@ a:hover                             {text-decoration:none;}
 
 /* 회원가입 영역 */
 
-.form-container{border:1px solid #fff; width:85%; height:2700px; margin:0 auto; background-color:#fff; border-radius: 40px; padding: 80px 60px;}
+.form-container{border:1px solid #fff; width:1300px; height:2700px; margin:0 auto; background-color:#fff; border-radius: 40px; padding: 80px 60px;}
 
 #form{ background-color:#eceef4; padding:60px 0 10px 0;}
 

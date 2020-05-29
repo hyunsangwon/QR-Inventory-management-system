@@ -234,13 +234,21 @@ function ajax_call_obj_history_list(jsonData)
           html += '<tr>';
           html += '<td>' + data[i].createAt + '</td>';
 
-          if(data[i].objStatus == 'return_finish') //반납 완료
+          if(data[i].holderName != null) //반납 완료
           {
             html += '<td>[관리책임자] ' + data[i].holderName + '</td>';
           }
           else
           {
-            html += '<td>[현장기사] ' + data[i].userName + '</td>';
+            console.log('auth ====> '+data[i].auth);
+            if(data[i].auth == 'manager')
+            {
+              html += '<td>[현장기사] ' + data[i].userName + '</td>';
+            }
+            if(data[i].auth == 'holder')
+            {
+              html += '<td>[관리책임자] ' + data[i].userName + '</td>';
+            }
           }
 
           html += '<td>' + data[i].addr + '</td>';

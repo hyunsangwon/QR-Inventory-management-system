@@ -90,7 +90,7 @@ input:focus {
     }
 
 .order-list-select-area {
-    width: 90%;
+    width: 1300px;
     height: auto;
     border-radius: 20px;
     background-color: #fff;
@@ -202,7 +202,7 @@ input:focus {
 
 
 .order-phone {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -237,7 +237,7 @@ input:focus {
 
 /* 주문자 전화번호*/
 .order-password {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }

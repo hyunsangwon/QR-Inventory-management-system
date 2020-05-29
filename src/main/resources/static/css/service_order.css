@@ -101,7 +101,7 @@ input:focus {
     }
 
 .order-list-select-area {
-    width: 90%;
+    width: 1300px;
     height: auto;
     border-radius: 20px;
     background-color: #fff;
@@ -189,7 +189,7 @@ input:focus {
 
 /* defalut input*/
 .input-box {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 60px;
     }
@@ -237,7 +237,7 @@ input:focus {
 
 /* 업체 주소 */
 .order-address {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 60px;
     }
@@ -307,7 +307,7 @@ input:focus {
 /* 주문자 이름*/
 
 .order-member {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -360,7 +360,7 @@ input:focus {
 
 /* 주문자 전화번호*/
 .order-phone {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 40px;
     }
@@ -410,7 +410,7 @@ input:focus {
 
 /* 요청사항 */
 .order-requests {
-    width: 100%;
+    width: 1112px;
     float: left;
     margin-bottom: 80px;
     }
