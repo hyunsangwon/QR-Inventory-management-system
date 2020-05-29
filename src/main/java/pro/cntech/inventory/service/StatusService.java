@@ -211,6 +211,7 @@ public class StatusService
         String secondNumber = null;
         String lastNumber = null;
 
+
         if(phone.length() == 11)
         {
             firstNumber = phone.substring(0,3);
@@ -235,7 +236,7 @@ public class StatusService
             secondNumber = phone.substring(3,6);
             lastNumber= phone.substring(6,10);
         }
-        else
+        if(phone.length() > 11 || phone.length() < 8)
         {
             return phone;
         }

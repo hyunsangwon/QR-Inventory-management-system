@@ -11,6 +11,14 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function(){
+        var sortName = $('#navSort').val();
+        $('#userOption option').each(function(){
+            if(this.value == sortName)
+            {
+                $(this).prop('selected', 'selected');
+            }
+        });
+
         $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
         $('#managerOption').hide();
         $('#holderOption').show()
@@ -193,6 +201,7 @@
 		<div class="w3-sidebar w3-collapse w3-white w3-animate-left"  style=" width:460px; overflow:hidden;"  id="mySidebar"><br>
 			  <div class="w3-container-select">
 			    <div class="filter-area">
+                  <input type="hidden" id="navSort" th:value="${sortName}"/>
  				  <select id="userOption">
                         <option value="date">최신등록순</option>
                         <option value="count">수량 높은순</option>

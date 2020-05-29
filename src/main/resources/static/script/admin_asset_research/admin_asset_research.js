@@ -85,11 +85,11 @@ function ajax_admin_info(data)
             var html = '';
             if(data.auth == 'holder')
             {
-                html += '<b>[관리 책임자] ' + data.userName + '</b>';
+                html += '<b>[관리책임자] ' + data.userName + '</b>';
             }
             else
             {
-                html += '<b>[현장 기사] ' + data.userName + '</b>';
+                html += '<b>[현장기사] ' + data.userName + '</b>';
             }
             $('#userName').html(html);
             var userInfo = '<li>: <span style="font-weight: 600;">' +data.phone+ '</span><li>';

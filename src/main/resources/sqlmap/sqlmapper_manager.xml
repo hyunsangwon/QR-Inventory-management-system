@@ -65,7 +65,7 @@
             ORDER BY u.user_name ASC
         </if>
         <if test='sortName eq "count"'>
-            ORDER BY assetCnt.totalObjCnt DESC
+            ORDER BY objCnt.objCnt DESC
         </if>
     </select>
     <!-- 자산 소유자, 자산 담당자의 자산 리스트-->

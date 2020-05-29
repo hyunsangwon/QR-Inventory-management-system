@@ -39,6 +39,7 @@ public class AdminService {
         int totalCnt = managerMapper.getObjListTotalCnt(param);
         PageHandler pageHandler = pageHandler(totalCnt,1,20);
 
+        map.addAttribute("sortName",sortName);
         map.addAttribute("myInfo",myInfo);
         map.addAttribute("assetManagerList",assetAdminList);
         map.addAttribute("assetManagerListSize",assetAdminList.size());
@@ -84,7 +85,7 @@ public class AdminService {
             secondNumber = phone.substring(3,6);
             lastNumber= phone.substring(6,10);
         }
-        else
+        if(phone.length() > 11 || phone.length() < 8)
         {
             return phone;
         }

@@ -40,7 +40,7 @@ a:hover                             {text-decoration:none;}
 
 
 /* Main Container */
-.wrap                               {width:100%; max-width: 1440px; margin:0 auto;}
+.wrap                               {width:1440px; max-width: 1440px; margin:0 auto;}
 .main-block						    {width:1440px; height:410px; background-color:#343434; float:left;}
 
 /* header */

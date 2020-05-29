@@ -29,7 +29,7 @@ a:hover                             {text-decoration:none;}
 /* Main Container */
 
 .wrap {
-    width: 100%;
+    width: 1440px;
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -817,15 +817,15 @@ input[type="text"]:disabled {background: #eceef4;}
         display: block;
     }*/
     .filter-area-panel {
-        width: 100%;
+        /*width: 100%;
         float: left;
         position: inherit !important;
-        margin-top: 30px;
+        margin-top: 30px;*/
     }
     .filter-area-panel select {
-        width: 85%;
+       /* width: 85%;
         float: left;
-        padding-left: 20px;
+        padding-left: 20px;*/
     }
     .search-input {
         margin: 20px 70px 0 0;
@@ -896,15 +896,15 @@ input[type="text"]:disabled {background: #eceef4;}
         display: block;
     }*/
     .filter-area-panel {
-        width: 100%;
+        /*width: 100%;
         float: left;
         position: inherit !important;
-        margin-top: 30px;
+        margin-top: 30px;*/
     }
     .filter-area-panel select {
-        width: 85%;
+        /*width: 85%;
         float: left;
-        padding-left: 20px;
+        padding-left: 20px;*/
     }
     .search-input {
         margin: 20px 70px 0 0;
@@ -982,15 +982,15 @@ input[type="text"]:disabled {background: #eceef4;}
         display: block;
     }*/
     .filter-area-panel {
-        width: 100%;
+        /*width: 100%;
         float: left;
         position: inherit !important;
-        margin-top: 30px;
+        margin-top: 30px;*/
     }
     .filter-area-panel select {
-        width: 85%;
+        /*width: 85%;
         float: left;
-        padding-left: 20px;
+        padding-left: 20px;*/
     }
     .search-input {
         margin: 20px 70px 0 0;
@@ -1151,7 +1151,7 @@ input[type="text"]:disabled {background: #eceef4;}
         display: block;
     }*/
     .page-title-search-area .page-title {
-        width: 100% !important;
+        /*width: 100% !important;*/
     }
     .page-title-search-area .page-search {
         width: 100% !important;
@@ -1403,6 +1403,7 @@ input[type="text"]:disabled {background: #eceef4;}
         padding: 60px 0 50px 26px !important;
     }
     .w3-padding-large {
+        width:100%;
         padding: 40px 30px 0 30px !important;
         float: left;
         margin-bottom: 30px !important;
