@@ -66,11 +66,27 @@ public class AdminService {
             secondNumber = phone.substring(3,7);
             lastNumber= phone.substring(7,11);
         }
-        else
+        if(phone.length() == 9)
+        {
+            firstNumber = phone.substring(0,2);
+            secondNumber = phone.substring(2,5);
+            lastNumber= phone.substring(5,9);
+        }
+        if(phone.length() == 8)
+        {
+            firstNumber = phone.substring(0,4);
+            secondNumber = phone.substring(4,8);
+            return firstNumber+"-"+secondNumber;
+        }
+        if(phone.length() == 10)
         {
             firstNumber = phone.substring(0,3);
             secondNumber = phone.substring(3,6);
             lastNumber= phone.substring(6,10);
+        }
+        else
+        {
+            return phone;
         }
 
         return firstNumber+"-"+secondNumber+"-"+lastNumber;
@@ -100,6 +116,13 @@ public class AdminService {
         int rows = 0;
         if("insert".equals(flag))
         {
+            rows = managerMapper.checkManager(userVO);
+            if(rows > 0)
+            {
+                return false;
+            }
+            UserPrincipalVO holder = getSecurityInfo();
+            userVO.setAddr(holder.getAddr());
             rows = managerMapper.setUserInfo(userVO);
             if(rows > 0)
             {

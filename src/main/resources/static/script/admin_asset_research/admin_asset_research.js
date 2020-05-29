@@ -260,8 +260,11 @@ function ajax_admin_add(data)
         {
             if(data)
             {
-                alert('입력 완료');
                 location.reload();
+            }
+            else
+            {
+                alert('이미 가입된 현장 기사거나 정보가 잘못되었습니다.');
             }
         },
         error : function(xhr, status, error)
@@ -288,7 +291,6 @@ function ajax_admin_update(data)
         {
             if(data)
             {
-                alert('수정 완료');
                 location.reload();
             }
         },

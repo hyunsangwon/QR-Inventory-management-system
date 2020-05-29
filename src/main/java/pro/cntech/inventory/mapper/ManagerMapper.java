@@ -14,6 +14,7 @@ public interface ManagerMapper
     List<UserVO> getMyMangerList (@Param("userSrl") String userSrl,@Param("sortName") String sortName);
     List<ObjListVO> getObjList(ObjListVO objListVO);
     int getObjListTotalCnt(ObjListVO objListVO);
+    int checkManager(UserVO userVO);
     int setUserInfo(UserVO userVO);
     int updateUserInfo(UserVO userVO);
 }

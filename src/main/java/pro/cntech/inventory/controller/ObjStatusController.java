@@ -28,7 +28,7 @@ public class ObjStatusController
     @GetMapping("/obj/status/{status}/list/{pageNum}")
     public String loadObjStatusList(ModelMap model
                                 ,@PathVariable("status") String status
-                                ,@PathVariable("pageNum") int pageNum)
+                                ,@PathVariable("pageNum") int pageNum) throws Exception
     {
         logger.debug("[ Call /obj/status/"+status+"/list/"+pageNum+" - GET ]");
         logger.debug("Param : "+status);

@@ -23,7 +23,7 @@ public class StatusService
     @Autowired
     private AwsService awsService;
 
-    public void getObjStatusList(ModelMap map, ObjListVO vo)
+    public void getObjStatusList(ModelMap map, ObjListVO vo) throws Exception
     {
         int MAX = 10;
         int limitCount=((vo.getPageNum() - 1 ) * MAX);
@@ -35,6 +35,15 @@ public class StatusService
         totalCnt = objStatusMapper.getObjStatusListTotalCnt(vo);
         PageHandler pageHandler = pageHandler(totalCnt,vo.getPageNum(),contentNum);
         List<ObjListVO> list = objStatusMapper.getObjStatusList(vo);
+        for(ObjListVO objList : list)
+        {
+            if(objList.getModelName() == null)
+            {
+                String[] modelNameArr = objList.getModelImageName().split("/");
+                String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
+                objList.setModelName(modelName);
+            }
+        }
 
         map.addAttribute("pageNum",vo.getPageNum());
         map.addAttribute("objStatus",vo.getObjStatus());
@@ -50,20 +59,20 @@ public class StatusService
         detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone()));
         detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone()));
 
-        String[] imageSrlName = detailvo.getObjSrlImage().split("/");
-        String[] imageModelName = detailvo.getObjModelImage().split("/");
+        String[] SrlNameArr = detailvo.getObjSrlImage().split("/");
+        String[] modelNameArr = detailvo.getObjModelImage().split("/");
         if(detailvo.getObjKinds() == null)
         {
             detailvo.setObjKinds("null");
         }
         if(detailvo.getSrlName() == null)
         {
-            String ocrSrlName = awsService.getConvertedText(imageSrlName[imageSrlName.length-1]);
+            String ocrSrlName = awsService.getConvertedText(SrlNameArr[SrlNameArr.length-1]).replace("\"","");
             detailvo.setSrlName(ocrSrlName);
         }
         if(detailvo.getModelName() == null)
         {
-            String ocrModelName = awsService.getConvertedText(imageModelName[imageModelName.length-1]);
+            String ocrModelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
             detailvo.setModelName(ocrModelName);
         }
 
@@ -214,11 +223,21 @@ public class StatusService
             secondNumber = phone.substring(2,5);
             lastNumber= phone.substring(5,9);
         }
-        else
+        if(phone.length() == 8)
+        {
+            firstNumber = phone.substring(0,4);
+            secondNumber = phone.substring(4,8);
+            return firstNumber+"-"+secondNumber;
+        }
+        if(phone.length() == 10)
         {
             firstNumber = phone.substring(0,3);
             secondNumber = phone.substring(3,6);
             lastNumber= phone.substring(6,10);
+        }
+        else
+        {
+            return phone;
         }
 
         return firstNumber+"-"+secondNumber+"-"+lastNumber;

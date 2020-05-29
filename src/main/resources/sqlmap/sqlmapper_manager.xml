@@ -145,6 +145,14 @@
         </if>
     </select>
 
+    <select id="checkManager" parameterType="pro.cntech.inventory.vo.UserVO" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM users
+        WHERE user_name = #{userName}
+        AND m_number = #{phone}
+    </select>
+
     <insert id="setUserInfo" parameterType="pro.cntech.inventory.vo.UserVO">
         INSERT INTO users
         (
@@ -159,7 +167,7 @@
         VALUES
         (
             #{userName},
-            '대전 동구 충정로 136',
+            #{addr},
             #{masterSrl},
             'manager',
             #{phone},

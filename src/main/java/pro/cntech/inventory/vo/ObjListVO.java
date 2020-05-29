@@ -10,6 +10,7 @@ public class ObjListVO extends PagingVO
     private String statusAt; //상태 변경일
     private String userName; //담당자 혹은 관리자
     private String modelName; //자산 모델명
+    private String modelImageName; //모델 사진 경로
     private String modelStatus; //자산 상태
     private String qrSrl; //QR 번호
     private String objKinds; //자산 종류

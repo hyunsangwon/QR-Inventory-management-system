@@ -8,6 +8,7 @@
             obj_status AS objStatus,
             DATE_FORMAT(obj_status_at,'%Y.%m.%d') AS statusAt,
             obj_m AS modelName,
+            obj_img_mn AS modelImageName,
             obj_kinds AS objKinds,
             qr_srl AS qrSrl,
             u.user_name AS userName,
