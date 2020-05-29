@@ -405,7 +405,7 @@ tbody td {
 }
 
 
-/* 반응형 */
+/* 반응형
 @media screen and (max-width: 767px) {
     .contents { padding:0 10px; }
     .cont-wrap .contents { padding:30px 10px; }
@@ -426,4 +426,4 @@ tbody td {
     .depth2-bg { display:none; }
 
     #hamburger { display:block; }
-}
+}*/

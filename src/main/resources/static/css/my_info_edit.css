@@ -541,6 +541,9 @@ input:focus {
     }
 
 .error-text{color: #b40a0a; text-align: left; float:left; margin-top:10px; font-size: 22px; display: none;}
+/*
+
+
 @media screen and (min-width: 1250px) and (max-width: 1430px) {
     .contents {
         padding: 0 10px;
@@ -812,3 +815,4 @@ input:focus {
 
 
 
+*/

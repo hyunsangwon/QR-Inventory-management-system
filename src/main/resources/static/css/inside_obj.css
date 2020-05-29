@@ -273,14 +273,14 @@ tbody td {
     padding: 0px 22px 0px 22px;
     }
 
-#page_start {
+.page_start {
     color: #000000;
     font-family: 'NanumSquare';
     font-weight: 700;
     padding-right:5px;
   }
 
-#page{padding:0 10px;}
+.page{padding:0 10px;}
 
 .page_line {
     color: #626569;
@@ -296,7 +296,7 @@ tbody td {
   }
 
 
-/* 반응형 */
+/* 반응형
 @media screen and (max-width: 767px) {
   .contents { padding:0 10px; }
   .cont-wrap .contents { padding:30px 10px; }
@@ -318,3 +318,4 @@ tbody td {
 
   #hamburger { display:block; }
 }
+*/
