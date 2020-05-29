@@ -258,13 +258,13 @@ function ajax_admin_add(data)
         cache : false,
         success : function(data)
         {
-            if(data)
-            {
-                location.reload();
-            }
-            else
+            if(data == 'false')
             {
                 alert('이미 가입된 현장 기사거나 정보가 잘못되었습니다.');
+            }
+            if(data =='true')
+            {
+                location.reload();
             }
         },
         error : function(xhr, status, error)
@@ -289,7 +289,11 @@ function ajax_admin_update(data)
         cache : false,
         success : function(data)
         {
-            if(data)
+            if(data == 'false')
+            {
+                alert('현장기사 정보수정 실패');
+            }
+            if(data =='true')
             {
                 location.reload();
             }

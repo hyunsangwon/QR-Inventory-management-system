@@ -150,8 +150,7 @@
         SELECT
             COUNT(*)
         FROM users
-        WHERE user_name = #{userName}
-        AND m_number = #{phone}
+        WHERE m_number = #{phone}
     </select>
 
     <insert id="setUserInfo" parameterType="pro.cntech.inventory.vo.UserVO">
