@@ -240,7 +240,6 @@ function ajax_call_obj_history_list(jsonData)
           }
           else
           {
-            console.log('auth ====> '+data[i].auth);
             if(data[i].auth == 'manager')
             {
               html += '<td>[현장기사] ' + data[i].userName + '</td>';
