@@ -30,7 +30,6 @@ public class Interceptor implements HandlerInterceptor
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         String userAuth = userPrincipalVO.getAuth();
         String name = userPrincipalVO.getName();
-        String addr = userPrincipalVO.getAddr();
         String userSrl = userPrincipalVO.getUserSrl();
         String companyName = userPrincipalVO.getCompanyName();
         modelAndView.addObject("userSrl",userSrl);

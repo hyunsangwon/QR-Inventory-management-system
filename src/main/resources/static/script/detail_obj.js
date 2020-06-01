@@ -155,7 +155,8 @@ function qr_save(item,event){
     var option = $('.selectObj option:selected').val();
     if(option == 'null')
     {
-      alert('장비종류를 선택해주세요.');
+      alert('자산 종류를 선택해주세요.');
+      $('.selectObj').attr('disabled',true);
       return false;
     }
     jsonData.objKinds = option;

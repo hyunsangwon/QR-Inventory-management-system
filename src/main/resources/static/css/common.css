@@ -59,7 +59,7 @@ a:hover                             {text-decoration:none;}
 #gnb .gnb-wrap > li a:hover, #gnb .gnb-wrap > li a.active { color:#fff; text-decoration:none;}
 #gnb .gnb-wrap > li .depth2 li a:hover {  text-decoration:none; }
 #gnb .gnb-wrap > li a.active:after { content:''; display:block; position:absolute; bottom:0; width:100%; height:3px; background:#005e95; }
-.depth2-bg { display:none; position:absolute; width:100%; max-width:1440px; height:250px; background:#558fdd; z-index:9; }
+.depth2-bg { display:none; position:absolute; width:1440px; height:250px; background:#558fdd; z-index:9; }
 
 
 /* 29 반응형 hamburger

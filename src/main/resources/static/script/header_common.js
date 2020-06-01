@@ -19,7 +19,7 @@ $(function(){
 });
 
 
-// pc
+
 var speed = 0.3;
 function pcMenu(){
   var depthBg = $('.depth2-bg');

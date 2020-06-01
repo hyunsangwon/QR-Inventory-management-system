@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/config :: configFragment"></head>
 <link rel="stylesheet" th:href="@{/css/service_order.css}">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    var _flag = true;
+
     $(function()
     {
         $('#qrCnt').keyup(function(e)// 주문 수량 입력
@@ -17,8 +20,9 @@
         $('#defaultAddr').click(function(){
             $('#newAddr').removeClass('btn-active');
             $('#defaultAddr').addClass('btn-active');
-            $('#companyAddr').val($('#h_companyAddr').val());
-            $('#companyDetailAddr').val($('#h_companyDetailAddr').val());
+            $('#div_old_addr').css('display','block');
+            $('#div_new_addr').css('display','none');
+            _flag = true;
         });
 
         $('#defaultName').click(function () {
@@ -28,16 +32,47 @@
             $('#userPhone').val($('#h_userPhone').val());
         });
 
-        $('#newAddr').click(function(){
-            $('#companyAddr').val('');
-            $('#companyDetailAddr').val('');
-        });
         $('#newName').click(function(){
             $('#userName').val('');
             $('#userPhone').val('');
         });
 
     });
+
+    function execPostCode()
+    {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+                $("[name=zipCode]").val(data.zonecode);
+                $("[name=addr]").val(fullRoadAddr);
+                $('#h_addr').val(fullRoadAddr);
+                $('#h_detailAddr').val(data.zonecode);
+            }
+        }).open();
+    }
+
 
     function qr_order()
     {
@@ -47,9 +82,6 @@
         {
             qrCnt = 0;
         }
-        console.log('maxCnt ===> '+maxCnt);
-        console.log('qrCnt ===> '+qrCnt);
-
         if (parseInt(maxCnt) < parseInt(qrCnt)) {
             alert('주문수량을 초과했습니다.');
             $('#qrCnt').val();
@@ -62,11 +94,23 @@
             $('#qrCnt').focus();
             return false;
         }
-        if($('#companyAddr').val() == '' || $('#companyDetailAddr').val() == '') {
+        if($('#companyAddr').val() == '' || $('#companyDetailAddr').val() == '')
+        {
             alert('주소를 입력해주세요.');
             $('#companyAddr').focus();
             return false;
         }
+
+        if(!_flag)
+        {
+            if($("[name=zipCode]").val() == '' || $("[name=addr]").val() == '')
+            {
+                alert('주소를 입력해주세요.');
+                $('#companyAddr').focus();
+                return false;
+            }
+        }
+
         if($('#userName').val() == '')
         {
             alert('주문자 이름을 입력해주세요');
@@ -80,12 +124,18 @@
             return false;
         }
 
-        $("input[name=addr]").val($('#companyAddr').val());
-        $("input[name=detailAddr]").val($('#companyDetailAddr').val());
+        if(_flag)
+        {
+            $("input[name=addr]").val($('#companyAddr').val());
+            $("input[name=detailAddr]").val($('#companyDetailAddr').val());
+        }
         $("input[name=orderCnt]").val($('#qrCnt').val());
         $("input[name=userName]").val($('#userPhone').val());
         $("input[name=userPhone]").val($('#userName').val());
         $("input[name=orderRequests]").val();
+
+        console.log('addr ===> '+$("input[name=addr]").val());
+        console.log('detailAddr =>'+$("input[name=detailAddr]").val());
         $('#orderForm').submit();
     }
 
@@ -100,7 +150,9 @@
             $('#companyDetailAddr').attr('disabled', false);
             $('#companyAddr').val();
             $('#companyDetailAddr').val();
-            $('#postCode').css('display','block');
+            _flag = false;
+            $('#div_old_addr').css('display','none');
+            $('#div_new_addr').css('display','block');
         }
         if(status == 'order')
         {
@@ -139,8 +191,8 @@
                 <div class="new-order-info">
                     <form th:action="@{/order/qr}" th:method="post" id="orderForm">
                         <input type="hidden" name="userSrl"  th:value="${userSrl}"/>
-                        <input type="hidden" name="addr" />
-                        <input type="hidden" name="detailAddr" />
+                        <input type="hidden" name="addr" id="h_addr"/>
+                        <input type="hidden" name="detailAddr" id="h_detailAddr"/>
                         <input type="hidden" name="orderCnt" />
                         <input type="hidden" name="userName" />
                         <input type="hidden" name="userPhone" />
@@ -164,15 +216,19 @@
                             <button id="newAddr" type="button" class="address-button" onclick="set_text('addr')">신규 배송지</button>
                         </div>
                         <!--기존 배송지 active 일 때-->
-                        <input class="order-zipCode"  id="companyAddr" type="text" style="width:706px;" th:value="${companyAddr}" disabled/>
-                        <input class="order-addr" id="companyDetailAddr" type="text" th:value="${detailAddr}" disabled/>
+                        <div id="div_old_addr" style="display: block;">
+                            <input class="order-zipCode"  id="companyAddr" type="text" style="width:706px;" th:value="${companyAddr}" disabled/>
+                            <input class="order-addr" id="companyDetailAddr" type="text" th:value="${detailAddr}" disabled/>
+                        </div>
                         <input id="h_companyAddr" type="hidden" th:value="${companyAddr}" />
                         <input id="h_companyDetailAddr" type="hidden" th:value="${detailAddr}"/>
                         <!--
                         신규 배송지 active 일 때  -->
-	          			<!--<input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
-	          			<input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />-->
-                      <!--  <button class="postCode-btn" id="postCode" type="button" onclick="execPostCode();" style="color: #666; cursor: pointer; margin-left:20px; display: none;">우편번호 검색</button>-->
+                        <div id="div_new_addr" style="display: none;">
+                            <input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
+                            <input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />
+                            <button class="postCode-btn" onclick="execPostCode();" id="postCode" type="button" style="color: #666; cursor: pointer; margin-left:20px; background-color:#fff">우편번호 검색</button>
+                        </div>
                     </div>
                     <div class="order-member">
                         <div class="order-member-text">

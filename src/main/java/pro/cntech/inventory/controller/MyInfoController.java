@@ -45,6 +45,10 @@ public class MyInfoController
         logger.debug("Param : "+userVO.toString());
         if(userVO == null) return false;
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
+        userPrincipalVO.getUserVO().setUserName(userVO.getUserName());
+
         return mainService.isUserinfoUpdate(userVO);
     }
 

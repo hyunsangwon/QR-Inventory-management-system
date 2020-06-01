@@ -1237,7 +1237,7 @@ input[type="text"]:disabled {background: #eceef4;}
         display: block;
     }*/
     .page-title-search-area .page-title {
-        width: 100% !important;
+        /*width: 100% !important;*/
     }
     .page-title-search-area .page-search {
         width: 100% !important;
