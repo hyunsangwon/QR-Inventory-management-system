@@ -358,19 +358,44 @@ function create_map()
 {
   var latitude = $('#latitude').val();
   var longitude = $('#longitude').val();
+  var companyLat = $('#companyLat').val();
+  var companyLon = $('#companyLon').val();
+
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
       };
   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-  var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
+
+ /* var markerPosition  = new kakao.maps.LatLng(latitude, longitude);
   var marker = new kakao.maps.Marker({
     position: markerPosition
   });
+  marker.setMap(map);*/
+  var innerMarkerImageSrc = "https://qr-s3.s3.ap-northeast-2.amazonaws.com/private/main-icon-map-c.svg";
+  var outerMarkerImageSrc = "https://qr-s3.s3.ap-northeast-2.amazonaws.com/private/main-icon-map-a.svg";
+  var imageSize = new kakao.maps.Size(20, 30);
 
-  marker.setMap(map);
+  var gpsMarkerImage = new kakao.maps.MarkerImage(outerMarkerImageSrc, imageSize);
+  var gpsMarker = new kakao.maps.Marker({
+    map: map,
+    position : new kakao.maps.LatLng(latitude,longitude),
+    title : "GPS 위치",
+    image : gpsMarkerImage // 마커 이미지
+  });
+  gpsMarker.setMap(map);
+  var inputMarkerImage = new kakao.maps.MarkerImage(innerMarkerImageSrc, imageSize);
+  var inputMarker = new kakao.maps.Marker({
+    map: map,
+    position : new kakao.maps.LatLng(companyLat,companyLon),
+    title : "입력 위치",
+    image : inputMarkerImage // 마커 이미지
+  });
+  inputMarker.setMap(map);
+
 }//end
+
 function delete_asset()
 {
   var qrSrl = $('#qrSrl').text();

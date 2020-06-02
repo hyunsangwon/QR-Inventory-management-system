@@ -13,7 +13,6 @@
 
     $(function(){
         $('a[name=admin_search]').css('background-color','#437ece');
-
         _nameSort  = $('#sortName').val();
         _typeSort = $('#filterName').val();
         $('#nameSort option').each(function(){
@@ -162,17 +161,21 @@
                     </table>
                 </div>
                 <div class="page_count_wrap">
-		             <span th:if="${pageHandler.prev}">
-		                 <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
-		             </span>
-                    <span class="page_num">
-				             <th:block th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
-								 	<span style="cursor:pointer" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
-							 </th:block>
-			             </span>
+                    <!--<span>
+                        <img src="list-left_next.svg" >
+                    </span>-->
+                    <span th:if="${pageHandler.prev}">
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-previous.svg}" th:id="${pageHandler.getStartPage()-1}" name="pageNum"/>
+                    </span>
+                    <span class="page_num" th:if="${size} != '0'" th:each="i,index: ${#numbers.sequence(pageHandler.getStartPage(),pageHandler.getEndPage())}">
+                        <span class="page" style="cursor:pointer;" th:text="${index.current}" th:id="${index.current}" name="pageNum">1</span>
+                    </span>
                     <span th:if="${pageHandler.next}">
-			              <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
-			          </span>
+                        <img style="cursor:pointer" th:src="@{/image/paging/list-next.svg}" th:id="${pageHandler.getEndPage()+1}" name="pageNum"/>
+                    </span>
+                    <!--<span>
+                        <img src="list-right_end.svg" >
+                    </span>-->
                 </div>
                 <!--//page_count_wrap-->
             </div>

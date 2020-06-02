@@ -183,8 +183,12 @@
                         <div class="list">GPS 추적 : <span th:text="${vo.addr}">서울시 관악구 신림동 서울대학로 123-4</span></div>
                     </div>
                     <!--//obj-info-->
+                    <!--GPS Hidden--->
                     <input type="hidden" id="latitude" th:value="${vo.latitude}"/>
                     <input type="hidden" id="longitude"th:value="${vo.longitude}"/>
+                    <input type="hidden" id="companyLat"th:value="${vo.companyLat}"/>
+                    <input type="hidden" id="companyLon"th:value="${vo.companyLon}"/>
+                    <!--END-->
                     <div id="map" style="width: 1100px; height:520px; float:left;"></div>
                 </div>
                 <!--//obj-box-->
