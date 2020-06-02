@@ -19,4 +19,5 @@ public class ObjListVO extends PagingVO
     private String objImage;
     private String auth;
     private String sortName;
+    private String filterName;
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ManagerMapper;
+import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
@@ -20,6 +21,8 @@ public class AdminService {
 
     @Autowired
     private ManagerMapper managerMapper;
+    @Autowired
+    private AwsService awsService;
 
     /*자산 담당자 기본 정보 세팅*/
     public void setMyInfo(ModelMap map,String sortName)
@@ -148,6 +151,59 @@ public class AdminService {
         PageHandler pageHandler = pageHandler(totalCnt,listVO.getPageNum(),contentNum);
         if(pageHandler == null) return null;
         return pageHandler;
+    }
+
+    public void getAssetAllList(int pageNum,String filterName,String sortName,ModelMap map) throws Exception
+    {
+        int MAX = 10;
+        int limitCount=((pageNum - 1 ) * MAX);
+        int contentNum = MAX;
+        int totalCnt = 0;
+        UserPrincipalVO userPrincipalVO = getSecurityInfo();
+        String userSrl = userPrincipalVO.getUserSrl();
+
+        ObjListVO objListVO = new ObjListVO();
+        objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum);
+        objListVO.setFilterName(filterName); objListVO.setSortName(sortName); objListVO.setUserSrl(userSrl);
+
+        List<ObjListVO> list = managerMapper.getAllAsset(objListVO);
+        totalCnt = managerMapper.getAllAssetTotalCnt(objListVO);
+        PageHandler pageHandler = pageHandler(totalCnt,pageNum,contentNum);
+
+        for(ObjListVO objList : list)
+        {
+            String status = objList.getObjStatus();
+            if(status.equals(ObjStatusCode.INNER_WAIT)) objList.setObjStatus("출고 대기");
+            if(status.equals(ObjStatusCode.OUTER_WAIT)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.RELEASE_FINISH)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.RELEASE_START)) objList.setObjStatus("출고 시작");
+            if(status.equals(ObjStatusCode.RETURN_START)) objList.setObjStatus("반납 시작");
+            if(status.equals(ObjStatusCode.RETURN_WAIT)) objList.setObjStatus("반납 대기");
+            if(status.equals(ObjStatusCode.RETURN_FINISH)) objList.setObjStatus("출고 대기");
+
+            if(objList.getModelName() == null)
+            {
+                String[] modelNameArr = objList.getModelImageName().split("/");
+                String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
+                objList.setModelName(modelName);
+                if(modelName.equals(""))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+                if(modelName.equals("인식 실패"))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+            }
+
+        }
+
+        map.addAttribute("sortName",sortName);
+        map.addAttribute("filterName",filterName);
+        map.addAttribute("pageNum",pageNum);
+        map.addAttribute("list",list);
+        map.addAttribute("size",list.size());
+        map.addAttribute("pageHandler",pageHandler);
     }
 
     public UserPrincipalVO getSecurityInfo()

@@ -8,6 +8,8 @@
 
     $(function()
     {
+        $('a[name=service]').css('background-color','#437ece');
+
         $('#qrCnt').keyup(function(e)// 주문 수량 입력
         {
             $(this).val($(this).val().replace(/[^0-9]/g,""));

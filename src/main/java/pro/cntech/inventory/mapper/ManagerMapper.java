@@ -17,4 +17,6 @@ public interface ManagerMapper
     int checkManager(UserVO userVO);
     int setUserInfo(UserVO userVO);
     int updateUserInfo(UserVO userVO);
+    List<ObjListVO>getAllAsset(ObjListVO objListVO);
+    int getAllAssetTotalCnt(ObjListVO objListVO);
 }

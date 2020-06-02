@@ -184,4 +184,59 @@
         WHERE user_srl = #{userSrl}
     </update>
 
+    <!--전체 자산 조회-->
+    <select id="getAllAsset" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
+        SELECT
+            o.obj_status AS objStatus,
+            o.obj_m AS modelName,
+            o.obj_img_mn AS modelImageName,
+            IFNULL(o.obj_kinds,'미정') AS objKinds,
+            u.user_name AS userName,
+            o.qr_srl AS qrSrl
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        WHERE u.master_srl = #{userSrl}
+        <if test='filterName eq "undefined"'>
+            AND o.obj_kinds IS NULL
+        </if>
+        <if test='filterName eq "machine"'>
+            AND o.obj_kinds = '레이저 복합기'
+        </if>
+        <if test='filterName eq "cartridge"'>
+            AND o.obj_kinds = '토너 카트리지'
+        </if>
+        <if test='sortName eq "name"'>
+            ORDER BY u.user_name ASC
+        </if>
+        <if test='sortName eq "model"'>
+            ORDER BY o.obj_m ASC
+        </if>
+        LIMIT #{limitcount},#{contentnum}
+    </select>
+
+    <select id="getAllAssetTotalCnt" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="Integer">
+        SELECT
+            COUNT(o.obj_srl)
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        WHERE u.master_srl = #{userSrl}
+        <if test='filterName eq "undefined"'>
+            AND o.obj_kinds IS NULL
+        </if>
+        <if test='filterName eq "machine"'>
+            AND o.obj_kinds = '레이저 복합기'
+        </if>
+        <if test='filterName eq "cartridge"'>
+            AND o.obj_kinds = '토너 카트리지'
+        </if>
+        <if test='sortName eq "name"'>
+            ORDER BY u.user_name ASC
+        </if>
+        <if test='sortName eq "model"'>
+            ORDER BY o.obj_m ASC
+        </if>
+    </select>
+
 </mapper>

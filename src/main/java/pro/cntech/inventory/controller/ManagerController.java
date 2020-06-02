@@ -73,12 +73,21 @@ public class ManagerController
     }
 
     /*전체 자산 조회*/
-    @GetMapping("/asset/list/sort/{sortName}")
-    public String loadAssetAllList(ModelMap map, @PathVariable("sortName") String sortName)
+    @GetMapping("/asset/list/sort/{nameSort}/type/{typeSort}/pageNum/{pageNum}")
+    public String loadAssetAllList(ModelMap map,
+                                   @PathVariable("nameSort") String nameSort,
+                                   @PathVariable("typeSort") String typeSort,
+                                   @PathVariable("pageNum") int pageNum) throws Exception
     {
-        logger.debug("[ Call /asset/all/list/sort/"+sortName+" - GET ]");
-        logger.debug("Param : "+sortName);
-
+        logger.debug("[ Call /asset/all/list/sort/"+nameSort+" - GET ]");
+        logger.debug("Param : "+nameSort);
+        logger.debug("Param : "+typeSort);
+        logger.debug("Param : "+pageNum);
+        String filterName = typeSort; String sortName = nameSort;
+        if(filterName != null && sortName != null)
+        {
+            adminService.getAssetAllList(pageNum,filterName,sortName,map);
+        }
         return MANAGER_VIEW_PREFIX+"all_obj_list";
     }
 
