@@ -292,6 +292,8 @@
         }
         /* 수정하기,수정취소 버튼 눌렀을 때*/
         $(document).ready(function(){
+            $('a[name=conf]').css('background-color','#437ece');
+
             $('#customer_phone').keyup(function(e) // 핸드폰 번호 입력
             {
                 $(this).val($(this).val().replace(/[^0-9]/g,""));

@@ -7,6 +7,9 @@
     var header = $("meta[name='_csrf_header']").attr("content");
 
     $(function(){
+
+        $('a[name=conf]').css('background-color','#437ece');
+
         $('#password').keydown(function(key){
             if(key.keyCode == 13)
             {

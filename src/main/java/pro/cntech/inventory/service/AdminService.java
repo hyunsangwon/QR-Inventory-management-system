@@ -14,6 +14,7 @@ import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -193,6 +194,28 @@ public class AdminService {
                 if(modelName.equals("인식 실패"))
                 {
                     objList.setModelName("모델명 인식 실패");
+                }
+            }
+        }
+
+        if(sortName.equals("model"))
+        {
+            String[] modelName = new String[list.size()];
+            for(int i =0; i <list.size(); i++)
+            {
+                modelName[i] = list.get(i).getModelName();
+            }
+            Arrays.sort(modelName);
+            for(int i= 0; i < list.size(); i++)
+            {
+                for(int j=0; j < list.size(); j++)
+                {
+                    if(modelName[i].equals(list.get(j).getModelName())){
+                        ObjListVO temp = list.get(j);
+                        ObjListVO temp02 = list.get(i);
+                        list.set(i,temp);
+                        list.set(j,temp02);
+                    }
                 }
             }
 

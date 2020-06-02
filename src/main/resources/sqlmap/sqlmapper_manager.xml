@@ -209,9 +209,6 @@
         <if test='sortName eq "name"'>
             ORDER BY u.user_name ASC
         </if>
-        <if test='sortName eq "model"'>
-            ORDER BY o.obj_m ASC
-        </if>
         LIMIT #{limitcount},#{contentnum}
     </select>
 

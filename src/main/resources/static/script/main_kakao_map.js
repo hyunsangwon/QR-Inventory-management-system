@@ -83,5 +83,5 @@ function closeOverlay() {
 
 function changeMarker(status)
 {
-    alert('작업중...!');
+    /*alert('작업중...!');*/
 }
