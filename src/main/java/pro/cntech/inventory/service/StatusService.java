@@ -42,6 +42,14 @@ public class StatusService
                 String[] modelNameArr = objList.getModelImageName().split("/");
                 String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
                 objList.setModelName(modelName);
+                if(modelName.equals(""))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+                if(modelName.equals("인식 실패"))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
             }
         }
 
@@ -69,11 +77,27 @@ public class StatusService
         {
             String ocrSrlName = awsService.getConvertedText(SrlNameArr[SrlNameArr.length-1]).replace("\"","");
             detailvo.setSrlName(ocrSrlName);
+            if(ocrSrlName.equals(""))
+            {
+                detailvo.setSrlName("시리얼명 인식 실패");
+            }
+            if(ocrSrlName.equals("인식 실패"))
+            {
+                detailvo.setSrlName("시리얼명 인식 실패");
+            }
         }
         if(detailvo.getModelName() == null)
         {
             String ocrModelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
             detailvo.setModelName(ocrModelName);
+            if(ocrModelName.equals(""))
+            {
+                detailvo.setModelName("모델명 인식 실패");
+            }
+            if(ocrModelName.equals("인식 실패"))
+            {
+                detailvo.setModelName("모델명 인식 실패");
+            }
         }
 
         if(detailvo.getAuth().equals("manager"))

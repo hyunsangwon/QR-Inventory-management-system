@@ -351,8 +351,6 @@ function pageClick(obj)
   var qrSrl = $('#qrSrl').text();
   var pageNum = obj.id;
   var jsonData = { "qrSrl" : qrSrl ,"pageNum" : pageNum};
-
-
   ajax_call_obj_history_list(jsonData);
   ajax_call_obj_history_page(jsonData);
 }//end
@@ -379,8 +377,6 @@ function delete_asset()
   var jsonData = { "qrSrl" : qrSrl};
   if(qrSrl != null || qrSrl != '')
   {
-    confirm(qrSrl+'자산을 삭제하시겠습니까?')
-    {
       $.ajax
       ({
         type: 'POST',
@@ -406,6 +402,5 @@ function delete_asset()
           console.log('error ====> ' + error);
         }
       });
-    }
   }
 } //end

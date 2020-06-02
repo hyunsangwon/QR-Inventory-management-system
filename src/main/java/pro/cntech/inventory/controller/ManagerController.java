@@ -72,4 +72,14 @@ public class ManagerController
         return adminService.isControlUser(userVO,"update");
     }
 
+    /*전체 자산 조회*/
+    @GetMapping("/asset/list/sort/{sortName}")
+    public String loadAssetAllList(ModelMap map, @PathVariable("sortName") String sortName)
+    {
+        logger.debug("[ Call /asset/all/list/sort/"+sortName+" - GET ]");
+        logger.debug("Param : "+sortName);
+
+        return MANAGER_VIEW_PREFIX+"all_obj_list";
+    }
+
 }
