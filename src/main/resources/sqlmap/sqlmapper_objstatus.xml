@@ -132,12 +132,12 @@
     <!--자산 히스토리 토탈 카운트-->
     <select id="getObjHistoryCnt" resultType="Integer" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
         SELECT
-            count(*)
+        COUNT(*)
         FROM obj_log AS ol
         INNER JOIN obj AS o
-            ON ol.obj_srl = o.obj_srl
-        INNER JOIN users AS u
-            ON u.user_srl = o.user_srl
+        ON ol.qr_srl = o.qr_srl
+        INNER JOIN users u
+        ON o.user_srl = u.user_srl
         WHERE ol.qr_srl = #{qrSrl}
     </select>
     <!--자산 삭제-->

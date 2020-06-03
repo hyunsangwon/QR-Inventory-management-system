@@ -3,6 +3,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/config :: configFragment"></head>
 <link rel="stylesheet" th:href="@{/css/detail_obj.css}">
+<style>
+    .category, .category *{margin:0;padding:0;color:#000;}
+    .category {position:absolute;overflow:hidden; top:1270px;left:80px;width:300px;height:50px;z-index:10;font-size:12px;text-align:center;}
+    .category li{list-style:none;float:left;width:120px;height:34px;padding-top:5px;cursor:pointer; background-color: rgba(255, 255, 255, 0.9); margin:0 4px; font-size:18px; border-radius:3px; font-weight:600;}
+</style>
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
 <script th:src="@{/script/detail_obj.js}" type="text/javascript"></script>
@@ -189,7 +194,20 @@
                     <input type="hidden" id="companyLat"th:value="${vo.companyLat}"/>
                     <input type="hidden" id="companyLon"th:value="${vo.companyLon}"/>
                     <!--END-->
-                    <div id="map" style="width: 1100px; height:520px; float:left;"></div>
+                    <!--KAKAO MAP-->
+                    <div id="map" style="width: 1100px; height:520px; float:left; position: relative;"></div>
+                    <div class="category">
+                        <ul>
+                            <li id="coffeeMenu">
+                                <span style="margin-right:5px;"><img th:src="@{/image/main/main-icon-map-c.svg}"></span>
+                                입력 위치
+                            </li>
+                            <li id="storeMenu">
+                                <span style="margin-right:5px;"><img th:src="@{/image/main/main-icon-map-a.svg}"></span>
+                                GPS 위치
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <!--//obj-box-->
                 <div class="obj-box" style="width:100%;">

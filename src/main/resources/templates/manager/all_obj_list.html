@@ -3,8 +3,13 @@
 <head th:replace="fragments/config :: configFragment"></head>
 <link rel="stylesheet" th:href="@{/css/delivery.css}">
 <style>
-    .selectTable{  float:right; margin-bottom:25px;}
-    .selectTable select{font-size:24px; width:200px; border:none; margin-right:5px; background:url('/image/common-icon-sourting-down.svg') 90% 50%; background-repeat: no-repeat;}
+    .selectTable{  float:right; margin-bottom:25px; position: relative; top:-25px;
+        cursor: pointer;}
+    .selectTable select{ cursor:pointer; font-size:24px; width:200px; border:none; margin-right:5px; background:url('/image/common-icon-sourting-down.svg') 90% 50%; background-repeat: no-repeat;}
+    option:hover { cursor: pointer; }
+    select, option {
+        text-align:right;
+    }
 </style>
 <script th:src="@{/script/delivery.js}" type="text/javascript"></script>
 <script>
@@ -106,6 +111,18 @@
                                 </div>
 
                                 <!--default-->
+                                <div class="selectTable">
+                                    <select id="nameSort">
+                                        <option value="model">모델명순</option>
+                                        <option value="name">관리자 이름순</option>
+                                    </select>
+                                    <select id="typeSort">
+                                        <option value="all">전체</option>
+                                        <option value="undefined">미정</option>
+                                        <option value="machine">레이저복합기</option>
+                                        <option value="cartridge">토너카트리지</option>
+                                    </select>
+                                </div>
                             </div>
                             <!--//regiseter-panel-title-->
                         </div>
@@ -115,18 +132,6 @@
                 </div>
                 <!--//panel-wrap-register-->
                 <div id="regisster_waitList">
-                    <div class="selectTable">
-                        <select id="nameSort">
-                            <option value="model">모델명순</option>
-                            <option value="name">관리자 이름순</option>
-                        </select>
-                        <select id="typeSort">
-                            <option value="all">전체</option>
-                            <option value="undefined">미정</option>
-                            <option value="machine">레이저복합기</option>
-                            <option value="cartridge">토너카트리지</option>
-                        </select>
-                    </div>
                     <table style="border-bottom:2px solid #d7d7d7;">
                         <colgroup>
                             <col width="10%" />
