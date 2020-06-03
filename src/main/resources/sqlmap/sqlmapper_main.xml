@@ -39,9 +39,9 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','release_finish','return_start')
+            AND o.obj_status IN ('return_finish','inner_wait','return_wait')
             )
-        AS outerCount,
+        AS innerCount,
         (
             SELECT
                 COUNT(o.obj_srl)
@@ -49,9 +49,9 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('inner_wait','return_wait','return_finish','release_start')
+            AND o.obj_status IN ('outer_wait','return_start','release_finish','release_start')
         )
-        AS innerCount
+        AS outerCount
         FROM obj AS o
         INNER JOIN users AS u
         ON o.user_srl = u.user_srl

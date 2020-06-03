@@ -38,6 +38,10 @@ public class MainService implements UserDetailsService
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException
     {
         UserVO userVO = mainMapper.getUserInfo(phone);
+
+        if(userVO == null) {
+            throw new UsernameNotFoundException("User Not Found");
+        }
         return new UserPrincipalVO(userVO);
     }
 
