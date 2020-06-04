@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pro.cntech.inventory.mapper.MainMapper;
+import pro.cntech.inventory.util.ContactFilter;
 import pro.cntech.inventory.util.MapUtil;
 import pro.cntech.inventory.vo.*;
 
@@ -50,7 +51,7 @@ public class MainService implements UserDetailsService
         List<MarkerVO> list = mainMapper.getCompanyGPS(userVO);
         for(MarkerVO vo : list)
         {
-           vo.setCompanyPhone(setCompanyPhoneNumber(vo.getCompanyPhone()));
+           vo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(vo.getCompanyPhone()));
         }
 
         return list;
@@ -67,44 +68,6 @@ public class MainService implements UserDetailsService
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         return userPrincipalVO;
-    }
-
-    public String setCompanyPhoneNumber(String phone)
-    {
-        String firstNumber = null;
-        String secondNumber = null;
-        String lastNumber= null;
-
-        if(phone.length() == 11)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,7);
-            lastNumber= phone.substring(7,11);
-        }
-        if(phone.length() == 9)
-        {
-            firstNumber = phone.substring(0,2);
-            secondNumber = phone.substring(2,5);
-            lastNumber= phone.substring(5,9);
-        }
-        if(phone.length() == 8)
-        {
-            firstNumber = phone.substring(0,4);
-            secondNumber = phone.substring(4,8);
-            return firstNumber+"-"+secondNumber;
-        }
-        if(phone.length() == 10)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,6);
-            lastNumber= phone.substring(6,10);
-        }
-        if(phone.length() > 11 || phone.length() < 8)
-        {
-            return phone;
-        }
-
-        return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 
     public boolean isUserinfoUpdate(UserVO userVO)

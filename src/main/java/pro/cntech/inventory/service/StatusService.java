@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
+import pro.cntech.inventory.util.ContactFilter;
 import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.*;
@@ -64,8 +65,8 @@ public class StatusService
     {
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
 
-        detailvo.setUserPhone(setPhoneNumber(detailvo.getUserPhone()));
-        detailvo.setCompanyPhone(setPhoneNumber(detailvo.getCompanyPhone()));
+        detailvo.setUserPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
+        detailvo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
 
         String[] SrlNameArr = detailvo.getObjSrlImage().split("/");
         String[] modelNameArr = detailvo.getObjModelImage().split("/");
@@ -227,45 +228,6 @@ public class StatusService
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
         return userPrincipalVO;
-    }
-
-    public String setPhoneNumber(String phone)
-    {
-        String firstNumber = null;
-        String secondNumber = null;
-        String lastNumber = null;
-
-
-        if(phone.length() == 11)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,7);
-            lastNumber= phone.substring(7,11);
-        }
-        if(phone.length() == 9)
-        {
-            firstNumber = phone.substring(0,2);
-            secondNumber = phone.substring(2,5);
-            lastNumber= phone.substring(5,9);
-        }
-        if(phone.length() == 8)
-        {
-            firstNumber = phone.substring(0,4);
-            secondNumber = phone.substring(4,8);
-            return firstNumber+"-"+secondNumber;
-        }
-        if(phone.length() == 10)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,6);
-            lastNumber= phone.substring(6,10);
-        }
-        if(phone.length() > 11 || phone.length() < 8)
-        {
-            return phone;
-        }
-
-        return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 
 }

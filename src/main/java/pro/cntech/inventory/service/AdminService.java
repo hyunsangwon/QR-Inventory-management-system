@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ManagerMapper;
+import pro.cntech.inventory.util.ContactFilter;
 import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
@@ -33,7 +34,7 @@ public class AdminService {
         String auth = user.getAuth();
 
         UserVO myInfo = managerMapper.getUserInfo(userSrl,auth);
-        if(myInfo.getPhone() != null) myInfo.setPhone(setPhoneNumber(myInfo.getPhone()));
+        if(myInfo.getPhone() != null) myInfo.setPhone(ContactFilter.getInstance().setPhoneNumber(myInfo.getPhone()));
 
         List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl,sortName);
         ObjListVO param = new ObjListVO();
@@ -55,46 +56,8 @@ public class AdminService {
     public UserVO getAdminInfo(UserVO userVO)
     {
         UserVO vo = managerMapper.getUserInfo(userVO.getUserSrl(),userVO.getAuth());
-        vo.setPhone(setPhoneNumber(vo.getPhone()));
+        vo.setPhone(ContactFilter.getInstance().setPhoneNumber(vo.getPhone()));
         return vo;
-    }
-
-    public String setPhoneNumber(String phone)
-    {
-        String firstNumber = null;
-        String secondNumber = null;
-        String lastNumber= null;
-
-        if(phone.length() == 11)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,7);
-            lastNumber= phone.substring(7,11);
-        }
-        if(phone.length() == 9)
-        {
-            firstNumber = phone.substring(0,2);
-            secondNumber = phone.substring(2,5);
-            lastNumber= phone.substring(5,9);
-        }
-        if(phone.length() == 8)
-        {
-            firstNumber = phone.substring(0,4);
-            secondNumber = phone.substring(4,8);
-            return firstNumber+"-"+secondNumber;
-        }
-        if(phone.length() == 10)
-        {
-            firstNumber = phone.substring(0,3);
-            secondNumber = phone.substring(3,6);
-            lastNumber= phone.substring(6,10);
-        }
-        if(phone.length() > 11 || phone.length() < 8)
-        {
-            return phone;
-        }
-
-        return firstNumber+"-"+secondNumber+"-"+lastNumber;
     }
 
     public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
