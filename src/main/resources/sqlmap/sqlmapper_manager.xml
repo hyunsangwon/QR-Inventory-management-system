@@ -23,11 +23,11 @@
         ON manager.master_srl = holder.user_srl
         <if test='auth eq "holder"'>
             WHERE manager.master_srl = ${userSrl}
-            AND o.obj_status IN ('inner_wait','return_finish')
+            AND o.obj_status IN ('warehousing','warehousing_new')
         </if>
         <if test='auth eq "manager"'>
             WHERE manager.user_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+            AND o.obj_status IN ('warehousing_wait','release_new','release','shipping')
         </if>
 
     </select>
@@ -51,7 +51,7 @@
         ON u.user_srl = o.user_srl
         WHERE u.master_srl = #{userSrl}
         AND u.auth != 'holder'
-        AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+        AND o.obj_status IN ('release_new','release','warehousing_wait','shipping')
         GROUP BY u.user_srl
         ) AS objCnt
         ON u.user_srl = objCnt.userSrl
@@ -92,7 +92,7 @@
                 AND o.obj_status IN ('inner_wait','return_finish')
             </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('inner_wait','return_finish')
+                AND o.obj_status IN ('warehousing','warehousing_new')
             </if>
         </if>
         <if test='auth eq "manager"'>
@@ -107,7 +107,7 @@
                 AND o.obj_status = 'return_start'
             </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+                AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
             </if>
         </if>
         ORDER BY o.create_at DESC
@@ -126,7 +126,7 @@
                 AND o.obj_status IN ('inner_wait','return_finish')
             </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('inner_wait','return_finish')
+                AND o.obj_status IN ('warehousing','warehousing_new')
             </if>
         </if>
         <if test='auth eq "manager"'>
@@ -141,7 +141,7 @@
                 AND o.obj_status = 'return_wait'
             </if>
             <if test='sortName eq "all"'>
-                AND o.obj_status IN ('outer_wait','release_finish','release_start','return_start','return_wait')
+                AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
             </if>
         </if>
     </select>

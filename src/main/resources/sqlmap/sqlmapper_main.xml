@@ -39,7 +39,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('return_finish','inner_wait','return_wait')
+            AND o.obj_status IN ('warehousing_new','warehousing_wait','warehousing')
             )
         AS innerCount,
         (
@@ -49,7 +49,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('outer_wait','return_start','release_finish','release_start')
+            AND o.obj_status IN ('release_new','release','shipping')
         )
         AS outerCount
         FROM obj AS o

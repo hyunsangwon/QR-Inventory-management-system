@@ -148,7 +148,6 @@ public class MainService implements UserDetailsService
             certificateVO.setCertificateImage(awsS3Url+s3bucketPath+imageName+".jpg");
             certificateVO.setUserSrl(userSrl);
             mainMapper.setCertificate(certificateVO);
-
             awsService.uploadObject(file[i],s3bucketPath,imageName+".jpg");
         }
     }

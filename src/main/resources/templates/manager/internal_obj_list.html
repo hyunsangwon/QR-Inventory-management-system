@@ -17,12 +17,12 @@
         $('.remark_check').hide();
 
         var objStatus = $('#objStatus').val();
-        if('return_finish' == objStatus)
+        if('warehousing' == objStatus)
         {
             $('#data_tab_1').addClass('current');
             $('#tab-1').addClass('current');
         }
-        if('return_wait' == objStatus)
+        if('warehousing_wait' == objStatus)
         {
             $('#data_tab_2').addClass('current');
             $('#tab-2').addClass('current');
@@ -152,11 +152,11 @@
         {
             var pageNum = $(this).attr('id');
             var objStatus = $('#objStatus').val();
-            if('return_finish' == objStatus)
+            if('warehousing' == objStatus)
             {
                 location.href="/obj/status/return_finish/list/"+pageNum;
             }
-            if('return_wait' == objStatus)
+            if('warehousing_wait' == objStatus)
             {
                 location.href="/obj/status/return_wait/list/"+pageNum;
             }
@@ -166,11 +166,11 @@
         {
             var pageNum = $(this).attr('id');
             var objStatus = $('#objStatus').val();
-            if('return_finish' == objStatus)
+            if('warehousing' == objStatus)
             {
                 location.href="/obj/status/return_finish/list/"+pageNum;
             }
-            if('return_wait' == objStatus)
+            if('warehousing_wait' == objStatus)
             {
                 location.href="/obj/status/return_wait/list/"+pageNum;
             }
@@ -267,8 +267,8 @@
         <!-- tab content -->
         <div id="tab_content_wrap">
             <ul class="tabs">
-                <li class="tab-link" data-tab="tab-1" id="data_tab_1">출고 대기</li>
-                <li class="tab-link" data-tab="tab-2" id="data_tab_2">반납 완료</li>
+                <li class="tab-link" data-tab="tab-1" id="data_tab_1">입고 자산</li>
+                <li class="tab-link" data-tab="tab-2" id="data_tab_2">재입고 대기</li>
             </ul>
             <input type="hidden" id="objStatus" th:value="${objStatus}"/>
             <input type="hidden" id="pageNum" th:value="${pageNum}"/>
@@ -308,7 +308,7 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_waitList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_finish'}">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'warehousing'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -344,7 +344,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="page_count_wrap" th:if="${objStatus eq 'return_finish'}">
+                <div class="page_count_wrap" th:if="${objStatus eq 'warehousing'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->
@@ -394,7 +394,7 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_completeList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'return_wait'}">
+                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'warehousing_wait'}">
                         <colgroup>
                             <col width="5%" />
                             <col width="15%" />
@@ -429,7 +429,7 @@
                     </table>
                 </div>
                 <!--//regisster_completeList-->
-                <div class="page_count_wrap" th:if="${objStatus eq 'return_wait'}">
+                <div class="page_count_wrap" th:if="${objStatus eq 'warehousing_wait'}">
                     <!--<span>
                         <img src="list-left_next.svg" >
                     </span>-->

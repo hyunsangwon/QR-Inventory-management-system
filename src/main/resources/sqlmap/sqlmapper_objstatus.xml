@@ -19,19 +19,16 @@
         INNER JOIN company AS c
             ON o.company_srl = c.company_srl
             WHERE u.master_srl = #{userSrl}
-        <if test='objStatus eq "return_finish"'>
-            AND obj_status IN ('return_finish','inner_wait')
+        <if test='objStatus eq "warehousing"'>
+            AND obj_status IN ('warehousing','warehousing_new')
         </if>
-        <if test='objStatus eq "release_finish"'>
-            AND obj_status IN ('release_finish','outer_wait')
+        <if test='objStatus eq "release"'>
+            AND obj_status IN ('release','release_new')
         </if>
-        <if test='objStatus eq "return_start"'>
+        <if test='objStatus eq "warehousing_wait"'>
             AND obj_status = #{objStatus}
         </if>
-        <if test='objStatus eq "return_wait"'>
-            AND obj_status = #{objStatus}
-        </if>
-        <if test='objStatus eq "release_start"'>
+        <if test='objStatus eq "shipping"'>
             AND obj_status = #{objStatus}
         </if>
         ORDER BY obj_status_at DESC
@@ -45,19 +42,16 @@
         INNER JOIN users AS u
         ON o.user_srl = u.user_srl
         WHERE u.master_srl = #{userSrl}
-        <if test='objStatus eq "return_finish"'>
-            AND obj_status IN ('return_finish','inner_wait')
+        <if test='objStatus eq "warehousing"'>
+            AND obj_status IN ('warehousing','warehousing_new')
         </if>
-        <if test='objStatus eq "release_finish"'>
-            AND obj_status IN ('release_finish','outer_wait')
+        <if test='objStatus eq "release"'>
+            AND obj_status IN ('release','release_new')
         </if>
-        <if test='objStatus eq "return_start"'>
+        <if test='objStatus eq "warehousing_wait"'>
             AND obj_status = #{objStatus}
         </if>
-        <if test='objStatus eq "return_wait"'>
-            AND obj_status = #{objStatus}
-        </if>
-        <if test='objStatus eq "release_start"'>
+        <if test='objStatus eq "shipping"'>
             AND obj_status = #{objStatus}
         </if>
     </select>

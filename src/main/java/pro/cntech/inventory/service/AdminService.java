@@ -137,13 +137,12 @@ public class AdminService {
         for(ObjListVO objList : list)
         {
             String status = objList.getObjStatus();
-            if(status.equals(ObjStatusCode.INNER_WAIT)) objList.setObjStatus("출고 대기");
-            if(status.equals(ObjStatusCode.OUTER_WAIT)) objList.setObjStatus("출고 완료");
-            if(status.equals(ObjStatusCode.RELEASE_FINISH)) objList.setObjStatus("출고 완료");
-            if(status.equals(ObjStatusCode.RELEASE_START)) objList.setObjStatus("출고 시작");
-            if(status.equals(ObjStatusCode.RETURN_START)) objList.setObjStatus("반납 시작");
-            if(status.equals(ObjStatusCode.RETURN_WAIT)) objList.setObjStatus("반납 대기");
-            if(status.equals(ObjStatusCode.RETURN_FINISH)) objList.setObjStatus("출고 대기");
+            if(status.equals(ObjStatusCode.RELEASE)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.NEW_RELEASE)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.WAREHOUSING_WAIT)) objList.setObjStatus("입고 대기");
+            if(status.equals(ObjStatusCode.WAREHOUSING)) objList.setObjStatus("입고 완료");
+            if(status.equals(ObjStatusCode.NEW_WAREHOUSING)) objList.setObjStatus("입고 완료");
+            if(status.equals(ObjStatusCode.SHIPPING)) objList.setObjStatus("배송 중");
 
             if(objList.getModelName() == null)
             {

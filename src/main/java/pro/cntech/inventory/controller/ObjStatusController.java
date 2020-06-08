@@ -37,11 +37,11 @@ public class ObjStatusController
         obj.setObjStatus(status);
         statusService.getObjStatusList(model,obj);
 
-        if(ObjStatusCode.RETURN_WAIT.equals(status) || ObjStatusCode.RETURN_FINISH.equals(status))
+        if(ObjStatusCode.WAREHOUSING.equals(status) || ObjStatusCode.WAREHOUSING_WAIT.equals(status))
         {
-            return MANAGER_VIEW_PREFIX+"internal_obj_list";
+            return MANAGER_VIEW_PREFIX+"internal_obj_list"; //재고 자산
         }
-        return MANAGER_VIEW_PREFIX+"external_obj_list";
+        return MANAGER_VIEW_PREFIX+"external_obj_list"; //운영 자산
     }
 
     /*자산 상세보기*/

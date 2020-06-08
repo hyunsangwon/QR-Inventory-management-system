@@ -51,6 +51,7 @@ public class StatusService
                 {
                     objList.setModelName("모델명 인식 실패");
                 }
+
             }
         }
 
@@ -67,7 +68,6 @@ public class StatusService
 
         detailvo.setUserPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
         detailvo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
-
         String[] SrlNameArr = detailvo.getObjSrlImage().split("/");
         String[] modelNameArr = detailvo.getObjModelImage().split("/");
         if(detailvo.getObjKinds() == null)
@@ -138,7 +138,7 @@ public class StatusService
         {
             for(ObjListVO listVO: objArrayVO.getParam())
             {
-                listVO.setObjStatus(ObjStatusCode.RETURN_FINISH); //출고 대기
+                listVO.setObjStatus(ObjStatusCode.WAREHOUSING); //출고 대기
                 insertObjLog(listVO); //로그 저장
                 rows = objStatusMapper.updateObjStatus(listVO);
             }
