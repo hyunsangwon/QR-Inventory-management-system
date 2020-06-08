@@ -287,20 +287,25 @@
 							<div class="circle"></div>
 							<span class="title">자산 관리 현황</span>
 						</div>
-						<div id="assetSelectBox" class="filter-area-panel" style="position:relative; top:-29px; padding:0; text-align:right;">
-		 				<!--자산 담당자를 클릭했을 경우 나오는 select-->
+						
+						<div id="assetSelectBox" class="filter-area-panel" style="">
+							<!-- <img th:src="@{/image/main/main-icon-search.svg}" style="position:relative; top:-50px; cursor:pointer;"></img>-->
+							<input type="text" name=""  size="20" class="search-input" onFocus="$(this).animate({width:'19em'},300)" onBlur="$(this).animate({width:'5em'},300)" >
+							<!-- <input type="text" id="" class="page-in-search" placeholder="업체 검색하기">
+							<img th:src="@{/image/main/main-icon-search.svg}" style="cursor:pointer;"/></input> -->
+		 				<!--자산 담당자를 클릭했을 경우 나오는 select
                         <select id="holderOption" th:if="${assetListSize} != '0'">
                             <option value="all"> 전체 관리 자산 </option>
                             <option value="return_finish"> 출고 대기 </option>
-                           <!-- <option value="return_wait"> 반납 승인 필요 </option>-->
+                           <!-- <option value="return_wait"> 반납 승인 필요 </option>
                         </select>
-                        <!--자산 관리자를 클릭했을 경우 나오는 select  -->
+                        <!--자산 관리자를 클릭했을 경우 나오는 select 
                         <select id="managerOption">
                             <option value="all"> 전체 관리 자산 </option>
                             <option value="release_finish"> 출고 완료 </option>
 		 				    <option value="return_start"> 반납 시작 </option>
                             <option value="return_wait"> 반납 승인 필요 </option>
-                        </select>
+                        </select> -->
                         </div>
 			             <!-- // filter-area-->
 					</div>
@@ -346,6 +351,9 @@
                             </div>
                             <div class="date" th:text="${list.statusAt}">
                                 2020.5.24, 10시 22분
+                            </div>
+                            <div class="date" th:text="${list.statusAt}">
+                                <span>출고날짜 :</span> 2020.5.24
                             </div>
                         </div>
                     </div>

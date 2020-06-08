@@ -92,7 +92,7 @@
             </div>
             <!--//panel-wrap-all-->
             <div id="panel-wrap-quick">
-                <div class="panel-heading" style="padding-bottom:97px !important; height:26px !important;">
+                <div class="panel-heading" style="padding-bottom:61px !important; height:26px !important;">
                     <div class="panel-group" >
                         <div class="circle"></div>
                         <span class="title">주요 기능 즐겨찾기</span>
@@ -102,18 +102,25 @@
                 </div>
                 <!--//panel-heading-->
                 <div class="quick-btn">
-                    <div class="qbtn" id="orderPage" style="margin-bottom:45px;">
+                	<div class="qbtn" id="approvalPage">
+                        <div class="qtitle" style="border-bottom:1px solid #fff;">관리자 목록 이동</div>
+                        <div class="qimg" style="border-bottom:1px solid #fff;">
+                           <img th:src="@{/image/main/home-quick-icon-people.svg}" alt="관리자 목록 이동" width="48px"/>
+                        </div>
+                    </div>
+                    <div class="qbtn" id="orderPage" >
                         <div class="qtitle" style="border-bottom:1px solid #fff;">QR 스티커 주문</div>
                         <div class="qimg" style="border-bottom:1px solid #fff;">
                             <img th:src="@{/image/main/home-quick-icon-order.svg}" alt="QR스티커주문" width="48px"/>
                         </div>
                     </div>
                     <div class="qbtn" id="approvalPage">
-                        <div class="qtitle" style="border-bottom:1px solid #fff;">반납 완료 승인</div>
+                        <div class="qtitle" style="border-bottom:1px solid #fff;">재입고 자산 승인</div>
                         <div class="qimg" style="border-bottom:1px solid #fff;">
-                           <img th:src="@{/image/main/home-quick-icon-check.svg}" alt="반납 완료 승인" width="48px"/>
+                           <img th:src="@{/image/main/home-quick-icon-check.svg}" alt="재입고 자산 승인" width="48px"/>
                         </div>
                     </div>
+                    
                 </div>
                 <!-- //quick-btn -->
             </div>

@@ -99,7 +99,7 @@ a:hover                             {text-decoration:none;}
 
 /* quick wrap, btn */
 #panel-wrap-quick					{width:29.2%;  height:404px; float:left; background-color: #eceef4;}
-#panel-wrap-quick .qbtn				{height:48px; cursor: pointer; margin-bottom:20px;}
+#panel-wrap-quick .qbtn				{height:48px; cursor: pointer; margin-bottom:23px;}
 #panel-wrap-quick .qimg				{width:48px; height:37px; padding-top:10px; padding-left:58px; float:left;}
 #panel-wrap-quick .qtitle			{width:170px;  padding:10px 0 10px 0; margin-left:58px; font-weight: 600; font-size:1.5em; float: left;}
 #panel-wrap-quick .qlink			{width:240px; float:left; padding:11px 17px 33px 0;font-size:1.5em; color:#727272;}
