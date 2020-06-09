@@ -106,7 +106,7 @@ public class ManagerController
     }
 
     /*전체 자산 조회 EXCEP download*/
-    @GetMapping("/asset/list/excel/download")
+    @PostMapping("/asset/list/excel/download")
     public void downloadExcelFile(HttpServletResponse response) throws Exception
     {
         response.setContentType("ms-vnd/excel");

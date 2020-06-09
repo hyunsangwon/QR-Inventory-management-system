@@ -4,27 +4,27 @@
 #title-wrap {
     width: 100%;
     max-width: 1440px;
-    }
+}
 
 .page-title-search-area {
     width: 100%;
     max-width: 1440px;
     height: 120px;
     background-color: #437ece;
-    }
+}
 
 .page-title-search-area .page-title {
     width: 50%;
     float: left;
     padding: 43px 0;
     color: #fff;
-    }
+}
 
 .page-title-search-area .page-title .all-company {
     margin-left: 40px;
     font-size: 1.75em;
     font-weight:600;
-    }
+}
 
 .page-title-search-area .page-search {
     width: 50%;
@@ -32,12 +32,12 @@
     padding: 42px 0;
     color: #fff;
     text-align: right;
-    }
+}
 
 .page-title-search-area .page-search .search {
     margin-right: 54px;
     font-size: 1.6em;
-    }
+}
 
 .page-title-search-area .page-search .page-in-search {
     background-color: #437ece;
@@ -46,7 +46,7 @@
     text-align: right;
     width: 70%;
     font-weight: 400;
-    }
+}
 
 
 #tab_content_wrap {
@@ -56,7 +56,7 @@
     max-width: 1440px;
     background-color: #eceef4;
     text-align: center;
-    }
+}
 
 ul.tabs {
     width: 100%;
@@ -65,7 +65,7 @@ ul.tabs {
     padding: 0px;
     float: left;
     list-style: none;
-    }
+}
 
 ul.tabs li {
     width: 33%;
@@ -76,11 +76,11 @@ ul.tabs li {
     font-size: 24px;
     cursor: pointer;
     font-weight: 600;
-    }
+}
 
 ul.tabs li.current {
     border-bottom: 10px solid #c0c6d4;
-    }
+}
 
 .tab-content {
     min-height: 500px;
@@ -89,16 +89,16 @@ ul.tabs li.current {
     overflow: hidden;
     display: none;
 
-    }
+}
 
 .tab-content.current {
     display: inherit;
-    }
+}
 
 
 .text_left {
     text-align: left;
-    }
+}
 
 /* 자산선택, 반납 승인 버튼*/
 .select_btn, .approve_btn{
@@ -121,18 +121,19 @@ ul.tabs li.current {
 /* 담보물 관리 현황 */
 
 .search-input {
-    width: 5em;
+    width: 10em;
     height: 50px;
     cursor: pointer;
     border-radius: 3em;
     margin-right: 0px;
-    padding: 2px 4em 2px 2em;
+    padding: 2px 2em 2px 2.5em;
     border: none;
     /* background-color:#fafbfc; */
     position: relative;
     bottom: 40px;
-    background: url('/image/main/main-icon-search.svg') no-repeat 100% 50%;
+    background: url('/image/main/main-icon-search.svg') no-repeat 0% 50%;
     font-size:23px;
+    margin-left:130px;
 }
 
 
@@ -146,20 +147,20 @@ input:focus {
     height:38px;
     float: left;
     margin-bottom:38px;
-    }
+}
 
 
 .regiseter-panel-group {
     width: 100%;
     height:50px;
     /* line-height: 68px; */
-    }
+}
 
 .regiseter-panel-title {
     width: 100%;
     height: 30px;
     float: left;
-  }
+}
 
 
 
@@ -171,32 +172,32 @@ input:focus {
     float: left;
     margin-right: 15px;
     margin-top: 10px;
-    }
+}
 
 .regiseter-panel-heading .regiseter-panel-group .regiseter-panel-title .title {
     font-size: 24px;
     color: #112287;
     font-weight: 600;
-    }
+}
 
 .regiseter-panel-heading .regiseter-panel-group .regiseter-panel-title .panel-text {
     font-size: 1em;
     margin-left: 20px;
     margin-top: 5px;
     color: #112287;
-    }
+}
 
 .section-box.active {
     background-color: #fafbfc;
     color: #000;
-    }
+}
 
 select {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    }
+}
 
 select::-ms-expand {
     display: none;
@@ -218,7 +219,7 @@ select::-ms-expand {
     font-size: 1.6em;
     background: url('/static/image/total_company/common-icon-sourting-down.svg') 100% 50%;
     background-repeat: no-repeat;
-    }
+}
 
 .event_search {
     width: 5%;
@@ -231,12 +232,12 @@ select::-ms-expand {
 }
 
 .event_search img {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 input[type="checkbox"]{
-   transform: scale(2);
+    transform: scale(2);
     cursor: pointer;
 }
 table {
@@ -245,11 +246,11 @@ table {
     margin: 50px auto;
     line-height: 37px;
     border-bottom: 2px solid #d7d7d7;
-    }
+}
 
 tr {
     background: #fff;
-    }
+}
 
 th {
     height: 82px;
@@ -259,17 +260,17 @@ th {
     border-bottom: 2px solid #d7d7d7;
     text-align: center;
     font-size: 24px;
-    }
+}
 
 tbody tr {
     cursor: pointer;
-    }
+}
 
 
 tbody tr:hover {
     background-color: #eceef4;
     opacity: .8;
-    }
+}
 
 tbody td {
     color: #000000;
@@ -278,7 +279,7 @@ tbody td {
     text-align: center;
     font-size: 24px;
     letter-spacing: -0.035em;
-    }
+}
 
 /*페이지 네비게이션*/
 .page_count_wrap {
@@ -286,20 +287,20 @@ tbody td {
     height: 60px;
     margin-top:60px;
     margin-bottom:10px;
-    }
+}
 
 .page_num {
     font-size: 24px;
     vertical-align: middle;
     padding: 0px 22px 0px 22px;
-    }
+}
 
 #page_start {
     color: #000000;
     font-family: 'NanumSquare';
     font-weight: 700;
     padding-right:5px;
-  }
+}
 
 #page{padding:0 10px;}
 
@@ -307,14 +308,14 @@ tbody td {
     color: #626569;
     font-family: 'NanumSquare';
     font-weight: 400;
-  }
+}
 
 #page_total {
     color: #626569;
     font-family: 'NanumSquare';
     font-weight: 400;
     padding-left:5px;
-  }
+}
 
 
 /* 반응형
