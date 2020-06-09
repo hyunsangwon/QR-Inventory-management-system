@@ -340,7 +340,7 @@
                 <!-- 출고 대기 -->
               <th:block th:unless="${assetListSize} == '0'">
                   <th:block th:each="list : ${assetList}">
-                    <div class="item-wait" th:if="${list.objStatus eq 'return_finish'|| list.objStatus eq 'inner_wait'}"
+                    <div class="item-wait" th:if="${list.objStatus eq 'warehousing_new'|| list.objStatus eq 'warehousing'}"
                          th:id="${list.qrSrl}" th:onclick="load_detail_page(this)">
                         <div class="item">
                             <img th:src="@{${list.objImage}}">
@@ -357,7 +357,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item-return-approve" th:if="${list.objStatus eq 'return_wait'}"
+                    <div class="item-return-approve" th:if="${list.objStatus eq 'warehousing_wait'}"
                          th:id='${list.qrSrl}' th:onclick="load_detail_page(this)">
                         <div class="item">
                             <img th:src="@{${list.objImage}}">

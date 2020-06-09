@@ -158,7 +158,7 @@ function ajax_admin_asset_list(data)
                 {
                     if(data[i].auth == 'holder') //자산 소유자 (반납 완료, 내부 등록)
                     {
-                        if(data[i].objStatus == 'return_finish' || data[i].objStatus == 'inner_wait') //출고 대기
+                        if(data[i].objStatus == 'warehousing' || data[i].objStatus == 'warehousing_new') //출고 대기
                         {
                             html += '<div class="item-wait" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';
@@ -175,7 +175,7 @@ function ajax_admin_asset_list(data)
                     }
                     if(data[i].auth == 'manager') //자산 관리자 (출고 완료, 출고 시작, 반납 시작, 반납 완료, 반납 대기, 외부자산 등록)
                     {
-                        if(data[i].objStatus == 'release_finish' || data[i].objStatus == 'outer_wait') //출고 완료
+                        if(data[i].objStatus == 'release' || data[i].objStatus == 'release_new') //출고 완료
                         {
                             html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';
@@ -189,7 +189,7 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '</div>';
                         }
-                        if(data[i].objStatus == 'release_start') //출고 시작
+                        if(data[i].objStatus == 'shipping') //출고 시작
                         {
                             html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';
@@ -203,21 +203,7 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '</div>';
                         }
-                        if(data[i].objStatus == 'return_start')
-                        {
-                            html += '<div class="item-return-start" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
-                            html += '<div class="item">';
-                            html += '<img src='+data[i].objImage+'>';
-                            html += '</div>';
-                            html += '<div class="item-text">';
-                            html += '<div class="state">';
-                            html += '<b>반납 시작</b>';
-                            html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
-                            html += '</div>';
-                            html += '</div>';
-                        }
-                        if(data[i].objStatus == 'return_wait')
+                        if(data[i].objStatus == 'warehousing_wait')
                         {
                             html += '<div class="item-return-finish" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';

@@ -11,6 +11,9 @@ import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserVO;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /*자산 관리자 컨트롤 */
@@ -89,6 +92,18 @@ public class ManagerController
             adminService.getAssetAllList(pageNum,filterName,sortName,map);
         }
         return MANAGER_VIEW_PREFIX+"all_obj_list";
+    }
+
+    @PostMapping("/asset/list/excel/download")
+    public void downloadExcelFile(HttpServletResponse response) throws IOException
+    {
+        response.setContentType("ms-vnd/excel");
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("자산_리스트","UTF-8")+".xls");
+
+
+
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
     }
 
 }

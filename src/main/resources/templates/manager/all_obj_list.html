@@ -141,10 +141,11 @@
                     <table style="border-bottom:2px solid #d7d7d7;">
                         <colgroup>
                             <col width="10%" />
-                            <col width="30%" />
-                            <col width="20%" />
-                            <col width="15%" />
                             <col width="25%" />
+                            <col width="15%" />
+                            <col width="10%" />
+                            <col width="25%" />
+                            <col width="15%" />
                         </colgroup>
                         <thead>
                         <tr>
@@ -153,6 +154,7 @@
                             <th>자산종류</th>
                             <th>관리자</th>
                             <th>QR ID</th>
+                            <th>거래처 명</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -167,6 +169,7 @@
                             <td th:text="${list.objKinds}">복합기</td>
                             <td th:text="${list.userName}">현상원</td>
                             <td th:text="${list.qrSrl}">20156456-5646DDD</td>
+                            <td th:text="${list.companyName}">(주)상원랜드</td>
                         </tr>
                         </tbody>
                     </table>

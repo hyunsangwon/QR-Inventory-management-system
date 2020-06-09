@@ -140,17 +140,13 @@ $(document).ready(function(){
 
 	$('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
-        if(tab_id == 'tab-1') //출고 시작
+        if(tab_id == 'tab-1') //배송 자산
         {
-          location.href = "/obj/status/release_start/list/1";
+          location.href = "/obj/status/shipping/list/1";
         }
-        if(tab_id == 'tab-2') //출고 완료
+        if(tab_id == 'tab-2') //출고 자산
         {
-          location.href = "/obj/status/release_finish/list/1";
-        }
-        if(tab_id == 'tab-3') //반납 시작
-        {
-          location.href = "/obj/status/return_start/list/1";
+          location.href = "/obj/status/release/list/1";
         }
 	});
 

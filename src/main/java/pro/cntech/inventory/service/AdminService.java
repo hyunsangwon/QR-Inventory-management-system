@@ -1,5 +1,8 @@
 package pro.cntech.inventory.service;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,7 @@ import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -189,6 +193,56 @@ public class AdminService {
         map.addAttribute("list",list);
         map.addAttribute("size",list.size());
         map.addAttribute("pageHandler",pageHandler);
+    }
+
+    public Workbook makeExcelForm() throws IOException
+    {
+        /*EXCEL SETTINGS*/
+        Workbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet("자산 목록"); //시트 생성
+        Row row = null; //행
+        Cell cell = null; //열
+        int rowNo = 0; //열 번호
+
+        CellStyle headStyle = excelStyle(workbook,"head");
+        CellStyle bodyStyle = excelStyle(workbook,"body");
+        row = sheet.createRow(rowNo++);
+
+        cell = row.createCell(0);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("");
+
+        return workbook;
+    }
+
+    public CellStyle excelStyle(Workbook workbook, String layout)
+    {
+        CellStyle cellStyle = null;
+
+        if(layout.equals("head"))
+        {
+            cellStyle = workbook.createCellStyle();//테이블 헤더 스타일
+            // 가는 경계선을 가집니다.
+            cellStyle.setBorderTop(BorderStyle.THIN);
+            cellStyle.setBorderBottom(BorderStyle.THIN);
+            cellStyle.setBorderLeft(BorderStyle.THIN);
+            cellStyle.setBorderRight(BorderStyle.THIN);
+            // 배경색은 노란색입니다.
+            cellStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.YELLOW.getIndex());
+            cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            // 데이터는 가운데 정렬합니다.
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
+            return cellStyle;
+        }
+        else
+        {
+            cellStyle = workbook.createCellStyle();
+            cellStyle.setBorderTop(BorderStyle.THIN);
+            cellStyle.setBorderBottom(BorderStyle.THIN);
+            cellStyle.setBorderLeft(BorderStyle.THIN);
+            cellStyle.setBorderRight(BorderStyle.THIN);
+            return cellStyle;
+        }
     }
 
     public UserPrincipalVO getSecurityInfo()
