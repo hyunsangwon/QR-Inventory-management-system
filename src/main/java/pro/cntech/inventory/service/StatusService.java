@@ -130,6 +130,8 @@ public class StatusService
         {
             for(ObjListVO listVO: objArrayVO.getParam())
             {
+                listVO.setObjStatus(ObjStatusCode.ASSET_DELETE);
+                insertObjLog(listVO); //로그 저장
                 String qrSrl = listVO.getQrSrl();
                 rows = objStatusMapper.deleteObj(qrSrl);
             }

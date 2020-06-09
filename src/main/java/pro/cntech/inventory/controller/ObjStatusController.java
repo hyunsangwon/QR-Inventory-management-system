@@ -79,7 +79,6 @@ public class ObjStatusController
     {
         logger.debug("[ Call /ajax/obj/release_wait/delete - POST ]");
         logger.debug("Param : "+objArrayVO.toString());
-
         return statusService.isControlObjStatus("delete",objArrayVO);
     }
 
