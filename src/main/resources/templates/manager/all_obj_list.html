@@ -115,8 +115,21 @@
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
                                 </div>
-
-                                <!--default-->
+                                
+                                
+                                <div style="float:right;">
+                                	<input type="text" name=""  size="20" class="search-input" onFocus="$(this).animate({width:'10em'},300)" onBlur="$(this).animate({width:'5em'},300)" >
+								</div>	
+								<div class="selectTable">
+                                    <select id="nameSort">
+                                        <option value="model">모델명</option>
+                                        <option value="name">자산 종류</option>
+                                        <option value="name">관리자</option>
+                                        <option value="name">QR ID</option>
+                                        <option value="name">거래처</option>
+                                    </select>
+								</div>
+                                <!--default
                                 <div class="selectTable">
                                     <select id="nameSort">
                                         <option value="model">모델명순</option>
@@ -128,7 +141,7 @@
                                         <option value="machine">레이저복합기</option>
                                         <option value="cartridge">토너카트리지</option>
                                     </select>
-                                </div>
+                                </div>-->
                             </div>
                             <!--//regiseter-panel-title-->
                         </div>

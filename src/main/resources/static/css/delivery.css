@@ -118,6 +118,27 @@ ul.tabs li.current {
 
 .sub-title{width:80%; text-align:left; float:left; height:50px; font-size:24px; color: #686a6e; margin-left:30px;}
 
+/* 담보물 관리 현황 */
+
+.search-input {
+    width: 5em;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 3em;
+    margin-right: 0px;
+    padding: 2px 4em 2px 2em;
+    border: none;
+    /* background-color:#fafbfc; */
+    position: relative;
+    bottom: 40px;
+    background: url('/image/main/main-icon-search.svg') no-repeat 100% 50%;
+    font-size:23px;
+}
+
+
+input:focus {
+    border: 1px solid #c3c3c3;
+}
 
 /* 등록 담보물 조회 */
 #panel-wrap-register {

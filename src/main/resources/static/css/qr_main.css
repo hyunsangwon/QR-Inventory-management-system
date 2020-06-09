@@ -94,7 +94,7 @@ a:hover                             {text-decoration:none;}
 .dash-board							{height:404px; }
 .dash-board .box					{width:339px; height:215px; float:left; cursor: pointer;}
 .dash-board .box .box-title		    {/*height:80px;*/ padding:0 0 0 88px; color: #727272; font-size:1.5em;}
-.dash-board .box .box-text		    {/*height:80px;*/ padding:14px 0 14px 88px; font-size:5em; font-family: 'Open Sans', sans-serif;}
+.dash-board .box .box-text		    {/*height:80px;*/ padding:14px 0 14px 88px; font-size:5em; font-family: 'Bebas Neue', sans-serif;}
 #panel-wrap-all .label				{/*height:90px;*/ width:100%;float:right; margin-right:30px; text-align: right; padding:30px 30px 0 0; font-size:1em; color: #727272;}	
 
 /* quick wrap, btn */
