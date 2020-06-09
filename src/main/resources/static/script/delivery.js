@@ -1,30 +1,14 @@
-/*
-/* nav 
-$('#nav ul li a').hover(function () {
-    $('.dep_area').stop(true,false).slideDown();
-},
-
-function () {
-    $('.dep_area').stop(true,false).slideUp();
-});
-
-
-/* function active */
-
 $(function(){
 	  var sBtn = $(".function-box");    //  function-bo를 sBtn으로 칭한다. 
 	  sBtn.find("a").click(function(){   // sBtn에 속해 있는  a 찾아 클릭 하면.
 	   sBtn.removeClass("active");     // sBtn 속에 (active) 클래스를 삭제 한다.
 	   $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
-	  })
-	  
+	  })	;
 	  var aBtn = $(".function-box");
 	  aBtn.find("a").click(function(){
 		  aBtn.removeClass("")
-	  })
-	 })
-
-
+	  });
+});
 // pc
 var speed = 0.3;
 function pcMenu(){
@@ -45,7 +29,6 @@ function moMenu(){
   hamburgerToggle();
   noTarget();
 }
-
 function noTarget(){
   $('.gnb-wrap > li > a').on('click',function(){
     if( $('#hamburger').is(':visible') ) {
@@ -56,7 +39,6 @@ function noTarget(){
     return false;
   });
 }
-
 function hamburgerToggle(){
   $('#hamburger').on('click',function(){
   
@@ -123,7 +105,6 @@ function delEvent(){
   $('#hamburger').removeAttr('class');
   $('#hamburger').find('span').removeAttr('style');
 }
-
 $(window).on('resize',function(){
   delEvent(); // 삭제 이벤트
 
@@ -136,9 +117,6 @@ $(window).on('resize',function(){
   }
 
 }).resize();
-
-
-
 $(document).ready(function(){
 
 	$('ul.tabs li').click(function(){
@@ -152,11 +130,6 @@ $(document).ready(function(){
 	})
 
 })
-
-
-
-
-
 /*check 전체선택 및 전체해제*/
 function checkAll(){
       if( $("#checkAll").is(':checked') ){

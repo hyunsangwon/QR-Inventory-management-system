@@ -102,7 +102,6 @@ function ajax_admin_asset_list(data)
         success : function(data)
         {
             //$('#asset_container').empty();
-            console.log('totalCnt ====> '+$('#totalObjCnt').val());
             var html = '';
             if(data.length == 0)
             {

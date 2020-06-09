@@ -121,7 +121,7 @@ public class AdminService {
         return pageHandler;
     }
 
-    public void getAssetAllList(int pageNum,String filterName,String sortName,ModelMap map) throws Exception
+    public void getAssetAllList(int pageNum,String filterName,String sortName,String searchValue,ModelMap map) throws Exception
     {
         int MAX = 10;
         int limitCount=((pageNum - 1 ) * MAX);
@@ -131,7 +131,7 @@ public class AdminService {
         String userSrl = userPrincipalVO.getUserSrl();
 
         ObjListVO objListVO = new ObjListVO();
-        objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum);
+        objListVO.setLimitcount(limitCount); objListVO.setContentnum(contentNum); objListVO.setSearchValue(searchValue);
         objListVO.setFilterName(filterName); objListVO.setSortName(sortName); objListVO.setUserSrl(userSrl);
 
         List<ObjListVO> list = managerMapper.getAllAsset(objListVO);
@@ -186,7 +186,7 @@ public class AdminService {
             }
 
         }
-
+        map.addAttribute("searchValue",searchValue);
         map.addAttribute("sortName",sortName);
         map.addAttribute("filterName",filterName);
         map.addAttribute("pageNum",pageNum);

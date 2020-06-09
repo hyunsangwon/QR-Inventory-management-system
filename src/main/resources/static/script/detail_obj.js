@@ -250,36 +250,34 @@ function ajax_call_obj_history_list(jsonData)
               html += '<td>[관리책임자] ' + data[i].userName + '</td>';
             }
           }
-
           html += '<td>' + data[i].addr + '</td>';
-
-          if(data[i].objStatus == 'inner_wait') //내부자산 등록
+          if(data[i].objStatus == 'warehousing_new')
           {
-            html += '<td><b>내부자산 등록</b></td>';
+            html += '<td><b>신규 등록(입고)</b></td>';
           }
-          if(data[i].objStatus == 'outer_wait') //외부자산 등록
+          if(data[i].objStatus == 'release_new')
           {
-            html += '<td><b>외부자산 등록</b></td>';
+            html += '<td><b>신규 등록(출고)</b></td>';
           }
-          if(data[i].objStatus == 'release_start') //출고 시작
+          if(data[i].objStatus == 'shipping')
           {
-            html += '<td><b>출고 시작</b></td>';
+            html += '<td><b>배송 중</b></td>';
           }
-          if(data[i].objStatus == 'release_finish') //출고 완료
+          if(data[i].objStatus == 'release')
           {
             html += '<td><b>출고 완료</b></td>';
           }
-          if(data[i].objStatus == 'return_wait') //반납 대기
+          if(data[i].objStatus == 'warehousing_wait')
           {
-            html += '<td><b>반납 대기</b></td>';
+            html += '<td><b>재입고 대기</b></td>';
           }
-          if(data[i].objStatus == 'return_finish') //반납 완료
+          if(data[i].objStatus == 'warehousing')
           {
-            html += '<td><b>반납 완료</b></td>';
+            html += '<td><b>입고 완료</b></td>';
           }
-          if(data[i].objStatus == 'return_start') //반납 시작
+          if(data[i].objStatus == 'asset_delete')
           {
-            html += '<td><b>반납 시작</b></td>';
+            html += '<td><b>자산 삭제</b></td>';
           }
           html += '</tr>';
         }

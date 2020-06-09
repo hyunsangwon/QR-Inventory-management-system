@@ -77,6 +77,8 @@
         <if test='auth eq "manager"'>
             manager.auth
         </if>
+            ,o.obj_status AS objStatus
+            ,o.qr_srl AS qrSrl
             ,IFNULL(o.obj_m,'data') AS modelName
             ,o.obj_img AS objImage
             ,DATE_FORMAT(o.obj_status_at,'%Y.%m.%d') AS statusAt
@@ -223,10 +225,19 @@
             AND o.obj_kinds IS NULL
         </if>
         <if test='filterName eq "machine"'>
-            AND o.obj_kinds = '레이저 복합기'
+            AND o.obj_kinds = '복합기'
         </if>
-        <if test='filterName eq "cartridge"'>
-            AND o.obj_kinds = '토너 카트리지'
+        <if test='filterName eq "crusher"'>
+            AND o.obj_kinds = '문서 파쇄기'
+        </if>
+        <if test='filterName eq "purifier"'>
+            AND o.obj_kinds = '공기 청정기'
+        </if>
+        <if test='filterName eq "ink"'>
+            AND o.obj_kinds = '무한 잉크 공급기'
+        </if>
+        <if test='searchValue neq "null"'>
+            AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
         </if>
         <if test='sortName eq "name"'>
             ORDER BY u.user_name ASC
@@ -245,16 +256,19 @@
             AND o.obj_kinds IS NULL
         </if>
         <if test='filterName eq "machine"'>
-            AND o.obj_kinds = '레이저 복합기'
+            AND o.obj_kinds = '복합기'
         </if>
-        <if test='filterName eq "cartridge"'>
-            AND o.obj_kinds = '토너 카트리지'
+        <if test='filterName eq "crusher"'>
+            AND o.obj_kinds = '문서 파쇄기'
         </if>
-        <if test='sortName eq "name"'>
-            ORDER BY u.user_name ASC
+        <if test='filterName eq "purifier"'>
+            AND o.obj_kinds = '공기 청정기'
         </if>
-        <if test='sortName eq "model"'>
-            ORDER BY o.obj_m ASC
+        <if test='filterName eq "ink"'>
+            AND o.obj_kinds = '무한 잉크 공급기'
+        </if>
+        <if test='searchValue neq "null"'>
+            AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
         </if>
     </select>
 

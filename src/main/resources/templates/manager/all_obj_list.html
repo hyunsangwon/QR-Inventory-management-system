@@ -15,18 +15,23 @@
 <script>
     var _nameSort = null;
     var _typeSort = null;
-
-    $(function(){
+    var _searchKeyWord = null;
+    $(function()
+    {
         $('a[name=admin_search]').css('background-color','#437ece');
         _nameSort  = $('#sortName').val();
         _typeSort = $('#filterName').val();
-        $('#nameSort option').each(function(){
+        _searchKeyWord = $('#searchValue').val();
+
+        $('#nameSort option').each(function()
+        {
             if(this.value == _nameSort)
             {
                 $(this).prop('selected', 'selected');
             }
         });
-        $('#typeSort option').each(function(){
+        $('#typeSort option').each(function()
+        {
             if(this.value == _typeSort)
             {
                 $(this).prop('selected', 'selected');
@@ -40,10 +45,20 @@
             _nameSort = $(this).val();
             if(_typeSort == null)
             {
+                if(_searchKeyWord != 'null')
+                {
+                    location.href = "/asset/list/search/"+_searchKeyWord+"/sort/"+_nameSort+"/type/all/pageNum/1";
+                    return false;
+                }
                 location.href = "/asset/list/sort/"+_nameSort+"/type/all/pageNum/1";
             }
             else
             {
+                if(_searchKeyWord != 'null')
+                {
+                    location.href = "/asset/list/search/"+_searchKeyWord+"/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/1";
+                    return false;
+                }
                 location.href = "/asset/list/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/1";
             }
         });
@@ -52,23 +67,48 @@
             _typeSort = $(this).val();
             if(_nameSort == null)
             {
+                if(_searchKeyWord != 'null')
+                {
+                    location.href = "/asset/list/search/"+_searchKeyWord+"/sort/model/type/"+_typeSort+"/pageNum/1";
+                    return false;
+                }
                 location.href = "/asset/list/sort/model/type/"+_typeSort+"/pageNum/1";
             }
             else
             {
+                if(_searchKeyWord != 'null')
+                {
+                    location.href = "/asset/list/search/"+_searchKeyWord+"/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/1";
+                    return false;
+                }
                 location.href = "/asset/list/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/1";
             }
         });
 
-        $("span[name=pageNum]").click(function(){
+        $("span[name=pageNum]").click(function()
+        {
             var pageNum = $(this).attr('id');
             location.href = "/asset/list/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/"+pageNum;
         });
-        $("img[name=pageNum]").click(function(){
+        $("img[name=pageNum]").click(function()
+        {
             var pageNum = $(this).attr('id');
             location.href = "/asset/list/sort/"+_nameSort+"/type/"+_typeSort+"/pageNum/"+pageNum;
         });
 
+        $('#companyNameSearch').keyup(function(key)
+        {
+            if(key.keyCode == 13)
+            {
+                var searchKeyWord = $('#companyNameSearch').val();
+                if(searchKeyWord == '')
+                {
+                    alert('키워드를 입력해주세요.');
+                    return false;
+                }
+                location.href = "/asset/list/search/"+searchKeyWord+"/sort/model/type/all/pageNum/1";
+            }
+        });
     });
 
     function load_detail_page(srl)
@@ -102,6 +142,7 @@
             </div>
         </div>
         <!-- //title -->
+        <input type="hidden" id="searchValue" th:value="${searchValue}"/>
         <input type="hidden" id="pageNum" th:value="${pageNum}"/>
         <input type="hidden" id="filterName" th:value="${filterName}"/>
         <input type="hidden" id="sortName" th:value="${sortName}"/>
@@ -117,39 +158,23 @@
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
                                 </div>
-
                                 <div class="selectTable">
                                     <select id="nameSort">
                                         <option value="model">모델명</option>
-                                        <option value="name">자산 종류</option>
                                         <option value="name">관리자</option>
-                                        <option value="name">QR ID</option>
-                                        <option value="name">거래처</option>
                                     </select>
                                     <select id="typeSort">
                                         <option value="all">전체</option>
                                         <option value="undefined">미정</option>
-                                        <option value="machine">레이저복합기</option>
-                                        <option value="cartridge">토너카트리지</option>
+                                        <option value="machine">복합기</option>
+                                        <option value="crusher">문서 파쇄기</option>
+                                        <option value="purifier">공기 청정기</option>
+                                        <option value="ink">무한 잉크 공급기</option>
                                     </select>
                                 </div>
-
                                 <div style="float:left;">
-                                    <input type="text" name=""  size="20" class="search-input" onFocus="$(this).animate({width:'10em'},300)" onBlur="$(this).animate({width:'10em'},300)" >
+                                    <input type="text" id="companyNameSearch" size="20" class="search-input" onFocus="$(this).animate({width:'10em'},300)" onBlur="$(this).animate({width:'10em'},300)" >
                                 </div>
-                                <!--default
-                                <div class="selectTable">
-                                    <select id="nameSort">
-                                        <option value="model">모델명순</option>
-                                        <option value="name">관리자 이름순</option>
-                                    </select>
-                                    <select id="typeSort">
-                                        <option value="all">전체</option>
-                                        <option value="undefined">미정</option>
-                                        <option value="machine">레이저복합기</option>
-                                        <option value="cartridge">토너카트리지</option>
-                                    </select>
-                                </div>-->
                             </div>
                             <!--//regiseter-panel-title-->
                         </div>
@@ -180,7 +205,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${size} == '0'">
-                            <td colspan=5>데이터가 없습니다.</td>
+                            <td colspan=6>데이터가 없습니다.</td>
                         </tr>
                         <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
                             th:data-srl="${list.qrSrl}"

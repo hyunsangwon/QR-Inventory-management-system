@@ -100,10 +100,26 @@ public class ManagerController
         String filterName = typeSort; String sortName = nameSort;
         if(filterName != null && sortName != null)
         {
-            adminService.getAssetAllList(pageNum,filterName,sortName,map);
+            adminService.getAssetAllList(pageNum,filterName,sortName,"null",map);
         }
         return MANAGER_VIEW_PREFIX+"all_obj_list";
     }
+
+    @GetMapping("/asset/list/search/{searchValue}/sort/{nameSort}/type/{typeSort}/pageNum/{pageNum}")
+    public String loadSearchAssetList(ModelMap map,
+                                      @PathVariable("searchValue") String searchValue,
+                                      @PathVariable("nameSort") String nameSort,
+                                      @PathVariable("typeSort") String typeSort,
+                                      @PathVariable("pageNum") int pageNum)throws Exception
+    {
+
+        if(searchValue != null || nameSort != null || typeSort != null)
+        {
+            adminService.getAssetAllList(pageNum,typeSort,nameSort,searchValue,map);
+        }
+        return MANAGER_VIEW_PREFIX+"all_obj_list";
+    }
+
 
     /*전체 자산 조회 EXCEP download*/
     @PostMapping("/asset/list/excel/download")
