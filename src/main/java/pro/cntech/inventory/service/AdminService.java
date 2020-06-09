@@ -195,7 +195,7 @@ public class AdminService {
         map.addAttribute("pageHandler",pageHandler);
     }
 
-    public Workbook makeExcelForm() throws IOException
+    public Workbook makeExcelForm() throws Exception
     {
         /*EXCEL SETTINGS*/
         Workbook workbook = new HSSFWorkbook();
@@ -206,12 +206,90 @@ public class AdminService {
 
         CellStyle headStyle = excelStyle(workbook,"head");
         CellStyle bodyStyle = excelStyle(workbook,"body");
+
         row = sheet.createRow(rowNo++);
 
         cell = row.createCell(0);
         cell.setCellStyle(headStyle);
-        cell.setCellValue("");
+        cell.setCellValue("자산 상태");
 
+        cell = row.createCell(1);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("모델명");
+
+        cell = row.createCell(2);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("자산 종류");
+
+        cell = row.createCell(3);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("관리자");
+
+        cell = row.createCell(4);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("QR ID");
+
+        cell = row.createCell(5);
+        cell.setCellStyle(headStyle);
+        cell.setCellValue("거래처 명");
+
+
+        UserPrincipalVO userPrincipalVO = getSecurityInfo();
+        String userSrl = userPrincipalVO.getUserSrl();
+        ObjListVO objListVO = new ObjListVO(); objListVO.setUserSrl(userSrl);
+
+        List<ObjListVO> list = managerMapper.getAssetExcelList(objListVO);
+
+        for(ObjListVO objList : list)
+        {
+            row = sheet.createRow(rowNo++);
+            String status = objList.getObjStatus();
+            if(status.equals(ObjStatusCode.RELEASE)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.NEW_RELEASE)) objList.setObjStatus("출고 완료");
+            if(status.equals(ObjStatusCode.WAREHOUSING_WAIT)) objList.setObjStatus("입고 대기");
+            if(status.equals(ObjStatusCode.WAREHOUSING)) objList.setObjStatus("입고 완료");
+            if(status.equals(ObjStatusCode.NEW_WAREHOUSING)) objList.setObjStatus("입고 완료");
+            if(status.equals(ObjStatusCode.SHIPPING)) objList.setObjStatus("배송 중");
+
+            cell = row.createCell(0);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getObjStatus());
+
+            if(objList.getModelName() == null)
+            {
+                String[] modelNameArr = objList.getModelImageName().split("/");
+                String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
+                objList.setModelName(modelName);
+                if(modelName.equals(""))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+                if(modelName.equals("인식 실패"))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+            }
+            cell = row.createCell(1);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getModelName());
+
+
+            cell = row.createCell(2);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getObjKinds());
+
+            cell = row.createCell(3);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getUserName());
+
+            cell = row.createCell(4);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getQrSrl());
+
+            cell = row.createCell(5);
+            cell.setCellStyle(bodyStyle);
+            cell.setCellValue(""+objList.getCompanyName());
+        }
         return workbook;
     }
 

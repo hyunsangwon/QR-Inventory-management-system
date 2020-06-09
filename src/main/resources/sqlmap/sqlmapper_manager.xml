@@ -258,4 +258,22 @@
         </if>
     </select>
 
+    <!--Excel List-->
+    <select id="getAssetExcelList" parameterType="pro.cntech.inventory.vo.ObjListVO" resultType="pro.cntech.inventory.vo.ObjListVO">
+        SELECT
+            o.obj_status AS objStatus,
+            o.obj_m AS modelName,
+            o.obj_img_mn AS modelImageName,
+            IFNULL(o.obj_kinds,'미정') AS objKinds,
+            u.user_name AS userName,
+            o.qr_srl AS qrSrl,
+            c.company_name AS companyName
+        FROM obj AS o
+        INNER JOIN users AS u
+        ON o.user_srl = u.user_srl
+        INNER JOIN company AS c
+        ON o.company_srl = c.company_srl
+        WHERE u.master_srl = #{userSrl}
+    </select>
+
 </mapper>

@@ -1,5 +1,6 @@
 package pro.cntech.inventory.controller;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,13 +105,17 @@ public class ManagerController
         return MANAGER_VIEW_PREFIX+"all_obj_list";
     }
 
-    @PostMapping("/asset/list/excel/download")
-    public void downloadExcelFile(HttpServletResponse response) throws IOException
+    /*전체 자산 조회 EXCEP download*/
+    @GetMapping("/asset/list/excel/download")
+    public void downloadExcelFile(HttpServletResponse response) throws Exception
     {
         response.setContentType("ms-vnd/excel");
         response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("자산_리스트","UTF-8")+".xls");
 
+        Workbook workBook = adminService.makeExcelForm();
 
+        workBook.write(response.getOutputStream());
+        workBook.close();
 
         response.getOutputStream().flush();
         response.getOutputStream().close();

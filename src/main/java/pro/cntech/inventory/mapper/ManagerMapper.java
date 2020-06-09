@@ -19,4 +19,5 @@ public interface ManagerMapper
     int updateUserInfo(UserVO userVO);
     List<ObjListVO>getAllAsset(ObjListVO objListVO);
     int getAllAssetTotalCnt(ObjListVO objListVO);
+    List<ObjListVO>getAssetExcelList(ObjListVO objListVO);
 }
