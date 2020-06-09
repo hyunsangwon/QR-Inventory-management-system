@@ -189,11 +189,19 @@ public class StatusService
             kinds = objDetailVO.getObjKinds();
             if("machine".equals(kinds))
             {
-                objDetailVO.setObjKinds("레이저 복합기");
+                objDetailVO.setObjKinds("복합기");
             }
-            if("cartridge".equals(kinds))
+            if("crusher".equals(kinds))
             {
-                objDetailVO.setObjKinds("토너 카트리지");
+                objDetailVO.setObjKinds("문서 파쇄기");
+            }
+            if("purifier".equals(kinds))
+            {
+                objDetailVO.setObjKinds("공기 청정기");
+            }
+            if("ink".equals(kinds))
+            {
+                objDetailVO.setObjKinds("무한 잉크 공급기");
             }
         }
         rows = objStatusMapper.updateObjInfo(objDetailVO);
