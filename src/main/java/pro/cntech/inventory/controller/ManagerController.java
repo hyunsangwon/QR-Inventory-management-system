@@ -112,6 +112,7 @@ public class ManagerController
         response.setContentType("ms-vnd/excel");
         response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("자산_리스트","UTF-8")+".xls");
 
+
         Workbook workBook = adminService.makeExcelForm();
 
         workBook.write(response.getOutputStream());
