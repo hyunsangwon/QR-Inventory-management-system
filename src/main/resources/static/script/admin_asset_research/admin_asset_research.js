@@ -10,16 +10,6 @@ function click_user(userSrl,auth) //왼쪽 NAV 클릭시 이벤트 함수
     _userSrl = userSrl;
     _userAuth = auth;
 
-    if(_userAuth == 'holder')
-    {
-        $('#managerOption').hide();
-        $('#holderOption').show();
-    }
-    if(_userAuth == 'manager')
-    {
-        $('#holderOption').hide();
-        $('#managerOption').show();
-    }
     $("div[name=section-box]").removeClass('active');
     $('#'+userSrl).addClass('active');
     var jsonData = { "userSrl" : userSrl, "auth" : _userAuth};
@@ -34,14 +24,6 @@ function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
 {
     var pageNum = obj.id;
     var sortName = "all";
-    if(_userAuth == 'holder')
-    {
-        sortName = $('#holderOption option:selected').val();
-    }
-    if(_userAuth == 'manager')
-    {
-        sortName = $('#managerOption option:selected').val();
-    }
     if(_userSrl == null)
     {
         _userSrl = $('#userSrl').val();
@@ -130,8 +112,6 @@ function ajax_admin_asset_list(data)
                     }
                     else
                     {
-                        $('#holderOption').hide(); //select box
-                        $('#managerOption').hide();
                         html += '<div class="default-remark">';
                         html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
                         html += '</div>';

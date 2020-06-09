@@ -40,7 +40,7 @@ public class AdminService {
         UserVO myInfo = managerMapper.getUserInfo(userSrl,auth);
         if(myInfo.getPhone() != null) myInfo.setPhone(ContactFilter.getInstance().setPhoneNumber(myInfo.getPhone()));
 
-        List<UserVO> assetAdminList = managerMapper.getMyMangerList(userSrl,sortName);
+        List<UserVO> adminList = managerMapper.getMyMangerList(userSrl,sortName);
         ObjListVO param = new ObjListVO();
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
         param.setAuth(auth); param.setSortName("all");
@@ -50,8 +50,8 @@ public class AdminService {
 
         map.addAttribute("sortName",sortName);
         map.addAttribute("myInfo",myInfo);
-        map.addAttribute("assetManagerList",assetAdminList);
-        map.addAttribute("assetManagerListSize",assetAdminList.size());
+        map.addAttribute("assetManagerList",adminList);
+        map.addAttribute("assetManagerListSize",adminList.size());
         map.addAttribute("assetList",assetList);
         map.addAttribute("assetListSize",assetList.size());
         map.addAttribute("pageHandler",pageHandler);

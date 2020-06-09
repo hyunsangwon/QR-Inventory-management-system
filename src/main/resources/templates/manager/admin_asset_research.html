@@ -18,25 +18,10 @@
                 $(this).prop('selected', 'selected');
             }
         });
-
         $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
-        $('#managerOption').hide();
-        $('#holderOption').show()
 
         $('#userOption').change(function(){
             location.href = "/asset/research/sort/"+$(this).val();
-        });
-        $('#holderOption').change(function(){
-            var holderSrl = $('#userSrl').val();
-            var jsonData = {"userSrl":holderSrl, "auth":'holder', "pageNum":1, "sortName":$(this).val()};
-            ajax_admin_asset_list(jsonData);
-            ajax_page_add(jsonData);
-        });
-        $('#managerOption').change(function(){
-            var managerSrl = _userSrl;
-            var jsonData = {"userSrl":managerSrl, "auth":'manager', "pageNum":1, "sortName":$(this).val()};
-            ajax_admin_asset_list(jsonData);
-            ajax_page_add(jsonData);
         });
 
         $('#insert_user_phone').keyup(function(e)// 핸드폰 번호 입력
@@ -260,22 +245,6 @@
                 </ul>
             </div>
             <!-- //company-info -->
-            <!--자산이 등록되어 있는 경우
-	    	<div class="company-info">
-	    		<ul class="info-list">
-	    			<li><b>담당자 연락처</b></li>
-	    			<li>전체 관리 자산</li>
-	    			<li>레이저 복합기</li>
-                    <li>토너 카트리지</li>
-	    		</ul>
-	    		<ul class="info-text">
-	    			<li>: <span style="font-weight: 600;">010-1234-5678</span><li>
-	    			<li>: <span>104개</span></li>
-	    			<li>: <span>28개</span></li>
-                    <li>: <span>76개</span></li>
-	    		</ul>
-	    	</div>-->
-	    	<!-- //company-info -->
 		    </div>
 		    <!-- //w3-container -->
 		  </header>
@@ -287,25 +256,8 @@
 							<div class="circle"></div>
 							<span class="title">자산 관리 현황</span>
 						</div>
-						
 						<div id="assetSelectBox" class="filter-area-panel" style="">
-							<!-- <img th:src="@{/image/main/main-icon-search.svg}" style="position:relative; top:-50px; cursor:pointer;"></img>-->
 							<input type="text" name=""  size="20" class="search-input" onFocus="$(this).animate({width:'19em'},300)" onBlur="$(this).animate({width:'5em'},300)" >
-							<!-- <input type="text" id="" class="page-in-search" placeholder="업체 검색하기">
-							<img th:src="@{/image/main/main-icon-search.svg}" style="cursor:pointer;"/></input> -->
-		 				<!--자산 담당자를 클릭했을 경우 나오는 select
-                        <select id="holderOption" th:if="${assetListSize} != '0'">
-                            <option value="all"> 전체 관리 자산 </option>
-                            <option value="return_finish"> 출고 대기 </option>
-                           <!-- <option value="return_wait"> 반납 승인 필요 </option>
-                        </select>
-                        <!--자산 관리자를 클릭했을 경우 나오는 select 
-                        <select id="managerOption">
-                            <option value="all"> 전체 관리 자산 </option>
-                            <option value="release_finish"> 출고 완료 </option>
-		 				    <option value="return_start"> 반납 시작 </option>
-                            <option value="return_wait"> 반납 승인 필요 </option>
-                        </select> -->
                         </div>
 			             <!-- // filter-area-->
 					</div>
@@ -340,34 +292,19 @@
                 <!-- 출고 대기 -->
               <th:block th:unless="${assetListSize} == '0'">
                   <th:block th:each="list : ${assetList}">
-                    <div class="item-wait" th:if="${list.objStatus eq 'warehousing_new'|| list.objStatus eq 'warehousing'}"
-                         th:id="${list.qrSrl}" th:onclick="load_detail_page(this)">
+                    <div class="item-wait" th:id="${list.qrSrl}" th:onclick="load_detail_page(this)">
                         <div class="item">
                             <img th:src="@{${list.objImage}}">
                         </div>
                         <div class="item-text">
                             <div class="state">
-                                <b>출고 대기</b>
+                                <b th:text="${list.modelName}">모델명</b>
                             </div>
-                            <div class="date" th:text="${list.statusAt}">
-                                2020.5.24, 10시 22분
+                            <div class="date" th:text="${list.companyName}">
+                                거래처 이름
                             </div>
-                            <div class="date" th:text="${list.statusAt}">
-                                <span>출고날짜 :</span> 2020.5.24
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-return-approve" th:if="${list.objStatus eq 'warehousing_wait'}"
-                         th:id='${list.qrSrl}' th:onclick="load_detail_page(this)">
-                        <div class="item">
-                            <img th:src="@{${list.objImage}}">
-                        </div>
-                        <div class="item-text">
-                            <div class="state">
-                                <b>반납 승인 필요</b>
-                            </div>
-                            <div class="item-id" th:text="${list.statusAt}">
-                                2020.5.24 14시 54분
+                            <div class="date">
+                                <span>출고날짜 :</span> <span th:text="${list.statusAt}">2020.5.24</span>
                             </div>
                         </div>
                     </div>

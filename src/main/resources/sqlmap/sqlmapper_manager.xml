@@ -77,39 +77,50 @@
         <if test='auth eq "manager"'>
             manager.auth
         </if>
-            ,o.qr_srl AS qrSrl
+            ,IFNULL(o.obj_m,'data') AS modelName
             ,o.obj_img AS objImage
-            ,o.obj_status AS objStatus
-            ,DATE_FORMAT(o.obj_status_at,'%Y.%m.%d, %H시%i분') AS statusAt
+            ,DATE_FORMAT(o.obj_status_at,'%Y.%m.%d') AS statusAt
+            ,c.company_name AS companyName
         FROM obj AS o
         INNER JOIN users AS manager
         ON o.user_srl = manager.user_srl
+        INNER JOIN company AS c
+        ON o.company_srl = c.company_srl
         <if test='auth eq "holder"'>
             INNER JOIN users AS holder
             ON manager.master_srl = holder.user_srl
             WHERE manager.master_srl = #{userSrl}
-            <if test='sortName eq "return_finish"'>
-                AND o.obj_status IN ('inner_wait','return_finish')
+            AND o.obj_status IN ('warehousing','warehousing_new')
+            <if test='searchName eq "qrSrl"'>
+                AND o.qr_srl LIKE CONCAT('%','%00%','%')
             </if>
-            <if test='sortName eq "all"'>
-                AND o.obj_status IN ('warehousing','warehousing_new')
+            <if test='searchName eq "assetKinds"'>
+
+            </if>
+            <if test='searchName eq "companyName"'>
+
+            </if>
+            <if test='searchName eq "all"'>
+
             </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
-            <if test='sortName eq "release_finish"'>
-                AND o.obj_status IN ('release_finish','outer_wait')
+            AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
+            <if test='searchName eq "qrSrl"'>
+
             </if>
-            <if test='sortName eq "return_wait"'>
-                AND o.obj_status = 'return_wait'
+            <if test='searchName eq "assetKinds"'>
+
             </if>
-            <if test='sortName eq "return_start"'>
-                AND o.obj_status = 'return_start'
+            <if test='searchName eq "companyName"'>
+
             </if>
-            <if test='sortName eq "all"'>
-                AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
+            <if test='searchName eq "all"'>
+
             </if>
         </if>
+
         ORDER BY o.create_at DESC
         LIMIT #{limitcount},#{contentnum}
     </select>
@@ -122,26 +133,34 @@
         ON o.user_srl = u.user_srl
         <if test='auth eq "holder"'>
             WHERE u.master_srl = #{userSrl}
-            <if test='sortName eq "return_finish"'>
-                AND o.obj_status IN ('inner_wait','return_finish')
+            AND o.obj_status IN ('warehousing','warehousing_new')
+            <if test='searchName eq "qrSrl"'>
+
             </if>
-            <if test='sortName eq "all"'>
-                AND o.obj_status IN ('warehousing','warehousing_new')
+            <if test='searchName eq "assetKinds"'>
+
+            </if>
+            <if test='searchName eq "companyName"'>
+
+            </if>
+            <if test='searchName eq "all"'>
+
             </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
-            <if test='sortName eq "release_finish"'>
-                AND o.obj_status = 'release_finish'
+            AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
+            <if test='searchName eq "qrSrl"'>
+
             </if>
-            <if test='sortName eq "return_start"'>
-                AND o.obj_status = 'return_start'
+            <if test='searchName eq "assetKinds"'>
+
             </if>
-            <if test='sortName eq "return_wait"'>
-                AND o.obj_status = 'return_wait'
+            <if test='searchName eq "companyName"'>
+
             </if>
-            <if test='sortName eq "all"'>
-                AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
+            <if test='searchName eq "all"'>
+
             </if>
         </if>
     </select>
