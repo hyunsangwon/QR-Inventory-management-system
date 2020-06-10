@@ -21,13 +21,13 @@
         create_marker_map(map);
 
         $('#approvalPage').click(function () {
-            location.href = "/obj/status/return_wait/list/1";
+            location.href = "/obj/status/warehousing_wait/list/1";
         });
         $('#orderPage').click(function () {
             location.href = "/order/qr";
         });
         $('#managerPage').click(function() {
-           /* location.href = "/order/qr";*/
+           location.href = "/asset/search/list";
         });
     });
 
@@ -35,15 +35,15 @@
     {
         if('all' == status)
         {
-            location.href="/asset/list/sort/model/type/all/pageNum/1";
+            location.href = "/asset/search/list";
         }
         if('inner' == status)
         {
-            location.href='/obj/status/return_finish/list/1';
+            location.href='/obj/status/warehousing/list/1';
         }
         if('outer' == status)
         {
-            location.href='/obj/status/release_start/list/1';
+            location.href='/obj/status/release/list/1';
         }
     }
 </script>
