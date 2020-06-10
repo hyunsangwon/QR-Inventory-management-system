@@ -113,8 +113,8 @@
         }
         return str;
     }
-
 </script>
+
 <script th:src="@{/script/admin_asset_research/admin_asset_research.js}" type="text/javascript"></script>
 <body>
 <div class="cd-main-header js-cd-main-header">
@@ -286,16 +286,18 @@
                             <div class="circle"></div>
                             <span class="title">자산 관리 현황</span>
                         </div>
-                        <div id="assetSelectBox" class="filter-area-panel" style="">
-                            <input type="text" id="assetSearch" size="20" class="search-input" onFocus="$(this).animate({width:'15em'},300)" onBlur="$(this).animate({width:'1em'},300)" >
-                        </div>
-                        <div class="selectTable" style="float:right;">
-                            <select id="searchCondition">
-                                <option value="all">전체 검색</option>
-                                <option value="assetType">자산 종류</option>
-                                <option value="qrSrl">QR ID</option>
-                                <option value="companyName">거래처</option>
-                            </select>
+                        <div id="search">
+                            <div id="assetSelectBox" class="filter-area-panel" style="">
+                                <input type="text" id="assetSearch" size="20" class="search-input" onFocus="$(this).animate({width:'15em'},300)" onBlur="$(this).animate({width:'1em'},300)" >
+                            </div>
+                            <div class="selectTable" style="float:right;">
+                                <select id="searchCondition">
+                                    <option value="all">전체 검색</option>
+                                    <option value="assetType">자산 종류</option>
+                                    <option value="qrSrl">QR ID</option>
+                                    <option value="companyName">거래처</option>
+                                </select>
+                            </div>
                         </div>
                         <!-- // filter-area-->
                     </div>

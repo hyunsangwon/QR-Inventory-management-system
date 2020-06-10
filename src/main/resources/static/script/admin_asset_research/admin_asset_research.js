@@ -110,6 +110,7 @@ function ajax_admin_asset_list(data)
                     }
                     else
                     {
+                        $('#search').hide();
                         html += '<div class="default-remark">';
                         html += '등록된 자산이 없습니다.<p>아래 순서에 따라 자산을 등록하세요.';
                         html += '</div>';
@@ -132,6 +133,7 @@ function ajax_admin_asset_list(data)
             }
             else
             {
+                $('#search').show();
                 for(var i=0; i < data.length; i++)
                 {
                     if(data[i].auth == 'holder') //자산 소유자
@@ -147,7 +149,7 @@ function ajax_admin_asset_list(data)
                             html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
                             html += '<div class="date">'+data[i].companyName+'</div>';
-                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 입고</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span> - 입고</div>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -165,7 +167,7 @@ function ajax_admin_asset_list(data)
                             html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
                             html += '<div class="date">'+data[i].companyName+'</div>';
-                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 출고</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span> - 출고</div>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -180,7 +182,7 @@ function ajax_admin_asset_list(data)
                             html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
                             html += '<div class="date">'+data[i].companyName+'</div>';
-                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 배송 중</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span> - 배송 중</div>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -195,7 +197,7 @@ function ajax_admin_asset_list(data)
                             html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
                             html += '<div class="date">'+data[i].companyName+'</div>';
-                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 입고 대기</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span> - 입고 대기</div>';
                             html += '</div>';
                             html += '</div>';
                         }

@@ -15,13 +15,21 @@
     $(function()
     {
         var option = $('#objKinds').val();
-        if('레이저 복합기' == option)
+        if('복합기' == option)
         {
             $(".selectObj option:eq(1)").attr("selected", "selected");
         }
-        if('토너 카트리지' == option)
+        if('문서 파쇄기' == option)
         {
             $(".selectObj option:eq(2)").attr("selected", "selected");
+        }
+        if('공기 청정기' == option)
+        {
+            $(".selectObj option:eq(3)").attr("selected", "selected");
+        }
+        if('무한 잉크 공급기' == option)
+        {
+            $(".selectObj option:eq(4)").attr("selected", "selected");
         }
         $(".delete-btn").click(function() {$("#company-info").css({"display": "block"});});
         $(".close").click(function() {$("#company-info").css({"display": "none"});});
