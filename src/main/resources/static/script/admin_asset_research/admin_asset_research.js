@@ -158,7 +158,7 @@ function ajax_admin_asset_list(data)
                     {
                         if(data[i].objStatus == 'release' || data[i].objStatus == 'release_new') //출고 완료
                         {
-                            html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item-wait" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';
                             html += '<img src='+data[i].objImage+'>';
                             html += '</div>';
@@ -173,7 +173,7 @@ function ajax_admin_asset_list(data)
                         }
                         if(data[i].objStatus == 'shipping') //출고 시작
                         {
-                            html += '<div class="item-release-ok" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
+                            html += '<div class="item-wait" id='+data[i].qrSrl+' onclick="load_detail_page(this)">';
                             html += '<div class="item">';
                             html += '<img src='+data[i].objImage+'>';
                             html += '</div>';
