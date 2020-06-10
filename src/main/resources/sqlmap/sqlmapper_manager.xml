@@ -93,36 +93,43 @@
             ON manager.master_srl = holder.user_srl
             WHERE manager.master_srl = #{userSrl}
             AND o.obj_status IN ('warehousing','warehousing_new')
-            <if test='searchName eq "qrSrl"'>
-                AND o.qr_srl LIKE CONCAT('%','%00%','%')
+            <if test='searchCondition eq "qrSrl"'>
+                AND o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "assetKinds"'>
-
+            <if test='searchCondition eq "assetType"'>
+                AND o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "companyName"'>
-
+            <if test='searchCondition eq "companyName"'>
+                AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "all"'>
-
+            <if test='searchCondition eq "all"'>
+                AND
+                (   o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
+                OR  o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
+                OR  c.company_name LIKE CONCAT('%',#{searchValue},'%')
+                )
             </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
             AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
-            <if test='searchName eq "qrSrl"'>
-
+            <if test='searchCondition eq "qrSrl"'>
+                AND o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "assetKinds"'>
-
+            <if test='searchCondition eq "assetType"'>
+                AND o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "companyName"'>
-
+            <if test='searchCondition eq "companyName"'>
+                AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "all"'>
-
+            <if test='searchCondition eq "all"'>
+                AND
+                (   o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
+                OR  o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
+                OR  c.company_name LIKE CONCAT('%',#{searchValue},'%')
+                )
             </if>
         </if>
-
         ORDER BY o.create_at DESC
         LIMIT #{limitcount},#{contentnum}
     </select>
@@ -133,36 +140,46 @@
         FROM obj AS o
         INNER JOIN users AS u
         ON o.user_srl = u.user_srl
+        INNER JOIN company AS c
+        ON o.company_srl = c.company_srl
         <if test='auth eq "holder"'>
             WHERE u.master_srl = #{userSrl}
             AND o.obj_status IN ('warehousing','warehousing_new')
-            <if test='searchName eq "qrSrl"'>
-
+            <if test='searchCondition eq "qrSrl"'>
+                AND o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "assetKinds"'>
-
+            <if test='searchCondition eq "assetType"'>
+                AND o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "companyName"'>
-
+            <if test='searchCondition eq "companyName"'>
+                AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "all"'>
-
+            <if test='searchCondition eq "all"'>
+                AND
+                (   o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
+                OR  o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
+                OR  c.company_name LIKE CONCAT('%',#{searchValue},'%')
+                )
             </if>
         </if>
         <if test='auth eq "manager"'>
             WHERE o.user_srl = #{userSrl}
             AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
-            <if test='searchName eq "qrSrl"'>
-
+            <if test='searchCondition eq "qrSrl"'>
+                AND o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "assetKinds"'>
-
+            <if test='searchCondition eq "assetType"'>
+                AND o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "companyName"'>
-
+            <if test='searchCondition eq "companyName"'>
+                AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
             </if>
-            <if test='searchName eq "all"'>
-
+            <if test='searchCondition eq "all"'>
+                AND
+                (   o.qr_srl LIKE CONCAT('%',#{searchValue},'%')
+                OR  o.obj_kinds LIKE CONCAT('%',#{searchValue},'%')
+                OR  c.company_name LIKE CONCAT('%',#{searchValue},'%')
+                )
             </if>
         </if>
     </select>

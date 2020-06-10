@@ -20,6 +20,6 @@ public class ObjListVO extends PagingVO
     private String auth;
     private String sortName;
     private String filterName;
-    private String searchName;
-    private String searchValue;
+    private String searchCondition; //검색 조건
+    private String searchValue; //검색 명
 }

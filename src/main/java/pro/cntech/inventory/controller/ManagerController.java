@@ -27,21 +27,12 @@ public class ManagerController
     @Autowired
     private AdminService adminService;
 
-
+    /*관리자 자산 조회*/
     @GetMapping("/asset/search/list")
     public String loadAdminListPage(ModelMap model)
     {
         logger.debug("[ Call /asset/search/list - GET ]");
         adminService.setMyInfo(model,"none");
-        return MANAGER_VIEW_PREFIX+"admin_asset_research";
-    }
-
-    @GetMapping("/asset/search/{searchName}/{searchValue}")
-    public String loadSearchAdminListPage(ModelMap model,@PathVariable("searchName") String searchName,
-                                    @PathVariable("searchValue") String searchValue)
-    {
-        logger.debug("[ Call /asset/search/"+searchName+"/"+searchValue+" - GET ]");
-        adminService.setMyInfo(model,searchName);
         return MANAGER_VIEW_PREFIX+"admin_asset_research";
     }
 

@@ -101,7 +101,6 @@ function ajax_admin_asset_list(data)
         },
         success : function(data)
         {
-            //$('#asset_container').empty();
             var html = '';
             if(data.length == 0)
             {
@@ -135,7 +134,7 @@ function ajax_admin_asset_list(data)
             {
                 for(var i=0; i < data.length; i++)
                 {
-                    if(data[i].auth == 'holder') //자산 소유자 (반납 완료, 내부 등록)
+                    if(data[i].auth == 'holder') //자산 소유자
                     {
                         if(data[i].objStatus == 'warehousing' || data[i].objStatus == 'warehousing_new') //출고 대기
                         {
@@ -145,14 +144,15 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '<div class="item-text">';
                             html += '<div class="state">';
-                            html += '<b>출고 대기</b>';
+                            html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
-                            html += '<div class="date">'+data[i].statusAt+'</div>';
+                            html += '<div class="date">'+data[i].companyName+'</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 입고</div>';
                             html += '</div>';
                             html += '</div>';
                         }
                     }
-                    if(data[i].auth == 'manager') //자산 관리자 (출고 완료, 출고 시작, 반납 시작, 반납 완료, 반납 대기, 외부자산 등록)
+                    if(data[i].auth == 'manager') //자산 관리자
                     {
                         if(data[i].objStatus == 'release' || data[i].objStatus == 'release_new') //출고 완료
                         {
@@ -162,9 +162,10 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '<div class="item-text">';
                             html += '<div class="state">';
-                            html += '<b>출고 완료</b>';
+                            html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
-                            html += '<div class="date">'+data[i].statusAt+'</div>';
+                            html += '<div class="date">'+data[i].companyName+'</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 출고</div>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -176,9 +177,10 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '<div class="item-text">';
                             html += '<div class="state">';
-                            html += '<b>출고 시작</b>';
+                            html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
-                            html += '<div class="date">'+data[i].statusAt+'</div>';
+                            html += '<div class="date">'+data[i].companyName+'</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 배송 중</div>';
                             html += '</div>';
                             html += '</div>';
                         }
@@ -190,9 +192,10 @@ function ajax_admin_asset_list(data)
                             html += '</div>';
                             html += '<div class="item-text">';
                             html += '<div class="state">';
-                            html += '<b>반납 대기중</b>';
+                            html += '<b>'+data[i].modelName+'</b>';
                             html += '</div>';
-                            html += '<div class="item-id">'+data[i].statusAt+'</div>';
+                            html += '<div class="date">'+data[i].companyName+'</div>';
+                            html += '<div class="date"><span>'+data[i].statusAt+'</span>- 입고 대기</div>';
                             html += '</div>';
                             html += '</div>';
                         }
