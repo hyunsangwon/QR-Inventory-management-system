@@ -28,11 +28,11 @@ public class ManagerController
     private AdminService adminService;
 
     /*관리자 자산 조회*/
-    @GetMapping("/asset/search/list")
-    public String loadAdminListPage(ModelMap model)
+    @GetMapping("/asset/search/list/{nameSort}")
+    public String loadAdminListPage(ModelMap model, @PathVariable("nameSort") String nameSort)
     {
         logger.debug("[ Call /asset/search/list - GET ]");
-        adminService.setMyInfo(model,"none");
+        adminService.setMyInfo(model,nameSort);
         return MANAGER_VIEW_PREFIX+"admin_asset_research";
     }
 
