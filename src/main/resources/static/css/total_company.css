@@ -456,7 +456,7 @@ select::-ms-expand {
     /* background-color:#fafbfc; */
     position: relative;
     bottom: 49px;
-    background: url('/image/main/main-icon-search.svg') no-repeat 100% 50%;
+    background: url('/image/main/main-icon-search.svg') no-repeat 0% 50%;
     font-size:23px;
 }
 

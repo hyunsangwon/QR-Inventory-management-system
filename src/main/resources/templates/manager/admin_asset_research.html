@@ -199,7 +199,7 @@
         <div id="content-wrap">
             <div class="page-title-search-area">
                 <div class="page-title">
-                    <div class="all-company">관리자 자산조회</div>
+                    <div class="all-company">관리자 목록</div>
                 </div>
                 <!-- //page-title -->
                 <div class="page-title-icon" style="width:50%; float:left; text-align:right; padding:26px 0;">
@@ -286,7 +286,7 @@
                             <div class="circle"></div>
                             <span class="title">자산 관리 현황</span>
                         </div>
-                        <div id="search">
+                        <div id="search" th:unless="${assetListSize} == '0'">
                             <div id="assetSelectBox" class="filter-area-panel" style="">
                                 <input type="text" id="assetSearch" size="20" class="search-input" onFocus="$(this).animate({width:'15em'},300)" onBlur="$(this).animate({width:'1em'},300)" >
                             </div>

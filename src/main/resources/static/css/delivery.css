@@ -121,7 +121,7 @@ ul.tabs li.current {
 /* 담보물 관리 현황 */
 
 .search-input {
-    width: 10em;
+    width: 0em;
     height: 50px;
     cursor: pointer;
     border-radius: 3em;
