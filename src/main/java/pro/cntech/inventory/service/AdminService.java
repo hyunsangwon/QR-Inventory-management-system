@@ -195,7 +195,7 @@ public class AdminService {
         map.addAttribute("pageHandler",pageHandler);
     }
 
-    public Workbook makeExcelForm() throws Exception
+    public Workbook makeExcelForm(ObjListVO objListVO) throws Exception
     {
         /*EXCEL SETTINGS*/
         Workbook workbook = new HSSFWorkbook();
@@ -236,7 +236,7 @@ public class AdminService {
 
         UserPrincipalVO userPrincipalVO = getSecurityInfo();
         String userSrl = userPrincipalVO.getUserSrl();
-        ObjListVO objListVO = new ObjListVO(); objListVO.setUserSrl(userSrl);
+        objListVO.setUserSrl(userSrl);
 
         List<ObjListVO> list = managerMapper.getAssetExcelList(objListVO);
 

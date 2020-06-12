@@ -133,7 +133,12 @@
                 <!-- //page-title -->
                 <div class="page-title" style="padding:26px 0px !important;">
                     <div class="excelDown" style="text-align:right;">
+                        <!--엑셀 다운로드 -->
                         <form th:method="post" th:action="@{/asset/list/excel/download}">
+                            <input type="hidden" name="searchValue" id="searchValue" th:value="${searchValue}"/>
+                            <input type="hidden" name="pageNum" id="pageNum" th:value="${pageNum}"/>
+                            <input type="hidden" name="filterName" id="filterName" th:value="${filterName}"/>
+                            <input type="hidden" name="sortName" id="sortName" th:value="${sortName}"/>
                             <button type="submit" style="background-color:#437ece; border:none; color:#fff; font-size:24px; font-weight:bold; vertical-align:middle; margin-right:10px;">엑셀 다운로드</button>
                             <img th:src="@{/image/main/main-icon-graph-exceldown.svg}" style="width:68px; margin-right:54px;"></img>
                         </form>
@@ -142,10 +147,6 @@
             </div>
         </div>
         <!-- //title -->
-        <input type="hidden" id="searchValue" th:value="${searchValue}"/>
-        <input type="hidden" id="pageNum" th:value="${pageNum}"/>
-        <input type="hidden" id="filterName" th:value="${filterName}"/>
-        <input type="hidden" id="sortName" th:value="${sortName}"/>
         <!-- tab content -->
         <div id="tab_content_wrap">
             <div id="tab-1" class="tab-content current">

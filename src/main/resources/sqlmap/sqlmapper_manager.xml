@@ -307,6 +307,24 @@
         INNER JOIN company AS c
         ON o.company_srl = c.company_srl
         WHERE u.master_srl = #{userSrl}
+        <if test='filterName eq "undefined"'>
+            AND o.obj_kinds IS NULL
+        </if>
+        <if test='filterName eq "machine"'>
+            AND o.obj_kinds = '복합기'
+        </if>
+        <if test='filterName eq "crusher"'>
+            AND o.obj_kinds = '문서 파쇄기'
+        </if>
+        <if test='filterName eq "purifier"'>
+            AND o.obj_kinds = '공기 청정기'
+        </if>
+        <if test='filterName eq "ink"'>
+            AND o.obj_kinds = '무한 잉크 공급기'
+        </if>
+        <if test='searchValue neq "null"'>
+            AND c.company_name LIKE CONCAT('%',#{searchValue},'%')
+        </if>
     </select>
 
 </mapper>

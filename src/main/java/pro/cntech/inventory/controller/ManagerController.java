@@ -56,7 +56,7 @@ public class ManagerController
     @PostMapping("/ajax/paging")
     public @ResponseBody PageHandler callAjaxPageHandler(@RequestBody ObjListVO listVO)
     {
-        logger.debug("[ Call /ajax/admin/paging - POST ]");
+        logger.debug("[ Call /ajax/paging - POST ]");
         logger.debug("Param : "+listVO.toString());
         return adminService.createPageHandler(listVO);
     }
@@ -84,7 +84,7 @@ public class ManagerController
                                    @PathVariable("typeSort") String typeSort,
                                    @PathVariable("pageNum") int pageNum) throws Exception
     {
-        logger.debug("[ Call /asset/all/list/sort/"+nameSort+" - GET ]");
+        logger.debug("[ Call /asset/list/sort/"+nameSort+"/type/"+typeSort+"/pageNum/"+pageNum+" - GET ]");
         logger.debug("Param : "+nameSort);
         logger.debug("Param : "+typeSort);
         logger.debug("Param : "+pageNum);
@@ -103,7 +103,11 @@ public class ManagerController
                                       @PathVariable("typeSort") String typeSort,
                                       @PathVariable("pageNum") int pageNum)throws Exception
     {
-
+        logger.debug("[ Call /asset/list/search/"+searchValue+"/sort/"+nameSort+"/type/"+typeSort+"/pageNum/"+pageNum+" - GET ]");
+        logger.debug("Param : "+nameSort);
+        logger.debug("Param : "+typeSort);
+        logger.debug("Param : "+pageNum);
+        logger.debug("Param : "+searchValue);
         if(searchValue != null || nameSort != null || typeSort != null)
         {
             adminService.getAssetAllList(pageNum,typeSort,nameSort,searchValue,map);
@@ -114,13 +118,14 @@ public class ManagerController
 
     /*전체 자산 조회 EXCEP download*/
     @PostMapping("/asset/list/excel/download")
-    public void downloadExcelFile(HttpServletResponse response) throws Exception
+    public void downloadExcelFile(HttpServletResponse response,
+                                  @ModelAttribute("objListVO") ObjListVO objListVO) throws Exception
     {
+        logger.debug("[ Call /asset/list/excel/download - POST ]");
+        logger.debug("Param : "+objListVO.toString());
         response.setContentType("ms-vnd/excel");
         response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("자산_리스트","UTF-8")+".xls");
-
-
-        Workbook workBook = adminService.makeExcelForm();
+        Workbook workBook = adminService.makeExcelForm(objListVO);
 
         workBook.write(response.getOutputStream());
         workBook.close();
