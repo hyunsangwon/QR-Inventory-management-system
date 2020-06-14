@@ -79,7 +79,8 @@
         </if>
             ,o.obj_status AS objStatus
             ,o.qr_srl AS qrSrl
-            ,IFNULL(o.obj_m,'data') AS modelName
+            ,o.obj_m AS modelName
+            ,obj_img_mn AS modelImageName
             ,o.obj_img AS objImage
             ,DATE_FORMAT(o.obj_status_at,'%Y.%m.%d') AS statusAt
             ,c.company_name AS companyName

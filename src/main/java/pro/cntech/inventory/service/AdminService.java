@@ -31,7 +31,7 @@ public class AdminService {
     private AwsService awsService;
 
     /*자산 담당자 기본 정보 세팅*/
-    public void setMyInfo(ModelMap map,String sortName)
+    public void setMyInfo(ModelMap map,String sortName) throws Exception
     {
         UserPrincipalVO user = getSecurityInfo();
         String userSrl = user.getUserSrl();
@@ -45,6 +45,23 @@ public class AdminService {
         param.setUserSrl(userSrl); param.setLimitcount(0); param.setContentnum(20);
         param.setAuth(auth); param.setSortName("all");
         List<ObjListVO> assetList = managerMapper.getObjList(param);
+        for(ObjListVO objList : assetList)
+        {
+            if(objList.getModelName() == null)
+            {
+                String[] modelNameArr = objList.getModelImageName().split("/");
+                String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
+                objList.setModelName(modelName);
+                if(modelName.equals(""))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+                if(modelName.equals("인식 실패"))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+            }
+        }
         int totalCnt = managerMapper.getObjListTotalCnt(param);
         PageHandler pageHandler = pageHandler(totalCnt,1,20);
 

@@ -29,7 +29,7 @@ public class ManagerController
 
     /*관리자 자산 조회*/
     @GetMapping("/asset/search/list/{nameSort}")
-    public String loadAdminListPage(ModelMap model, @PathVariable("nameSort") String nameSort)
+    public String loadAdminListPage(ModelMap model, @PathVariable("nameSort") String nameSort) throws Exception
     {
         logger.debug("[ Call /asset/search/list - GET ]");
         adminService.setMyInfo(model,nameSort);
