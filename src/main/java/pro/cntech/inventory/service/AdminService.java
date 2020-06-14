@@ -81,7 +81,7 @@ public class AdminService {
         return vo;
     }
 
-    public List<ObjListVO> getAdminAssetList(ObjListVO objListVO)
+    public List<ObjListVO> getAdminAssetList(ObjListVO objListVO) throws Exception
     {
         int MAX = 20;
         int limitCount=((objListVO.getPageNum() - 1 ) * MAX);
@@ -96,6 +96,25 @@ public class AdminService {
             objListVO.setUserSrl(masterSrl);
         }
         List<ObjListVO> list = managerMapper.getObjList(objListVO);
+
+        for(ObjListVO objList : list)
+        {
+            if(objList.getModelName() == null)
+            {
+                String[] modelNameArr = objList.getModelImageName().split("/");
+                String modelName = awsService.getConvertedText(modelNameArr[modelNameArr.length-1]).replace("\"","");
+                objList.setModelName(modelName);
+                if(modelName.equals(""))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+                if(modelName.equals("인식 실패"))
+                {
+                    objList.setModelName("모델명 인식 실패");
+                }
+            }
+        }
+
         return list;
     }
 

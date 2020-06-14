@@ -51,7 +51,7 @@ public class ManagerController
     }
 
     @PostMapping("/ajax/admin/asset/list")
-    public @ResponseBody List<ObjListVO> ajaxCallAdminAssetInfo(@RequestBody ObjListVO listVO)
+    public @ResponseBody List<ObjListVO> ajaxCallAdminAssetInfo(@RequestBody ObjListVO listVO) throws Exception
     {
         logger.debug("[ Call /ajax/admin/asset/list - POST ]");
         logger.debug("Param : "+listVO.toString());
