@@ -4,17 +4,22 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pro.cntech.inventory.service.AdminService;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.ObjListVO;
+import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /*자산 관리자 컨트롤 */
@@ -123,8 +128,15 @@ public class ManagerController
     {
         logger.debug("[ Call /asset/list/excel/download - POST ]");
         logger.debug("Param : "+objListVO.toString());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserPrincipalVO userPrincipalVO = (UserPrincipalVO) auth.getPrincipal();
+        String companyName = userPrincipalVO.getCompanyName();
+        String today = new SimpleDateFormat( "yyMMdd").format(new Date());
+        String title = "자산리스트";
+
         response.setContentType("ms-vnd/excel");
-        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("자산_리스트","UTF-8")+".xls");
+        response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode(today+"_"+companyName+"_"+title,"UTF-8")+".xls");
         Workbook workBook = adminService.makeExcelForm(objListVO);
 
         workBook.write(response.getOutputStream());

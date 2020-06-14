@@ -28,4 +28,5 @@ public class ObjDetailVO extends PagingVO
     private String objKinds; //장비 종류
     private String companyLat;
     private String companyLon;
+    private int radiusDistance; //반경 거리
 }

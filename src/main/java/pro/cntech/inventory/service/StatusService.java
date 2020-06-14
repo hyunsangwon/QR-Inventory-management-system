@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
 import pro.cntech.inventory.util.ContactFilter;
+import pro.cntech.inventory.util.DistanceCalculation;
 import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
 import pro.cntech.inventory.vo.*;
@@ -62,6 +63,7 @@ public class StatusService
         map.addAttribute("pageHandler",pageHandler);
     }
 
+    /* 자산 상세보기 */
     public ObjDetailVO getObjDetail(String qrSrl) throws Exception
     {
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
@@ -109,6 +111,16 @@ public class StatusService
         {
             detailvo.setAuth("자산 소유자");
         }
+
+        DistanceCalculation distanceCalculation = new DistanceCalculation();
+        double meter = distanceCalculation.distance(
+                Double.parseDouble(detailvo.getLatitude()),
+                Double.parseDouble(detailvo.getLongitude()),
+                Double.parseDouble(detailvo.getCompanyLat()),
+                Double.parseDouble(detailvo.getCompanyLon()),
+                "meter"
+                );
+        detailvo.setRadiusDistance((int)meter);
         return detailvo;
     }
 

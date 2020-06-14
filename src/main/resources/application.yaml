@@ -3,7 +3,7 @@ application:
   title: QR-Inventory-API
 spring:
   profiles:
-    active: env
+    active: dev
 mybatis:
   mapper-locations: classpath:/sqlmap/sqlmapper_*.xml
 logging:
@@ -13,7 +13,7 @@ kakao:
 aws:
   s3:
     access-id: AKIAWRLYC323CCXX777E
-    access-pw: D1En4rvy+dfsl0gEPHF5hc3nDqngWmplMeqUqdrH
+    access-pw: D1En4rvy+dfsl0gEPHF5hc3nDqngWㅑmplMeqUqdrH
     bucket: qr-s3
   api-gateway-url: https://66m2vdg9fi.execute-api.ap-northeast-2.amazonaws.com/OCR-API/ocr
 
