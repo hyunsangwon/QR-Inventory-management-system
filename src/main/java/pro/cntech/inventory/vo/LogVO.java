@@ -7,6 +7,7 @@ public class LogVO
 {
     private String logSrl;
     private String objSrl;
+    private String userSrl;
     private String qrSrl;
     private String objStatus;
     private String latitude;

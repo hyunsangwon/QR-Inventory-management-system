@@ -52,7 +52,6 @@ public class StatusService
                 {
                     objList.setModelName("모델명 인식 실패");
                 }
-
             }
         }
 
@@ -171,7 +170,7 @@ public class StatusService
         UserPrincipalVO userPrincipalVO = getSecurityInfo();
         String holderName = userPrincipalVO.getName();
         String objAddr = userPrincipalVO.getAddr();
-
+        logVO.setUserSrl(userPrincipalVO.getUserSrl());
         logVO.setObjStatus(listVO.getObjStatus());
         logVO.setQrSrl(listVO.getQrSrl());
         logVO.setObjAddr(objAddr);

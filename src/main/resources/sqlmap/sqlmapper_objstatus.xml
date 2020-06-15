@@ -89,6 +89,7 @@
         INSERT INTO obj_log
         (
             qr_srl,
+            user_srl,
             obj_status,
             obj_addr,
             create_at,
@@ -97,6 +98,7 @@
         VALUES
         (
             #{qrSrl},
+            #{userSrl},
             #{objStatus},
             #{objAddr},
             now(),
