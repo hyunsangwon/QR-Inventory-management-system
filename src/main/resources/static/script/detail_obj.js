@@ -257,7 +257,7 @@ function ajax_call_obj_history_list(jsonData)
           }
           if(data[i].objStatus == 'release_new')
           {
-            html += '<td><b>신규 등록(출고)</b></td>';
+            html += '<td><b>출고 완료</b></td>';
           }
           if(data[i].objStatus == 'shipping')
           {

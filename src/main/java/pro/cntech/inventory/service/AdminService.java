@@ -198,6 +198,22 @@ public class AdminService {
                     objList.setModelName("모델명 인식 실패");
                 }
             }
+
+            if(objList.getSrlName() == null)
+            {
+                String[] srlNameArr = objList.getSrlImageName().split("/");
+                String srlName = awsService.getConvertedText(srlNameArr[srlNameArr.length-1]).replace("\"","");
+                objList.setSrlName(srlName);
+                if(srlName.equals(""))
+                {
+                    objList.setSrlName("시리얼명 인식 실패");
+                }
+                if(srlName.equals("인식 실패"))
+                {
+                    objList.setSrlName("시리얼명 인식 실패");
+                }
+            }
+
         }
 
         if(sortName.equals("model"))

@@ -228,7 +228,9 @@
         SELECT
             o.obj_status AS objStatus,
             o.obj_m AS modelName,
+            o.obj_s AS srlName,
             o.obj_img_mn AS modelImageName,
+            o.obj_img_srl AS srlImageName,
             IFNULL(o.obj_kinds,'미정') AS objKinds,
             u.user_name AS userName,
             o.qr_srl AS qrSrl,
@@ -259,6 +261,9 @@
         </if>
         <if test='sortName eq "name"'>
             ORDER BY u.user_name ASC
+        </if>
+        <if test='sortName eq "company"'>
+            ORDER BY c.company_name ASC
         </if>
         LIMIT #{limitcount},#{contentnum}
     </select>
