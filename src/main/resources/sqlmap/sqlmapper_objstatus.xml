@@ -120,7 +120,7 @@
         INNER JOIN obj AS o
             ON ol.qr_srl = o.qr_srl
         INNER JOIN users u
-            ON o.user_srl = u.user_srl
+            ON ol.user_srl = u.user_srl
         WHERE ol.qr_srl = #{qrSrl}
         ORDER BY ol.create_at DESC
         LIMIT #{limitcount},#{contentnum}

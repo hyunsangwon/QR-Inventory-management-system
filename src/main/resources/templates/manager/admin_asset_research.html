@@ -12,6 +12,10 @@
     var header = $("meta[name='_csrf_header']").attr("content");
     $(document).ready(function()
     {
+        if($('#assetListSize').val() == '0')
+        {
+            $('#search').hide();
+        }
         var sortName = $('#navSort').val();
         $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
         $('#userOption option').each(function()
@@ -286,7 +290,8 @@
                             <div class="circle"></div>
                             <span class="title">자산 관리 현황</span>
                         </div>
-                        <div id="search" th:unless="${assetListSize} == '0'">
+                        <input type="hidden" id="assetListSize" th:value="${assetListSize}"/>
+                        <div id="search">
                             <div id="assetSelectBox" class="filter-area-panel" style="">
                                 <input type="text" id="assetSearch" size="20" class="search-input" onFocus="$(this).animate({width:'15em'},300)" onBlur="$(this).animate({width:'1em'},300)" >
                             </div>
