@@ -11,9 +11,12 @@ public class DistanceCalculation
         dist = rad2deg(dist);
         dist = dist * 60 * 1.1515;
 
-        if (unit == "kilometer") {
+        if (unit == "kilometer")
+        {
             dist = dist * 1.609344;
-        } else if(unit == "meter"){
+        }
+        else if(unit == "meter")
+        {
             dist = dist * 1609.344;
         }
         return Math.round(dist);
