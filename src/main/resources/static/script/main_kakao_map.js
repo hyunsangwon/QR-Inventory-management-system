@@ -1,4 +1,5 @@
 var _overlay = null;
+var _markerCnt = 0;
 
 /* 지도 마커 생성*/
 function create_marker_map(map)
@@ -58,6 +59,11 @@ function create_marker_map(map)
 function create_pop_up(marker,map,data)
 {
     kakao.maps.event.addListener(marker, 'click', function() {
+        ++_markerCnt;
+        if(_markerCnt > 1)
+        {
+            _overlay.setMap(null);
+        }
         var content = '<div class="map-wrap">' +
             '    <div class="info">' +
             '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' +
