@@ -739,7 +739,7 @@ select, option {text-align:right;}
 .page_count_wrap {
     width: 100%;
     height: 60px;
-    margin-bottom: 10px;
+    margin:70px 0;
     text-align: center;
 }
 
@@ -1283,7 +1283,6 @@ footer {
 .w3-row-padding {
     padding: 0px 40px 0px 40px !important;
     height:30px;
-    float:left;
     width:100%;
 }
 .w3-padding-large {

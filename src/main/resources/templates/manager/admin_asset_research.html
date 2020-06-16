@@ -226,7 +226,7 @@
                 </div>
                 <!-- // filter-area-->
             </div>
-            <div class="container-text" style="height:1400px; overflow-y:auto; overflow-x:hidden;  ">
+            <div class="container-text" style="height:2200px; overflow-y:auto; overflow-x:hidden;  ">
                 <div class="section-box active" name="section-box" th:data-listNo="${myInfo.userSrl}" th:onclick="click_user(this.getAttribute('data-listNo'),'holder')" th:id="${myInfo.userSrl}">
                     <a>
                         <!--자산 담당자일 경우는 com-icon-crown, 자산 관리자일 경우는 com-icon-->
@@ -249,7 +249,7 @@
         <!-- // w3-sidebar w3-collapse w3-white w3-animate-left -->
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-        <div class="w3-main" style="margin-left:460px; height:1750px;">
+        <div class="w3-main" style="margin-left:460px; height:2300px;">
             <!-- Header -->
             <header id="company-all-info">
                 <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()" style="background:url('/image/hamburger_menu.png') no-repeat ; width:50px; height:50px; background-size:50px; margin:20px;"><i class="fa fa-bars"></i></span>
@@ -283,6 +283,25 @@
                 <!-- //w3-container -->
             </header>
             <div class="clear"></div>
+            
+            <!--주석처리는 여기서부터 -->
+            <div class="w3-row-padding" style="padding:0 50px;">
+                <div class="panel-heading" style="margin-bottom:30px;">
+                    <div class="panel-group">
+                        <div class="panel-title">
+                            <div class="circle"></div>
+                            <span class="title">자산 위치</span>
+                        </div>
+                        <div class="map" style="border:1px solid #000; width:880px; height:400px; float:left; margin:30px 0 60px 0;">
+                        	
+                        </div>
+                    </div>
+                    <!--//panel-group-->
+                </div>
+                <!--//panel-heading-->
+            </div>
+            <!-- //여기까지 -->
+            
             <div class="w3-row-padding" style="padding:0 50px;">
                 <div class="panel-heading">
                     <div class="panel-group">
