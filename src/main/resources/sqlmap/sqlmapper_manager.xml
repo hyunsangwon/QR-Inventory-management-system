@@ -333,4 +333,29 @@
         </if>
     </select>
 
+    <select id="getAssetMarker" parameterType="pro.cntech.inventory.vo.UserVO" resultType="pro.cntech.inventory.vo.MarkerVO">
+        SELECT
+        o.obj_srl AS objSrl,
+        c.company_srl AS companySrl,
+        c.company_name AS companyName,
+        c.addr AS companyAddr,
+        c.phone AS companyPhone,
+        c.latitude,
+        c.longitude,
+        o.obj_status AS objStatus
+        FROM obj AS o
+        INNER JOIN company AS c
+        ON o.company_srl = c.company_srl
+        INNER JOIN users AS u
+        ON c.user_srl = u.user_srl
+        <if test='auth eq "holder"'>
+            WHERE u.master_srl = #{userSrl}
+            AND o.obj_status IN ('warehousing','warehousing_new')
+        </if>
+        <if test='auth eq "manager"'>
+            WHERE u.user_srl = #{userSrl}
+            AND o.obj_status IN ('shipping','release_new','release','warehousing_wait')
+        </if>
+    </select>
+
 </mapper>

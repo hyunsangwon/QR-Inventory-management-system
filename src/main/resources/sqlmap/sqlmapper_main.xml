@@ -65,15 +65,20 @@
             c.company_name AS companyName,
             c.addr AS companyAddr,
             c.phone AS companyPhone,
-            o.latitude,
-            o.longitude,
+            c.latitude,
+            c.longitude,
             o.obj_status AS objStatus
         FROM obj AS o
         INNER JOIN company AS c
         ON o.company_srl = c.company_srl
         INNER JOIN users AS u
         ON c.user_srl = u.user_srl
-        WHERE u.master_srl = #{userSrl}
+        <if test='auth eq "holder"'>
+            WHERE u.master_srl = #{userSrl}
+        </if>
+        <if test='auth eq "manager"'>
+            WHERE u.user_srl = #{userSrl}
+        </if>
     </select>
 
     <update id="updateMyInfo" parameterType="pro.cntech.inventory.vo.UserVO">

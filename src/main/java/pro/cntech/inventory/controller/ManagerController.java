@@ -11,12 +11,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pro.cntech.inventory.service.AdminService;
 import pro.cntech.inventory.util.PageHandler;
+import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -144,6 +144,14 @@ public class ManagerController
 
         response.getOutputStream().flush();
         response.getOutputStream().close();
+    }
+
+    @PostMapping("/ajax/call/user/asset/marker")
+    public @ResponseBody List<MarkerVO> ajaxCallMapMarker(@RequestBody UserVO userVO)
+    {
+        logger.debug("[ Call /ajax/call/kakaomap/marker- GET ]");
+        logger.debug("Param : "+userVO.toString());
+        return adminService.getCompanyGPS(userVO);
     }
 
 }

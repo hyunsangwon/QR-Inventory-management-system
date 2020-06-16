@@ -1,5 +1,5 @@
 application:
-  version: v3.1.0
+  version: v3.1.1
   title: QR-Inventory-API
 spring:
   profiles:

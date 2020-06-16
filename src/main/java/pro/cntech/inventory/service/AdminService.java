@@ -14,6 +14,7 @@ import pro.cntech.inventory.mapper.ManagerMapper;
 import pro.cntech.inventory.util.ContactFilter;
 import pro.cntech.inventory.util.ObjStatusCode;
 import pro.cntech.inventory.util.PageHandler;
+import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
@@ -72,6 +73,16 @@ public class AdminService {
         map.addAttribute("assetList",assetList);
         map.addAttribute("assetListSize",assetList.size());
         map.addAttribute("pageHandler",pageHandler);
+    }
+
+    public List<MarkerVO> getCompanyGPS(UserVO userVO)
+    {
+        List<MarkerVO> list = managerMapper.getAssetMarker(userVO);
+        for(MarkerVO vo : list)
+        {
+            vo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(vo.getCompanyPhone()));
+        }
+        return list;
     }
 
     public UserVO getAdminInfo(UserVO userVO)

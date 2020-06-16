@@ -473,6 +473,23 @@ input:focus {
 .default-wrap .default-box .box{width:182px; height: 182px; background-color: #f5f5f5; margin-bottom:10px; border-radius: 17px;}
 .default-wrap .default-box span{font-size:18px; font-weight: 600;}
 
+/* 지도 팝업 */
+.map-wrap 							{position: absolute;left: 170px;bottom: 40px;/* width: 259px; height: 233px; */margin-left: -144px;text-align: left;overflow: hidden; line-height: 1.5; }
+.map-wrap * 						{padding: 0;margin: 0;}
+.map-wrap .info 					{padding:30px; border-radius: 6px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc; overflow: hidden; background-color: rgba(26, 26, 26, 0.85);}
+.map-wrap .info:nth-child(1) 		{border: 0; box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.4)}
+.info .title 						{padding: 20px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+.info .close 						{position: absolute;top: 10px;right: 10px; color: #888; width: 17px;height: 17px; background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover 					{cursor: pointer;}
+.info .body 						{position: relative;overflow: hidden;}
+.factory-nm-grade					{font-size:1.25em; font-weight:600; color:#fff;}
+.info .desc 						{position: relative; margin: 13px 0 0 90px;height: 75px;}
+.desc .ellipsis 					{overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.desc .jibun 						{font-size: 11px;color: #888;margin-top: -2px; color:#909090;}
+.jibun.ellipsis						{color:#909090; margin-bottom:15px;}
+.company-dambo						{color:#fff; font-size:1em; line-height:1.6em;}
+#grade-percent-total								{float:left;}
+.amcharts-chart-div a 						{display : none! important;}
 
 /* 출고 대기 box*/
 

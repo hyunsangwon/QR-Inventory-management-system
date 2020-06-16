@@ -5,7 +5,8 @@ var _markerCnt = 0;
 function create_marker_map(map)
 {
     var userSrl = $('#userSrl').val();
-    var jsonData = { "userSrl" : userSrl}
+    var jsonData = { "userSrl" : userSrl , "auth" : "holder"};
+
     $.ajax({
         type: 'POST',
         contentType: "application/json",

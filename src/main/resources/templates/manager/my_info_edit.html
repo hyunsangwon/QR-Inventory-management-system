@@ -33,8 +33,8 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-                $("[name=zipCode]").val(data.zonecode);
-                $("[name=addr]").val(fullRoadAddr);
+                $("[name=zipCode]").val(data.zonecode+', '+fullRoadAddr);
+
             }
         }).open();
     }
@@ -129,9 +129,9 @@
                         <div class="company-text">
                             <div class="circle"></div>회사 주소
                         </div>
-                        <input type="text" id="companyDetailAddr" name="zipCode" th:value="${vo.detailAddr}" style="width:500px; margin-bottom:10px;"/>
+                        <input type="text" id="companyDetailAddr" name="zipCode" th:value="${vo.addr}" style="width:500px; margin-bottom:10px;"/>
                         <button class="address-button" onclick="execPostCode();">우편번호 찾기</button>
-                        <input type="text" id="companyAddr" name="addr" th:value="${vo.addr}" style="width:700px;"/>
+                        <input type="text" id="companyAddr" name="addr" th:value="${vo.detailAddr}" style="width:700px;"/>
                     </div>
           		</div>
                 <div class="edit-complete-btn">
@@ -240,6 +240,13 @@
                 companyName.focus();
                 return false;
             }
+            if($('#companyDetailAddr').val() == '')
+            {
+                alert('회사주소를 입력해주세요');
+                companyAddr.focus();
+                return false;
+            }
+
             if(companyAddr.val() == '')
             {
                 alert('회사주소를 입력해주세요');

@@ -128,7 +128,8 @@
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
 
-    $(function(){
+    $(function()
+    {
         $('#uploadFile').change(function(e){
             _filesTempArr = []; //단일 파일 보낼때 ( 다중 파일 업로드일때는 삭제 바람 )
             var files = e.target.files;
@@ -145,7 +146,8 @@
         });
     });
 
-    function img_preview(arr){
+    function img_preview(arr)
+    {
             arr.forEach(function(f){
             //파일명이 길면 파일명...으로 처리
             var fileName = f.name;
@@ -165,7 +167,8 @@
         });//arr.forEach
     }
     /* e-mail select box*/
-    $('.selectEmail').change(function(){
+    $('.selectEmail').change(function()
+    {
         $(".selectEmail option:selected").each(function () {
             if($(this).val()== '1'){ //직접입력일 경우
                 $(".str_email02").val(''); //값 초기화
@@ -177,7 +180,8 @@
         });
     });
     /* 전화번호 숫자 입력*/
-    function onlyNumber(event){
+    function onlyNumber(event)
+    {
         event = event || window.event;
         var keyID = (event.which) ? event.which : event.keyCode;
         if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
@@ -187,7 +191,8 @@
         }
     }
     /* 비밀번호 일치하지 않을 때*/
-    $('.pw').focusout(function () {
+    $('.pw').focusout(function ()
+    {
         var pwd1 = $("#password_1").val();
         var pwd2 = $("#password_2").val();
 
@@ -203,10 +208,10 @@
         }
     });
 
-    function isEmail(email) {
+    function isEmail(email)
+    {
         var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
         return regExp.test(email); // 형식에 맞는 경우 true 리턴
-
     }
 
     function isCompanyNumber(bizID) //사업자 번호 체크
@@ -287,7 +292,7 @@
         }
         if(detailAddr.val() == '')
         {
-            alert('주소를 입력해주세요');
+            alert('상세 주소를 입력해주세요');
             detailAddr.focus();
             return false;
         }
@@ -407,8 +412,7 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-                $("#addr").val(data.zonecode);
-                $("#detailAddr").val(fullRoadAddr);
+                $("#addr").val(data.zonecode+', '+fullRoadAddr);
             }
         }).open();
     }

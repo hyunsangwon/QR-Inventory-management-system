@@ -44,7 +44,8 @@
     function execPostCode()
     {
         new daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function(data)
+            {
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
@@ -67,14 +68,11 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-                $("[name=zipCode]").val(data.zonecode);
-                $("[name=addr]").val(fullRoadAddr);
-                $('#h_addr').val(fullRoadAddr);
-                $('#h_detailAddr').val(data.zonecode);
+                $("[name=zipCode]").val(data.zonecode+', '+fullRoadAddr);
+                $('#h_addr').val(data.zonecode+', '+fullRoadAddr);
             }
         }).open();
     }
-
 
     function qr_order()
     {
@@ -135,9 +133,10 @@
         $("input[name=userName]").val($('#userPhone').val());
         $("input[name=userPhone]").val($('#userName').val());
         $("input[name=orderRequests]").val();
-
-        console.log('addr ===> '+$("input[name=addr]").val());
-        console.log('detailAddr =>'+$("input[name=detailAddr]").val());
+        if($("[name=zipCode]").val() != '')
+        {
+            $('#h_detailAddr').val($('#newDetailAddr').val());
+        }
         $('#orderForm').submit();
     }
 
@@ -167,7 +166,6 @@
             $('#userPhone').val();
         }
     }
-
 </script>
 <body>
 <div class="cd-main-header js-cd-main-header">
@@ -228,7 +226,7 @@
                         신규 배송지 active 일 때  -->
                         <div id="div_new_addr" style="display: none;">
                             <input class="order-zipCode" name="zipCode" type="text" placeholder="우편번호를 검색하세요." />
-                            <input class="order-addr" name="addr" type="text" placeholder="상세주소를 입력하세요." />
+                            <input class="order-addr" name="addr" id="newDetailAddr" type="text" placeholder="상세주소를 입력하세요." />
                             <button class="postCode-btn" onclick="execPostCode();" id="postCode" type="button" style="color: #666; cursor: pointer; margin-left:20px; background-color:#fff">우편번호 검색</button>
                         </div>
                     </div>
@@ -264,7 +262,6 @@
                         </div>
                         <input type="text"/>
                     </div>
-
                    <!-- <span class="order-surcharge">
                         <div class="order-surcharge-text">
                             <span>추가 결제금액</span>

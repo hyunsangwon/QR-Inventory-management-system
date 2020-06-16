@@ -2,6 +2,7 @@ package pro.cntech.inventory.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserVO;
 
@@ -20,4 +21,5 @@ public interface ManagerMapper
     List<ObjListVO>getAllAsset(ObjListVO objListVO);
     int getAllAssetTotalCnt(ObjListVO objListVO);
     List<ObjListVO>getAssetExcelList(ObjListVO objListVO);
+    List<MarkerVO> getAssetMarker(UserVO userVO);
 }
