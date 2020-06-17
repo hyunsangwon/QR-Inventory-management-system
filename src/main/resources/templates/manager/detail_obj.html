@@ -16,7 +16,7 @@
     $(function()
     {
         var option = $('#objKinds').val();
-        if('null' == option)
+        if('null' == option || '미정' == option)
         {
             $('#null').prop('checked',true);
         }
@@ -144,12 +144,12 @@
 			                            <div class="circle"></div>자산 종류
 			                        </div> 
 			                         <div class="text" style="width:450px; height:120px; float:left; font-size:28px; text-align:left; margin-bottom:50px;">
-			                            <input type="radio" id="null" name="assetType"><label for="null">미정</label></input>
-			                            <input type="radio" id="machine" name="assetType"><label for="machine">복합기</label></input>
-			                            <input type="radio" id="crusher" name="assetType"><label for="crusher">문서 파쇄기</label></input></br>
+			                            <input type="radio" id="null" name="assetType" value="미정"><label for="null">미정</label></input>
+			                            <input type="radio" id="machine" name="assetType" value="복합기"><label for="machine">복합기</label></input>
+			                            <input type="radio" id="crusher" name="assetType" value="문서 파쇄기"><label for="crusher">문서 파쇄기</label></input></br>
 			                            <div style="height:50px;"></div>
-			                            <input type="radio" id="purifier" name="assetType"><label for="purifier">공기 청정기</label></input>
-			                            <input type="radio" id="ink" name="assetType"><label for="ink">무한 잉크 공급기</label></input>
+			                            <input type="radio" id="purifier" name="assetType" value="공기 청정기"><label for="purifier">공기 청정기</label></input>
+			                            <input type="radio" id="ink" name="assetType" value="무한 잉크 공급기"><label for="ink">무한 잉크 공급기</label></input>
 			                        </div>
 			                        <div class="title" style="margin:25px 0;">
 			                            <div class="circle"></div>Model

@@ -189,6 +189,7 @@ function ajax_update_obj()
     return false;
   }
   var radioVal = $('input[name="assetType"]:checked').val();
+  console.log('radioVal ------> '+radioVal);
   var qrSrl = $('#qrSrl').text();
   var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName, "objKinds" : radioVal};
   $.ajax
