@@ -43,7 +43,7 @@
         $('.qr_edit').click(function(){
             $('.selectObj').attr('disabled',false);
         });
-        $(".qr_edit_modal").click(function() {
+       /*  $(".qr_edit_modal").click(function() {
             $("#obj-info").css({
                 "display": "block"
             });
@@ -57,7 +57,7 @@
             $("#obj-info").css({
                 "display": "none"
             });
-        });
+        }); */
     });
 </script>
 <body>
@@ -123,13 +123,35 @@
                     </div>
                     <!--//panel-wrap-register-->
                     <input id="objKinds" th:value="${vo.objKinds}" type="hidden"/>
-                    <div class="obj-info">
+                    
+                    <div class="edit-wrap" style=" height:44px; float:right; text-align: right; position:relative; bottom:-45px; cursor:pointer;">
+                           <div onclick="qr_edit(this)" class="qr_edit">
+                            <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
+                            	<img th:src="@{/image/list-icon-edit.svg}">
+                        	</div>
+                            
+                            <div onclick="qr_save(this)" class="qr_save">
+                            	<span style="color:#666; font-size:24px; vertical-align: middle;">수정완료</span>
+                            	<img th:src="@{/image/list-icon-edit-complate.svg}">
+                        </div> 
+                    </div>
+           
+                    <div class="obj-info" style="padding-top:0 !important;">
                         <div class="list" style="font-weight:600;">관리자 : <span th:text="${vo.userName}">현상원</span></div>
                         <div class="list">연락처 : <span th:text="${vo.userPhone}">01012345678</span></div>
-                        <div class="list">자산종류 : <span>미정</span></div>
+                        <div class="list">자산종류 :
+	                        <select class="selectObj" disabled>
+                            <option value="null">미정</option>
+                            <option value="machine">복합기</option>
+                            <option value="crusher">문서 파쇄기</option>
+                            <option value="purifier">공기 청정기</option>
+                            <option value="ink">무한 잉크 공급기</option>
+                        </select> 
+	                    </div>
                     </div>
                     <!--//obj-info-->
-					<!-- 자산 기본정보, OCR 수정 modal -->
+                    
+					<!-- 자산 기본정보, OCR 수정 modal
 			        <div id="obj-info" class="company-modal">
 			            <div id="modal-content" class="modal-company">
 			                <div class="order-info-title">
@@ -170,7 +192,7 @@
 			                </div>
 			            </div>
 			        </div>
-			        <!-- //obj-info-->
+			        //obj-info-->
         
                     <!-- 20.05.15 추가-->
                     <div class="edit-wrap" style=" height:44px; float:right; text-align: right; position:relative; bottom:10px; cursor:pointer;">
@@ -180,12 +202,12 @@
                             <option value="crusher">문서 파쇄기</option>
                             <option value="purifier">공기 청정기</option>
                             <option value="ink">무한 잉크 공급기</option>
-                        </select> -->
+                        </select> 
                         <div class="qr_edit_modal">
                             <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
                             <img th:src="@{/image/list-icon-edit.svg}">
                         </div>
-                        <!-- <div onclick="qr_save(this)" class="qr_save">
+                        <div onclick="qr_save(this)" class="qr_save">
                             <span style="color:#666; font-size:24px; vertical-align: middle;">저장하기</span>
                             <img th:src="@{/image/list-icon-edit-complate.svg}">
                         </div> -->
@@ -210,9 +232,8 @@
                             <div class="list-title">
                                 Model
                             </div>
-                            <div class="title-text"  name="qr1" style="margin:12px 0 20px 0; padding-left:14px;" th:text="${vo.modelName}">
-                            	0202000504-00000001
-                                <!-- <textarea id="modelName" name="qr1" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.modelName}"></textarea> -->
+                            <div class="title-text" >  <!-- name="qr1" style="margin:12px 0 20px 0; padding-left:14px;" th:text="${vo.modelName}" -->                         	
+                                <input type="text" id="modelName" name="qr1" rows="2" cols="24" wrap="virtual" disabled="disabled" ><!-- th:text="${vo.modelName}" --></input>
                             </div>
                             <div class="obj-model-img">
                                 <div class="model-img">
@@ -227,9 +248,8 @@
                             <div class="list-title">
                                 Serial Number
                             </div>
-                            <div class="title-text" name="qr2" style="margin:12px 0 20px 0; padding-left:14px;" th:text="${vo.srlName}">
-                            	0202000504-00000001
-                                <!-- <textarea id="srlName" name="qr2" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.srlName}"></textarea> -->
+                            <div class="title-text"><!-- name="qr2" style="margin:12px 0 20px 0; padding-left:14px;" th:text="${vo.srlName}"> -->                            	
+                                <input type="text" id="srlName" name="qr2" rows="2" cols="24" wrap="virtual" disabled="disabled" ><!-- th:text="${vo.srlName} --></input>
                             </div>
                             <div class="obj-serial-img">
                                 <div class="serial-img">
@@ -291,7 +311,7 @@
                     		 <div class="companyName" style="float:left; width:135px; height:50px; margin-top:10px; display:none; ">거래처명</div>
                     		 <input type="text" value="외부 업체 기기" style="font-weight:600; border:1px solid #00ff0000; margin-bottom:20px;"></input> 
                     	</div> 
-                        <div class="list">
+                        <div class="list" style="margin-top:5px;">
 							<div class="list-title1" >연락처</div>                     
                         	<span class="clocn">:</span>     
                         	<input type="text" value="01012345678" style="border:1px solid #00ff0000; "></input>                    	                      	

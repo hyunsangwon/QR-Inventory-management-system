@@ -131,18 +131,18 @@ $(window).on('resize',function(){
 function qr_edit(item,event) {
   $(item).children().addClass("edit_img_active");
   $(item).next().addClass("qr_save_active");
-  var input_di = $(item).parent().next().next().children().children().find('textarea')[0];
+  var input_di = $(item).parent().next().next().next().next().children().children().find('input')[0];
   input_di.disabled = false;
-  var input_di2 = $(item).parent().next().next().next().children().children().find('textarea')[0];
+  var input_di2 = $(item).parent().next().next().next().next().next().children().children().find('input')[0];
   input_di2.disabled = false;
 }
 
 function qr_save(item,event){
   $(item).prev().children().removeClass("edit_img_active");
   $(item).prev().next().removeClass("qr_save_active");
-  var input_di =  $(item).parent().next().next().children().children().find('textarea')[0];
+  var input_di =  $(item).parent().next().next().next().next().children().children().find('input')[0];
   input_di.disabled = true;
-  var input_di2 =  $(item).parent().next().next().next().children().children().find('textarea')[0];
+  var input_di2 =  $(item).parent().next().next().next().next().next().children().children().find('input')[0];
   input_di2.disabled = true;
   /*  var modelName = remove_special_str($('#modelName').val());
     var srlName = remove_special_str($('#srlName').val());*/
