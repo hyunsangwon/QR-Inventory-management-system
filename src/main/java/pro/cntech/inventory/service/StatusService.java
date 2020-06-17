@@ -54,7 +54,6 @@ public class StatusService
                 }
             }
         }
-
         map.addAttribute("pageNum",vo.getPageNum());
         map.addAttribute("objStatus",vo.getObjStatus());
         map.addAttribute("list",list);
@@ -169,11 +168,9 @@ public class StatusService
         LogVO logVO = new LogVO();
         UserPrincipalVO userPrincipalVO = getSecurityInfo();
         String holderName = userPrincipalVO.getName();
-        String objAddr = userPrincipalVO.getAddr();
         logVO.setUserSrl(userPrincipalVO.getUserSrl());
         logVO.setObjStatus(listVO.getObjStatus());
         logVO.setQrSrl(listVO.getQrSrl());
-        logVO.setObjAddr(objAddr);
         logVO.setHolderName(holderName);
         objStatusMapper.setObjLog(logVO);
     }
@@ -185,7 +182,6 @@ public class StatusService
         String qrSrl = objDetailVO.getQrSrl();
         rows = objStatusMapper.deleteObj(qrSrl);
         //삭제 로그 추가 개발 예정
-
         if(rows > 0) return true;
         return  false;
     }
@@ -194,27 +190,6 @@ public class StatusService
     public Boolean isUpdateObjInfo(ObjDetailVO objDetailVO)
     {
         int rows = 0;
-        String kinds= null;
-        if(objDetailVO != null)
-        {
-            kinds = objDetailVO.getObjKinds();
-            if("machine".equals(kinds))
-            {
-                objDetailVO.setObjKinds("복합기");
-            }
-            if("crusher".equals(kinds))
-            {
-                objDetailVO.setObjKinds("문서 파쇄기");
-            }
-            if("purifier".equals(kinds))
-            {
-                objDetailVO.setObjKinds("공기 청정기");
-            }
-            if("ink".equals(kinds))
-            {
-                objDetailVO.setObjKinds("무한 잉크 공급기");
-            }
-        }
         rows = objStatusMapper.updateObjInfo(objDetailVO);
         if(rows > 0) return true;
         return  false;

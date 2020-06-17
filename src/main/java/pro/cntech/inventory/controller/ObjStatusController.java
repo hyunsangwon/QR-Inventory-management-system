@@ -64,7 +64,7 @@ public class ObjStatusController
 
         return statusService.getObjHistoryList(objDetailVO);
     }
-    /*히스토리 paing 처리*/
+    /* 히스토리 paing 처리*/
     @PostMapping("/ajax/obj/history/page")
     public @ResponseBody PageHandler callAjaxPageHandler(@RequestBody ObjDetailVO objDetailVO)
     {

@@ -91,7 +91,6 @@
             qr_srl,
             user_srl,
             obj_status,
-            obj_addr,
             create_at,
             holder_name
         )
@@ -100,7 +99,6 @@
             #{qrSrl},
             #{userSrl},
             #{objStatus},
-            #{objAddr},
             now(),
             #{holderName}
         )

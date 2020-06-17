@@ -144,24 +144,23 @@ function qr_save(item,event){
   input_di.disabled = true;
   var input_di2 =  $(item).parent().next().next().next().children().children().find('textarea')[0];
   input_di2.disabled = true;
+  /*  var modelName = remove_special_str($('#modelName').val());
+    var srlName = remove_special_str($('#srlName').val());*/
 
-  var modelName = remove_special_str($('#modelName').val());
-  var srlName = remove_special_str($('#srlName').val());
-
-  var qrSrl = $('#qrSrl').text();
-  var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};
-  if(confirm('수정하시겠습니까?'))
-  {
-    var option = $('.selectObj option:selected').val();
-    if(option == 'null')
-    {
-      alert('자산 종류를 선택해주세요.');
-      $('.selectObj').attr('disabled',true);
-      return false;
-    }
-    jsonData.objKinds = option;
-    ajax_update_obj(jsonData);
-  }
+  /*  var qrSrl = $('#qrSrl').text();
+    var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};*/
+  /* if(confirm('수정하시겠습니까?'))
+   {
+     var option = $('.selectObj option:selected').val();
+     if(option == 'null')
+     {
+       alert('자산 종류를 선택해주세요.');
+       $('.selectObj').attr('disabled',true);
+       return false;
+     }
+     jsonData.objKinds = option;
+     ajax_update_obj(jsonData);
+   }*/
 
 }//end
 
@@ -174,16 +173,30 @@ function remove_special_str(str){
   return str;
 }
 
-
 /* 20.05.18 추가*/
-function ajax_update_obj(data)
+function ajax_update_obj()
 {
+  var modelName = $('#modelName').val();
+  var srlName = $('#srlName').val();
+  if(modelName == '')
+  {
+    alert('자산 모델명을 입력해주세요.');
+    return false;
+  }
+  if(srlName == '')
+  {
+    alert('자산 시리얼명을 입력해주세요.');
+    return false;
+  }
+  var radioVal = $('input[name="assetType"]:checked').val();
+  var qrSrl = $('#qrSrl').text();
+  var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName, "objKinds" : radioVal};
   $.ajax
   ({
       type: 'POST',
       contentType: "application/json",
       url:'/ajax/obj/update',
-      data : JSON.stringify(data),
+      data : JSON.stringify(jsonData),
       beforeSend : function(xhr)
       {
         xhr.setRequestHeader(header, token);
@@ -328,7 +341,6 @@ function ajax_call_obj_history_page(jsonData)
           {
             html += '<span class="page" id="'+ i + '"onclick="pageClick(this);" style="cursor:pointer;">' + i + '</span>';
           }
-
           html += '</span>';
         }
       }
