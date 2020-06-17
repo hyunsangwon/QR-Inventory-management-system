@@ -11,6 +11,7 @@
 <!--카카오 지도 API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f283c9704c76d19621ebd286c77b5d5a&libraries=services"></script>
 <script th:src="@{/script/detail_obj.js}" type="text/javascript"></script>
+
 <script>
     $(function()
     {
@@ -37,6 +38,22 @@
         create_map();
         $('.qr_edit').click(function(){
             $('.selectObj').attr('disabled',false);
+        });
+        $(".qr_edit_modal").click(function() {
+            $("#obj-info").css({
+                "display": "block"
+            });
+        });
+
+        $(".obj-plus-btn").click(function() {
+            $("#obj-info").css({
+                "display": "none"
+            });
+        });
+        $(".close").click(function() {
+            $("#obj-info").css({
+                "display": "none"
+            });
         });
     });
 </script>
@@ -106,25 +123,70 @@
                     <div class="obj-info">
                         <div class="list" style="font-weight:600;">관리자 : <span th:text="${vo.userName}">현상원</span></div>
                         <div class="list">연락처 : <span th:text="${vo.userPhone}">01012345678</span></div>
+                        <div class="list">자산종류 : <span>미정</span></div>
                     </div>
                     <!--//obj-info-->
+					
+					<!-- 자산 기본정보, OCR 수정 modal -->
+			        <div id="obj-info" class="company-modal">
+			            <div id="modal-content" class="modal-company">
+			                <div class="order-info-title">
+			                    <div class="title">
+			                        <span>기본 정보 수정</span>
+			                        <span class="close"><img th:src="@{/image/popup-icon-close.svg}"></span>
+			                    </div>
+			                </div>
+			                <div class="form" >
+			                    <div class="form-box" style="margin-bottom:50px;">
+			                    	<div class="title" style="width:250px !important; height:120px; margin-bottom:50px;">
+			                            <div class="circle"></div>자산 종류
+			                        </div> 
+			                         <div class="text" style="width:450px; height:120px; float:left; font-size:28px; text-align:left; margin-bottom:50px;">
+			                            <input type="radio" id="" name="typeradio"><label for="">미정</label></input>
+			                            <input type="radio" id="" name="typeradio"><label for="">복합기</label></input>
+			                            <input type="radio" id="" name="typeradio"><label for="">문서 파쇄기</label></input></br>
+			                            <div style="height:50px;"></div>
+			                            <input type="radio" id="" name="typeradio"><label for="">공기 청정기</label></input>
+			                            <input type="radio" id="" name="typeradio"><label for="">무한 잉크 공급기</label></input>
+			                        </div>
+			                        <div class="title" style="margin:25px 0;">
+			                            <div class="circle"></div>Model
+			                        </div>
+			                        <div class="text" style="margin-bottom:30px;">
+			                            <input type="text" id="" style="width:496px; height:80px; padding-left:40px; font-weight: 500;">
+			                        </div>
+			                        <div class="title" style="margin:25px 0;">
+			                            <div class="circle"></div>Serial Number
+			                        </div>
+			                        <div class="text" >
+			                            <input type="text" id="" style="width:496px; height:80px; padding-left:40px; font-weight: 500;">
+			                        </div>
+			                   </div>
+			                </div>
+			                <div class="obj-plus-btn">
+			                    <button class="plus_btn" id="add_user"><span>수정 완료</span></button>
+			                </div>
+			            </div>
+			        </div>
+			        <!-- //obj-info-->
+        
                     <!-- 20.05.15 추가-->
-                    <div class="edit-wrap" style="width:82%; height:44px; float:left; text-align: right;margin-bottom:40px; ">
-                        <select class="selectObj" disabled>
+                    <div class="edit-wrap" style=" height:44px; float:right; text-align: right; position:relative; bottom:10px; cursor:pointer;">
+                        <!-- <select class="selectObj" disabled>
                             <option value="null">미정</option>
                             <option value="machine">복합기</option>
                             <option value="crusher">문서 파쇄기</option>
                             <option value="purifier">공기 청정기</option>
                             <option value="ink">무한 잉크 공급기</option>
-                        </select>
-                        <div onclick="qr_edit(this)" class="qr_edit">
+                        </select> -->
+                        <div onclick="qr_edit_modal();" class="qr_edit_modal">
                             <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
                             <img th:src="@{/image/list-icon-edit.svg}">
                         </div>
-                        <div onclick="qr_save(this)" class="qr_save">
+                        <!-- <div onclick="qr_save(this)" class="qr_save">
                             <span style="color:#666; font-size:24px; vertical-align: middle;">저장하기</span>
                             <img th:src="@{/image/list-icon-edit-complate.svg}">
-                        </div>
+                        </div> -->
                     </div>
                     <!-- //20.05.15 추가-->
                     <div class="obj-image">
@@ -132,7 +194,7 @@
                             <div class="list-title">
                                 QR ID
                             </div>
-                            <div class="title-text" th:text="${vo.qrSrl}" id="qrSrl" style="margin:12px 0 50px 0;">
+                            <div class="title-text" th:text="${vo.qrSrl}" id="qrSrl" style="margin:12px 0 20px 0;	padding-left:14px;">
                                 20202000504-00000001
                             </div>
                             <div class="obj-id-img">
@@ -146,8 +208,9 @@
                             <div class="list-title">
                                 Model
                             </div>
-                            <div class="title-text">
-                                <textarea id="modelName" name="qr1" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.modelName}"></textarea>
+                            <div class="title-text"  name="qr1" style="margin:12px 0 20px 0; padding-left:14px;">
+                            	0202000504-00000001
+                                <!-- <textarea id="modelName" name="qr1" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.modelName}"></textarea> -->
                             </div>
                             <div class="obj-model-img">
                                 <div class="model-img">
@@ -162,8 +225,9 @@
                             <div class="list-title">
                                 Serial Number
                             </div>
-                            <div class="title-text">
-                                <textarea id="srlName" name="qr2" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.srlName}"></textarea>
+                            <div class="title-text" name="qr2" style="margin:12px 0 20px 0; padding-left:14px;">
+                            	0202000504-00000001
+                                <!-- <textarea id="srlName" name="qr2" rows="2" cols="24" wrap="virtual" disabled="disabled" th:text="${vo.srlName}"></textarea> -->
                             </div>
                             <div class="obj-serial-img">
                                 <div class="serial-img">
@@ -175,7 +239,7 @@
                     <!--//obj-image-->
                 </div>
                 <!--//obj-box-->
-                <div class="obj-box" style="height:840px;">
+                <div class="obj-box" style="height:950px;">
                     <div id="panel-wrap-register" class="text_left">
                         <div class="regiseter-panel-heading">
                             <div class="regiseter-panel-group">
@@ -192,11 +256,64 @@
                     </div>
                     <!--//panel-wrap-register-->
                     <div class="obj-info" style="line-height:43px;">
+                    	<div class="edit-wrap" style=" height:44px; float:right; text-align: right; position:relative; cursor:pointer;">
+	                        <div onclick="qr_edit(this)" class="qr_edit">
+                            <span style="color:#666; font-size:24px; vertical-align: middle;">수정하기</span>
+                            <img th:src="@{/image/list-icon-edit.svg}">
+                        </div>
+                        <div onclick="qr_save(this)" class="qr_save">
+                            <span style="color:#666; font-size:24px; vertical-align: middle;">수정완료</span>
+                            <img th:src="@{/image/list-icon-edit-complete.svg}">
+                        </div>
+                    </div>
+                    
+                    
+                    	<!-- 20.06.16 추가 
+                    	                  	
+                    	<!— ***수정하기 클릭했을 때 style***
+                    	.companyName style="display:block;"
+                    	.clocn style="display:none;"
+                    	.cetegory {top:1410px;}
+                    	.list input[type="text"]{margin-bottom:20px;}
+
+                    	
+                    	***수정완료 클릭했을 때 style***
+                    	.companyName style="display:none;"
+                    	.clocn style="display:block;"
+                    	.cetegory {top:1350px;}
+                    	.list input[type="text"]{margin-bottom:0px;}
+                    	.list input[type="text"]{height:47px;}
+                    	.list-title2{height:50px;}
+                    	.list-title1{height:50px; margin-top:0;},.list-title2{height:50px; margin-top:0;}
+                    	
+                    	input 투명색상 {border:1px solid #00ff0000;}
+                    	
+                    	-->
+                    	<div class="list" >                 		              		
+                    		 <div class="companyName" style="float:left; width:135px; height:50px; margin-top:10px; display:none; ">거래처명</div>
+                    		 <input type="text" value="외부 업체 기기" style="font-weight:600; border:1px solid #00ff0000; margin-bottom:20px;"></input> 
+                    	</div> 
+                        <div class="list">
+							<div class="list-title1" >연락처</div>                     
+                        	<span class="clocn">:</span>     
+                        	<input type="text" value="01012345678" style="border:1px solid #00ff0000; "></input>                    	                      	
+                        </div>
+                        <div class="list">
+                        	<div class="list-title2" >입력주소</div>
+                        	<span class="">:</span>  
+                        	<input type="text" style="/* margin-bottom:10px !important; */ border:1px solid #00ff0000; "></input></p>
+                        	<input type="text" style="display:none;"></input>                    	             	
+                        </div>        
+                        <div class="list"><div style="width:135px; float:left;">GPS 수신</div><b><div style="margin-right:25px; float:left;">:</div>자산의 GPS가 입력 주소로부터 <span th:text="|${vo.radiusDistance}m|">200m</span> 거리에서 수신되었습니다.</b></div>
+                        <!-- //20.06.16 추가 -->
+                       
+                        <!-- 
                         <div class="list" style="font-weight:600; margin:20px 0; " th:text="${vo.companyName}">(주)외부 기기사용 업체명</div>
                         <div class="list">연락처 : <span th:text="${vo.companyPhone}">01012345678</span></div>
                         <div class="list">입력주소 : <span th:text="${vo.inputAddr}">서울시 관악구 신림동 대성빌딩 3층 31호</span></div>
-                        <!--<div class="list">GPS 추적 : <span th:text="${vo.addr}">서울시 관악구 신림동 서울대학로 123-4</span></div>-->
-                        <div class="list"><b>자산의 GPS가 입력 주소로부터 <span th:text="|${vo.radiusDistance}m|">200m</span> 거리에서 수신되었습니다.</b></div>
+                        <!--<div class="list">GPS 추적 : <span th:text="${vo.addr}">서울시 관악구 신림동 서울대학로 123-4</span></div>
+                        <div class="list">GPS 수신 : <b>자산의 GPS가 입력 주소로부터 <span th:text="|${vo.radiusDistance}m|">200m</span> 거리에서 수신되었습니다.</b></div>
+                     -->
                     </div>
                     <!--//obj-info-->
                     <!--GPS Hidden--->
@@ -266,4 +383,5 @@
             <!--//cd-main-header js-cd-main-header-->
             <footer th:replace="fragments/header:: headFooterFragment"></footer>
 </body>
+
 </html>
