@@ -167,6 +167,12 @@
         addr = #{companyAddr},
         detail_addr = #{companyDetailAddr},
         phone = #{companyPhone}
+        <if test='latitude != null'>
+        ,latitude = #{latitude}
+        </if>
+        <if test='longitude != null'>
+         ,longitude = #{longitude}
+        </if>
         WHERE company_srl = #{companySrl}
     </update>
 

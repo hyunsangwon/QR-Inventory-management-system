@@ -8,10 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import pro.cntech.inventory.mapper.ObjStatusMapper;
-import pro.cntech.inventory.util.ContactFilter;
-import pro.cntech.inventory.util.DistanceCalculation;
-import pro.cntech.inventory.util.ObjStatusCode;
-import pro.cntech.inventory.util.PageHandler;
+import pro.cntech.inventory.util.*;
 import pro.cntech.inventory.vo.*;
 
 import java.util.List;
@@ -187,7 +184,7 @@ public class StatusService
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public Boolean isUpdateObjDetailInfo(ObjDetailVO objDetailVO,String flag)
+    public Boolean isUpdateObjDetailInfo(ObjDetailVO objDetailVO,String flag) throws Exception
     {
         int rows = 0;
         if("obj".equals(flag))
@@ -217,6 +214,10 @@ public class StatusService
         }
         if("company".equals(flag))
         {
+            MapUtil mapUtil = new MapUtil();
+            String[] gps = mapUtil.convertAddrToGPS(objDetailVO.getCompanyAddr()).split("/");
+            objDetailVO.setLongitude(gps[0]);
+            objDetailVO.setLatitude(gps[1]);
             rows = objStatusMapper.updateCompanyInfo(objDetailVO);
         }
 

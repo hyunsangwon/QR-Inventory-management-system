@@ -99,7 +99,7 @@ public class ObjStatusController
     }
 
     @PostMapping("/ajax/obj/update")
-    public @ResponseBody Boolean callAjaxObjUpdate(@RequestBody ObjDetailVO objDetailVO)
+    public @ResponseBody Boolean callAjaxObjUpdate(@RequestBody ObjDetailVO objDetailVO) throws Exception
     {
         logger.debug("[ Call /ajax/obj/update - POST ]");
         logger.debug("Param : "+objDetailVO.toString());
@@ -107,7 +107,7 @@ public class ObjStatusController
     }
 
     @PostMapping("/ajax/company/update")
-    public @ResponseBody Boolean callAjaxCompanyUpdate(@RequestBody ObjDetailVO objDetailVO)
+    public @ResponseBody Boolean callAjaxCompanyUpdate(@RequestBody ObjDetailVO objDetailVO) throws Exception
     {
         logger.debug("[ Call /ajax/company/update - POST ]");
         logger.debug("Param : "+objDetailVO.toString());
