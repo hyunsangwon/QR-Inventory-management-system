@@ -103,6 +103,15 @@ public class ObjStatusController
     {
         logger.debug("[ Call /ajax/obj/update - POST ]");
         logger.debug("Param : "+objDetailVO.toString());
-        return statusService.isUpdateObjInfo(objDetailVO);
+        return statusService.isUpdateObjDetailInfo(objDetailVO,"obj");
     }
+
+    @PostMapping("/ajax/company/update")
+    public @ResponseBody Boolean callAjaxCompanyUpdate(@RequestBody ObjDetailVO objDetailVO)
+    {
+        logger.debug("[ Call /ajax/company/update - POST ]");
+        logger.debug("Param : "+objDetailVO.toString());
+        return statusService.isUpdateObjDetailInfo(objDetailVO,"company");
+    }
+
 }

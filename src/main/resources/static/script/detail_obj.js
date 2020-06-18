@@ -148,6 +148,9 @@ function qr_edit(item,event) { //수정 하기
     $('#companyAddrDetail').css('display','block');
     $('.list-title2').css('height','100px');
     $('#gpsInfo').css('display','none');
+    var companyPhone = $('#companyPhone').val();
+    companyPhone = remove_special_str(companyPhone)
+    $('#companyPhone').val(companyPhone);
   }
 
 }
@@ -182,13 +185,24 @@ function qr_save(item,event){ //수정 완료
 
   if(event == 'obj')
   {
-    var modelName = remove_special_str($('#modelName').val());
-    var srlName = remove_special_str($('#srlName').val());
+    var modelName =  $('#modelName').val();
+    modelName = remove_special_str(modelName);
+    var srlName = $('#srlName').val();
+    srlName = remove_special_str(srlName);
     var qrSrl = $('#qrSrl').text();
     var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};
-
     if(confirm('수정하시겠습니까?'))
     {
+      if(modelName == '')
+      {
+        alert('자산 모델명을 입력해주세요.');
+        return false;
+      }
+      if(srlName == '')
+      {
+        alert('자산 시리얼명을 입력해주세요.');
+        return false;
+      }
       var option = $('.selectObj option:selected').val();
       if(option == 'null')
       {
@@ -202,43 +216,86 @@ function qr_save(item,event){ //수정 완료
   }
   if(event == 'company')
   {
-
+    if(confirm('수정하시겠습니까?'))
+    {
+      var data = checkCompanyInfo();
+      ajax_update_company(data);
+    }
   }
 
 }//end
 
+function checkCompanyInfo()
+{
+  var companySrl = $('#companySrl').val();
+  var companyName = $('#companyName').val();
+  var companyPhone = $('#companyPhone').val();
+  var companyAddr = $('#companyAddr').val();
+  var companyDetailAddr = $('#companyAddrDetail').val();
 
-
-
+  if(companyName == '')
+  {
+    alert('회사 이름을 입력해주세요');
+    return false;
+  }
+  if(companyPhone == '')
+  {
+    alert('회사 연락처를 입력해주세요');
+    return false;
+  }
+  if(companyAddr == '')
+  {
+    alert('회사 주소를 입력해주세요');
+    return false;
+  }
+  if(companyDetailAddr == '')
+  {
+    alert('회사 주소를 입력해주세요');
+    return false;
+  }
+  companyPhone = remove_special_str(companyPhone);
+  var jsonData = { "companySrl" : companySrl ,"companyName" : companyName, "companyPhone" : companyPhone,"companyAddr": companyAddr , "companyDetailAddr" : companyDetailAddr};
+  return jsonData;
+}
 
 function remove_special_str(str){
   var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-
   if(regExp.test(str)){
     str = str.replace(regExp, ""); // 찾은 특수 문자를 제거
   }
   return str;
 }
 
-/* 20.05.18 추가*/
-function ajax_update_obj()
+function ajax_update_company(jsonData)
 {
-  var modelName = $('#modelName').val();
-  var srlName = $('#srlName').val();
-  if(modelName == '')
-  {
-    alert('자산 모델명을 입력해주세요.');
-    return false;
-  }
-  if(srlName == '')
-  {
-    alert('자산 시리얼명을 입력해주세요.');
-    return false;
-  }
-  var radioVal = $('input[name="assetType"]:checked').val();
-  console.log('radioVal ------> '+radioVal);
-  var qrSrl = $('#qrSrl').text();
-  var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName, "objKinds" : radioVal};
+  $.ajax
+  ({
+    type: 'POST',
+    contentType: "application/json",
+    url:'/ajax/company/update',
+    data : JSON.stringify(jsonData),
+    beforeSend : function(xhr)
+    {
+      xhr.setRequestHeader(header, token);
+    },
+    dataType : "text",
+    cache : false,
+    success : function(data)
+    {
+      if(data == 'true')
+      {
+        location.reload();
+      }
+    },
+    error : function(xhr, status, error)
+    {
+      console.log('error ====> ' + error);
+    }
+  });
+}
+
+function ajax_update_obj(jsonData)
+{
   $.ajax
   ({
       type: 'POST',

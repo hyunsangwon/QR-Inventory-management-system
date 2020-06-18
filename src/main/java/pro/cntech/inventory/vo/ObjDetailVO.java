@@ -18,9 +18,12 @@ public class ObjDetailVO extends PagingVO
     private String latitude; // 위도
     private String longitude; // 경도
     private String addr; // gps 주소
+    private String companySrl; //업체 고유번호
     private String inputAddr; //입력 주소
-    private String companyName;
-    private String companyPhone;
+    private String companyAddr;
+    private String companyDetailAddr; //업체 상세 주소
+    private String companyName; //업체 이름
+    private String companyPhone; //업체 연락처
     private String userPhone;
     private String createAt;
     private String auth;

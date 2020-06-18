@@ -20,4 +20,5 @@ public interface ObjStatusMapper
     int updateObjStatus(ObjListVO objVO);
     void setObjLog(LogVO logVO);
     int updateObjInfo(ObjDetailVO objDetailVO);
+    int updateCompanyInfo(ObjDetailVO objDetailVO);
 }

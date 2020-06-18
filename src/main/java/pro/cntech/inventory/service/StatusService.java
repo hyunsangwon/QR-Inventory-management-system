@@ -187,31 +187,39 @@ public class StatusService
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public Boolean isUpdateObjInfo(ObjDetailVO objDetailVO)
+    public Boolean isUpdateObjDetailInfo(ObjDetailVO objDetailVO,String flag)
     {
         int rows = 0;
-        String kinds= null;
-        if(objDetailVO != null)
+        if("obj".equals(flag))
         {
-            kinds = objDetailVO.getObjKinds();
-            if("machine".equals(kinds))
+            String kinds= null;
+            if(objDetailVO != null)
             {
-                objDetailVO.setObjKinds("복합기");
+                kinds = objDetailVO.getObjKinds();
+                if("machine".equals(kinds))
+                {
+                    objDetailVO.setObjKinds("복합기");
+                }
+                if("crusher".equals(kinds))
+                {
+                    objDetailVO.setObjKinds("문서 파쇄기");
+                }
+                if("purifier".equals(kinds))
+                {
+                    objDetailVO.setObjKinds("공기 청정기");
+                }
+                if("ink".equals(kinds))
+                {
+                    objDetailVO.setObjKinds("무한 잉크 공급기");
+                }
             }
-            if("crusher".equals(kinds))
-            {
-                objDetailVO.setObjKinds("문서 파쇄기");
-            }
-            if("purifier".equals(kinds))
-            {
-                objDetailVO.setObjKinds("공기 청정기");
-            }
-            if("ink".equals(kinds))
-            {
-                objDetailVO.setObjKinds("무한 잉크 공급기");
-            }
+            rows = objStatusMapper.updateObjInfo(objDetailVO);
         }
-        rows = objStatusMapper.updateObjInfo(objDetailVO);
+        if("company".equals(flag))
+        {
+            rows = objStatusMapper.updateCompanyInfo(objDetailVO);
+        }
+
         if(rows > 0) return true;
         return  false;
     }

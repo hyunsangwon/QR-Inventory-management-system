@@ -69,8 +69,10 @@
             o.latitude,
             o.longitude,
             o.addr,
+            c.company_srl AS companySrl,
             c.company_name AS companyName,
             c.addr AS inputAddr,
+            c.detail_addr AS companyDetailAddr,
             c.phone AS companyPhone,
             c.latitude AS companyLat,
             c.longitude AS companyLon,
@@ -157,5 +159,17 @@
             obj_kinds = #{objKinds}
         WHERE qr_srl = #{qrSrl}
     </update>
+
+    <update id="updateCompanyInfo" parameterType="pro.cntech.inventory.vo.ObjDetailVO">
+        UPDATE company
+        SET
+        company_name = #{companyName},
+        addr = #{companyAddr},
+        detail_addr = #{companyDetailAddr},
+        phone = #{companyPhone}
+        WHERE company_srl = #{companySrl}
+    </update>
+
+
 
 </mapper>
