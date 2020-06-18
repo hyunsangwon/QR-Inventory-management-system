@@ -412,7 +412,8 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-                $("#addr").val(data.zonecode+', '+fullRoadAddr);
+                $("#addr").val(fullRoadAddr);
+                //$("#addr").val(data.zonecode+', '+fullRoadAddr);
             }
         }).open();
     }

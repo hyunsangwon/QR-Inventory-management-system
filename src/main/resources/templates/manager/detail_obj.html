@@ -72,7 +72,8 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-                $("#companyAddr").val(data.zonecode+', '+fullRoadAddr);
+                //$("#companyAddr").val(data.zonecode+', '+fullRoadAddr);
+                $("#companyAddr").val(fullRoadAddr);
             }
         }).open();
     }
