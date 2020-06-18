@@ -301,7 +301,7 @@ ul.tabs li.current {
     float: left;
 }
 
-.selectObj {width: 230px; height: 43px; font-size: 28px; padding-left: 10px; margin-right:30px; background-color:#fff; border: none; margin-top: 2px; cursor: pointer; background-repeat: no-repeat !important; background:url('/image/common-icon-sourting-down.svg') 100% 50%}
+.selectObj {width: 260px; height: 43px; font-size: 28px; padding-left: 10px; margin-right:30px; background-color:#fff; border: none; margin-top: 2px; cursor: pointer; background-repeat: no-repeat !important; background:url('/image/common-icon-sourting-down.svg') 100% 50%}
 
 
 .regiseter-panel-heading .regiseter-panel-title .circle {

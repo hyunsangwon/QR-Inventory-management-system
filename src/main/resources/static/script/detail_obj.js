@@ -128,41 +128,88 @@ $(window).on('resize',function(){
 
 
 /* 20.05.15 추가 */
-function qr_edit(item,event) {
+function qr_edit(item,event) { //수정 하기
   $(item).children().addClass("edit_img_active");
   $(item).next().addClass("qr_save_active");
-  var input_di = $(item).parent().next().next().next().next().children().children().find('input')[0];
-  input_di.disabled = false;
-  var input_di2 = $(item).parent().next().next().next().next().next().children().children().find('input')[0];
-  input_di2.disabled = false;
+  if(event == 'obj')
+  {
+    var input_di = $(item).parent().next().next().next().next().children().children().find('input')[0];
+    input_di.disabled = false;
+    var input_di2 = $(item).parent().next().next().next().next().next().children().children().find('input')[0];
+    input_di2.disabled = false;
+  }
+  if(event == 'company')
+  {
+    $('.companyName').css('display','block');
+    $('.clocn').css('display','none');
+    $('input[name="companyInfo"]').css('margin-bottom','20px');
+    $('input[name="companyInfo"]').css('border','solid 2px #bcc2d0');
+    $('.category').css('top','1400px');
+    $('#companyAddrDetail').css('display','block');
+    $('.list-title2').css('height','100px');
+    $('#gpsInfo').css('display','none');
+  }
+
 }
 
-function qr_save(item,event){
+function qr_save(item,event){ //수정 완료
   $(item).prev().children().removeClass("edit_img_active");
   $(item).prev().next().removeClass("qr_save_active");
-  var input_di =  $(item).parent().next().next().next().next().children().children().find('input')[0];
-  input_di.disabled = true;
-  var input_di2 =  $(item).parent().next().next().next().next().next().children().children().find('input')[0];
-  input_di2.disabled = true;
-  /*  var modelName = remove_special_str($('#modelName').val());
-    var srlName = remove_special_str($('#srlName').val());*/
+  if(event == 'obj')
+  {
+    var input_di =  $(item).parent().next().next().next().next().children().children().find('input')[0];
+    input_di.disabled = true;
+    var input_di2 =  $(item).parent().next().next().next().next().next().children().children().find('input')[0];
+    input_di2.disabled = true;
+  }
+  if(event == 'company')
+  {
+    $('.companyName').css('display','none');
+    $('.clocn').css('display','block');
+    $('.category').css('top','1300px');
+    $('input[name="companyInfo"]').css('margin-bottom','0px');
+    $('input[name="companyInfo"]').css('height','50px');
+    $('input[name="companyInfo"]').css('border','solid 1px #00ff0000');
+    $('.list-title2').css('height','50px');
+    $('.list-title2').css('margin-top','0px');
+    $('.list-title1').css('height','50px');
+    $('.list-title1').css('margin-top','0px');
+    $('.gpswrap').css('padding-top','25px !important');
+    $('#companyName').css('padding-left','0px !important');
+    $('#companyAddrDetail').css('display','none');
+    $('#gpsInfo').css('display','block');
+  }
 
-  /*  var qrSrl = $('#qrSrl').text();
-    var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};*/
-  /* if(confirm('수정하시겠습니까?'))
-   {
-     var option = $('.selectObj option:selected').val();
-     if(option == 'null')
-     {
-       alert('자산 종류를 선택해주세요.');
-       $('.selectObj').attr('disabled',true);
-       return false;
-     }
-     jsonData.objKinds = option;
-     ajax_update_obj(jsonData);
-   }*/
+  if(event == 'obj')
+  {
+    var modelName = remove_special_str($('#modelName').val());
+    var srlName = remove_special_str($('#srlName').val());
+    var qrSrl = $('#qrSrl').text();
+    var jsonData = { "qrSrl" : qrSrl ,"modelName" : modelName, "srlName": srlName};
+
+    if(confirm('수정하시겠습니까?'))
+    {
+      var option = $('.selectObj option:selected').val();
+      if(option == 'null')
+      {
+        alert('자산 종류를 선택해주세요.');
+        $('.selectObj').attr('disabled',true);
+        return false;
+      }
+      jsonData.objKinds = option;
+      ajax_update_obj(jsonData);
+    }
+  }
+  if(event == 'company')
+  {
+
+  }
 
 }//end
+
+
+
+
 
 function remove_special_str(str){
   var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
