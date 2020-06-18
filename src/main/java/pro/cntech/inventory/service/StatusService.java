@@ -62,9 +62,8 @@ public class StatusService
     public ObjDetailVO getObjDetail(String qrSrl) throws Exception
     {
         ObjDetailVO detailvo = objStatusMapper.getObjDetail(qrSrl);
-
         detailvo.setUserPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
-        detailvo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getUserPhone()));
+        detailvo.setCompanyPhone(ContactFilter.getInstance().setPhoneNumber(detailvo.getCompanyPhone()));
         String[] SrlNameArr = detailvo.getObjSrlImage().split("/");
         String[] modelNameArr = detailvo.getObjModelImage().split("/");
         if(detailvo.getObjKinds() == null)

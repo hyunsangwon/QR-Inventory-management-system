@@ -114,6 +114,7 @@
             ol.latitude,
             ol.obj_status AS objStatus,
             ol.holder_name AS holderName,
+            o.addr AS objAddr,
             u.user_name AS userName,
             u.auth
         FROM obj_log AS ol
@@ -175,7 +176,5 @@
         </if>
         WHERE company_srl = #{companySrl}
     </update>
-
-
 
 </mapper>

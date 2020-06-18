@@ -17,7 +17,8 @@ public class ObjDetailVO extends PagingVO
     private String objModelImage; //자산 모델명 이미지
     private String latitude; // 위도
     private String longitude; // 경도
-    private String addr; // gps 주소
+    private String addr; // gps 변환 주소 (업체 위치)
+    private String objAddr; // 자산 위치
     private String companySrl; //업체 고유번호
     private String inputAddr; //입력 주소
     private String companyAddr;

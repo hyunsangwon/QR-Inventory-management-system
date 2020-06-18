@@ -368,7 +368,14 @@ function ajax_call_obj_history_list(jsonData)
               html += '<td>[관리책임자] ' + data[i].userName + '</td>';
             }
           }
-          html += '<td>' + data[i].addr + '</td>';
+          if(data[i].addr == null) //자산 로그 주소가 null 이라면
+          {
+            html += '<td>' + data[i].objAddr + '</td>';
+          }
+          else
+          {
+            html += '<td>' + data[i].addr + '</td>';
+          }
           if(data[i].objStatus == 'warehousing_new')
           {
             html += '<td><b>신규 등록(입고)</b></td>';

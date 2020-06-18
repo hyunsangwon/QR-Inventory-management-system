@@ -61,7 +61,6 @@ public class ObjStatusController
     {
         logger.debug("[ Call /ajax/obj/history/list - POST ]");
         logger.debug("Param : "+objDetailVO.toString());
-
         return statusService.getObjHistoryList(objDetailVO);
     }
     /* 히스토리 paing 처리*/
