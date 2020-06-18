@@ -25,6 +25,12 @@
         {
             create_marker_map(_map);
         }
+        var sessionAuth = $('#sessionAuth').val();
+        var sessionSrl = $('#sessionSrl').val();
+        if(sessionAuth != '' && sessionSrl != '')
+        {
+            click_user(sessionSrl,sessionAuth);
+        }
 
         var sortName = $('#navSort').val();
         $('span[name=1]').css('font-weight',800); //초기 페이지 번호 css
@@ -128,9 +134,10 @@
         return str;
     }
 </script>
-
 <script th:src="@{/script/admin_asset_research/admin_asset_research.js}" type="text/javascript"></script>
 <body>
+<input type="hidden" id="sessionAuth" th:value="${sessionAuth}"/>
+<input type="hidden" id="sessionSrl" th:value="${sessionSrl}"/>
 <div class="cd-main-header js-cd-main-header">
     <div id="main_ct" class="wrap">
         <div th:replace="fragments/header:: headInfoFragment"></div>
@@ -293,7 +300,6 @@
                 <!-- //w3-container -->
             </header>
             <div class="clear"></div>
-            
             <!--주석처리는 여기서부터 -->
             <div id="assetMap" class="w3-row-padding" style="padding:0 50px;">
                 <div class="panel-heading" style="margin-bottom:30px;">
@@ -311,7 +317,6 @@
                 <!--//panel-heading-->
             </div>
             <!-- //여기까지 -->
-            
             <div class="w3-row-padding" style="padding:0 50px;">
                 <div class="panel-heading">
                     <div class="panel-group">

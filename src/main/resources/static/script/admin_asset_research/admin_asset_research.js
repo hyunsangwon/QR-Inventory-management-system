@@ -41,7 +41,7 @@ function pageClick(obj) //페이지 번호 클릭시 이벤트 함수
 
 function load_detail_page(obj) //사진 클릭시 이벤트 함수
 {
-    location.href = "/obj/detail/search/"+obj.id;
+    location.href = "/obj/detail/search/"+obj.id+"/"+_userSrl+"/"+_userAuth;
 }
 /*자산 관리자 정보 가져오기*/
 function ajax_admin_info(data)

@@ -16,7 +16,9 @@ import pro.cntech.inventory.vo.ObjListVO;
 import pro.cntech.inventory.vo.UserPrincipalVO;
 import pro.cntech.inventory.vo.UserVO;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,9 +36,25 @@ public class ManagerController
 
     /*관리자 자산 조회*/
     @GetMapping("/asset/search/list/{nameSort}")
-    public String loadAdminListPage(ModelMap model, @PathVariable("nameSort") String nameSort) throws Exception
+    public String loadAdminListPage(ModelMap model, @PathVariable("nameSort") String nameSort,
+                                    HttpServletRequest request) throws Exception
     {
         logger.debug("[ Call /asset/search/list - GET ]");
+        HttpSession httpSession = request.getSession();
+        String auth = (String)httpSession.getAttribute("sessionAuth");
+        String userSrl = (String)httpSession.getAttribute("sessionSrl");
+        if(auth != null && userSrl != null)
+        {
+            model.addAttribute("sessionAuth",auth);
+            model.addAttribute("sessionSrl",userSrl);
+            httpSession.removeAttribute("sessionAuth");
+            httpSession.removeAttribute("sessionSrl");
+        }
+        else
+        {
+            model.addAttribute("sessionAuth",null);
+            model.addAttribute("sessionSrl",null);
+        }
         adminService.setMyInfo(model,nameSort);
         return MANAGER_VIEW_PREFIX+"admin_asset_research";
     }

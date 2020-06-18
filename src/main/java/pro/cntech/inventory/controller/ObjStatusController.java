@@ -13,6 +13,8 @@ import pro.cntech.inventory.vo.ObjArrayVO;
 import pro.cntech.inventory.vo.ObjDetailVO;
 import pro.cntech.inventory.vo.ObjListVO;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -55,6 +57,26 @@ public class ObjStatusController
         model.addAttribute("vo",statusService.getObjDetail(qrSrl));
         return MANAGER_VIEW_PREFIX+"detail_obj";
     }
+
+    /*자산 상세보기 (세션 이용... ) 좋은 방법은 아님 */
+    @GetMapping("/obj/detail/search/{qrSrl}/{userSrl}/{auth}")
+    public String loadObjDetailPage02(ModelMap model
+            ,@PathVariable("qrSrl") String qrSrl
+            ,@PathVariable("userSrl") String userSrl
+            ,@PathVariable("auth") String auth
+            ,HttpServletRequest request)throws Exception
+    {
+        logger.debug("[ Call /obj/search/"+qrSrl+ "- GET ]");
+        logger.debug("Param : "+qrSrl);
+        HttpSession session = request.getSession();
+        session.setAttribute("sessionAuth",auth);
+        session.setAttribute("sessionSrl",userSrl);
+
+        model.addAttribute("vo",statusService.getObjDetail(qrSrl));
+        return MANAGER_VIEW_PREFIX+"detail_obj";
+    }
+
+
     /* 자산 히스토리 리스트 불러오기 */
     @PostMapping("/ajax/obj/history/list")
     public @ResponseBody List<ObjDetailVO> callAjaxObjHistoryList(@RequestBody ObjDetailVO objDetailVO)
