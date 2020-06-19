@@ -148,6 +148,7 @@ function qr_edit(item,event) { //수정 하기
     $('#companyAddrDetail').css('display','block');
     $('.list-title2').css('height','100px');
     $('#gpsInfo').css('display','none');
+    $('#companyName').css('padding-left','20px'); // 200619 신애 추가
     var companyPhone = $('#companyPhone').val();
     companyPhone = remove_special_str(companyPhone)
     $('#companyPhone').val(companyPhone);

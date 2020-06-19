@@ -103,13 +103,13 @@
                 <input type="hidden" id="objStatus" th:value="${objStatus}"/>
                 <!--<div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>-->
                 <div id="regisster_waitList">
-                    <table th:if="${objStatus eq 'shipping'}" style="border-bottom:2px solid #d7d7d7;">
+                    <table th:if="${objStatus eq 'shipping'}" style="border-bottom:2px solid #d7d7d7; table-layout:fixed;">
                         <colgroup>
-                            <col width="20%" />
                             <col width="10%" />
-                            <col width="15%" />
                             <col width="20%" />
-                            <col width="25%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
                         </colgroup>
                         <thead>
                         <tr>
@@ -129,9 +129,9 @@
                             th:onclick="load_detail_page(this.getAttribute('data-srl'))">
                             <td th:text="${list.statusAt}">2020.5.7</td>
                             <td th:text="${list.userName}">홍길동A</td>
-                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.modelName}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">SL-X3220NR</td>
                             <td th:text="${list.objKinds}">레이저복합기</td>
-                            <td th:text="${list.srlName}">20200504-00000001</td>
+                            <td th:text="${list.srlName}" style="width:90px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>
@@ -175,13 +175,13 @@
                 <!--검색(베타 주석처리)-->
                <!-- <div class="event_search"><img th:src="@{/image/paging/common-icon-search_black.svg}"></div>-->
                 <div id="regisster_completeList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'release'}">
+                    <table style="border-bottom:2px solid #d7d7d7; table-layout:fixed;" th:if="${objStatus eq 'release'}">
                         <colgroup>
-                            <col width="20%" />
                             <col width="10%" />
-                            <col width="15%" />
                             <col width="20%" />
-                            <col width="25%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
                         </colgroup>
                         <thead>
                         <tr>
@@ -201,9 +201,9 @@
                             th:onclick="load_detail_page(this.getAttribute('data-srl'))">
                             <td th:text="${list.statusAt}">2020.5.7</td>
                             <td th:text="${list.userName}">홍길동A</td>
-                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.modelName}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">SL-X3220NR</td>
                             <td th:text="${list.objKinds}">레이저복합기</td>
-                            <td th:text="${list.companyName}">20200504-00000001</td>
+                            <td th:text="${list.companyName}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>

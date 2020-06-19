@@ -453,9 +453,8 @@ select::-ms-expand {
     margin-right: 0px;
     padding: 2px 2em 2px 2em;
     border: none;
-    /* background-color:#fafbfc; */
     position: relative;
-    bottom: 49px;
+    top: -20px;
     background: url('/image/main/main-icon-search.svg') no-repeat 0% 50%;
     font-size:23px;
 }
@@ -706,6 +705,7 @@ input:focus {
     height:653px;
     overflow:hidden;
     margin-bottom:100px;
+    z-index:9999;
 }
 .form               {font-size:28px; font-weight: 300; line-height: 45px;}
 .form-box           {width:100%; float:left;}
@@ -720,7 +720,7 @@ input:focus {
 input[type="text"]:disabled {background: #eceef4;}
 
 
-.selectTable{  float:right; margin-bottom:25px; position: relative; top:-30px;cursor: pointer;}
+.selectTable{ cursor: pointer;}
 .selectTable select{ cursor:pointer; font-size:24px; width:200px; border:none; margin-right:5px; background:url('/image/common-icon-sourting-down.svg') 90% 50%; background-repeat: no-repeat;}
 option:hover { cursor: pointer; }
 select, option {text-align:right;}
@@ -1103,7 +1103,7 @@ select, option {text-align:right;}
         display: block;
     }*/
     .w3-padding-large {
-        padding: 40px 60px 0 60px !important;
+        padding: 0px 60px 0 60px !important;
         margin-bottom: 30px;
     }
     .item-waiting,

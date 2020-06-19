@@ -60,13 +60,13 @@
                 </div>
                 <!--//panel-wrap-register-->
                 <div id="regisster_waitList">
-                    <table style="border-bottom:2px solid #d7d7d7;">
+                    <table style="border-bottom:2px solid #d7d7d7; table-layout:fixed;">
                         <colgroup>
                             <col width="10%" />
-                            <col width="15%" />
+                            <col width="20%" />
                             <col width="10%" />
-                            <col width="45%" />
-                            <col width="30%" />
+                            <col width="40%" />
+                            <col width="10%" />
                         </colgroup>
                         <thead>
                         <tr>
@@ -84,9 +84,9 @@
                         <tr th:unless="${size} == '0'" th:each="list : ${list}"
                             style="cursor:default;">
                             <td th:text="${list.orderDate}">2020.2.24</td>
-                            <td th:text="${list.orderSrl}">12345678-12345678</td>
+                            <td th:text="${list.orderSrl}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">12345678-12345678</td>
                             <td th:text="${list.orderCnt}">50</td>
-                            <td th:text="${list.addr}">(주)제조공장 가나다업체</td>
+                            <td th:text="${list.addr}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">(주)제조공장 가나다업체</td>
                             <td th:if="${list.orderStatus} == 'p'"><b>배송 준비중</b></td>
                             <td th:if="${list.orderStatus} == 'y'"><b>배송 완료</b></td>
                             <td th:if="${list.orderStatus} == 'n'"><b>주문 완료</b></td>

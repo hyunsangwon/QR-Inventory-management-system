@@ -348,19 +348,19 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_waitList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'warehousing'}">
+                    <table style="border-bottom:2px solid #d7d7d7; table-layout:fixed;" th:if="${objStatus eq 'warehousing'}">
                         <colgroup>
-                            <col width="5%" />
-                            <col width="15%" />
-                            <col width="10%" />
-                            <col width="15%" />
+                            <col width="2%" />
+                            <!-- <col width="20%" /> -->
                             <col width="20%" />
-                            <col width="25%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
                         </colgroup>
                         <thead>
                         <tr>
                             <th name="checkRow"></th>
-                            <th>대기 시작일</th>
+                            <!-- <th>대기 시작일</th> -->
                             <th>최종 관리자</th>
                             <th>모델명</th>
                             <th>자산종류</th>
@@ -375,11 +375,11 @@
                             th:data-srl="${list.qrSrl}"
                             th:onclick="load_detail_page(this.getAttribute('data-srl'))">
                             <td name="checkRow"><input type="checkbox" class="check" name="objRow" th:value="${list.qrSrl}"></td>
-                            <td th:text="${list.statusAt}">2020.5.7</td>
+                            <!-- <td th:text="${list.statusAt}">2020.5.7</td> -->
                             <td th:text="${list.userName}">홍길동A</td>
-                            <td th:text="${list.modelName}">SL-X3220NR</td>
+                            <td th:text="${list.modelName}" style="width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">SL-X3220NR</td>
                             <td th:text="${list.objKinds}">레이저복합기</td>
-                            <td th:text="${list.srlName}">20200504-00000001</td>
+                            <td th:text="${list.srlName}" style="width:90px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>
@@ -413,7 +413,7 @@
                                     <div class="circle"></div><span class="title">총 <span id="register_complete_tot" th:text="${size}">167</span>자산</span></p>
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
-                                    <button class="approve_btn" id="return_confirm">재입고 승인</button>
+                                    <button class="approve_btn" id="return_confirm" style="margin-right:20px;">재입고 승인</button>
                                     <button class="delete_btn" id="delete_confirm">자산 삭제</button>
                                 </div>
                                 <div class="remark" style="float:left; margin-top:10px; margin-left: 25px; line-height:37px;">
@@ -436,19 +436,19 @@
                 <div class="event_search"><img src="common-icon-search_black.svg"></div>
                 -->
                 <div id="regisster_completeList">
-                    <table style="border-bottom:2px solid #d7d7d7;" th:if="${objStatus eq 'warehousing_wait'}">
+                    <table style="border-bottom:2px solid #d7d7d7; table-layout:fixed;" th:if="${objStatus eq 'warehousing_wait'}">
                         <colgroup>
-                            <col width="5%" />
-                            <col width="15%" />
-                            <col width="10%" />
-                            <col width="15%" />
+                            <col width="2%" />
+                     		<!-- <col width="20%" /> -->
                             <col width="20%" />
-                            <col width="25%" />
+                            <col width="20%" />
+                            <col width="20%" />
+                            <col width="20%" />
                         </colgroup>
                         <thead>
                         <tr>
                             <th></th>
-                            <th>반납 완료일</th>
+                            <!-- <th>반납 완료일</th> -->
                             <th>최종 관리자</th>
                             <th>모델명</th>
                             <th>자산종류</th>
@@ -457,15 +457,15 @@
                         </thead>
                         <tbody>
                         <tr th:if="${size} == '0'">
-                            <td colspan=6>데이터가 없습니다.</td>
+                            <td colspan=5>데이터가 없습니다.</td>
                         </tr>
                         <tr th:unless="${size} == '0'" th:each="list : ${list}">
                             <td><input type="checkbox" name="objReturnRow" class="check" th:value="${list.qrSrl}"></td>
-                            <td th:text="${list.statusAt}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">2020.5.7</td>
+                            <!-- <td th:text="${list.statusAt}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">2020.5.7</td> -->
                             <td th:text="${list.userName}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">홍길동A</td>
-                            <td th:text="${list.modelName}"style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">SL-X3220NR</td>
+                            <td th:text="${list.modelName}"style="cursor:pointer; width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">SL-X3220NR</td>
                             <td th:text="${list.objKinds}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">레이저복합기</td>
-                            <td th:text="${list.srlName}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">20200504-00000001</td>
+                            <td th:text="${list.srlName}" style="cursor:pointer; width:100px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>
