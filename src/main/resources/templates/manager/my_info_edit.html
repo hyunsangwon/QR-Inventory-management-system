@@ -266,7 +266,8 @@
             {
                 jsonData.password = null;
             }
-            ajax_user_info_update(jsonData);
+            console.log(JSON.stringify(jsonData));
+            //ajax_user_info_update(jsonData);
         }
 
         function ajax_user_info_update(data)
@@ -333,7 +334,6 @@
                     password_2.focus();
                     return false;
                 }
-                alert("수정이 완료되었습니다.");
                 $('.new-password-area').hide();
             });
         });

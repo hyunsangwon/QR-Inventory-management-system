@@ -13,13 +13,13 @@
         var objStatus = $('#objStatus').val();
         if(objStatus == 'shipping')
         {
-            $('#data_tab_1').addClass('current');
-            $('#tab-1').addClass('current');
+            $('#data_tab_2').addClass('current');
+            $('#tab-2').addClass('current');
         }
         if(objStatus == 'release')
         {
-            $('#data_tab_2').addClass('current');
-            $('#tab-2').addClass('current');
+            $('#data_tab_1').addClass('current');
+            $('#tab-1').addClass('current');
         }
 
         $('a[name=external_asset_search]').css('background-color','#437ece');
@@ -78,12 +78,12 @@
         <!-- tab content -->
         <div id="tab_content_wrap">
             <ul class="tabs">
-                <li class="tab-link" data-tab="tab-1" id="data_tab_1">배송 중 자산</li>
-                <li class="tab-link" data-tab="tab-2" id="data_tab_2">출고 자산</li>
+                <li class="tab-link" data-tab="tab-1" id="data_tab_1">출고 자산</li>
+                <li class="tab-link" data-tab="tab-2" id="data_tab_2">배송 중 자산</li>
             </ul>
             <input type="hidden" id="pageNum" th:value="${pageNum}"/>
             <!--//tabs-->
-            <div id="tab-1" class="tab-content">
+            <div id="tab-2" class="tab-content">
                 <div id="panel-wrap-register" class="text_left">
                     <div class="regiseter-panel-heading">
                         <div class="regiseter-panel-group">
@@ -156,7 +156,7 @@
                 <!--//page_count_wrap-->
             </div>
             <!--//tab-1-->
-            <div id="tab-2" class="tab-content">
+            <div id="tab-1" class="tab-content">
                 <div id="panel-wrap-register" class="text_left">
                     <div class="regiseter-panel-heading">
                         <div class="regiseter-panel-group">

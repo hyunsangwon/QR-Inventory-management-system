@@ -140,11 +140,11 @@ $(document).ready(function(){
 
 	$('ul.tabs li').click(function(){
 		var tab_id = $(this).attr('data-tab');
-        if(tab_id == 'tab-1') //배송 자산
+        if(tab_id == 'tab-2') //배송 자산
         {
           location.href = "/obj/status/shipping/list/1";
         }
-        if(tab_id == 'tab-2') //출고 자산
+        if(tab_id == 'tab-1') //출고 자산
         {
           location.href = "/obj/status/release/list/1";
         }
