@@ -50,6 +50,25 @@ public class StatusService
                     objList.setModelName("모델명 인식 실패");
                 }
             }
+
+            if(!vo.getObjStatus().equals("release"))
+            {
+                if(objList.getSrlName() == null)
+                {
+                    String[] srlNameArr = objList.getSrlImageName().split("/");
+                    String srlName = awsService.getConvertedText(srlNameArr[srlNameArr.length-1]).replace("\"","");
+                    objList.setSrlName(srlName);
+                    if(srlName.equals(""))
+                    {
+                        objList.setSrlName("시리얼명 인식 실패");
+                    }
+                    if(srlName.equals("인식 실패"))
+                    {
+                        objList.setSrlName("시리얼명 인식 실패");
+                    }
+                }
+            }
+
         }
         map.addAttribute("pageNum",vo.getPageNum());
         map.addAttribute("objStatus",vo.getObjStatus());

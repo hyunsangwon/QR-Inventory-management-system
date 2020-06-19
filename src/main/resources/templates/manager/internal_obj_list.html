@@ -364,7 +364,7 @@
                             <th>최종 관리자</th>
                             <th>모델명</th>
                             <th>자산종류</th>
-                            <th>QR ID</th>
+                            <th>시리얼명</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -379,7 +379,7 @@
                             <td th:text="${list.userName}">홍길동A</td>
                             <td th:text="${list.modelName}">SL-X3220NR</td>
                             <td th:text="${list.objKinds}">레이저복합기</td>
-                            <td th:text="${list.qrSrl}">20200504-00000001</td>
+                            <td th:text="${list.srlName}">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>
@@ -465,7 +465,7 @@
                             <td th:text="${list.userName}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">홍길동A</td>
                             <td th:text="${list.modelName}"style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">SL-X3220NR</td>
                             <td th:text="${list.objKinds}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">레이저복합기</td>
-                            <td th:text="${list.qrSrl}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">20200504-00000001</td>
+                            <td th:text="${list.srlName}" style="cursor:pointer;" th:data-srl="${list.qrSrl}"  th:onclick="load_detail_page_confirm(this.getAttribute('data-srl'))">20200504-00000001</td>
                         </tr>
                         </tbody>
                     </table>

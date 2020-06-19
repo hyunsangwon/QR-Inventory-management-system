@@ -9,6 +9,8 @@
             DATE_FORMAT(obj_status_at,'%Y.%m.%d') AS statusAt,
             obj_m AS modelName,
             obj_img_mn AS modelImageName,
+            obj_s AS srlName,
+            obj_img_srl AS srlImageName,
             IFNULL(obj_kinds,'미정') AS objKinds,
             qr_srl AS qrSrl,
             u.user_name AS userName,
