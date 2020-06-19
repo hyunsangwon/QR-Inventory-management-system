@@ -12,9 +12,7 @@
     {
         var pageNum = $('#pageNum').val();
         $('#'+pageNum).css('font-weight',800);
-
         $('a[name=inner_asset_search]').css('background-color','#437ece');
-        $('.remark_check').hide();
 
         var objStatus = $('#objStatus').val();
         if('warehousing' == objStatus)
@@ -27,50 +25,28 @@
             $('#data_tab_2').addClass('current');
             $('#tab-2').addClass('current');
         }
-        $('input[name=objRow]').hide();
-
         /* 입고자산 -> 자산삭제 */
         $('#select_obj').click(function()
         {
-
-            $('input[name=objRow]').show();
-            var checkedLen = $('input[name=objRow]:checked').length;
-            if(checkedLen > 0)
-            {
-                $('#select_obj').removeClass('select_btn');
-                $('#select_obj').addClass('delete_active_btn');
-            }else
-            {
-                $('#select_obj').removeClass('delete_active_btn');
-                $('#select_obj').addClass('select_btn');
-            }
-            $('#select_obj').text('자산 삭제하기');
-            $('.remark_default').hide();
-            $('.remark_check').show();
-            var className = $('#select_obj').attr('class');
-
-            if(className == 'delete_active_btn')
-            {
-                if(confirm('해당 자산을 삭제 하시겠습니까?')) {
-                    var paramArr = new Array();
-                    var data = new Object();
-                    $('input[name=objRow]').each(function() {
-                        if (this.checked)
-                        {
-                            var obj = new Object();
-                            obj.qrSrl =  this.value;
-                            paramArr.push(obj);
-                        }
-                    });
-                    data.param = paramArr;
-                    if(data.param.length == 0)
+            if(confirm('해당 자산을 삭제 하시겠습니까?')) {
+                var paramArr = new Array();
+                var data = new Object();
+                $('input[name=objRow]').each(function() {
+                    if (this.checked)
                     {
-                        alert('삭제할 자산을 선택해주세요');
+                        var obj = new Object();
+                        obj.qrSrl =  this.value;
+                        paramArr.push(obj);
                     }
-                    else
-                    {
-                        ajax_delete_obj(data);
-                    }
+                });
+                data.param = paramArr;
+                if(data.param.length == 0)
+                {
+                    alert('삭제할 자산을 선택해주세요');
+                }
+                else
+                {
+                    ajax_delete_obj(data);
                 }
             }
         });
@@ -323,16 +299,12 @@
                                 </div>
                                 <div class="btn-wrap" style=" float:right; position: relative; bottom:10px;">
                                     <!--자산 선택 전 활성화 되는 버튼-->
-                                    <button class="delete_active_btn" id="select_obj">자산 선택하기</button>
+                                    <button class="select_btn" id="select_obj" style="width:198px;">자산 삭제하기</button>
                                     <!--자산 선택 후 활성화 되는 버튼
                                     <button class="select_btn">자산 삭제하기</button>-->
                                 </div>
-                                <!--default-->
-                                <div class="remark_default" style="float:left; margin-top:10px; margin-left: 25px;">
-                                    <span style="font-size: 24px;  color: #112287; ">입고 자산을 선택하시면 삭제 가능합니다.</span>
-                                </div>
                                 <div class="remark_check" style="float:left; margin-top:10px; margin-left: 25px; line-height: 35px;">
-                                    <span style="font-size: 24px;  color: #112287; margin-bottom:5px;">자산이 삭제되면 관리 이력과 QR스티커 정보가 지워집니다.</span>
+                                    <span style="font-size: 24px;  color: #112287; margin-bottom:5px;"> 자산 선택 후 '자산 삭제하기'를 누르면 자산이 목록에서 제거됩니다.</span>
                                     <p>
                                     <span style="font-size: 24px;  color: #112287; ">자산 삭제 후 부착된 QR 스티커는 제거해주세요.</span>
                                 </div>
