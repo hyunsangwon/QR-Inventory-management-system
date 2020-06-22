@@ -35,8 +35,8 @@ public class ObjStatusController
         logger.debug("[ Call /obj/status/"+status+"/list/"+pageNum+" - GET ]");
         logger.debug("Param : "+status);
         ObjListVO obj = new ObjListVO();
-        obj.setPageNum(pageNum);
-        obj.setObjStatus(status);
+        obj.setPageNum(pageNum); obj.setObjStatus(status);
+
         statusService.getObjStatusList(model,obj);
 
         if(ObjStatusCode.WAREHOUSING.equals(status) || ObjStatusCode.WAREHOUSING_WAIT.equals(status))

@@ -18,7 +18,7 @@ aws:
   api-gateway-url: https://66m2vdg9fi.execute-api.ap-northeast-2.amazonaws.com/OCR-API/ocr
 
 server:
-  port: 8080
+    port: 8080
 ---
 spring:
   profiles: dev
