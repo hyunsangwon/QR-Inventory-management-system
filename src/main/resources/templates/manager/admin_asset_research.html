@@ -73,9 +73,9 @@
                 alert('번호를 입력해주세요');
                 return false;
             }
-            if(phone.length < 10)
+            if(phone.length < 10 && phone.length > 12)
             {
-                alert('번호가 올바르지 않습니다.');
+                alert('올바르지 않은 번호형식입니다.');
                 return false;
             }
              var masterSrl = $('#masterSrl').val();
@@ -111,9 +111,9 @@
                 alert('번호를 입력해주세요');
                 return false;
             }
-            if(phone.length < 10)
+            if(phone.length < 10 && phone.length > 12)
             {
-                alert('번호가 올바르지 않습니다.');
+                alert('올바르지 않은 번호형식입니다.');
                 return false;
             }
             var userSrl = $('#userSrl').val();

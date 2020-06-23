@@ -23,11 +23,11 @@ server:
 spring:
   profiles: dev
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
     hikari:
       maximum-pool-size: 1
-    url: jdbc:mysql://localhost:3306/qr_inventory?useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
-    username: root
+    url: jdbc:mariadb://database-qr.c1wdflbqbfqj.ap-northeast-2.rds.amazonaws.com/qr_inventory_test?useUnicode=true&charaterEncoding=utf-8&serverTimezone=UTC
+    username: admin
     password: tkddnjs0823
   thymeleaf:
     cache: false

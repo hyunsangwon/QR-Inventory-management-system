@@ -123,6 +123,13 @@
             $('#userPhone').focus();
             return false;
         }
+        //연락처 길이 체크
+        if($('#userPhone').val().length < 10 && $('#userPhone').val().length > 12)
+        {
+            alert('올바르지 않은 번호형식입니다.');
+            $('#userPhone').focus();
+            return false;
+        }
 
         if(_flag)
         {

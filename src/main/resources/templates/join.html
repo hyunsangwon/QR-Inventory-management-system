@@ -254,6 +254,14 @@
             phone.focus();
             return false;
         }
+
+        if(phone.val().length < 10 && phone.val().length > 12)
+        {
+            alert('올바르지 않은 번호형식입니다.');
+            phone.focus();
+            return false;
+        }
+
         if(password.val() == '' || $('#password_1').val() == '')
         {
             alert('비밀번호를 입력해주세요');
