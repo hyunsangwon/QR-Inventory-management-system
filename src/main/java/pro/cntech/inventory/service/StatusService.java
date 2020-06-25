@@ -73,7 +73,7 @@ public class StatusService
         map.addAttribute("pageNum",vo.getPageNum());
         map.addAttribute("objStatus",vo.getObjStatus());
         map.addAttribute("list",list);
-        map.addAttribute("size",list.size());
+        map.addAttribute("size",totalCnt);
         map.addAttribute("pageHandler",pageHandler);
     }
 

@@ -55,7 +55,7 @@ public class OrderService
         map.addAttribute("pageNum",pageNum);
         map.addAttribute("list",list);
         map.addAttribute("size",list.size());
-        map.addAttribute("pageHandler",pageHandler);
+        map.addAttribute("pageHandler",totalCnt);
     }
 
     private PageHandler pageHandler(int totalCount, int pageNum, int contentNum)

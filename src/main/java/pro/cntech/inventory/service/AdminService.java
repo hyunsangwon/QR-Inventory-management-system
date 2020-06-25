@@ -254,7 +254,7 @@ public class AdminService {
         map.addAttribute("filterName",filterName);
         map.addAttribute("pageNum",pageNum);
         map.addAttribute("list",list);
-        map.addAttribute("size",list.size());
+        map.addAttribute("size",totalCnt);
         map.addAttribute("pageHandler",pageHandler);
     }
 

@@ -26,7 +26,7 @@ function create_marker_map(map)
 
             for(var i=0; i<data.length; i++)
             {
-                if(data[i].objStatus == 'release' || data[i].objStatus == 'release_new'  || data[i].objStatus == 'warehousing_wait')//내부 자산
+                if(data[i].objStatus == 'release' || data[i].objStatus == 'release_new'  || data[i].objStatus == 'warehousing_wait')//렌탈 지점
                 {
                     var markerImage = new kakao.maps.MarkerImage(innerMarkerImageSrc, imageSize);
                     var marker = new kakao.maps.Marker({
@@ -37,7 +37,7 @@ function create_marker_map(map)
                     });
                     create_pop_up(marker,map,data[i]);
                 }
-                if(data[i].objStatus == 'shipping' || data[i].objStatus == 'warehousing_new' || data[i].objStatus == 'warehousing')//외부 자산
+                if(data[i].objStatus == 'shipping' || data[i].objStatus == 'warehousing_new' || data[i].objStatus == 'warehousing')//운영 자산
                 {
                     var markerImage = new kakao.maps.MarkerImage(outerMarkerImageSrc, imageSize);
                     var marker = new kakao.maps.Marker({
@@ -47,6 +47,7 @@ function create_marker_map(map)
                         image : markerImage // 마커 이미지
                     });
                     create_pop_up(marker,map,data[i]);
+
                 }
             }
         },
