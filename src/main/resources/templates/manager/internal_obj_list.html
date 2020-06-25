@@ -193,11 +193,7 @@
     /*입고자산 -> 자산 상세 이동 */
     function load_detail_page(srl)
     {
-        var deleteBtnTextName = $('#select_obj').text();
-        if(deleteBtnTextName != '자산 삭제하기')
-        {
-            location.href = "/obj/detail/search/"+srl;
-        }
+        location.href = "/obj/detail/search/"+srl;
     }
     /*재입고 대기 -> 자산 상세 이동*/
     function load_detail_page_confirm(srl)
