@@ -45,7 +45,7 @@ a:hover                             {text-decoration:none;}
 #main_ct > section.cover			{ padding:3em 4.5em;}
 #container							{width:100%; height:940px;}
 .login-box							{width:83.5%; height:940px; margin:0 auto; }
-.login-box .title					{width:100%;  padding-top:82px; }
+.login-box .title					{width:100%;  padding-top:70px; }
 .login-box .title .header			{font-size:2.2em; line-height:55px;}
 .login-box .title .header .join		{width:100%; text-align:right; font-size:0.68em; font-weight:600; cursor:pointer;}
 
