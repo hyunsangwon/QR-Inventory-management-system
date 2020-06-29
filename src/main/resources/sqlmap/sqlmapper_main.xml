@@ -39,7 +39,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('warehousing_new','warehousing_wait','warehousing')
+            AND o.obj_status IN ('warehousing_new','warehousing')
             )
         AS innerCount,
         (
@@ -49,7 +49,7 @@
             INNER JOIN users AS u
             ON o.user_srl = u.user_srl
             WHERE u.master_srl = #{userSrl}
-            AND o.obj_status IN ('release_new','release','shipping')
+            AND o.obj_status IN ('release_new','release','shipping','warehousing_wait')
         )
         AS outerCount
         FROM obj AS o
@@ -100,33 +100,33 @@
     <insert id="setUserJoin" parameterType="pro.cntech.inventory.vo.UserVO">
         INSERT INTO users
         (
-        user_name,
-        auth,
-        password,
-        company_name,
-        addr,
-        detail_addr,
-        m_number,
-        s_number,
-        email,
-        latitude,
-        longitude,
-        grade
+	        user_name,
+	        auth,
+	        password,
+	        company_name,
+	        addr,
+	        detail_addr,
+	        m_number,
+	        s_number,
+	        email,
+	        latitude,
+	        longitude,
+	        grade
         )
         VALUES
-        (
-        #{userName},
-        'holder',
-        #{password},
-        #{companyName},
-        #{detailAddr},
-        #{addr},
-        #{phone},
-        #{companyPhone},
-        #{email},
-        #{latitude},
-        #{longitude},
-        'A'
+	    (
+	        #{userName},
+	        'holder',
+	        #{password},
+	        #{companyName},
+	        #{detailAddr},
+	        #{addr},
+	        #{phone},
+	        #{companyPhone},
+	        #{email},
+	        #{latitude},
+	        #{longitude},
+	        'A'
         )
     </insert>
     <!-- 이미 가입된 자산소유자인지 확인 -->

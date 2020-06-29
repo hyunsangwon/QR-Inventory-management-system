@@ -1,18 +1,29 @@
 package pro.cntech.inventory.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import pro.cntech.inventory.service.AwsService;
 import pro.cntech.inventory.service.MainService;
 import pro.cntech.inventory.vo.MarkerVO;
 import pro.cntech.inventory.vo.UserVO;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 public class MainContoller
@@ -23,7 +34,9 @@ public class MainContoller
 
     @Autowired
     private MainService mainService;
-
+    @Autowired
+    private AwsService awsService;
+    
     @GetMapping("/login")
     public String loadLoginxPage(HttpServletRequest request)
     {
@@ -104,6 +117,37 @@ public class MainContoller
         }
         mainService.uploadImageToAwsS3(file,userSrl,businessNumber);
         return true;
+    }
+    
+    //사용자 매뉴얼, 브로셔 다운로드
+    @GetMapping("/file/download/{type}")
+    public ResponseEntity<ByteArrayResource> downloadFile(HttpServletResponse response, @PathVariable("type") String type) throws Exception 
+    {
+    	
+    	 logger.debug("[ Call /file/download/"+type+" - GET ]");
+    	 String FILE_MANUAL = "WEISER_QR_SERVICE_manual_ver1.4.pdf";
+    	 String FILE_BROCHURE = "WEISER_QR_SERVICE_brochure_v1.2.pdf";
+    	 String BUCKET_PATH = "/public-download";   		
+    	 byte[] data = null;
+    	 String keyName = null;
+    	 if("manual".equals(type))
+    	 {
+    		 data = awsService.getObject(BUCKET_PATH, FILE_MANUAL);
+    		 keyName = FILE_MANUAL;
+    	 }
+    	 if("brochure".equals(type))
+    	 {
+    		 data = awsService.getObject(BUCKET_PATH, FILE_BROCHURE);
+    		 keyName = FILE_BROCHURE;
+    	 }
+    	 final ByteArrayResource resource = new ByteArrayResource(data);
+    	 
+    	 return ResponseEntity
+                 .ok()
+                 .contentLength(data.length)
+                 .header("Content-type", "application/octet-stream")
+                 .header("Content-disposition", "attachment; filename=\"" + keyName + "\"")
+                 .body(resource);
     }
 
 }

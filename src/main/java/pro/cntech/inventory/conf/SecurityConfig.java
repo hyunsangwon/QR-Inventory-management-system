@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     {
         http
                 .authorizeRequests()
-                .antMatchers("/","/login","/login-fail","/join","/img/upload").permitAll()//모두 허용
+                .antMatchers("/","/login","/login-fail","/join","/img/upload","/file/**").permitAll()//모두 허용
                 .anyRequest().authenticated()
                 .and()
                 .csrf().ignoringAntMatchers("/*","/img/upload")//해당 URL CSRF 무시
