@@ -207,7 +207,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${size} == '0'">
-                            <td colspan=7>데이터가 없습니다.</td>
+                            <td colspan=6>데이터가 없습니다.</td>
                         </tr>
                         <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
                             th:data-srl="${list.qrSrl}"

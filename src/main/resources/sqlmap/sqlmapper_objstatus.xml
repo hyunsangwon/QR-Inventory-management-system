@@ -149,6 +149,7 @@
     <update id="updateObjStatus" parameterType="pro.cntech.inventory.vo.ObjListVO">
         UPDATE obj
         SET
+        	user_srl = #{userSrl},
             obj_status = #{objStatus},
             obj_status_at = now()
         WHERE qr_srl = #{qrSrl}

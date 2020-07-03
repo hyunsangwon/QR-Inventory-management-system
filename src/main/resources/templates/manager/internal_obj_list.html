@@ -337,7 +337,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${size} == '0'">
-                            <td colspan=6>데이터가 없습니다.</td>
+                            <td colspan=5>데이터가 없습니다.</td>
                         </tr>
                         <tr th:unless="${size} == '0'" th:each="list : ${list}" style="cursor:pointer;"
                             th:data-srl="${list.qrSrl}"
@@ -425,7 +425,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${size} == '0'">
-                            <td colspan=5>데이터가 없습니다.</td>
+                            <td colspan=4>데이터가 없습니다.</td>
                         </tr>
                         <tr th:unless="${size} == '0'" th:each="list : ${list}">
                             <td><input type="checkbox" name="objReturnRow" class="check" th:value="${list.qrSrl}"></td>

@@ -167,6 +167,8 @@ public class StatusService
             {
                 listVO.setObjStatus(ObjStatusCode.WAREHOUSING); //출고 대기
                 insertObjLog(listVO); //로그 저장
+                UserPrincipalVO userPrincipalVO = getSecurityInfo();
+                listVO.setUserSrl(userPrincipalVO.getUserSrl());
                 rows = objStatusMapper.updateObjStatus(listVO);
             }
         }

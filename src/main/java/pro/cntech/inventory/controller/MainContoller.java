@@ -121,7 +121,8 @@ public class MainContoller
     
     //사용자 매뉴얼, 브로셔 다운로드
     @GetMapping("/file/download/{type}")
-    public ResponseEntity<ByteArrayResource> downloadFile(HttpServletResponse response, @PathVariable("type") String type) throws Exception 
+    public ResponseEntity<ByteArrayResource> downloadFile(HttpServletResponse response, 
+    		@PathVariable("type") String type) throws Exception 
     {
     	
     	 logger.debug("[ Call /file/download/"+type+" - GET ]");

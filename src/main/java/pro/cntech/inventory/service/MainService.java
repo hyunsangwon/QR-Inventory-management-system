@@ -101,7 +101,7 @@ public class MainService implements UserDetailsService
             return null;
         }
         MapUtil util = new MapUtil();
-        String gps[] = util.convertAddrToGPS(userVO.getDetailAddr()).split("/");
+        String gps[] = util.convertAddrToGPS(userVO.getAddr()).split("/");
         userVO.setLongitude(gps[0]);
         userVO.setLatitude(gps[1]);
         userVO.setPassword(makeHashedPassword(userVO.getPassword()));
@@ -135,10 +135,9 @@ public class MainService implements UserDetailsService
     public void uploadImageToAwsS3(MultipartFile[] file,String userSrl,String businessNumber) throws Exception
     {
         Random ran = new Random();
-        String imageName = new SimpleDateFormat( "yyMMdd").format(new Date());
-        String randomNumber = Integer.toString(ran.nextInt(500)+10);
+        String imageName = new SimpleDateFormat("yyMMdd").format(new Date());
         String awsS3Url = "https://qr-s3.s3.ap-northeast-2.amazonaws.com";
-        String s3bucketPath = "/private/users/"+randomNumber+"/"+imageName;
+        String s3bucketPath = "/private/users/"+userSrl+"/"+imageName;
         int fileSize = file.length;
         CertificateVO certificateVO = null;
         for(int i=0; i<fileSize; i++)
