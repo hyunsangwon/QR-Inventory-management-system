@@ -1,13 +1,12 @@
-# inventory
-# QR-service project :relaxed: :baby_chick:
-
-씨앤테크 QR 서비스 프로젝트
-
+# QR 재고관리 시스템 프로젝트 with springBoot  :relaxed: :baby_chick:
+ 사업연계 국가프로젝트로 진행했던 프로젝트
+ 개발기간 약 6개월 총 3명 개발진행
+ PL을 맡아 사업 마무리 진행
+ 
 # Summary
-
-QR스티커로 자산을 편리하게 체크하기 위해 만드는 프로젝트 입니다.  
-고가이거나 차량·건설기계처럼 이동성이 높은 동산, 도난 우려가 높은 것에 대해선 IoT 단말기를 활용한다.  
-저가나 이동성이 낮은 자산, 원재료·반제품·완제품 등 재고자산에는 QR코드를 이용할 계획이다.  
+ QR스티커로 자산을 편리하게 체크하기 위해 만드는 프로젝트 입니다.  
+ 고가이거나 차량·건설기계처럼 이동성이 높은 동산, 도난 우려가 높은 것에 대해선 IoT 단말기를 활용한다.  
+ 저가나 이동성이 낮은 자산, 원재료·반제품·완제품 등 재고자산에는 QR코드를 이용할 계획이다.  
 
 # Development stack
 ##### Cloud stack
@@ -34,5 +33,6 @@ QR이란 Quick Response로 바코드 보다 수많은 정보를 입력할 수 �
 QR안에 특정 코드를 입력후 자산과 매칭 후 자산을 주기적으로 관리하고자 한다.  
 
 # Organizer
- - 현상원 (master)
- - 김신애 (designer)
+ - 현상원 (Backend&Cloud developer)
+ - 김신애 (Front developer)
+ - 백민건 (App developer)
